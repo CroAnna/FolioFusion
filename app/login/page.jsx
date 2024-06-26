@@ -1,7 +1,11 @@
 import React from "react";
 
-const page = () => {
-  return <div>login page</div>;
+const LoginPage = () => {
+  return (
+    <div>
+      login LoginPage <button className="btn btn-accent">Accent</button>
+    </div>
+  );
 };
 
-export default page;
+export default LoginPage;
