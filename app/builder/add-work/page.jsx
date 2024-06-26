@@ -4,8 +4,8 @@ import React from "react";
 
 const AddWork = () => {
   return (
-    <div className="w-full flex flex-col">
-      <h2 className="text-2xl font-bold">
+    <div className="p-6 flex flex-col gap-4">
+      <h2 className="text-4xl font-bold">
         2. Add work experience and your projects
       </h2>
       <NextPreviousNavigation
