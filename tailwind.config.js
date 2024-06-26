@@ -8,6 +8,6 @@ module.exports = {
   theme: {},
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light"], // dodaj tu dark da se automatski mijenja
+    themes: ["emerald"], //  dark da se automatski mijenja https://daisyui.com/docs/themes/
   },
 };
