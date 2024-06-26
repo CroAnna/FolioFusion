@@ -1,22 +1,17 @@
 import React from "react";
 import Steps from "../Steps";
+import { stepsData } from "@/utils/data";
 
-const PortfolioMaker = ({ portfolioStack, setPortfolioStack }) => {
-  const stepsData = [
-    {
-      text: "Create hero",
-    },
-    { text: "Add work/projects" },
-    { text: "Add education" },
-    { text: "Add other info" },
-    { text: "Deploy or download as PDF" },
-  ];
-
+const PortfolioMaker = ({
+  portfolioStack,
+  setPortfolioStack,
+  currentStep,
+  children,
+}) => {
   return (
     <div>
-      <h2>Create your portfolio</h2>
-      <Steps currentStep={3} stepsData={stepsData} />
-      <button className="btn btn-neutral">Neutral</button>
+      <Steps currentStep={currentStep} stepsData={stepsData} />
+      {children}
     </div>
   );
 };
