@@ -1,10 +1,18 @@
-import React from "react";
+"use client";
+import PortfolioMaker from "@/components/PortfolioMaker";
+import RenderedPortfolio from "@/components/RenderedPortfolio";
+import { useState } from "react";
 
 const BuilderPage = () => {
+  const [portfolioStack, setPortfolioStack] = useState(null);
+
   return (
-    <div>
-      BuilderPage
-      <button className="btn btn-neutral">Neutral</button>
+    <div className="grid grid-cols-2">
+      <PortfolioMaker
+        portfolioStack={portfolioStack}
+        setPortfolioStack={setPortfolioStack}
+      />
+      <RenderedPortfolio portfolioStack={portfolioStack} />
     </div>
   );
 };
