@@ -2,6 +2,7 @@ import { Gabarito } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "./providers";
 
 const font = Gabarito({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`flex flex-col min-h-screen ${font.className}`}>
         <Navbar />
-        <div className="flex-1">{children}</div>
+        <Providers>
+          <div className="flex-1">{children}</div>
+        </Providers>
         <Footer />
       </body>
     </html>

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function BuilderLayout({ children }) {
-  const [portfolioStack, setPortfolioStack] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const pathname = usePathname();
 
@@ -24,14 +23,8 @@ export default function BuilderLayout({ children }) {
     <>
       <div className="flex-1"></div>
       <div className="grid grid-cols-2">
-        <PortfolioMaker
-          portfolioStack={portfolioStack}
-          setPortfolioStack={setPortfolioStack}
-          currentStep={currentStep}
-        >
-          {children}
-        </PortfolioMaker>
-        <RenderedPortfolio portfolioStack={portfolioStack} />
+        <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>
+        <RenderedPortfolio />
       </div>
     </>
   );

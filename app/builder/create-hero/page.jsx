@@ -2,14 +2,17 @@
 import FileInput from "@/components/FileInput";
 import Join from "@/components/Join";
 import NextPreviousNavigation from "@/components/NextPreviousNavigation";
+import { PortfolioContext } from "@/components/PortfolioProvider";
 import { heroDesignItemsData } from "@/utils/data";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [heroTheme, setHeroTheme] = useState(null);
+  const { portfolioStackContextData, setPortfolioStackContextData } =
+    useContext(PortfolioContext);
 
   const removeSelectedImage = () => {
     setFile(null);
@@ -17,6 +20,21 @@ const CreateHero = () => {
       fileInputRef.current.value = "";
     }
   };
+
+  useEffect(() => {
+    if (file) {
+      console.log(URL.createObjectURL(file));
+      setPortfolioStackContextData((prev) => [
+        ...prev.filter((el) => el.hero != true),
+        { hero: true, img_url: URL.createObjectURL(file) },
+      ]);
+    } else {
+      // remove that image from stack
+      setPortfolioStackContextData((prev) =>
+        prev.filter((el) => el.hero != true)
+      );
+    }
+  }, [file]);
 
   return (
     <div className="p-6 flex flex-col gap-8">
