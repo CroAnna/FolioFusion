@@ -1,7 +1,7 @@
 import { Gabarito } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/app/_components/Navbar";
+import Footer from "@/app/_components/Footer";
 import Providers from "./providers";
 
 const font = Gabarito({ subsets: ["latin"] });

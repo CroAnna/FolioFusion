@@ -1,6 +1,6 @@
 "use client";
-import PortfolioMaker from "@/components/PortfolioMaker";
-import RenderedPortfolio from "@/components/RenderedPortfolio";
+import PortfolioMaker from "@/app/_components/PortfolioMaker";
+import RenderedPortfolio from "@/app/_components/RenderedPortfolio";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 

@@ -1,9 +1,9 @@
 "use client";
-import FileInput from "@/components/FileInput";
-import Join from "@/components/Join";
-import NextPreviousNavigation from "@/components/NextPreviousNavigation";
-import { PortfolioContext } from "@/components/PortfolioProvider";
-import { heroDesignItemsData } from "@/utils/data";
+import FileInput from "@/app/_components/FileInput";
+import Join from "@/app/_components/Join";
+import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
+import { PortfolioContext } from "@/app/_components/PortfolioProvider";
+import { heroDesignItemsData } from "@/app/_libs/utils";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
@@ -66,7 +66,20 @@ const CreateHero = () => {
         )}
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">1.2. Select hero design</h3>
+        <h3 className="text-2xl font-bold">1.2. Add your name</h3>
+        <Join items={heroDesignItemsData} setSelected={setHeroTheme} />
+        {heroTheme}
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-2 items-center">
+          <h3 className="text-2xl font-bold">1.3. Describe yourself</h3>
+          <p>(Or add a funny punchline)</p>
+        </div>
+        <Join items={heroDesignItemsData} setSelected={setHeroTheme} />
+        {heroTheme}
+      </div>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-2xl font-bold">1.4. Select hero design</h3>
         <Join items={heroDesignItemsData} setSelected={setHeroTheme} />
         {heroTheme}
       </div>

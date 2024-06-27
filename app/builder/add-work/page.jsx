@@ -1,4 +1,4 @@
-import NextPreviousNavigation from "@/components/NextPreviousNavigation";
+import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import Link from "next/link";
 import React from "react";
 
