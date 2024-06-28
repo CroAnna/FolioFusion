@@ -1,29 +1,63 @@
 import Image from "next/image";
+import { useContext } from "react";
+import { PortfolioContext } from "./PortfolioProvider";
+import {
+  DribbbleLogo,
+  FacebookLogo,
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  TiktokLogo,
+  XLogo,
+  YoutubeLogo,
+  Link as LinkLogo,
+} from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
 
-const PortfolioHero = ({
-  name,
-  img,
-  description,
-  palette,
-  image_rounded,
-  welcome,
-  short,
-  image_border,
-  border_style,
-  extra_elements,
-  extra_style_elements,
-}) => {
+const PortfolioHero = () => {
+  const { portfolioStackContextData } = useContext(PortfolioContext);
+  const border_style = portfolioStackContextData.hero_border_style;
+  const palette = portfolioStackContextData.hero_palette;
+  const extra_style_elements =
+    portfolioStackContextData.hero_extra_style_elements;
+
+  const bgColors = `
+        ${palette == "Palette 1" && "bg-zinc-100 text-gray-600"} 
+        ${palette == "Palette 4" && "bg-slate-800 text-gray-50"} 
+        ${palette == "Palette 3" && "bg-orange-50 text-amber-900"} 
+        ${palette == "Palette 2" && "bg-sky-50 text-gray-800"} 
+        ${palette == "Palette 5" && "bg-neutral-900 text-gray-100"}
+        ${palette == "Palette 6" && "bg-stone-900 text-gray-100"}`;
+
+  const primaryBorderColors = `
+        ${palette == "Palette 1" && "border-cyan-900"} 
+        ${palette == "Palette 2" && "border-cyan-900"}
+        ${palette == "Palette 3" && "border-lime-800"} 
+        ${palette == "Palette 4" && "border-amber-200 "} 
+        ${palette == "Palette 5" && "border-emerald-500"} 
+        ${palette == "Palette 6" && "border-orange-500"}`;
+
+  const primaryColors = `
+        ${palette == "Palette 1" && "text-amber-600"} 
+        ${palette == "Palette 2" && "text-blue-800"} 
+        ${palette == "Palette 3" && "text-orange-800"} 
+        ${palette == "Palette 4" && "text-yellow-400"} 
+        ${palette == "Palette 5" && "text-lime-500"}
+        ${palette == "Palette 6" && "text-yellow-400"}`;
+
+  const secondaryColors = `
+        ${palette == "Palette 1" && "text-cyan-900"} 
+        ${palette == "Palette 2" && "text-cyan-900"}
+        ${palette == "Palette 3" && "text-lime-800"} 
+        ${palette == "Palette 4" && "text-amber-200 "} 
+        ${palette == "Palette 5" && "text-emerald-500"}  
+        ${palette == "Palette 6" && "text-orange-500"}`;
+
   return (
     <div
-      className={`hero min-h-screen w-full relative
-        ${palette == "Palette 1" && "bg-zinc-100 text-gray-600"} 
-      ${palette == "Palette 4" && "bg-slate-800 text-gray-50"} 
-      ${palette == "Palette 3" && "bg-orange-50 text-amber-900"} 
-      ${palette == "Palette 2" && "bg-sky-50 text-gray-800"} 
-      ${palette == "Palette 5" && "bg-stone-900 text-gray-100"}
-       ${palette == "Palette 6" && "bg-neutral-900 text-gray-100"}`}
+      className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center ${bgColors}`}
     >
-      {extra_elements && (
+      {portfolioStackContextData.hero_extra && (
         <>
           <Image
             src={
@@ -52,8 +86,8 @@ const PortfolioHero = ({
                 : extra_style_elements == "dots" && `/dots-yellow.png`
             }
             alt={""}
-            width="320"
-            height="320"
+            width="360"
+            height="360"
             className={`absolute left-0 ${
               extra_style_elements == "abstract" ? "bottom-0" : "bottom-8"
             }`}
@@ -85,63 +119,161 @@ const PortfolioHero = ({
                 : extra_style_elements == "dots" && `/dots-long-yellow.png`
             }
             alt={""}
-            width="320"
+            width="360"
             height="320"
             className="absolute right-0 top-0"
           />
         </>
       )}
       <div className={`hero-content rounded-full`}>
-        <div
-          className={`max-w-xs inline-block 
-            ${image_rounded ? "rounded-full" : "rounded-lg"} 
+        {portfolioStackContextData.hero_image && (
+          <div
+            className={`max-w-xs inline-block 
+            ${
+              portfolioStackContextData.hero_image_rounded
+                ? "rounded-full"
+                : "rounded-lg"
+            } 
           ${
-            image_border &&
-            `border-4 border-${border_style} p-4  
-            ${palette == "Palette 1" && "border-cyan-900"} 
-                ${palette == "Palette 2" && "border-cyan-900"}
-              ${palette == "Palette 3" && "border-lime-800"} 
-              ${palette == "Palette 4" && "border-amber-200 "} 
-               ${palette == "Palette 5" && "border-emerald-500"}  `
-          }
-                ${palette == "Palette 6" && "border-orange-500"}`}
-        >
-          <img
-            src={img}
-            alt=""
-            className={`${
-              image_rounded ? "rounded-full" : "rounded-lg"
-            } w-full h-full`}
-          />
-        </div>
+            portfolioStackContextData.hero_image_border &&
+            `border-4 ${
+              border_style == "dashed"
+                ? "border-dashed"
+                : border_style == "solid"
+                ? "border-solid"
+                : border_style == "dotted"
+                ? "border-dotted"
+                : "border-double"
+            } p-4 ${primaryBorderColors}`
+          }`}
+          >
+            <Image
+              width={320}
+              height={320}
+              src={portfolioStackContextData.hero_image}
+              alt=""
+              className={`${
+                portfolioStackContextData.hero_image_rounded
+                  ? "rounded-full"
+                  : "rounded-lg"
+              } w-full h-full`}
+            />
+          </div>
+        )}
         <div className="flex flex-col gap-4">
-          <p className="py-0 text-lg">{welcome}</p>
+          <p className="py-0 text-lg">
+            {portfolioStackContextData.hero_welcome}
+          </p>
           <div>
             <h1
-              className={`text-8xl font-bold max-w-[640px] 
-                ${palette == "Palette 1" && "text-amber-600"} 
-              ${palette == "Palette 2" && "text-blue-800"} 
-              ${palette == "Palette 3" && "text-orange-800"} 
-              ${palette == "Palette 4" && "text-yellow-400"} 
-              ${palette == "Palette 5" && "text-lime-500"}
-               ${palette == "Palette 6" && "text-yellow-400"}`}
+              className={`text-8xl font-bold break-words max-w-[680px]
+                ${primaryColors}`}
             >
-              {name}
+              {portfolioStackContextData.hero_name}
             </h1>
             <h2
               className={`text-5xl font-bold 
-                ${palette == "Palette 1" && "text-cyan-900"} 
-                ${palette == "Palette 2" && "text-cyan-900"}
-              ${palette == "Palette 3" && "text-lime-800"} 
-              ${palette == "Palette 4" && "text-amber-200 "} 
-               ${palette == "Palette 5" && "text-emerald-500"}  
-                ${palette == "Palette 6" && "text-orange-500"} `}
+              ${secondaryColors}`}
             >
-              {short}
+              {portfolioStackContextData.hero_short}
             </h2>
           </div>
-          <p className="py-4 text-lg">{description}</p>
+          <p className="py-4 text-lg max-w-xl">
+            {portfolioStackContextData.hero_description}
+          </p>
         </div>
+      </div>
+      <div className="flex gap-2">
+        {portfolioStackContextData.social_github && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_github}
+            className={primaryColors}
+          >
+            <GithubLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_linkedin && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_linkedin}
+            className={primaryColors}
+          >
+            <LinkedinLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_facebook && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_facebook}
+            className={primaryColors}
+          >
+            <FacebookLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_instagram && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_instagram}
+            className={primaryColors}
+          >
+            <InstagramLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_x && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_x}
+            className={primaryColors}
+          >
+            <XLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_youtube && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_youtube}
+            className={primaryColors}
+          >
+            <YoutubeLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_tiktok && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_tiktok}
+            className={primaryColors}
+          >
+            <TiktokLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_dribble && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_dribble}
+            className={primaryColors}
+          >
+            <DribbbleLogo size={36} weight="duotone" />
+          </Link>
+        )}
+        {portfolioStackContextData.social_other && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_other}
+            className={primaryColors}
+          >
+            <LinkLogo size={36} weight="duotone" />
+          </Link>
+        )}
       </div>
     </div>
   );

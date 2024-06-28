@@ -10,23 +10,47 @@ import {
   heroExtraElementsData,
   heroPaletteItemsData,
 } from "@/app/_libs/utils";
+import {
+  DribbbleLogo,
+  FacebookLogo,
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  TiktokLogo,
+  XLogo,
+  YoutubeLogo,
+  Link,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
-  const [heroPalette, setHeroPalette] = useState(null);
+  const [heroPalette, setHeroPalette] = useState();
   const [roundedHeroImage, setRoundedHeroImage] = useState(null);
   const [borderHeroImage, setBorderHeroImage] = useState(null);
   const [borderStyleHeroImage, setBorderStyleHeroImage] = useState(null);
   const [extraElements, setExtraElements] = useState(null);
   const [extraStyleElements, setExtraStyleElements] = useState(null);
+  const [githubUrl, setGithubUrl] = useState("");
+  const [linkedinUrl, setLinkedinUrl] = useState("");
+  const [facebookUrl, setFacebookUrl] = useState("");
+  const [instagramUrl, setInstagramUrl] = useState("");
+  const [xUrl, setXUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [tiktokUrl, setTiktokUrl] = useState("");
+  const [dribbleUrl, setDribbleUrl] = useState("");
+  const [otherUrl, setOtherUrl] = useState("");
+
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
 
   const removeSelectedImage = () => {
     setFile(null);
+    setRoundedHeroImage(false);
+    setBorderHeroImage(false);
+    setBorderStyleHeroImage(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -50,6 +74,16 @@ const CreateHero = () => {
       [field]: value,
     });
   };
+
+  // const handleUpdateNested = (field, value) => {
+  //   setPortfolioStackContextData({
+  //     ...portfolioStackContextData,
+  //     social_links: {
+  //       ...portfolioStackContextData.social_links,
+  //       [field]: value,
+  //     },
+  //   });
+  // };
 
   useEffect(() => {
     handleUpdate("hero_palette", heroPalette);
@@ -85,6 +119,9 @@ const CreateHero = () => {
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         hero_image: undefined,
+        hero_image_rounded: undefined,
+        hero_border_style: undefined,
+        hero_image_border: undefined,
       });
     }
   }, [file]);
@@ -168,12 +205,12 @@ const CreateHero = () => {
           onChange={(e) => {
             handleUpdate("hero_short", e.target.value);
           }}
-          placeholder={"I build apps."}
+          placeholder={"Who are you? What you do?"}
         />
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">1.4. Describe yourself</h3>
+          <h3 className="text-2xl font-bold">1.5. Describe yourself</h3>
           <p>(Or add a funny punchline)</p>
         </div>
         <Input
@@ -181,12 +218,12 @@ const CreateHero = () => {
           onChange={(e) => {
             handleUpdate("hero_description", e.target.value);
           }}
-          placeholder={"Enter your name"}
+          placeholder={"Enter description"}
         />
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">
-          1.5. Select hero background color
+          1.6. Select hero background color
         </h3>
         <Join
           items={heroPaletteItemsData}
@@ -195,7 +232,7 @@ const CreateHero = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">1.6. Select UI of your hero</h3>
+        <h3 className="text-2xl font-bold">1.7. Select UI of your hero</h3>
         <Toggle
           text={"Show extra elements"}
           onChange={handleExtraElementsToggle}
@@ -207,6 +244,86 @@ const CreateHero = () => {
             name={"hero_extra"}
           />
         )}
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-2 items-center">
+          <h3 className="text-2xl font-bold">
+            1.8. Add links to social medias
+          </h3>
+          <p>(Or leave blank)</p>
+        </div>
+        <Input
+          icon={<GithubLogo size={32} weight="duotone" />}
+          name={"social_github"}
+          onChange={(e) => {
+            handleUpdate("social_github", e.target.value);
+          }}
+          placeholder={"Paste Github URL"}
+        />
+        <Input
+          icon={<LinkedinLogo size={32} weight="duotone" />}
+          name={"social_linkedin"}
+          onChange={(e) => {
+            handleUpdate("social_linkedin", e.target.value);
+          }}
+          placeholder={"Paste LinkedIn URL"}
+        />
+        <Input
+          icon={<FacebookLogo size={32} weight="duotone" />}
+          name={"social_facebook"}
+          onChange={(e) => {
+            handleUpdate("social_facebook", e.target.value);
+          }}
+          placeholder={"Paste Facebook URL"}
+        />
+        <Input
+          icon={<InstagramLogo size={32} weight="duotone" />}
+          name={"social_instagram"}
+          onChange={(e) => {
+            handleUpdate("social_instagram", e.target.value);
+          }}
+          placeholder={"Paste Instagram URL"}
+        />
+        <Input
+          icon={<XLogo size={32} weight="duotone" />}
+          name={"social_x"}
+          onChange={(e) => {
+            handleUpdate("social_x", e.target.value);
+          }}
+          placeholder={"Paste X URL"}
+        />
+        <Input
+          icon={<YoutubeLogo size={32} weight="duotone" />}
+          name={"social_youtube"}
+          onChange={(e) => {
+            handleUpdate("social_youtube", e.target.value);
+          }}
+          placeholder={"Paste Youtube URL"}
+        />
+        <Input
+          icon={<TiktokLogo size={32} weight="duotone" />}
+          name={"social_tiktok"}
+          onChange={(e) => {
+            handleUpdate("social_tiktok", e.target.value);
+          }}
+          placeholder={"Paste TikTok URL"}
+        />
+        <Input
+          icon={<DribbbleLogo size={32} weight="duotone" />}
+          name={"social_dribble"}
+          onChange={(e) => {
+            handleUpdate("social_dribble", e.target.value);
+          }}
+          placeholder={"Paste Dribble URL"}
+        />
+        <Input
+          icon={<Link size={32} weight="duotone" />}
+          name={"social_other"}
+          onChange={(e) => {
+            handleUpdate("social_other", e.target.value);
+          }}
+          placeholder={"Paste other URL"}
+        />
       </div>
       <NextPreviousNavigation nextUrl={"/builder/add-work"} />
     </div>
