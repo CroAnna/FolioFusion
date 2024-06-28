@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import RenderedPortfolio from "../_components/RenderedPortfolio";
 import PortfolioMaker from "../_components/PortfolioMaker";
+import { stepsData } from "../_libs/utils";
+import Steps from "../_components/Steps";
 
 export default function BuilderLayout({ children }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -24,6 +26,7 @@ export default function BuilderLayout({ children }) {
       <div className="flex-1"></div>
       <div className="flex w-full">
         <div className="flex-2">
+          <Steps currentStep={currentStep} stepsData={stepsData} />
           <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>
         </div>
         <div className="flex-3 w-full">

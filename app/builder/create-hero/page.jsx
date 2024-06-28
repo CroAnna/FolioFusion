@@ -33,15 +33,6 @@ const CreateHero = () => {
   const [borderStyleHeroImage, setBorderStyleHeroImage] = useState(null);
   const [extraElements, setExtraElements] = useState(null);
   const [extraStyleElements, setExtraStyleElements] = useState(null);
-  const [githubUrl, setGithubUrl] = useState("");
-  const [linkedinUrl, setLinkedinUrl] = useState("");
-  const [facebookUrl, setFacebookUrl] = useState("");
-  const [instagramUrl, setInstagramUrl] = useState("");
-  const [xUrl, setXUrl] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [tiktokUrl, setTiktokUrl] = useState("");
-  const [dribbleUrl, setDribbleUrl] = useState("");
-  const [otherUrl, setOtherUrl] = useState("");
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
@@ -74,16 +65,6 @@ const CreateHero = () => {
       [field]: value,
     });
   };
-
-  // const handleUpdateNested = (field, value) => {
-  //   setPortfolioStackContextData({
-  //     ...portfolioStackContextData,
-  //     social_links: {
-  //       ...portfolioStackContextData.social_links,
-  //       [field]: value,
-  //     },
-  //   });
-  // };
 
   useEffect(() => {
     handleUpdate("hero_palette", heroPalette);
@@ -269,6 +250,14 @@ const CreateHero = () => {
           placeholder={"Paste LinkedIn URL"}
         />
         <Input
+          icon={<XLogo size={32} weight="duotone" />}
+          name={"social_x"}
+          onChange={(e) => {
+            handleUpdate("social_x", e.target.value);
+          }}
+          placeholder={"Paste X URL"}
+        />
+        <Input
           icon={<FacebookLogo size={32} weight="duotone" />}
           name={"social_facebook"}
           onChange={(e) => {
@@ -283,14 +272,6 @@ const CreateHero = () => {
             handleUpdate("social_instagram", e.target.value);
           }}
           placeholder={"Paste Instagram URL"}
-        />
-        <Input
-          icon={<XLogo size={32} weight="duotone" />}
-          name={"social_x"}
-          onChange={(e) => {
-            handleUpdate("social_x", e.target.value);
-          }}
-          placeholder={"Paste X URL"}
         />
         <Input
           icon={<YoutubeLogo size={32} weight="duotone" />}

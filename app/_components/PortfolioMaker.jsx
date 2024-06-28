@@ -1,11 +1,6 @@
-import React from "react";
-import { stepsData } from "@/app/_libs/utils";
-import Steps from "./Steps";
-
-const PortfolioMaker = ({ currentStep, children }) => {
+const PortfolioMaker = ({ children }) => {
   return (
-    <div>
-      <Steps currentStep={currentStep} stepsData={stepsData} />
+    <div className="overflow-scroll" style={{ height: "calc(100vh - 88px)" }}>
       {children}
     </div>
   );

@@ -204,6 +204,16 @@ const PortfolioHero = () => {
             <LinkedinLogo size={36} weight="duotone" />
           </Link>
         )}
+        {portfolioStackContextData.social_x && (
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href={portfolioStackContextData.social_x}
+            className={primaryColors}
+          >
+            <XLogo size={36} weight="duotone" />
+          </Link>
+        )}
         {portfolioStackContextData.social_facebook && (
           <Link
             target="_blank"
@@ -222,16 +232,6 @@ const PortfolioHero = () => {
             className={primaryColors}
           >
             <InstagramLogo size={36} weight="duotone" />
-          </Link>
-        )}
-        {portfolioStackContextData.social_x && (
-          <Link
-            target="_blank"
-            rel="noopener noreferrer"
-            href={portfolioStackContextData.social_x}
-            className={primaryColors}
-          >
-            <XLogo size={36} weight="duotone" />
           </Link>
         )}
         {portfolioStackContextData.social_youtube && (
