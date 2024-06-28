@@ -7,5 +7,13 @@ export const stepsData = [
   { text: "Add other info" },
   { text: "Deploy or download as PDF" },
 ];
-
-export const heroDesignItemsData = ["Theme 1", "Theme 2", "Theme 3", "Theme 4"];
+export const heroPaletteItemsData = [
+  "Palette 1",
+  "Palette 2",
+  "Palette 3",
+  "Palette 4",
+  "Palette 5",
+  "Palette 6",
+];
+export const borderStyleItemsData = ["dashed", "dotted", "solid", "double"];
+export const heroExtraElementsData = ["abstract", "dots"];

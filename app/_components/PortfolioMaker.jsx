@@ -1,6 +1,6 @@
 import React from "react";
-import Steps from "../Steps";
 import { stepsData } from "@/app/_libs/utils";
+import Steps from "./Steps";
 
 const PortfolioMaker = ({ currentStep, children }) => {
   return (

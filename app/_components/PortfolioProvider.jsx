@@ -2,13 +2,13 @@
 import { createContext, useState } from "react";
 
 const PortfolioContext = createContext({
-  portfolioStackContextData: [],
+  portfolioStackContextData: {},
   setPortfolioStackContextData: () => {},
 });
 
 const PortfolioProvider = ({ children }) => {
   const [portfolioStackContextData, setPortfolioStackContextData] = useState(
-    []
+    {}
   );
 
   return (

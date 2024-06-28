@@ -1,8 +1,8 @@
 "use client";
-import PortfolioMaker from "@/app/_components/PortfolioMaker";
-import RenderedPortfolio from "@/app/_components/RenderedPortfolio";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import RenderedPortfolio from "../_components/RenderedPortfolio";
+import PortfolioMaker from "../_components/PortfolioMaker";
 
 export default function BuilderLayout({ children }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -22,9 +22,13 @@ export default function BuilderLayout({ children }) {
   return (
     <>
       <div className="flex-1"></div>
-      <div className="grid grid-cols-2">
-        <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>
-        <RenderedPortfolio />
+      <div className="flex w-full">
+        <div className="flex-2">
+          <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>
+        </div>
+        <div className="flex-3 w-full">
+          <RenderedPortfolio />
+        </div>
       </div>
     </>
   );
