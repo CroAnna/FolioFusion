@@ -8,9 +8,11 @@ import {
   projectLinkIcons,
   getPrimaryTextColor,
   getBgColor,
+  getIconBgColor,
 } from "../_libs/utils";
 import { PortfolioContext } from "./PortfolioProvider";
 import { useContext } from "react";
+import Image from "next/image";
 
 const ProjectCard = ({ project }) => {
   const { portfolioStackContextData } = useContext(PortfolioContext);
@@ -22,6 +24,8 @@ const ProjectCard = ({ project }) => {
   const selectedIcon2 = projectLinkIcons.find(
     (el) => el.value === project.project_link_2_icon
   );
+
+  const iconBg = getIconBgColor(palette);
 
   return (
     <div
@@ -44,11 +48,56 @@ const ProjectCard = ({ project }) => {
           {project.project_description}
         </p>
         <div className="flex gap-6 p-2">
-          {/* {project.project_technologies.map((el, index) => (
-            <div className="max-w-20 h-10" key={index}>
-              <img src={el} alt={el} className="w-full h-full object-cover" />
-            </div>
-          ))} */}
+          {project.project_technology_1_icon &&
+            project.project_technology_1_icon != "-" && (
+              <Image
+                width={32}
+                height={32}
+                src={`https://skillicons.dev/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
+                alt={""}
+                className="w-full h-full object-cover"
+              />
+            )}
+          {project.project_technology_2_icon &&
+            project.project_technology_2_icon != "-" && (
+              <Image
+                width={32}
+                height={32}
+                src={`https://skillicons.dev/icons?i=${project.project_technology_2_icon}`}
+                alt={""}
+                className="w-full h-full object-cover"
+              />
+            )}
+          {project.project_technology_3_icon &&
+            project.project_technology_3_icon != "-" && (
+              <Image
+                width={32}
+                height={32}
+                src={`https://skillicons.dev/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
+                alt={""}
+                className="w-full h-full object-cover"
+              />
+            )}
+          {project.project_technology_4_icon &&
+            project.project_technology_4_icon != "-" && (
+              <Image
+                width={32}
+                height={32}
+                src={`https://skillicons.dev/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
+                alt={""}
+                className="w-full h-full object-cover"
+              />
+            )}
+          {project.project_technology_5_icon &&
+            project.project_technology_5_icon != "-" && (
+              <Image
+                width={32}
+                height={32}
+                src={`https://skillicons.dev/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
+                alt={""}
+                className="w-full h-full object-cover"
+              />
+            )}
         </div>
         <div className="flex gap-2 justify-between w-full">
           {project.project_link_1_url && project.project_link_1_text && (
@@ -56,7 +105,7 @@ const ProjectCard = ({ project }) => {
               <button
                 className={`py-2 flex w-full items-center justify-center gap-1 ${getBgColor(
                   palette
-                )} text-lg  rounded-lg shadow-custom-sm font-medium `}
+                )} text-lg rounded-lg shadow-custom-sm font-medium `}
                 target="_blank"
                 rel="noreferrer"
               >

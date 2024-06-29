@@ -1,6 +1,14 @@
 import React from "react";
 
-const Select = ({ label, options, name, onChange, placeholder }) => {
+const Select = ({
+  label,
+  options,
+  name,
+  onChange,
+  placeholder,
+  valueAttribute = "value",
+  labelAttribute = "label",
+}) => {
   return (
     <label className="form-control w-full max-w-xs">
       {label && (
@@ -14,11 +22,11 @@ const Select = ({ label, options, name, onChange, placeholder }) => {
         onChange={onChange}
       >
         <option disabled selected>
-          {placeholder || "Pick one"}
+          {placeholder || "Select"}
         </option>
         {options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
+          <option key={index} value={option[valueAttribute]}>
+            {option[labelAttribute]}
           </option>
         ))}
       </select>

@@ -5,13 +5,14 @@ import Textarea from "./Textarea";
 import { PortfolioContext } from "./PortfolioProvider";
 import FileInput from "./FileInput";
 import Select from "./Select";
-import { projectLinkIcons } from "../_libs/utils";
+import { iconNames, icons, projectLinkIcons } from "../_libs/utils";
 
 const ProjectInputCard = ({ projectKey }) => {
   const {
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
   } = useContext(PortfolioContext);
+
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
 
@@ -137,6 +138,68 @@ const ProjectInputCard = ({ projectKey }) => {
             handleUpdateNested(`project_link_2_icon`, e.target.value);
           }}
         />
+      </div>
+      <div>
+        <div className="label pb-0 pt-0">
+          <span className="label-text  text-base">
+            Select up to 5 technologies:
+          </span>
+        </div>
+        <div className="flex justify-between items-end gap-3">
+          <Select
+            placeholder="-"
+            options={icons}
+            labelAttribute="icon"
+            valueAttribute="icon"
+            name={`project_technology_1_icon`}
+            onChange={(e) => {
+              handleUpdateNested(`project_technology_1_icon`, e.target.value);
+            }}
+          />
+          <Select
+            placeholder="-"
+            options={icons}
+            labelAttribute="icon"
+            valueAttribute="icon"
+            name={`project_technology_2_icon`}
+            onChange={(e) => {
+              handleUpdateNested(`project_technology_2_icon`, e.target.value);
+            }}
+          />
+          <Select
+            placeholder="-"
+            options={icons}
+            labelAttribute="icon"
+            valueAttribute="icon"
+            label={""}
+            name={`project_technology_3_icon`}
+            onChange={(e) => {
+              handleUpdateNested(`project_technology_3_icon`, e.target.value);
+            }}
+          />
+          <Select
+            placeholder="-"
+            options={icons}
+            labelAttribute="icon"
+            valueAttribute="icon"
+            label={""}
+            name={`project_technology_4_icon`}
+            onChange={(e) => {
+              handleUpdateNested(`project_technology_4_icon`, e.target.value);
+            }}
+          />
+          <Select
+            placeholder="-"
+            options={icons}
+            labelAttribute="icon"
+            valueAttribute="icon"
+            label={""}
+            name={`project_technology_5_icon`}
+            onChange={(e) => {
+              handleUpdateNested(`project_technology_5_icon`, e.target.value);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
