@@ -13,6 +13,12 @@ import {
   Link as LinkLogo,
 } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
+import {
+  getBgColor,
+  getPrimaryBorderColors,
+  getPrimaryColors,
+  getSecondaryColors,
+} from "../_libs/utils";
 
 const PortfolioHero = () => {
   const { portfolioStackContextData } = useContext(PortfolioContext);
@@ -21,41 +27,11 @@ const PortfolioHero = () => {
   const extra_style_elements =
     portfolioStackContextData.hero_extra_style_elements;
 
-  const bgColors = `
-        ${palette == "Palette 1" && "bg-zinc-100 text-gray-600"} 
-        ${palette == "Palette 4" && "bg-slate-800 text-gray-50"} 
-        ${palette == "Palette 3" && "bg-orange-50 text-amber-900"} 
-        ${palette == "Palette 2" && "bg-sky-50 text-gray-800"} 
-        ${palette == "Palette 5" && "bg-neutral-900 text-gray-100"}
-        ${palette == "Palette 6" && "bg-stone-900 text-gray-100"}`;
-
-  const primaryBorderColors = `
-        ${palette == "Palette 1" && "border-cyan-900"} 
-        ${palette == "Palette 2" && "border-cyan-900"}
-        ${palette == "Palette 3" && "border-lime-800"} 
-        ${palette == "Palette 4" && "border-amber-200 "} 
-        ${palette == "Palette 5" && "border-emerald-500"} 
-        ${palette == "Palette 6" && "border-orange-500"}`;
-
-  const primaryColors = `
-        ${palette == "Palette 1" && "text-amber-600"} 
-        ${palette == "Palette 2" && "text-blue-800"} 
-        ${palette == "Palette 3" && "text-orange-800"} 
-        ${palette == "Palette 4" && "text-yellow-400"} 
-        ${palette == "Palette 5" && "text-lime-500"}
-        ${palette == "Palette 6" && "text-yellow-400"}`;
-
-  const secondaryColors = `
-        ${palette == "Palette 1" && "text-cyan-900"} 
-        ${palette == "Palette 2" && "text-cyan-900"}
-        ${palette == "Palette 3" && "text-lime-800"} 
-        ${palette == "Palette 4" && "text-amber-200 "} 
-        ${palette == "Palette 5" && "text-emerald-500"}  
-        ${palette == "Palette 6" && "text-orange-500"}`;
-
   return (
     <div
-      className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center ${bgColors}`}
+      className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center ${getBgColor(
+        palette
+      )}`}
     >
       {portfolioStackContextData.hero_extra && (
         <>
@@ -144,7 +120,7 @@ const PortfolioHero = () => {
                 : border_style == "dotted"
                 ? "border-dotted"
                 : "border-double"
-            } p-4 ${primaryBorderColors}`
+            } p-4 ${getPrimaryBorderColors(palette)}`
           }`}
           >
             <Image
@@ -167,13 +143,13 @@ const PortfolioHero = () => {
           <div>
             <h1
               className={`text-8xl font-bold break-words max-w-[680px]
-                ${primaryColors}`}
+                ${getPrimaryColors(palette)}`}
             >
               {portfolioStackContextData.hero_name}
             </h1>
             <h2
               className={`text-5xl font-bold 
-              ${secondaryColors}`}
+              ${getSecondaryColors(palette)}`}
             >
               {portfolioStackContextData.hero_short}
             </h2>
@@ -189,7 +165,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_github}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <GithubLogo size={36} weight="duotone" />
           </Link>
@@ -199,7 +175,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_linkedin}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <LinkedinLogo size={36} weight="duotone" />
           </Link>
@@ -209,7 +185,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_x}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <XLogo size={36} weight="duotone" />
           </Link>
@@ -219,7 +195,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_facebook}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <FacebookLogo size={36} weight="duotone" />
           </Link>
@@ -229,7 +205,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_instagram}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <InstagramLogo size={36} weight="duotone" />
           </Link>
@@ -239,7 +215,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_youtube}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <YoutubeLogo size={36} weight="duotone" />
           </Link>
@@ -249,7 +225,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_tiktok}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <TiktokLogo size={36} weight="duotone" />
           </Link>
@@ -259,7 +235,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_dribble}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <DribbbleLogo size={36} weight="duotone" />
           </Link>
@@ -269,7 +245,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_other}
-            className={primaryColors}
+            className={getPrimaryColors(palette)}
           >
             <LinkLogo size={36} weight="duotone" />
           </Link>
