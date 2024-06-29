@@ -14,10 +14,10 @@ const Input = ({
   onChange,
 }) => {
   return (
-    <div>
+    <div className="w-full">
       {label && (
-        <div className="label">
-          <span className="label-text">{label}</span>
+        <div className="label pb-0 pt-0">
+          <span className="label-text text-base">{label}</span>
         </div>
       )}
       <div className="input-parent-wrapper input input-bordered flex items-center gap-2">

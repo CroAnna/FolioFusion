@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import {
   getBgColor,
+  getPrimaryTextColor,
   getPrimaryBorderColors,
   getPrimaryColors,
   getSecondaryColors,
@@ -29,9 +30,8 @@ const PortfolioHero = () => {
 
   return (
     <div
-      className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center ${getBgColor(
-        palette
-      )}`}
+      className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center 
+        ${getPrimaryTextColor(palette)} ${getBgColor(palette)}`}
     >
       {portfolioStackContextData.hero_extra && (
         <>
