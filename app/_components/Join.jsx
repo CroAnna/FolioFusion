@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 
-const Join = ({ items, setSelected, name }) => {
+const Join = ({ items, setSelected, name, value }) => {
   useEffect(() => {
-    setSelected(items[0]);
+    if (value) {
+      console.log(value);
+      setSelected(value);
+    } else {
+      setSelected(items[0]);
+    }
   }, []);
 
   return (
@@ -13,7 +18,8 @@ const Join = ({ items, setSelected, name }) => {
           className="join-item btn"
           type="radio"
           name={name}
-          defaultChecked={el == items[0]}
+          value={value}
+          defaultChecked={el == value}
           aria-label={el}
           onClick={() => setSelected(el)}
         />

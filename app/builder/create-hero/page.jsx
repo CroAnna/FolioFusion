@@ -28,9 +28,9 @@ const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [heroPalette, setHeroPalette] = useState();
-  const [roundedHeroImage, setRoundedHeroImage] = useState(null);
+  const [roundedHeroImage, setRoundedHeroImage] = useState(false);
   const [borderHeroImage, setBorderHeroImage] = useState(null);
-  const [borderStyleHeroImage, setBorderStyleHeroImage] = useState(null);
+  const [borderStyleHeroImage, setBorderStyleHeroImage] = useState();
   const [extraElements, setExtraElements] = useState(null);
   const [extraStyleElements, setExtraStyleElements] = useState(null);
 
@@ -45,6 +45,13 @@ const CreateHero = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    setPortfolioStackContextData({
+      ...portfolioStackContextData,
+      hero_image: undefined,
+      hero_image_rounded: undefined,
+      hero_border_style: undefined,
+      hero_image_border: undefined,
+    });
   };
 
   const handleRoundedToggle = () => {
@@ -67,19 +74,45 @@ const CreateHero = () => {
   };
 
   useEffect(() => {
+    if (portfolioStackContextData.hero_image) {
+      console.log(portfolioStackContextData.hero_image);
+      setFile(portfolioStackContextData.hero_image);
+    }
+    if (portfolioStackContextData.hero_image_rounded) {
+      console.log(portfolioStackContextData.hero_image_rounded.toString());
+      setRoundedHeroImage(portfolioStackContextData.hero_image_rounded);
+    }
+
+    if (portfolioStackContextData.hero_border_style) {
+      console.log(portfolioStackContextData.hero_border_style.toString());
+      setBorderStyleHeroImage(portfolioStackContextData.hero_border_style);
+    }
+
+    if (portfolioStackContextData.hero_image_border) {
+      console.log(portfolioStackContextData.hero_image_border.toString());
+      setBorderHeroImage(portfolioStackContextData.hero_image_border);
+    }
+  }, []);
+
+  useEffect(() => {
     handleUpdate("hero_palette", heroPalette);
   }, [heroPalette]);
 
   useEffect(() => {
+    console.log("novi hero_image_rounded " + roundedHeroImage);
+
     handleUpdate("hero_image_rounded", roundedHeroImage);
   }, [roundedHeroImage]);
 
   useEffect(() => {
+    console.log("novi hero_image_border " + borderHeroImage);
     handleUpdate("hero_image_border", borderHeroImage);
   }, [borderHeroImage]);
 
   useEffect(() => {
-    handleUpdate("hero_border_style", borderStyleHeroImage);
+    console.log("novi stil " + borderStyleHeroImage);
+    borderStyleHeroImage &&
+      handleUpdate("hero_border_style", borderStyleHeroImage);
   }, [borderStyleHeroImage]);
 
   useEffect(() => {
@@ -91,19 +124,23 @@ const CreateHero = () => {
   }, [extraStyleElements]);
 
   useEffect(() => {
-    if (file) {
+    console.log(file);
+    console.log(portfolioStackContextData.hero_image);
+    if (file && !portfolioStackContextData.hero_image) {
+      console.log("nemam ");
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         hero_image: URL.createObjectURL(file),
       });
-    } else {
+    } else if (file && portfolioStackContextData.hero_image) {
+      console.log("imam ");
+
       setPortfolioStackContextData({
         ...portfolioStackContextData,
-        hero_image: undefined,
-        hero_image_rounded: undefined,
-        hero_border_style: undefined,
-        hero_image_border: undefined,
+        hero_image: file,
       });
+    } else {
+      console.log("nis ");
     }
   }, [file]);
 
@@ -117,13 +154,19 @@ const CreateHero = () => {
             <FileInput setFile={setFile} fileInputRef={fileInputRef} />
             {file && (
               <>
-                <Toggle text={"Rounded image"} onChange={handleRoundedToggle} />
                 <Toggle
+                  text={"Rounded image"}
+                  onChange={handleRoundedToggle}
+                  value={roundedHeroImage}
+                />
+                <Toggle
+                  value={borderHeroImage}
                   text={"Border around image"}
                   onChange={handleBorderToggle}
                 />
                 {borderHeroImage && (
                   <Join
+                    value={borderStyleHeroImage}
                     items={borderStyleItemsData}
                     setSelected={setBorderStyleHeroImage}
                     name={"hero_border_style"}
@@ -134,17 +177,6 @@ const CreateHero = () => {
           </div>
           {file && (
             <div className="flex flex-col gap-2">
-              <div className="avatar">
-                <div className="w-24 rounded-full">
-                  <Image
-                    className="max-w-full max-h-96"
-                    src={URL.createObjectURL(file)}
-                    alt={file}
-                    width="96"
-                    height="96"
-                  />
-                </div>
-              </div>
               <button
                 className="btn btn-outline w-fit btn-error btn-ghost"
                 onClick={removeSelectedImage}
@@ -207,6 +239,7 @@ const CreateHero = () => {
           1.6. Select hero background color
         </h3>
         <Join
+          value={heroPalette}
           items={heroPaletteItemsData}
           setSelected={setHeroPalette}
           name={"hero_palette"}
@@ -215,11 +248,13 @@ const CreateHero = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">1.7. Select UI of your hero</h3>
         <Toggle
+          value={extraElements}
           text={"Show extra elements"}
           onChange={handleExtraElementsToggle}
         />
         {extraElements && (
           <Join
+            value={extraStyleElements}
             items={heroExtraElementsData}
             setSelected={setExtraStyleElements}
             name={"hero_extra"}
