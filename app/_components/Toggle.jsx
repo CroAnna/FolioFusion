@@ -1,6 +1,6 @@
 import React from "react";
 
-const Toggle = ({ text, defaultChecked = false, onChange, value }) => {
+const Toggle = ({ text, onChange, checked }) => {
   return (
     <div className="form-control w-52">
       <label className="label cursor-pointer">
@@ -8,9 +8,8 @@ const Toggle = ({ text, defaultChecked = false, onChange, value }) => {
         <input
           type="checkbox"
           className="toggle toggle-primary"
-          defaultChecked={defaultChecked}
           onChange={onChange}
-          checked={value}
+          checked={checked}
         />
       </label>
     </div>

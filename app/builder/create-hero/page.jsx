@@ -21,126 +21,54 @@ import {
   YoutubeLogo,
   Link,
 } from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
-  const [heroPalette, setHeroPalette] = useState();
-  const [roundedHeroImage, setRoundedHeroImage] = useState(false);
-  const [borderHeroImage, setBorderHeroImage] = useState(null);
-  const [borderStyleHeroImage, setBorderStyleHeroImage] = useState();
-  const [extraElements, setExtraElements] = useState(null);
-  const [extraStyleElements, setExtraStyleElements] = useState(null);
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
 
   const removeSelectedImage = () => {
     setFile(null);
-    setRoundedHeroImage(false);
-    setBorderHeroImage(false);
-    setBorderStyleHeroImage(null);
+
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
     setPortfolioStackContextData({
       ...portfolioStackContextData,
-      hero_image: undefined,
-      hero_image_rounded: undefined,
-      hero_border_style: undefined,
-      hero_image_border: undefined,
+      hero_image: null,
+      hero_image_rounded: false,
+      hero_border_style: "dashed",
+      hero_image_border: false,
     });
-  };
-
-  const handleRoundedToggle = () => {
-    setRoundedHeroImage(!roundedHeroImage);
-  };
-
-  const handleBorderToggle = () => {
-    setBorderHeroImage(!borderHeroImage);
-  };
-
-  const handleExtraElementsToggle = () => {
-    setExtraElements(!extraElements);
   };
 
   const handleUpdate = (field, value) => {
-    setPortfolioStackContextData({
-      ...portfolioStackContextData,
+    setPortfolioStackContextData((prev) => ({
+      ...prev,
       [field]: value,
-    });
+    }));
   };
 
   useEffect(() => {
     if (portfolioStackContextData.hero_image) {
-      console.log(portfolioStackContextData.hero_image);
       setFile(portfolioStackContextData.hero_image);
-    }
-    if (portfolioStackContextData.hero_image_rounded) {
-      console.log(portfolioStackContextData.hero_image_rounded.toString());
-      setRoundedHeroImage(portfolioStackContextData.hero_image_rounded);
-    }
-
-    if (portfolioStackContextData.hero_border_style) {
-      console.log(portfolioStackContextData.hero_border_style.toString());
-      setBorderStyleHeroImage(portfolioStackContextData.hero_border_style);
-    }
-
-    if (portfolioStackContextData.hero_image_border) {
-      console.log(portfolioStackContextData.hero_image_border.toString());
-      setBorderHeroImage(portfolioStackContextData.hero_image_border);
     }
   }, []);
 
   useEffect(() => {
-    handleUpdate("hero_palette", heroPalette);
-  }, [heroPalette]);
-
-  useEffect(() => {
-    console.log("novi hero_image_rounded " + roundedHeroImage);
-
-    handleUpdate("hero_image_rounded", roundedHeroImage);
-  }, [roundedHeroImage]);
-
-  useEffect(() => {
-    console.log("novi hero_image_border " + borderHeroImage);
-    handleUpdate("hero_image_border", borderHeroImage);
-  }, [borderHeroImage]);
-
-  useEffect(() => {
-    console.log("novi stil " + borderStyleHeroImage);
-    borderStyleHeroImage &&
-      handleUpdate("hero_border_style", borderStyleHeroImage);
-  }, [borderStyleHeroImage]);
-
-  useEffect(() => {
-    handleUpdate("hero_extra", extraElements);
-  }, [extraElements]);
-
-  useEffect(() => {
-    handleUpdate("hero_extra_style_elements", extraStyleElements);
-  }, [extraStyleElements]);
-
-  useEffect(() => {
-    console.log(file);
-    console.log(portfolioStackContextData.hero_image);
     if (file && !portfolioStackContextData.hero_image) {
-      console.log("nemam ");
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         hero_image: URL.createObjectURL(file),
       });
     } else if (file && portfolioStackContextData.hero_image) {
-      console.log("imam ");
-
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         hero_image: file,
       });
-    } else {
-      console.log("nis ");
     }
   }, [file]);
 
@@ -156,19 +84,25 @@ const CreateHero = () => {
               <>
                 <Toggle
                   text={"Rounded image"}
-                  onChange={handleRoundedToggle}
-                  value={roundedHeroImage}
+                  onChange={(e) => {
+                    handleUpdate("hero_image_rounded", e.target.checked);
+                  }}
+                  checked={portfolioStackContextData.hero_image_rounded}
                 />
                 <Toggle
-                  value={borderHeroImage}
+                  checked={portfolioStackContextData.hero_image_border}
                   text={"Border around image"}
-                  onChange={handleBorderToggle}
+                  onChange={(e) => {
+                    handleUpdate("hero_image_border", e.target.checked);
+                  }}
                 />
-                {borderHeroImage && (
+                {portfolioStackContextData.hero_image_border && (
                   <Join
-                    value={borderStyleHeroImage}
+                    value={portfolioStackContextData.hero_border_style}
                     items={borderStyleItemsData}
-                    setSelected={setBorderStyleHeroImage}
+                    onChange={(e) => {
+                      handleUpdate("hero_border_style", e.target.value);
+                    }}
                     name={"hero_border_style"}
                   />
                 )}
@@ -193,6 +127,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_welcome"}
+          value={portfolioStackContextData.hero_welcome}
           onChange={(e) => {
             handleUpdate("hero_welcome", e.target.value);
           }}
@@ -203,6 +138,7 @@ const CreateHero = () => {
         <h3 className="text-2xl font-bold">1.3. Add your name</h3>
         <Input
           name={"hero_name"}
+          value={portfolioStackContextData.hero_name}
           onChange={(e) => {
             handleUpdate("hero_name", e.target.value);
           }}
@@ -215,6 +151,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_short"}
+          value={portfolioStackContextData.hero_short}
           onChange={(e) => {
             handleUpdate("hero_short", e.target.value);
           }}
@@ -228,6 +165,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_description"}
+          value={portfolioStackContextData.hero_description}
           onChange={(e) => {
             handleUpdate("hero_description", e.target.value);
           }}
@@ -239,25 +177,31 @@ const CreateHero = () => {
           1.6. Select hero background color
         </h3>
         <Join
-          value={heroPalette}
+          value={portfolioStackContextData.hero_palette}
           items={heroPaletteItemsData}
-          setSelected={setHeroPalette}
+          onChange={(e) => {
+            handleUpdate("hero_palette", e.target.value);
+          }}
           name={"hero_palette"}
         />
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">1.7. Select UI of your hero</h3>
         <Toggle
-          value={extraElements}
-          text={"Show extra elements"}
-          onChange={handleExtraElementsToggle}
+          checked={portfolioStackContextData.hero_extra}
+          text={"Border around image"}
+          onChange={(e) => {
+            handleUpdate("hero_extra", e.target.checked);
+          }}
         />
-        {extraElements && (
+        {portfolioStackContextData.hero_extra && (
           <Join
-            value={extraStyleElements}
+            value={portfolioStackContextData.hero_extra_style_elements}
             items={heroExtraElementsData}
-            setSelected={setExtraStyleElements}
-            name={"hero_extra"}
+            onChange={(e) => {
+              handleUpdate("hero_extra_style_elements", e.target.value);
+            }}
+            name={"hero_extra_style_elements"}
           />
         )}
       </div>
@@ -271,6 +215,7 @@ const CreateHero = () => {
         <Input
           icon={<GithubLogo size={32} weight="duotone" />}
           name={"social_github"}
+          value={portfolioStackContextData.social_github}
           onChange={(e) => {
             handleUpdate("social_github", e.target.value);
           }}
@@ -279,6 +224,7 @@ const CreateHero = () => {
         <Input
           icon={<LinkedinLogo size={32} weight="duotone" />}
           name={"social_linkedin"}
+          value={portfolioStackContextData.social_linkedin}
           onChange={(e) => {
             handleUpdate("social_linkedin", e.target.value);
           }}
@@ -287,6 +233,7 @@ const CreateHero = () => {
         <Input
           icon={<XLogo size={32} weight="duotone" />}
           name={"social_x"}
+          value={portfolioStackContextData.social_x}
           onChange={(e) => {
             handleUpdate("social_x", e.target.value);
           }}
@@ -295,6 +242,7 @@ const CreateHero = () => {
         <Input
           icon={<FacebookLogo size={32} weight="duotone" />}
           name={"social_facebook"}
+          value={portfolioStackContextData.social_facebook}
           onChange={(e) => {
             handleUpdate("social_facebook", e.target.value);
           }}
@@ -303,6 +251,7 @@ const CreateHero = () => {
         <Input
           icon={<InstagramLogo size={32} weight="duotone" />}
           name={"social_instagram"}
+          value={portfolioStackContextData.social_instagram}
           onChange={(e) => {
             handleUpdate("social_instagram", e.target.value);
           }}
@@ -311,6 +260,7 @@ const CreateHero = () => {
         <Input
           icon={<YoutubeLogo size={32} weight="duotone" />}
           name={"social_youtube"}
+          value={portfolioStackContextData.social_youtube}
           onChange={(e) => {
             handleUpdate("social_youtube", e.target.value);
           }}
@@ -319,6 +269,7 @@ const CreateHero = () => {
         <Input
           icon={<TiktokLogo size={32} weight="duotone" />}
           name={"social_tiktok"}
+          value={portfolioStackContextData.social_tiktok}
           onChange={(e) => {
             handleUpdate("social_tiktok", e.target.value);
           }}
@@ -326,6 +277,7 @@ const CreateHero = () => {
         />
         <Input
           icon={<DribbbleLogo size={32} weight="duotone" />}
+          value={portfolioStackContextData.social_dribble}
           name={"social_dribble"}
           onChange={(e) => {
             handleUpdate("social_dribble", e.target.value);
@@ -334,6 +286,7 @@ const CreateHero = () => {
         />
         <Input
           icon={<Link size={32} weight="duotone" />}
+          value={portfolioStackContextData.social_other}
           name={"social_other"}
           onChange={(e) => {
             handleUpdate("social_other", e.target.value);

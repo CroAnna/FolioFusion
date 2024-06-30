@@ -1,15 +1,4 @@
-import React, { useEffect } from "react";
-
-const Join = ({ items, setSelected, name, value }) => {
-  useEffect(() => {
-    if (value) {
-      console.log(value);
-      setSelected(value);
-    } else {
-      setSelected(items[0]);
-    }
-  }, []);
-
+const Join = ({ items, onChange, name, value }) => {
   return (
     <div className="join">
       {items.map((el, index) => (
@@ -18,10 +7,10 @@ const Join = ({ items, setSelected, name, value }) => {
           className="join-item btn"
           type="radio"
           name={name}
-          value={value}
-          defaultChecked={el == value}
+          value={el}
+          checked={el === value}
           aria-label={el}
-          onClick={() => setSelected(el)}
+          onChange={onChange}
         />
       ))}
     </div>
