@@ -45,7 +45,12 @@ const AddEducation = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">2.3. Add your projects</h3>
+        <div className="flex gap-2 items-center">
+          <h3 className="text-2xl font-bold">
+            2.3. Add your work experience and education
+          </h3>
+          <p>(from newest to oldest)</p>
+        </div>
       </div>
       <NextPreviousNavigation
         nextUrl={"/builder/add-other"}

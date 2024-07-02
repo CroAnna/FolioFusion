@@ -9,6 +9,7 @@ export const stepsData = [
   { text: "Add other info" },
   { text: "Deploy or download as PDF" },
 ];
+
 export const heroPaletteItemsData = [
   "Palette 1",
   "Palette 2",
@@ -17,87 +18,161 @@ export const heroPaletteItemsData = [
   "Palette 5",
   "Palette 6",
 ];
+
 export const borderStyleItemsData = ["dashed", "dotted", "solid", "double"];
+
 export const heroExtraElementsData = ["abstract", "dots"];
 
 export const getBgColor = (palette) => {
-  return `
-  ${palette == "Palette 1" && "bg-zinc-100"} 
-  ${palette == "Palette 2" && "bg-sky-50 "} 
-  ${palette == "Palette 3" && "bg-orange-50"} 
-  ${palette == "Palette 4" && "bg-slate-800"} 
-  ${palette == "Palette 5" && "bg-neutral-900"}
-  ${palette == "Palette 6" && "bg-stone-900"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "bg-zinc-100";
+    case "Palette 2":
+      return "bg-sky-50";
+    case "Palette 3":
+      return "bg-orange-50";
+    case "Palette 4":
+      return "bg-slate-800";
+    case "Palette 5":
+      return "bg-neutral-900";
+    case "Palette 6":
+      return "bg-stone-900";
+    default:
+      return null;
+  }
 };
 
 export const getPrimaryBgColors = (palette) => {
-  return `
-      ${palette == "Palette 1" && "bg-amber-600"} 
-      ${palette == "Palette 2" && "bg-blue-800"} 
-      ${palette == "Palette 3" && "bg-orange-800"} 
-      ${palette == "Palette 4" && "bg-yellow-400"} 
-      ${palette == "Palette 5" && "bg-lime-500"}
-      ${palette == "Palette 6" && "bg-yellow-400"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "bg-amber-600";
+    case "Palette 2":
+      return "bg-blue-800";
+    case "Palette 3":
+      return "bg-orange-800";
+    case "Palette 4":
+      return "bg-yellow-400";
+    case "Palette 5":
+      return "bg-lime-500";
+    case "Palette 6":
+      return "bg-yellow-400";
+    default:
+      return null;
+  }
 };
 
 export const getSecondaryBgColors = (palette) => {
-  return `
-      ${palette == "Palette 1" && "bg-white"} 
-      ${palette == "Palette 2" && "bg-sky-100"} 
-      ${palette == "Palette 3" && "bg-orange-100"} 
-      ${palette == "Palette 4" && "bg-slate-900"} 
-      ${palette == "Palette 5" && "bg-neutral-800"}
-      ${palette == "Palette 6" && "bg-stone-800"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "bg-white";
+    case "Palette 2":
+      return "bg-sky-100";
+    case "Palette 3":
+      return "bg-orange-100";
+    case "Palette 4":
+      return "bg-slate-900";
+    case "Palette 5":
+      return "bg-neutral-800";
+    case "Palette 6":
+      return "bg-stone-800";
+    default:
+      return null;
+  }
 };
 
 export const getPrimaryTextColor = (palette) => {
-  return `
-  ${palette == "Palette 1" && "text-gray-900"} 
-  ${palette == "Palette 2" && "text-gray-800"}
-  ${palette == "Palette 3" && "text-amber-900"} 
-  ${palette == "Palette 4" && "text-gray-50"}
-  ${palette == "Palette 5" && "text-gray-100"}
-  ${palette == "Palette 6" && "text-gray-100"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "text-gray-900";
+    case "Palette 2":
+      return "text-gray-800";
+    case "Palette 3":
+      return "text-amber-900";
+    case "Palette 4":
+      return "text-gray-50";
+    case "Palette 5":
+      return "text-gray-100";
+    case "Palette 6":
+      return "text-gray-100";
+    default:
+      return null;
+  }
 };
 
 export const getSecondaryTextColor = (palette) => {
-  return `
-  ${palette == "Palette 1" && "text-gray-100"} 
-  ${palette == "Palette 2" && "text-gray-100"} 
-  ${palette == "Palette 3" && "text-gray-100"} 
-  ${palette == "Palette 4" && "text-gray-900"} 
-  ${palette == "Palette 5" && "text-gray-900"}
-  ${palette == "Palette 6" && "text-gray-900"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "text-gray-100";
+    case "Palette 2":
+      return "text-gray-100";
+    case "Palette 3":
+      return "text-gray-100";
+    case "Palette 4":
+      return "text-gray-900";
+    case "Palette 5":
+      return "text-gray-900";
+    case "Palette 6":
+      return "text-gray-900";
+    default:
+      return null;
+  }
 };
 
 export const getPrimaryBorderColors = (palette) => {
-  return `
-      ${palette == "Palette 1" && "border-cyan-900"} 
-      ${palette == "Palette 2" && "border-cyan-900"}
-      ${palette == "Palette 3" && "border-lime-800"} 
-      ${palette == "Palette 4" && "border-amber-200 "} 
-      ${palette == "Palette 5" && "border-emerald-500"} 
-      ${palette == "Palette 6" && "border-orange-500"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "border-cyan-900";
+    case "Palette 2":
+      return "border-cyan-900";
+    case "Palette 3":
+      return "border-lime-800";
+    case "Palette 4":
+      return "border-amber-200";
+    case "Palette 5":
+      return "border-emerald-500";
+    case "Palette 6":
+      return "border-orange-500";
+    default:
+      return null;
+  }
 };
 
 export const getPrimaryColors = (palette) => {
-  return `
-      ${palette == "Palette 1" && "text-amber-600"} 
-      ${palette == "Palette 2" && "text-blue-800"} 
-      ${palette == "Palette 3" && "text-orange-800"} 
-      ${palette == "Palette 4" && "text-yellow-400"} 
-      ${palette == "Palette 5" && "text-lime-500"}
-      ${palette == "Palette 6" && "text-yellow-400"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "text-amber-600";
+    case "Palette 2":
+      return "text-blue-800";
+    case "Palette 3":
+      return "text-orange-800";
+    case "Palette 4":
+      return "text-yellow-400";
+    case "Palette 5":
+      return "text-lime-500";
+    case "Palette 6":
+      return "text-yellow-400";
+    default:
+      return "";
+  }
 };
 
 export const getSecondaryColors = (palette) => {
-  return `
-      ${palette == "Palette 1" && "text-cyan-900"} 
-      ${palette == "Palette 2" && "text-cyan-900"}
-      ${palette == "Palette 3" && "text-lime-800"} 
-      ${palette == "Palette 4" && "text-amber-200 "} 
-      ${palette == "Palette 5" && "text-emerald-500"}  
-      ${palette == "Palette 6" && "text-orange-500"}`;
+  switch (palette) {
+    case "Palette 1":
+      return "text-cyan-900";
+    case "Palette 2":
+      return "text-cyan-900";
+    case "Palette 3":
+      return "text-lime-800";
+    case "Palette 4":
+      return "text-amber-200";
+    case "Palette 5":
+      return "text-emerald-500";
+    case "Palette 6":
+      return "text-orange-500";
+    default:
+      return "";
+  }
 };
 
 export const projectLinkIcons = [
@@ -107,13 +182,107 @@ export const projectLinkIcons = [
 ];
 
 export const getIconBgColor = (palette) => {
-  return `${palette == "Palette 1" ? "light" : ""}${
-    palette == "Palette 2" ? "light" : ""
-  }${palette == "Palette 3" ? "light" : ""}${
-    palette == "Palette 4" ? "dark" : ""
-  }${palette == "Palette 5" ? "dark" : ""}${
-    palette == "Palette 6" ? "dark" : ""
-  }`;
+  switch (palette) {
+    case "Palette 1":
+    case "Palette 2":
+    case "Palette 3":
+      return "light";
+    case "Palette 4":
+    case "Palette 5":
+    case "Palette 6":
+      return "dark";
+    default:
+      return null;
+  }
+};
+
+export const getHexSecondaryBgColor = (palette) => {
+  switch (palette) {
+    case "Palette 1":
+      return "#FFFFFF"; // white
+    case "Palette 2":
+      return "#e0f2fe"; // sky-100
+    case "Palette 3":
+      return "#FFEDD5"; // orange-100
+    case "Palette 4":
+      return "#0F172A"; // slate-900
+    case "Palette 5":
+      return "#262626"; // neutral-800
+    case "Palette 6":
+      return "#2D2D2D"; // stone-800
+    default:
+      return null;
+  }
+};
+
+export const getHexPrimaryTextColor = (palette) => {
+  switch (palette) {
+    case "Palette 1":
+      return "#111827"; // gray-900
+    case "Palette 2":
+      return "#1f2937"; // gray-800
+    case "Palette 3":
+      return "#78350f"; // amber-900
+    case "Palette 4":
+      return "#f9fafb"; // gray-50
+    case "Palette 5":
+    case "Palette 6":
+      return "#f3f4f6"; // gray-100
+    default:
+      return null;
+  }
+};
+
+export const getHexPrimaryColor = (palette) => {
+  switch (palette) {
+    case "Palette 1":
+      return "#d97706"; // amber-600
+    case "Palette 2":
+      return "#1e40af"; // blue-800
+    case "Palette 3":
+      return "#9a3412"; // orange-800
+    case "Palette 4":
+      return "#facc15"; // yellow-400
+    case "Palette 5":
+      return "#84cc16"; // lime-500
+    case "Palette 6":
+      return "#facc15"; // yellow-400
+    default:
+      return null;
+  }
+};
+
+export const getHexSecondaryColor = (palette) => {
+  switch (palette) {
+    case "Palette 1":
+    case "Palette 2":
+      return "#164e63"; // cyan-900
+    case "Palette 3":
+      return "#3f6212"; // lime-800
+    case "Palette 4":
+      return "#fde68a"; // amber-200
+    case "Palette 5":
+      return "#10b981"; // emerald-500
+    case "Palette 6":
+      return "#f97316"; // orange-500
+    default:
+      return null;
+  }
+};
+
+export const getHexLineColor = (palette) => {
+  switch (palette) {
+    case "Palette 1":
+    case "Palette 2":
+    case "Palette 3":
+      return "#d4d4d4";
+    case "Palette 4":
+    case "Palette 5":
+    case "Palette 6":
+      return "#525252";
+    default:
+      return null;
+  }
 };
 
 export const icons = [
@@ -160,7 +329,7 @@ export const icons = [
   { icon: "cmake" },
   { icon: "codepen" },
   { icon: "coffeescript" },
-  { icon: "css" },
+  { icon: "hex" },
   { icon: "cypress" },
   { icon: "d3" },
   { icon: "dart" },
@@ -346,7 +515,7 @@ export const icons = [
   { icon: "webflow" },
   { icon: "webpack" },
   { icon: "webstorm" },
-  { icon: "windicss" },
+  { icon: "windihex" },
   { icon: "windows" },
   { icon: "wordpress" },
   { icon: "workers" },
