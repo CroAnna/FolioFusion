@@ -1,7 +1,17 @@
-const FileInput = ({ setFile, fileInputRef, label, onChange }) => {
+import { useEffect } from "react";
+
+const FileInput = ({ setFile, fileInputRef, label, file }) => {
   const handleChange = (event) => {
     setFile(event.target.files[0]);
   };
+
+  useEffect(() => {
+    if (fileInputRef.current && file) {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      fileInputRef.current.files = dataTransfer.files;
+    }
+  }, [file, fileInputRef]);
 
   return (
     <div className="w-full">
