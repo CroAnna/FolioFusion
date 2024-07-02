@@ -308,7 +308,7 @@ const CreateHero = () => {
           placeholder={"Paste other URL"}
         />
       </div>
-      <NextPreviousNavigation nextUrl={"/builder/add-work"} />
+      <NextPreviousNavigation nextUrl={"/builder/add-projects"} />
     </div>
   );
 };

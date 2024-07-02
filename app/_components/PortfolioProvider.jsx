@@ -29,8 +29,10 @@ const PortfolioProvider = ({ children }) => {
     social_tiktok: "",
     social_dribble: "",
     social_other: "",
-    work_description: "",
-    work_title: "",
+    project_group_description: "",
+    project_group_title: "",
+    timeline_group_description: "",
+    timeline_group_title: "",
   });
 
   const [
@@ -56,6 +58,29 @@ const PortfolioProvider = ({ children }) => {
     },
   ]);
 
+  const [
+    portfolioStackTimelineContextData,
+    setPortfolioStackTimelineContextData,
+  ] = useState([
+    {
+      timeline_id: 1,
+      timeline_title: "",
+      timeline_description: "",
+      timeline_technology_1_icon: "",
+      timeline_technology_2_icon: "",
+      timeline_technology_3_icon: "",
+      timeline_technology_4_icon: "",
+      timeline_technology_5_icon: "",
+      timeline_link_1_url: "",
+      timeline_link_2_url: "",
+      timeline_link_1_text: "",
+      timeline_link_2_text: "",
+      timeline_link_1_icon: "",
+      timeline_link_2_icon: "",
+      timeline_img: "",
+    },
+  ]);
+
   return (
     <PortfolioContext.Provider
       value={{
@@ -63,6 +88,8 @@ const PortfolioProvider = ({ children }) => {
         setPortfolioStackContextData,
         portfolioStackProjectsContextData,
         setPortfolioStackProjectsContextData,
+        portfolioStackTimelineContextData,
+        setPortfolioStackTimelineContextData,
       }}
     >
       {children}

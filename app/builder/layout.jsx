@@ -14,7 +14,7 @@ export default function BuilderLayout({ children }) {
     console.log("next page " + pathname);
     if (pathname == "/builder/create-hero") {
       setCurrentStep(1);
-    } else if (pathname == "/builder/add-work") {
+    } else if (pathname == "/builder/add-projects") {
       setCurrentStep(2);
     } else if (pathname == "/builder/add-education") {
       setCurrentStep(3);

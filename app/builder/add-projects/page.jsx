@@ -38,27 +38,25 @@ const AddWork = () => {
 
   return (
     <div className="p-6 flex flex-col gap-8">
-      <h2 className="text-4xl font-bold">
-        2. Add work experience and your projects
-      </h2>
+      <h2 className="text-4xl font-bold">2. Add your projects</h2>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">2.1. Add section title</h3>
         <Input
-          name={"work_title"}
-          value={portfolioStackContextData.work_title}
+          name={"project_group_title"}
+          value={portfolioStackContextData.project_group_title}
           onChange={(e) => {
-            handleUpdate("work_title", e.target.value);
+            handleUpdate("project_group_title", e.target.value);
           }}
-          placeholder={"My projects / Work"}
+          placeholder={"My projects"}
         />
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">2.2. Add section description</h3>
         <Input
-          name={"work_description"}
-          value={portfolioStackContextData.work_description}
+          name={"project_group_description"}
+          value={portfolioStackContextData.project_group_description}
           onChange={(e) => {
-            handleUpdate("work_description", e.target.value);
+            handleUpdate("project_group_description", e.target.value);
           }}
           placeholder={"This is what I have done."}
         />

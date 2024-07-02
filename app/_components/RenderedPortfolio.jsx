@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { PortfolioContext } from "./PortfolioProvider";
 import PortfolioHero from "./PortfolioHero";
-import PortfolioWork from "./PortfolioWork";
+import PortfolioProjects from "./PortfolioProjects";
+import PortfolioEducation from "./PortfolioEducation";
 
 const RenderedPortfolio = () => {
   const { portfolioStackContextData, portfolioStackProjectsContextData } =
@@ -14,7 +15,8 @@ const RenderedPortfolio = () => {
         {JSON.stringify(portfolioStackProjectsContextData)}
       </p>
       <PortfolioHero />
-      <PortfolioWork />
+      <PortfolioProjects />
+      <PortfolioEducation />
     </div>
   );
 };

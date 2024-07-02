@@ -2,14 +2,12 @@ import React, { useContext } from "react";
 import { PortfolioContext } from "./PortfolioProvider";
 import {
   getBgColor,
-  getPrimaryBorderColors,
   getPrimaryColors,
   getPrimaryTextColor,
-  getSecondaryColors,
 } from "../_libs/utils";
 import ProjectCard from "./ProjectCard";
 
-const PortfolioWork = () => {
+const PortfolioProjects = () => {
   const { portfolioStackContextData, portfolioStackProjectsContextData } =
     useContext(PortfolioContext);
   const palette = portfolioStackContextData.hero_palette;
@@ -27,7 +25,7 @@ const PortfolioWork = () => {
             palette
           )}`}
         >
-          {portfolioStackContextData.work_title}
+          {portfolioStackContextData.project_group_title}
         </h3>
         <p className="text-xl font-bold max-w-xs">
           {portfolioStackContextData.work_description}
@@ -40,4 +38,4 @@ const PortfolioWork = () => {
   );
 };
 
-export default PortfolioWork;
+export default PortfolioProjects;
