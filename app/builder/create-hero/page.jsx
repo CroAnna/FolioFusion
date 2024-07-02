@@ -26,6 +26,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
+  const [firstLoad, setFirstLoad] = useState(false);
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
@@ -54,21 +55,30 @@ const CreateHero = () => {
 
   useEffect(() => {
     if (portfolioStackContextData.hero_image) {
-      setFile(portfolioStackContextData.hero_image);
+      setFile(portfolioStackContextData.hero_image); // u komponenti pise da nije nis selectano a sve ostalo dela dobro
     }
   }, []);
 
   useEffect(() => {
     if (file && !portfolioStackContextData.hero_image) {
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
-        hero_image: URL.createObjectURL(file),
-      });
-    } else if (file && portfolioStackContextData.hero_image) {
+      setFirstLoad(true);
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         hero_image: file,
       });
+    } else if (file && portfolioStackContextData.hero_image) {
+      if (!firstLoad) {
+        setPortfolioStackContextData({
+          ...portfolioStackContextData,
+          hero_image: file,
+        });
+        setFirstLoad(true);
+      } else {
+        setPortfolioStackContextData({
+          ...portfolioStackContextData,
+          hero_image: file,
+        });
+      }
     }
   }, [file]);
 
@@ -79,7 +89,11 @@ const CreateHero = () => {
         <h3 className="text-2xl font-bold">1.1. Add your photo</h3>
         <div className="flex gap-4">
           <div>
-            <FileInput setFile={setFile} fileInputRef={fileInputRef} />
+            <FileInput
+              setFile={setFile}
+              file={file}
+              fileInputRef={fileInputRef}
+            />
             {file && (
               <>
                 <Toggle

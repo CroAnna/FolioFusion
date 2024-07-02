@@ -45,6 +45,7 @@ const AddWork = () => {
         <h3 className="text-2xl font-bold">2.1. Add section title</h3>
         <Input
           name={"work_title"}
+          value={portfolioStackContextData.work_title}
           onChange={(e) => {
             handleUpdate("work_title", e.target.value);
           }}
@@ -55,6 +56,7 @@ const AddWork = () => {
         <h3 className="text-2xl font-bold">2.2. Add section description</h3>
         <Input
           name={"work_description"}
+          value={portfolioStackContextData.work_description}
           onChange={(e) => {
             handleUpdate("work_description", e.target.value);
           }}
@@ -63,9 +65,12 @@ const AddWork = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">2.3. Add your projects</h3>
-        {portfolioStackProjectsContextData.map((project, index) => (
-          <ProjectInputCard key={index} projectKey={index} project={project} />
-        ))}
+        {portfolioStackProjectsContextData.map(
+          (project, index) =>
+            project.project_id && (
+              <ProjectInputCard key={index} projectKey={project.project_id} />
+            )
+        )}
         <button
           className="btn btn-secondary "
           onClick={() => {

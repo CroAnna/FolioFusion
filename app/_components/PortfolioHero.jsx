@@ -126,7 +126,7 @@ const PortfolioHero = () => {
             <Image
               width={320}
               height={320}
-              src={portfolioStackContextData.hero_image}
+              src={URL.createObjectURL(portfolioStackContextData.hero_image)}
               alt=""
               className={`${
                 portfolioStackContextData.hero_image_rounded

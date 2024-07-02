@@ -36,7 +36,7 @@ const ProjectCard = ({ project }) => {
       <div className="m-5 w-full md:w-[591px] h-96 overflow-hidden">
         {project.project_img && (
           <img
-            src={project.project_img}
+            src={URL.createObjectURL(project.project_img)}
             alt={project.project_title}
             className="rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom"
           />

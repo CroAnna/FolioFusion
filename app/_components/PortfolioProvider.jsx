@@ -29,6 +29,8 @@ const PortfolioProvider = ({ children }) => {
     social_tiktok: "",
     social_dribble: "",
     social_other: "",
+    work_description: "",
+    work_title: "",
   });
 
   const [
