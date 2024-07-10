@@ -5,6 +5,8 @@ const PortfolioContext = createContext({
   setPortfolioStackContextData: () => {},
   portfolioStackProjectsContextData: [],
   setPortfolioStackProjectsContextData: () => {},
+  portfolioStackTimelineContextData: [],
+  setPortfolioStackTimelineContextData: () => {},
 });
 
 const PortfolioProvider = ({ children }) => {
@@ -66,18 +68,9 @@ const PortfolioProvider = ({ children }) => {
       timeline_id: 1,
       timeline_title: "",
       timeline_description: "",
-      timeline_technology_1_icon: "",
-      timeline_technology_2_icon: "",
-      timeline_technology_3_icon: "",
-      timeline_technology_4_icon: "",
-      timeline_technology_5_icon: "",
-      timeline_link_1_url: "",
-      timeline_link_2_url: "",
-      timeline_link_1_text: "",
-      timeline_link_2_text: "",
-      timeline_link_1_icon: "",
-      timeline_link_2_icon: "",
-      timeline_img: "",
+      timeline_time: "",
+      timeline_keywords: "",
+      timeline_type: null,
     },
   ]);
 

@@ -53,7 +53,7 @@ const ProjectCard = ({ project }) => {
               <Image
                 width={32}
                 height={32}
-                src={`https://skillicons.dev/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
                 alt={""}
                 className="w-full h-full object-cover"
               />
@@ -63,7 +63,7 @@ const ProjectCard = ({ project }) => {
               <Image
                 width={32}
                 height={32}
-                src={`https://skillicons.dev/icons?i=${project.project_technology_2_icon}`}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}`}
                 alt={""}
                 className="w-full h-full object-cover"
               />
@@ -73,7 +73,7 @@ const ProjectCard = ({ project }) => {
               <Image
                 width={32}
                 height={32}
-                src={`https://skillicons.dev/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
                 alt={""}
                 className="w-full h-full object-cover"
               />
@@ -83,7 +83,7 @@ const ProjectCard = ({ project }) => {
               <Image
                 width={32}
                 height={32}
-                src={`https://skillicons.dev/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
                 alt={""}
                 className="w-full h-full object-cover"
               />
@@ -93,7 +93,7 @@ const ProjectCard = ({ project }) => {
               <Image
                 width={32}
                 height={32}
-                src={`https://skillicons.dev/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
                 alt={""}
                 className="w-full h-full object-cover"
               />

@@ -24,7 +24,8 @@ const AddWork = () => {
     setPortfolioStackProjectsContextData([
       ...portfolioStackProjectsContextData,
       {
-        project_id: portfolioStackProjectsContextData.length + 1,
+        project_id:
+          portfolioStackProjectsContextData.slice(-1)[0].project_id + 1,
         project_title: "",
         project_descrtiption: "",
         project_technologies: "",

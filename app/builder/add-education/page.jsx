@@ -1,4 +1,5 @@
 "use client";
+import ExperienceInputCard from "@/app/_components/ExperienceInputCard";
 import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
@@ -17,6 +18,23 @@ const AddEducation = () => {
       ...portfolioStackContextData,
       [field]: value,
     });
+  };
+
+  const addExperience = () => {
+    setPortfolioStackTimelineContextData([
+      ...portfolioStackTimelineContextData,
+      {
+        timeline_id:
+          portfolioStackTimelineContextData.length > 0
+            ? portfolioStackTimelineContextData.slice(-1)[0].timeline_id + 1
+            : 1,
+        timeline_title: "",
+        timeline_description: "",
+        timeline_time: "",
+        timeline_keywords: "",
+        timeline_type: null,
+      },
+    ]);
   };
 
   return (
@@ -51,6 +69,24 @@ const AddEducation = () => {
           </h3>
           <p>(from newest to oldest)</p>
         </div>
+        {portfolioStackTimelineContextData.map(
+          (timeline, index) =>
+            timeline.timeline_id && (
+              <ExperienceInputCard
+                key={index}
+                index={index}
+                experienceKey={timeline.timeline_id}
+              />
+            )
+        )}
+        <button
+          className="btn btn-secondary "
+          onClick={() => {
+            addExperience();
+          }}
+        >
+          Add experience
+        </button>
       </div>
       <NextPreviousNavigation
         nextUrl={"/builder/add-other"}

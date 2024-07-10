@@ -10,7 +10,7 @@ const Select = ({
   labelAttribute = "label",
 }) => {
   return (
-    <label className="form-control w-full max-w-xs">
+    <label className="form-control w-full">
       {label && (
         <div className="label pb-0 pt-0">
           <span className="label-text  text-base">{label} </span>

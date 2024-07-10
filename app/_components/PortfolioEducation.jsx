@@ -33,12 +33,13 @@ const PortfolioEducation = () => {
         <p className="text-xl font-bold max-w-xs">
           {portfolioStackContextData.timeline_group_description}
         </p>
-        <VerticalTimeline lineColor={getHexLineColor(palette)}>
-          <TimelineElement palette={palette} />
-          <TimelineElement palette={palette} />
-          <TimelineElement palette={palette} />
-          <TimelineElement palette={palette} />
-        </VerticalTimeline>
+        {portfolioStackTimelineContextData.length > 0 && (
+          <VerticalTimeline lineColor={getHexLineColor(palette)}>
+            {portfolioStackTimelineContextData.map((el, index) => (
+              <TimelineElement palette={palette} key={index} data={el} />
+            ))}
+          </VerticalTimeline>
+        )}
       </div>
     </div>
   );

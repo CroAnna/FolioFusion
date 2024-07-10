@@ -1,38 +1,61 @@
-import { ToiletPaper } from "@phosphor-icons/react/dist/ssr";
+import { Briefcase, ToiletPaper } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import {
+  experienceLinkIcons,
   getHexPrimaryTextColor,
   getHexSecondaryBgColor,
   getHexSecondaryColor,
+  getPrimaryBgColors,
+  getSecondaryTextColor,
 } from "../_libs/utils";
 
-const TimelineElement = ({ palette }) => {
+const TimelineElement = ({ palette, data }) => {
   return (
-    <VerticalTimelineElement
-      visible={true}
-      date="April 2013"
-      contentArrowStyle={{
-        borderRight: `7px solid ${getHexSecondaryBgColor(palette)}`,
-      }}
-      contentStyle={{
-        background: getHexSecondaryBgColor(palette),
-        color: getHexPrimaryTextColor(palette),
-      }}
-      iconStyle={{
-        background: getHexSecondaryBgColor(palette),
-        color: getHexPrimaryTextColor(palette),
-        border: `3px solid ${getHexSecondaryColor(palette)}`,
-        boxShadow: "none",
-      }}
-      icon={<ToiletPaper />}
-    >
-      <h3 className="vertical-timeline-element-title">
-        Content Marketing for Web, Mobile and Social Media{" "}
-      </h3>
-      <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
-      <p>Strategy, Social Media</p>
-    </VerticalTimelineElement>
+    data && (
+      <VerticalTimelineElement
+        visible={true}
+        date={data.timeline_time}
+        contentArrowStyle={{
+          borderRight: `7px solid ${getHexSecondaryBgColor(palette)}`,
+        }}
+        contentStyle={{
+          background: getHexSecondaryBgColor(palette),
+          color: getHexPrimaryTextColor(palette),
+        }}
+        iconStyle={{
+          background: getHexSecondaryBgColor(palette),
+          color: getHexPrimaryTextColor(palette),
+          border: `3px solid ${getHexSecondaryColor(palette)}`,
+          boxShadow: "none",
+        }}
+        icon={
+          data.timeline_type
+            ? experienceLinkIcons.find((el) => el.value == data.timeline_type)
+                ?.icon
+            : null
+        }
+      >
+        <h3 className="vertical-timeline-element-title font-bold text-lg">
+          {data.timeline_title}
+        </h3>
+        <h4 className="vertical-timeline-element-subtitle">
+          {data.timeline_description}
+        </h4>
+        <div className="vertical-timeline-element-subtitle flex gap-2 pt-3 flex-wrap">
+          {data.timeline_keywords &&
+            data.timeline_keywords.split(",").map((el, _index) => (
+              <div
+                className={`${getPrimaryBgColors(palette)} 
+            ${getSecondaryTextColor(palette)} w-fit rounded-md px-2 `}
+                key={_index}
+              >
+                {el}
+              </div>
+            ))}
+        </div>
+      </VerticalTimelineElement>
+    )
   );
 };
 
