@@ -181,6 +181,10 @@ const ProjectInputCard = ({ projectKey }) => {
         </div>
         <div className="flex gap-3 w-full">
           <Select
+            value={
+              portfolioStackProjectsContextData[projectKey - 1]
+                .project_link_1_icon
+            }
             options={projectLinkIcons}
             label={"Link 1 icon:"}
             name={`project_link_1_icon`}
@@ -189,6 +193,10 @@ const ProjectInputCard = ({ projectKey }) => {
             }}
           />
           <Select
+            value={
+              portfolioStackProjectsContextData[projectKey - 1]
+                .project_link_2_icon
+            }
             options={projectLinkIcons}
             label={"Link 2 icon:"}
             name={`project_link_2_icon`}
@@ -213,6 +221,10 @@ const ProjectInputCard = ({ projectKey }) => {
               onChange={(e) => {
                 handleUpdateNested(`project_technology_1_icon`, e.target.value);
               }}
+              value={
+                portfolioStackProjectsContextData[projectKey - 1]
+                  .project_technology_1_icon
+              }
             />
             <Select
               placeholder="-"
@@ -223,6 +235,10 @@ const ProjectInputCard = ({ projectKey }) => {
               onChange={(e) => {
                 handleUpdateNested(`project_technology_2_icon`, e.target.value);
               }}
+              value={
+                portfolioStackProjectsContextData[projectKey - 1]
+                  .project_technology_2_icon
+              }
             />
             <Select
               placeholder="-"
@@ -234,6 +250,10 @@ const ProjectInputCard = ({ projectKey }) => {
               onChange={(e) => {
                 handleUpdateNested(`project_technology_3_icon`, e.target.value);
               }}
+              value={
+                portfolioStackProjectsContextData[projectKey - 1]
+                  .project_technology_3_icon
+              }
             />
             <Select
               placeholder="-"
@@ -245,6 +265,10 @@ const ProjectInputCard = ({ projectKey }) => {
               onChange={(e) => {
                 handleUpdateNested(`project_technology_4_icon`, e.target.value);
               }}
+              value={
+                portfolioStackProjectsContextData[projectKey - 1]
+                  .project_technology_4_icon
+              }
             />
             <Select
               placeholder="-"
@@ -256,6 +280,10 @@ const ProjectInputCard = ({ projectKey }) => {
               onChange={(e) => {
                 handleUpdateNested(`project_technology_5_icon`, e.target.value);
               }}
+              value={
+                portfolioStackProjectsContextData[projectKey - 1]
+                  .project_technology_5_icon
+              }
             />
           </div>
         </div>

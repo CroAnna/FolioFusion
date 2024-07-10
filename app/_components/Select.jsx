@@ -1,6 +1,7 @@
 import React from "react";
 
 const Select = ({
+  value = null,
   label,
   options,
   name,
@@ -20,6 +21,7 @@ const Select = ({
         className="select select-bordered w-full"
         name={name}
         onChange={onChange}
+        value={value}
       >
         <option disabled selected>
           {placeholder || "Select"}

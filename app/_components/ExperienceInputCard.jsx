@@ -76,6 +76,7 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
             console.log(JSON.parse(JSON.stringify(e.target.value)));
             handleUpdateNested(`timeline_type`, e.target.value);
           }}
+          value={portfolioStackTimelineContextData[index].timeline_type}
         />
         <Input
           label={"Keywords:"}
