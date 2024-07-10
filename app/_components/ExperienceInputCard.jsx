@@ -27,14 +27,10 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
     );
   };
 
-  useEffect(() => {
-    console.log(portfolioStackTimelineContextData);
-  }, [portfolioStackTimelineContextData]);
-
   return (
     portfolioStackTimelineContextData[index] && (
       <div className="bg-blue-50 border-stone-300 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
-        <div className="flex gap-4 items-center cursor-pointer">
+        <div className="flex gap-4">
           <Input
             label={"Title:"}
             name={`timeline_title`}
@@ -44,7 +40,10 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
             }}
             placeholder={"Recommended 1 or 2 words"}
           />
-          <div onClick={handleDelete}>
+          <div
+            onClick={handleDelete}
+            className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2"
+          >
             <Trash size={32} color="#b91c1c" weight="duotone" />
           </div>
         </div>

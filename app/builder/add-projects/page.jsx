@@ -67,11 +67,15 @@ const AddWork = () => {
         {portfolioStackProjectsContextData.map(
           (project, index) =>
             project.project_id && (
-              <ProjectInputCard key={index} projectKey={project.project_id} />
+              <ProjectInputCard
+                key={project.project_id}
+                projectKey={project.project_id}
+                index={index}
+              />
             )
         )}
         <button
-          className="btn btn-secondary "
+          className="btn btn-secondary"
           onClick={() => {
             addProject();
           }}

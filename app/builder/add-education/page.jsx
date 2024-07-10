@@ -73,7 +73,7 @@ const AddEducation = () => {
           (timeline, index) =>
             timeline.timeline_id && (
               <ExperienceInputCard
-                key={index}
+                key={timeline.timeline_id}
                 index={index}
                 experienceKey={timeline.timeline_id}
               />

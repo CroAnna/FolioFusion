@@ -6,8 +6,9 @@ import { PortfolioContext } from "./PortfolioProvider";
 import FileInput from "./FileInput";
 import Select from "./Select";
 import { icons, projectLinkIcons } from "../_libs/utils";
+import { Trash } from "@phosphor-icons/react/dist/ssr";
 
-const ProjectInputCard = ({ projectKey }) => {
+const ProjectInputCard = ({ projectKey, index }) => {
   const {
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
@@ -19,9 +20,11 @@ const ProjectInputCard = ({ projectKey }) => {
 
   const handleUpdateNested = (field, value) => {
     setPortfolioStackProjectsContextData((prevData) =>
-      prevData.map((el) =>
-        el.project_id === projectKey - 1 + 1 ? { ...el, [field]: value } : el
-      )
+      prevData.map((el) => {
+        console.log(index + " " + el.project_id + " " + projectKey);
+
+        return el.project_id === projectKey ? { ...el, [field]: value } : el;
+      })
     );
   };
 
@@ -38,34 +41,24 @@ const ProjectInputCard = ({ projectKey }) => {
   };
 
   useEffect(() => {
-    console.log(portfolioStackProjectsContextData[projectKey - 1].project_img);
-    if (portfolioStackProjectsContextData[projectKey - 1].project_img) {
-      console.log(
-        portfolioStackProjectsContextData[projectKey - 1].project_img
-      );
-      console.log(
-        portfolioStackProjectsContextData[projectKey - 1].project_img
-      );
-      setFile(portfolioStackProjectsContextData[projectKey - 1].project_img);
+    console.log(portfolioStackProjectsContextData[index].project_img);
+    if (portfolioStackProjectsContextData[index].project_img) {
+      console.log(portfolioStackProjectsContextData[index].project_img);
+      console.log(portfolioStackProjectsContextData[index].project_img);
+      setFile(portfolioStackProjectsContextData[index].project_img);
     }
   }, []);
 
   useEffect(() => {
     console.log(file);
-    if (
-      file &&
-      !portfolioStackProjectsContextData[projectKey - 1].project_img
-    ) {
+    if (file && !portfolioStackProjectsContextData[index].project_img) {
       setFirstLoad(true);
       setPortfolioStackProjectsContextData((prevData) =>
         prevData.map((el) =>
           el.project_id == projectKey ? { ...el, project_img: file } : el
         )
       );
-    } else if (
-      file &&
-      portfolioStackProjectsContextData[projectKey - 1].project_img
-    ) {
+    } else if (file && portfolioStackProjectsContextData[index].project_img) {
       if (!firstLoad) {
         setPortfolioStackProjectsContextData((prevData) =>
           prevData.map((el) =>
@@ -83,27 +76,36 @@ const ProjectInputCard = ({ projectKey }) => {
     }
   }, [file]);
 
+  const handleDelete = () => {
+    setPortfolioStackProjectsContextData((prevData) =>
+      prevData.filter((el) => el.project_id !== projectKey)
+    );
+  };
+
   return (
-    portfolioStackProjectsContextData[projectKey - 1] && (
+    portfolioStackProjectsContextData[index] && (
       <div className="bg-blue-50 border-stone-300 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
-        <Input
-          label={"Title:"}
-          name={`project_title`}
-          value={
-            portfolioStackProjectsContextData[projectKey - 1].project_title
-          }
-          onChange={(e) => {
-            handleUpdateNested(`project_title`, e.target.value);
-          }}
-          placeholder={"Recommended 1 or 2 words"}
-        />
+        <div className="flex gap-4">
+          <Input
+            label={"Title:"}
+            name={`project_title`}
+            value={portfolioStackProjectsContextData[index].project_title}
+            onChange={(e) => {
+              handleUpdateNested(`project_title`, e.target.value);
+            }}
+            placeholder={"Recommended 1 or 2 words"}
+          />
+          <div
+            onClick={handleDelete}
+            className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2"
+          >
+            <Trash size={32} color="#b91c1c" weight="duotone" />
+          </div>
+        </div>
         <Textarea
           label={"Description:"}
           name={"project_description"}
-          value={
-            portfolioStackProjectsContextData[projectKey - 1]
-              .project_description
-          }
+          value={portfolioStackProjectsContextData[index].project_description}
           onChange={(e) => {
             handleUpdateNested("project_description", e.target.value);
           }}
@@ -129,10 +131,7 @@ const ProjectInputCard = ({ projectKey }) => {
         </div>
         <div className="flex gap-3 w-full">
           <Input
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_1_text
-            }
+            value={portfolioStackProjectsContextData[index].project_link_1_text}
             label={"Link 1 text:"}
             name={`project_link_1_text`}
             onChange={(e) => {
@@ -143,10 +142,7 @@ const ProjectInputCard = ({ projectKey }) => {
           <Input
             label={"Link 2 text:"}
             name={`project_link_2_text`}
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_2_text
-            }
+            value={portfolioStackProjectsContextData[index].project_link_2_text}
             onChange={(e) => {
               handleUpdateNested(`project_link_2_text`, e.target.value);
             }}
@@ -156,10 +152,7 @@ const ProjectInputCard = ({ projectKey }) => {
         <div className="flex gap-3 w-full">
           <Input
             label={"Link 1 URL:"}
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_1_url
-            }
+            value={portfolioStackProjectsContextData[index].project_link_1_url}
             name={`project_link_1`}
             onChange={(e) => {
               handleUpdateNested(`project_link_1_url`, e.target.value);
@@ -169,10 +162,7 @@ const ProjectInputCard = ({ projectKey }) => {
           <Input
             label={"Link 2 URL:"}
             name={`project_link_2`}
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_2_url
-            }
+            value={portfolioStackProjectsContextData[index].project_link_2_url}
             onChange={(e) => {
               handleUpdateNested(`project_link_2_url`, e.target.value);
             }}
@@ -181,10 +171,7 @@ const ProjectInputCard = ({ projectKey }) => {
         </div>
         <div className="flex gap-3 w-full">
           <Select
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_1_icon
-            }
+            value={portfolioStackProjectsContextData[index].project_link_1_icon}
             options={projectLinkIcons}
             label={"Link 1 icon:"}
             name={`project_link_1_icon`}
@@ -193,10 +180,7 @@ const ProjectInputCard = ({ projectKey }) => {
             }}
           />
           <Select
-            value={
-              portfolioStackProjectsContextData[projectKey - 1]
-                .project_link_2_icon
-            }
+            value={portfolioStackProjectsContextData[index].project_link_2_icon}
             options={projectLinkIcons}
             label={"Link 2 icon:"}
             name={`project_link_2_icon`}
@@ -222,7 +206,7 @@ const ProjectInputCard = ({ projectKey }) => {
                 handleUpdateNested(`project_technology_1_icon`, e.target.value);
               }}
               value={
-                portfolioStackProjectsContextData[projectKey - 1]
+                portfolioStackProjectsContextData[index]
                   .project_technology_1_icon
               }
             />
@@ -236,7 +220,7 @@ const ProjectInputCard = ({ projectKey }) => {
                 handleUpdateNested(`project_technology_2_icon`, e.target.value);
               }}
               value={
-                portfolioStackProjectsContextData[projectKey - 1]
+                portfolioStackProjectsContextData[index]
                   .project_technology_2_icon
               }
             />
@@ -251,7 +235,7 @@ const ProjectInputCard = ({ projectKey }) => {
                 handleUpdateNested(`project_technology_3_icon`, e.target.value);
               }}
               value={
-                portfolioStackProjectsContextData[projectKey - 1]
+                portfolioStackProjectsContextData[index]
                   .project_technology_3_icon
               }
             />
@@ -266,7 +250,7 @@ const ProjectInputCard = ({ projectKey }) => {
                 handleUpdateNested(`project_technology_4_icon`, e.target.value);
               }}
               value={
-                portfolioStackProjectsContextData[projectKey - 1]
+                portfolioStackProjectsContextData[index]
                   .project_technology_4_icon
               }
             />
@@ -281,7 +265,7 @@ const ProjectInputCard = ({ projectKey }) => {
                 handleUpdateNested(`project_technology_5_icon`, e.target.value);
               }}
               value={
-                portfolioStackProjectsContextData[projectKey - 1]
+                portfolioStackProjectsContextData[index]
                   .project_technology_5_icon
               }
             />
