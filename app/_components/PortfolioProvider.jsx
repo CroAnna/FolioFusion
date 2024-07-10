@@ -7,6 +7,8 @@ const PortfolioContext = createContext({
   setPortfolioStackProjectsContextData: () => {},
   portfolioStackTimelineContextData: [],
   setPortfolioStackTimelineContextData: () => {},
+  portfolioStackActivityContextData: [],
+  setPortfolioStackActivityContextData: () => {},
 });
 
 const PortfolioProvider = ({ children }) => {
@@ -74,6 +76,19 @@ const PortfolioProvider = ({ children }) => {
     },
   ]);
 
+  const [
+    portfolioStackActivityContextData,
+    setPortfolioStackActivityContextData,
+  ] = useState([
+    {
+      activity_id: 1,
+      activity_title: "",
+      activity_description: "",
+      activity_type: null,
+      activity_img: "",
+    },
+  ]);
+
   return (
     <PortfolioContext.Provider
       value={{
@@ -83,6 +98,8 @@ const PortfolioProvider = ({ children }) => {
         setPortfolioStackProjectsContextData,
         portfolioStackTimelineContextData,
         setPortfolioStackTimelineContextData,
+        portfolioStackActivityContextData,
+        setPortfolioStackActivityContextData,
       }}
     >
       {children}

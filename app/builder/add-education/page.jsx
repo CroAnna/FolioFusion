@@ -89,7 +89,7 @@ const AddEducation = () => {
         </button>
       </div>
       <NextPreviousNavigation
-        nextUrl={"/builder/add-other"}
+        nextUrl={"/builder/add-activities"}
         previousUrl={"/builder/add-projects"}
       />
     </div>

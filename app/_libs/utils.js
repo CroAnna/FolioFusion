@@ -1,8 +1,12 @@
 import {
+  Binary,
   Briefcase,
+  Certificate,
   GithubLogo,
   GraduationCap,
   Link,
+  Medal,
+  Trophy,
 } from "@phosphor-icons/react/dist/ssr";
 
 export const stepsData = [
@@ -11,7 +15,7 @@ export const stepsData = [
   },
   { text: "Add projects" },
   { text: "Add education and work experience" },
-  { text: "Add other info" },
+  { text: "Add achievements and activities" },
   { text: "Deploy or download as PDF" },
 ];
 
@@ -196,6 +200,29 @@ export const experienceLinkIcons = [
     value: "education",
     label: "Education",
     icon: <GraduationCap weight="duotone" size={32} />,
+  },
+];
+
+export const activityIcons = [
+  {
+    value: "certificate",
+    label: "Certificate",
+    icon: <Certificate weight="duotone" size={32} />,
+  },
+  {
+    value: "medal",
+    label: "Medal",
+    icon: <Medal weight="duotone" size={32} />,
+  },
+  {
+    value: "trophy",
+    label: "Trophy",
+    icon: <Trophy weight="duotone" size={32} />,
+  },
+  {
+    value: "binary",
+    label: "Binary",
+    icon: <Binary weight="duotone" size={32} />,
   },
 ];
 

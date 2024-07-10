@@ -11,7 +11,7 @@ const Textarea = ({
   value = null,
 }) => {
   return (
-    <div>
+    <div className="w-full">
       <label className="form-control">
         <div className="label pb-0 pt-0">
           <span className="label-text text-base">{label}</span>
