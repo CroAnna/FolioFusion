@@ -6,6 +6,7 @@ import { PortfolioContext } from "./PortfolioProvider";
 import Select from "./Select";
 import { experienceLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
+import Swal from "sweetalert2";
 
 const ExperienceInputCard = ({ index, experienceKey }) => {
   const {
@@ -22,9 +23,23 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
   };
 
   const handleDelete = () => {
-    setPortfolioStackTimelineContextData((prevData) =>
-      prevData.filter((el) => el.timeline_id !== experienceKey)
-    );
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will delete this experience.",
+      icon: "warning",
+      showCancelButton: true,
+      iconColor: "#66cc8a",
+      confirmButtonColor: "#66cc8a",
+      cancelButtonColor: "#b91c1c",
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Confirm",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setPortfolioStackTimelineContextData((prevData) =>
+          prevData.filter((el) => el.timeline_id !== experienceKey)
+        );
+      }
+    });
   };
 
   return (
