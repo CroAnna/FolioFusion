@@ -182,8 +182,8 @@ export const getSecondaryColors = (palette) => {
 
 export const projectLinkIcons = [
   { value: "-", label: "-", icon: null },
-  { value: "github", label: "Github", icon: <GithubLogo size={32} /> },
-  { value: "link", label: "Link", icon: <Link size={32} /> },
+  { value: "github", label: "Github", icon: <GithubLogo size={28} /> },
+  { value: "link", label: "Link", icon: <Link size={28} /> },
 ];
 
 export const experienceLinkIcons = [
