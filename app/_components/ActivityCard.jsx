@@ -10,7 +10,7 @@ import {
 
 const ActivityCard = ({ palette, data }) => {
   return (
-    <div className="card card-compact glass w-72 relative my-16">
+    <div className="card card-compact glass w-72 relative">
       {data.activity_img && (
         <figure className="h-48">
           <img src={URL.createObjectURL(data.activity_img)} alt="activity" />
