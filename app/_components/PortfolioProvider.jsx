@@ -37,6 +37,7 @@ const PortfolioProvider = ({ children }) => {
     project_group_title: "",
     timeline_group_description: "",
     timeline_group_title: "",
+    activity_bg_shape: "low-poly-grid",
   });
 
   const [

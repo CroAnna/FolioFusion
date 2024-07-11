@@ -28,6 +28,15 @@ export const heroPaletteItemsData = [
   "Palette 6",
 ];
 
+export const activityBgData = [
+  "low-poly-grid",
+  "layered-steps",
+  "blob",
+  "blurry-gradient",
+  "circle-scatter",
+  "stacked-peaks",
+];
+
 export const borderStyleItemsData = ["dashed", "dotted", "solid", "double"];
 
 export const heroExtraElementsData = ["abstract", "dots"];

@@ -65,7 +65,7 @@ const AddEducation = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
           <h3 className="text-2xl font-bold">
-            2.3. Add your work experience and education
+            3.3. Add your work experience and education
           </h3>
           <p>(from newest to oldest)</p>
         </div>

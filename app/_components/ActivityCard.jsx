@@ -3,6 +3,7 @@ import {
   activityIcons,
   getHexSecondaryBgColor,
   getPrimaryBgColors,
+  getPrimaryBorderColors,
   getSecondaryBgColors,
   getSecondaryTextColor,
 } from "../_libs/utils";
@@ -17,9 +18,11 @@ const ActivityCard = ({ palette, data }) => {
       )}
       {data.activity_type ? (
         <div
-          className={`absolute top-[-16px] right-[-16px] rounded-full p-4 ${getPrimaryBgColors(
+          className={`absolute top-[-16px] right-[-16px] rounded-full border-4 ${getPrimaryBorderColors(
             palette
-          )} ${getSecondaryTextColor(palette)} `}
+          )} p-4  ${getPrimaryBgColors(palette)} ${getSecondaryTextColor(
+            palette
+          )} `}
         >
           {activityIcons.find((el) => el.value == data.activity_type)?.icon}
         </div>
