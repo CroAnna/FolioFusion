@@ -18,6 +18,8 @@ export default function BuilderLayout({ children }) {
       setCurrentStep(2);
     } else if (pathname == "/builder/add-education") {
       setCurrentStep(3);
+    } else if (pathname == "/builder/add-activities") {
+      setCurrentStep(4);
     }
   }, [pathname]);
 
