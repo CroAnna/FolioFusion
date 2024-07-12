@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
 
-const NextPreviousNavigation = ({ previousUrl = null, nextUrl = null }) => {
+const NextPreviousNavigation = ({
+  previousUrl = null,
+  nextUrl = null,
+  handleNextClick = () => {},
+}) => {
   return (
     <div className="join grid grid-cols-2">
       {previousUrl && (
@@ -13,7 +17,10 @@ const NextPreviousNavigation = ({ previousUrl = null, nextUrl = null }) => {
       )}
       {nextUrl && (
         <Link href={nextUrl}>
-          <button className="join-item btn btn-outline bg-primary w-full">
+          <button
+            className="join-item btn btn-outline bg-primary w-full"
+            onClick={handleNextClick()}
+          >
             Next
           </button>
         </Link>

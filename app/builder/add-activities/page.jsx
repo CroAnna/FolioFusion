@@ -36,6 +36,8 @@ const AddActivities = () => {
     }));
   };
 
+  // const { data, error } = await supabase.from("portfolios").select();
+
   return (
     <div className="p-6 flex flex-col gap-4">
       <h2 className="text-4xl font-bold">4. Add achievements and activities</h2>

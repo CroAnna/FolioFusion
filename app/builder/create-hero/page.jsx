@@ -82,6 +82,10 @@ const CreateHero = () => {
     }
   }, [file]);
 
+  const saveData = () => {
+    console.log("save");
+  };
+
   return (
     <div className="p-6 flex flex-col gap-8">
       <h2 className="text-4xl font-bold">1. Create hero</h2>
@@ -308,7 +312,10 @@ const CreateHero = () => {
           placeholder={"Paste other URL"}
         />
       </div>
-      <NextPreviousNavigation nextUrl={"/builder/add-projects"} />
+      <NextPreviousNavigation
+        handleNextClick={saveData}
+        nextUrl={"/builder/add-projects"}
+      />
     </div>
   );
 };
