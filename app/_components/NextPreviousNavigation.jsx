@@ -10,7 +10,7 @@ const NextPreviousNavigation = ({
     <div className="join grid grid-cols-2">
       {previousUrl && (
         <Link href={previousUrl} className="w-full">
-          <button className="join-item btn btn-outline bg-white w-full">
+          <button className="join-item btn btn-outline w-full">
             Previous page
           </button>
         </Link>
@@ -18,7 +18,7 @@ const NextPreviousNavigation = ({
       {nextUrl && (
         <Link href={nextUrl}>
           <button
-            className="join-item btn btn-outline bg-primary w-full"
+            className="join-item btn btn-outline bg-accent w-full"
             onClick={handleNextClick()}
           >
             Next

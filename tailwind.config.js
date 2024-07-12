@@ -15,6 +15,16 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["emerald"], //  dark da se automatski mijenja https://daisyui.com/docs/themes/
+    themes: [
+      {
+        custom: {
+          primary: "#06b6d4",
+          secondary: "#4ade80",
+          accent: "#5b21b6",
+          neutral: "#3d4451",
+          "base-100": "#262626",
+        },
+      },
+    ], //  dark da se automatski mijenja https://daisyui.com/docs/themes/
   },
 };
