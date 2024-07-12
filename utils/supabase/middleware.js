@@ -37,10 +37,12 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const allowedPaths = ["/login", "/auth"];
+
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
+    request.nextUrl.pathname !== "/" &&
+    !allowedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
   ) {
     console.log("nema usera i redirecta middleware");
     // no user, potentially respond by redirecting the user to the login page
