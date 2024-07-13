@@ -1,4 +1,3 @@
-import { supabase } from "../_libs/initSupabase";
 import { login, signup } from "./actions";
 
 const LoginPage = async () => {
@@ -10,20 +9,22 @@ const LoginPage = async () => {
           <div className="flex flex-col gap-1">
             <label htmlFor="email">Email:</label>
             <input
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
               id="email"
               name="email"
               type="email"
+              placeholder="example@mail.com"
               required
             />
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="password">Password:</label>
             <input
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
               id="password"
               name="password"
               type="password"
+              placeholder="6+ characters"
               required
             />
           </div>

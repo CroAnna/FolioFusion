@@ -22,8 +22,8 @@ const Navbar = async () => {
         <>
           <p>Hello {data.user.email}</p>
           <div className="flex gap-2">
-            <Link href="builder/create-hero">
-              <button className="btn btn-primary">Na buildera</button>
+            <Link href="/builder/create-hero">
+              <button className="btn btn-primary">My portfolio</button>
             </Link>
             <form action={logout}>
               <button className="btn btn-primary btn-outline" type="submit">
