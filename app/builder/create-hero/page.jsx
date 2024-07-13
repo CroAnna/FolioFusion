@@ -21,12 +21,20 @@ import {
   YoutubeLogo,
   Link,
 } from "@phosphor-icons/react/dist/ssr";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { getCreateHeroData, upsertCreateHeroData } from "./actions";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [firstLoad, setFirstLoad] = useState(false);
+  const [portfolioId, setPortfolioId] = useState(null);
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
@@ -53,9 +61,44 @@ const CreateHero = () => {
     }));
   };
 
+  const getPortfolio = useCallback(async () => {
+    const { portfolio, error } = await getCreateHeroData();
+
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(portfolio);
+      setPortfolioId(portfolio.id);
+      setPortfolioStackContextData({
+        ...portfolioStackContextData,
+        hero_image_rounded: portfolio.hero_image_rounded,
+        hero_image_border: portfolio.hero_image_border,
+        hero_border_style: portfolio.hero_border_style,
+        hero_extra: portfolio.hero_extra,
+        hero_palette: portfolio.hero_palette,
+        hero_extra_style_elements: portfolio.hero_extra_style_elements,
+        hero_welcome: portfolio.hero_welcome,
+        hero_name: portfolio.hero_name,
+        hero_short: portfolio.hero_short,
+        hero_description: portfolio.hero_description,
+        social_github: portfolio.social_github,
+        social_linkedin: portfolio.social_linkedin,
+        social_x: portfolio.social_x,
+        social_facebook: portfolio.social_facebook,
+        social_instagram: portfolio.social_instagram,
+        social_youtube: portfolio.social_youtube,
+        social_tiktok: portfolio.social_tiktok,
+        social_dribble: portfolio.social_dribble,
+        social_other: portfolio.social_other,
+      });
+    }
+  }, []);
+
   useEffect(() => {
+    getPortfolio();
+
     if (portfolioStackContextData.hero_image) {
-      setFile(portfolioStackContextData.hero_image); // u komponenti pise da nije nis selectano a sve ostalo dela dobro
+      setFile(portfolioStackContextData.hero_image);
     }
   }, []);
 
@@ -82,13 +125,39 @@ const CreateHero = () => {
     }
   }, [file]);
 
-  const saveData = () => {
-    console.log("save");
+  const saveData = async () => {
+    console.log("save data");
+    const response = upsertCreateHeroData(
+      portfolioId,
+      portfolioStackContextData.hero_image_rounded,
+      portfolioStackContextData.hero_image_border,
+      portfolioStackContextData.hero_border_style,
+      portfolioStackContextData.hero_extra,
+      portfolioStackContextData.hero_palette,
+      portfolioStackContextData.hero_extra_style_elements,
+      portfolioStackContextData.hero_welcome,
+      portfolioStackContextData.hero_name,
+      portfolioStackContextData.hero_short,
+      portfolioStackContextData.hero_description,
+      portfolioStackContextData.social_github,
+      portfolioStackContextData.social_linkedin,
+      portfolioStackContextData.social_x,
+      portfolioStackContextData.social_facebook,
+      portfolioStackContextData.social_instagram,
+      portfolioStackContextData.social_youtube,
+      portfolioStackContextData.social_tiktok,
+      portfolioStackContextData.social_dribble,
+      portfolioStackContextData.social_other
+    );
+    console.log(response);
   };
 
   return (
     <div className="p-6 flex flex-col gap-8">
-      <h2 className="text-4xl font-bold">1. Create hero</h2>
+      <div className="flex justify-between">
+        <h2 className="text-4xl font-bold">1. Create hero</h2>
+        <button className="btn btn-secondary w-24 btn-outline">Save</button>
+      </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">1.1. Add your photo</h3>
         <div className="flex gap-4">
@@ -103,6 +172,7 @@ const CreateHero = () => {
                 <Toggle
                   text={"Rounded image"}
                   onChange={(e) => {
+                    console.log(portfolioStackContextData.hero_image);
                     handleUpdate("hero_image_rounded", e.target.checked);
                   }}
                   checked={portfolioStackContextData.hero_image_rounded}

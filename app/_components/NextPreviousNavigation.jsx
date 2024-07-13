@@ -18,10 +18,11 @@ const NextPreviousNavigation = ({
       {nextUrl && (
         <Link href={nextUrl}>
           <button
-            className="join-item btn btn-outline bg-accent w-full"
-            onClick={handleNextClick()}
+            className="join-item btn btn-secondary w-full"
+            onClick={handleNextClick}
           >
-            Next
+            {/* TODO add loader while saving data and then redirect */}
+            Next (+ save)
           </button>
         </Link>
       )}

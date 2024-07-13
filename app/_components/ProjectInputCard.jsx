@@ -98,7 +98,7 @@ const ProjectInputCard = ({ projectKey, index }) => {
   return (
     portfolioStackProjectsContextData[index] && (
       <>
-        <div className="bg-blue-50 border-stone-300 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
+        <div className="border-emerald-500 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
           <div className="flex gap-4">
             <Input
               label={"Title:"}
