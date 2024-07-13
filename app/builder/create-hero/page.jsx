@@ -67,7 +67,6 @@ const CreateHero = () => {
     if (error) {
       console.log(error);
     } else {
-      console.log(portfolio);
       setPortfolioId(portfolio.id);
       setPortfolioStackContextData({
         ...portfolioStackContextData,
@@ -126,8 +125,7 @@ const CreateHero = () => {
   }, [file]);
 
   const saveData = async () => {
-    console.log("save data");
-    const response = upsertCreateHeroData(
+    const response = await upsertCreateHeroData(
       portfolioId,
       portfolioStackContextData.hero_image_rounded,
       portfolioStackContextData.hero_image_border,
@@ -150,13 +148,19 @@ const CreateHero = () => {
       portfolioStackContextData.social_other
     );
     console.log(response);
+    setPortfolioId(response.portfolio.id);
   };
 
   return (
     <div className="p-6 flex flex-col gap-8">
       <div className="flex justify-between">
         <h2 className="text-4xl font-bold">1. Create hero</h2>
-        <button className="btn btn-secondary w-24 btn-outline">Save</button>
+        <button
+          className="btn btn-secondary w-24 btn-outline"
+          onClick={saveData}
+        >
+          Save
+        </button>
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">1.1. Add your photo</h3>

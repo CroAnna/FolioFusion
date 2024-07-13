@@ -77,7 +77,7 @@ const AddWork = () => {
             )
         )}
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           onClick={() => {
             addProject();
           }}

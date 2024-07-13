@@ -6,7 +6,7 @@ export async function getCreateHeroData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user.id " + user.id);
+  console.log("user.id " + user.id); // TODO problem je da nakon logouta ostaju stari podaci u kontekstu i onda ih ucitava od prethodno ucitanog usera
   const { data: portfolio, error } = await supabase
     .from("portfolios")
     .select()
@@ -43,31 +43,36 @@ export async function upsertCreateHeroData(
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user.id " + user.id);
+  const upsertData = {
+    hero_image_rounded: hero_image_rounded,
+    hero_image_border: hero_image_border,
+    hero_border_style: hero_border_style,
+    hero_extra: hero_extra,
+    hero_palette: hero_palette,
+    hero_extra_style_elements: hero_extra_style_elements,
+    hero_welcome: hero_welcome,
+    hero_name: hero_name,
+    hero_short: hero_short,
+    hero_description: hero_description,
+    social_github: social_github,
+    social_linkedin: social_linkedin,
+    social_x: social_x,
+    social_facebook: social_facebook,
+    social_instagram: social_instagram,
+    social_youtube: social_youtube,
+    social_tiktok: social_tiktok,
+    social_dribble: social_dribble,
+    social_other: social_other,
+    user_id: user.id,
+  };
+  if (id) {
+    upsertData.id = id;
+  }
+
   const { data: portfolio, error } = await supabase
     .from("portfolios")
-    .upsert({
-      id: id,
-      hero_image_rounded: hero_image_rounded,
-      hero_image_border: hero_image_border,
-      hero_border_style: hero_border_style,
-      hero_extra: hero_extra,
-      hero_palette: hero_palette,
-      hero_extra_style_elements: hero_extra_style_elements,
-      hero_welcome: hero_welcome,
-      hero_name: hero_name,
-      hero_short: hero_short,
-      hero_description: hero_description,
-      social_github: social_github,
-      social_linkedin: social_linkedin,
-      social_x: social_x,
-      social_facebook: social_facebook,
-      social_instagram: social_instagram,
-      social_youtube: social_youtube,
-      social_tiktok: social_tiktok,
-      social_dribble: social_dribble,
-      social_other: social_other,
-    })
+    .upsert(upsertData)
+    .select()
     .single();
 
   return { portfolio, error };
