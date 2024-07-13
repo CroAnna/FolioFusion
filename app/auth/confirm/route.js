@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { addUser } from "./actions";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -15,8 +16,13 @@ export async function GET(request) {
       token_hash,
     });
     if (!error) {
-      // redirect user to specified redirect URL or root of app
-      redirect(next);
+      // add that user to users in DB
+      const { error: error2 } = await addUser();
+
+      if (!error2) {
+        // redirect user to specified redirect URL or root of app
+        redirect(next);
+      }
     }
   }
 
