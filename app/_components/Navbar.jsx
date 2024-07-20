@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { createClient } from "@/utils/supabase/server";
 import { logout } from "../logout/actions";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = async () => {
   const supabase = createClient();
@@ -26,9 +27,7 @@ const Navbar = async () => {
               <button className="btn btn-primary">My portfolio</button>
             </Link>
             <form action={logout}>
-              <button className="btn btn-primary btn-outline" type="submit">
-                Logout
-              </button>
+              <LogoutButton />
             </form>
           </div>
         </>
