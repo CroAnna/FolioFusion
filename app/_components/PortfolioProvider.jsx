@@ -92,7 +92,6 @@ const PortfolioProvider = ({ children }) => {
   ]);
 
   const resetContextValues = () => {
-    console.log("ciscenje");
     setPortfolioStackContextData({
       hero_image: null,
       hero_image_rounded: false,
