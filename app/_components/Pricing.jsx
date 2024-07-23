@@ -9,6 +9,7 @@ import {
   Tag,
   UserFocus,
 } from "@phosphor-icons/react/dist/ssr";
+import { constants } from "../../utils/stripe/constants";
 
 const Pricing = () => {
   return (
@@ -61,7 +62,11 @@ const Pricing = () => {
           </div>
         </div>
         <div className="flex gap-8">
-          <div className="bg-neutral-900 p-8 rounded-3xl flex items-center justify-center flex-col gap-4 cursor-pointer border-neutral-900 hover:border-emerald-500 border-2 hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105">
+          <a
+            className="bg-neutral-900 p-8 rounded-3xl flex items-center justify-center flex-col gap-4 cursor-pointer border-neutral-900 hover:border-emerald-500 border-2 hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105"
+            target="_blank"
+            href={constants.paymentLinks.oneYearPass}
+          >
             <h3 className="font-semibold text-4xl text-green-400">
               1-Year Pass
             </h3>
@@ -73,8 +78,12 @@ const Pricing = () => {
               <h2 className="text-5xl font-bold">5€</h2>
               <h2 className="text-lg text-neutral-500">EUR</h2>
             </div>
-          </div>
-          <div className="bg-neutral-900 flex items-center justify-center flex-col my-[-80px] mr-[-50px] w-[400px] rounded-3xl p-8 border-emerald-500 border-2 shadow-[0_0px_30px_-15px_rgba(34,211,238,1)] gap-4 cursor-pointer hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105">
+          </a>
+          <a
+            className="bg-neutral-900 flex items-center justify-center flex-col my-[-80px] mr-[-50px] w-[400px] rounded-3xl p-8 border-emerald-500 border-2 shadow-[0_0px_30px_-15px_rgba(34,211,238,1)] gap-4 cursor-pointer hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105"
+            target="_blank"
+            href={constants.paymentLinks.lifetimePass}
+          >
             <h3 className="font-semibold text-4xl text-green-400">
               Lifetime Deal
             </h3>
@@ -86,7 +95,7 @@ const Pricing = () => {
               <h2 className="text-6xl font-bold">10€</h2>
               <h2 className="text-lg text-neutral-500">EUR</h2>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

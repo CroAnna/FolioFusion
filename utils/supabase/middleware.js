@@ -38,10 +38,11 @@ export async function updateSession(request) {
   } = await supabase.auth.getUser();
 
   const allowedPaths = ["/login", "/auth"];
-
+  console.log(request.nextUrl.pathname);
   if (
     !user &&
     request.nextUrl.pathname !== "/" &&
+    request.nextUrl.pathname !== "/api/webhook" &&
     !allowedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
   ) {
     console.log("nema usera i redirecta middleware");
