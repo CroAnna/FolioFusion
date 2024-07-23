@@ -53,7 +53,6 @@ const handleGrantAccess = async (customerEmail) => {
 const handleCompletedCheckoutSession = async (event) => {
   try {
     // payment is successful, grant access to the product
-    console.log("u handleCompletedCheckoutSession");
     const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       event.data.object.id,
       {
@@ -88,8 +87,7 @@ export async function POST(req) {
   const body = await req.text();
   const signature = headers().get("stripe-signature");
 
-  let result = "Webhook called.";
-  console.log(result);
+  console.log("Webhook called.");
 
   let data;
   let eventType;
@@ -121,18 +119,18 @@ export async function POST(req) {
       }
 
       case "customer.subscription.deleted": {
-        // ❌ TODO Revoke access to the product
+        // TODO Revoke access to the product
         // The customer might have changed the plan (higher or lower plan, cancel soon etc...)
-        const subscription = await stripe.subscriptions.retrieve(
-          data.object.id
-        );
-        const user = await User.findOne({
-          customerId: subscription.customer,
-        });
+        // const subscription = await stripe.subscriptions.retrieve(
+        //   data.object.id
+        // );
+        // const user = await User.findOne({
+        //   customerId: subscription.customer,
+        // });
 
-        // Revoke access to your product
-        user.hasAccess = false;
-        await user.save();
+        // // Revoke access to your product
+        // user.hasAccess = false;
+        // await user.save();
 
         break;
       }
