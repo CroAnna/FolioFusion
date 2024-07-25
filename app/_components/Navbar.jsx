@@ -35,7 +35,6 @@ const Navbar = async () => {
       {!data ||
         (!data.user && (
           <>
-            <h2>Welcome! Please, log in to use the app.</h2>
             <Link href="login">
               <button className="btn btn-primary">Login</button>
             </Link>
