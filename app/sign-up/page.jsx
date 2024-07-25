@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { login, signup } from "./actions";
 
-const LoginPage = async () => {
+const SignUpPage = async () => {
   return (
     <div className="flex flex-col gap-8 w-full items-center mt-10">
-      <h2 className="font-bold text-3xl">Log in to continue.</h2>
-      <form className="flex flex-col gap-8 w-[440px] bg-neutral-900 p-8 rounded-xl">
+      <h2 className="font-bold text-3xl flex items-center">
+        Sign up for&nbsp; <span className="text-emerald-400 ">free</span>.
+      </h2>
+      <form className="flex flex-col gap-8 w-96 bg-neutral-900 p-8 rounded-xl">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="email">Email:</label>
@@ -31,19 +33,19 @@ const LoginPage = async () => {
           </div>
         </div>
         <div className="flex flex-col gap-12">
-          <button className="btn btn-primary" formAction={login}>
-            Log in
+          <button className="btn btn-primary" formAction={signup}>
+            Sign up
           </button>
           <div className="flex text-center flex-col">
-            <p className="text-stone-400">Don&apos;t have an account yet? 😮</p>
+            <p className="text-stone-400">Already have an account?</p>
             <div>
               <Link
-                href="/sign-up"
+                href="/login"
                 className="text-emerald-400 underline text-lg"
               >
-                Sign up
+                Login
               </Link>
-              <p> and start building your portfolio in a few minutes</p>
+              <p>and start building your portfolio now</p>
             </div>
           </div>
         </div>
@@ -52,4 +54,4 @@ const LoginPage = async () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

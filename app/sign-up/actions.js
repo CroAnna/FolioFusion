@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
-export async function login(formData) {
+export async function signup(formData) {
   const supabase = createClient();
 
   // type-casting here for convenience
@@ -14,13 +14,14 @@ export async function login(formData) {
     password: formData.get("password"),
   };
 
-  const { error } = await supabase.auth.signInWithPassword(data);
-  // TODO dodaj nakon validacije ili tu da se spremi user i u tablicu s userima
+  const { error } = await supabase.auth.signUp(data);
 
   if (error) {
+    console.log(error);
+    console.error(error.message);
     redirect("/error");
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/validate-account");
 }

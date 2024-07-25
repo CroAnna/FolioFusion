@@ -37,7 +37,7 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const allowedPaths = ["/login", "/auth"];
+  const allowedPaths = ["/login", "/auth", "/sign-up", "/validate-account"];
   console.log(request.nextUrl.pathname);
   if (
     !user &&
