@@ -34,7 +34,6 @@ const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [firstLoad, setFirstLoad] = useState(false);
-  const [portfolioId, setPortfolioId] = useState(null);
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
@@ -67,9 +66,9 @@ const CreateHero = () => {
     if (error) {
       console.log(error);
     } else {
-      setPortfolioId(portfolio.id);
       setPortfolioStackContextData({
         ...portfolioStackContextData,
+        id: portfolio.id,
         hero_image_rounded: portfolio.hero_image_rounded,
         hero_image_border: portfolio.hero_image_border,
         hero_border_style: portfolio.hero_border_style,
@@ -89,9 +88,12 @@ const CreateHero = () => {
         social_tiktok: portfolio.social_tiktok,
         social_dribble: portfolio.social_dribble,
         social_other: portfolio.social_other,
+        project_group_description: portfolio.project_group_description,
+        project_group_title: portfolio.project_group_title,
       });
     }
   }, []);
+
 
   useEffect(() => {
     getPortfolio();
@@ -126,7 +128,7 @@ const CreateHero = () => {
 
   const saveData = async () => {
     const response = await upsertCreateHeroData(
-      portfolioId,
+      portfolioStackContextData.id,
       portfolioStackContextData.hero_image_rounded,
       portfolioStackContextData.hero_image_border,
       portfolioStackContextData.hero_border_style,
@@ -148,7 +150,6 @@ const CreateHero = () => {
       portfolioStackContextData.social_other
     );
     console.log(response);
-    setPortfolioId(response.portfolio.id);
   };
 
   return (

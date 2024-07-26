@@ -21,14 +21,14 @@ const PortfolioProjects = () => {
         className={`max-w-screen-lg px-2 mx-auto pt-16 flex flex-col gap-6 `}
       >
         <h3
-          className={`uppercase text-xl font-medium ${getPrimaryColors(
+          className={`uppercase text-xl font-medium tracking-wider ${getPrimaryColors(
             palette
           )}`}
         >
           {portfolioStackContextData.project_group_title}
         </h3>
         <p className="text-xl font-bold max-w-xs">
-          {portfolioStackContextData.work_description}
+          {portfolioStackContextData.project_group_description}
         </p>
         {portfolioStackProjectsContextData.map((el, index) => (
           <ProjectCard project={el} key={index} />

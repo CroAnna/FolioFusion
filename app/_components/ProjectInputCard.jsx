@@ -8,8 +8,9 @@ import Select from "./Select";
 import { icons, projectLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
+import { deleteProjectById } from "../builder/add-projects/actions";
 
-const ProjectInputCard = ({ projectKey, index }) => {
+const ProjectInputCard = ({ projectKey, index, projectId }) => {
   const {
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
@@ -22,7 +23,7 @@ const ProjectInputCard = ({ projectKey, index }) => {
   const handleUpdateNested = (field, value) => {
     setPortfolioStackProjectsContextData((prevData) =>
       prevData.map((el) => {
-        return el.project_id === projectKey ? { ...el, [field]: value } : el;
+        return el.project_order === projectKey ? { ...el, [field]: value } : el;
       })
     );
   };
@@ -34,7 +35,7 @@ const ProjectInputCard = ({ projectKey, index }) => {
     }
     setPortfolioStackProjectsContextData((prevData) =>
       prevData.map((el) =>
-        el.project_id == projectKey ? { ...el, project_img: null } : el
+        el.project_order == projectKey ? { ...el, project_img: null } : el
       )
     );
   };
@@ -54,21 +55,21 @@ const ProjectInputCard = ({ projectKey, index }) => {
       setFirstLoad(true);
       setPortfolioStackProjectsContextData((prevData) =>
         prevData.map((el) =>
-          el.project_id == projectKey ? { ...el, project_img: file } : el
+          el.project_order == projectKey ? { ...el, project_img: file } : el
         )
       );
     } else if (file && portfolioStackProjectsContextData[index].project_img) {
       if (!firstLoad) {
         setPortfolioStackProjectsContextData((prevData) =>
           prevData.map((el) =>
-            el.project_id == projectKey ? { ...el, project_img: file } : el
+            el.project_order == projectKey ? { ...el, project_img: file } : el
           )
         );
         setFirstLoad(true);
       } else {
         setPortfolioStackProjectsContextData((prevData) =>
           prevData.map((el) =>
-            el.project_id == projectKey ? { ...el, project_img: file } : el
+            el.project_order == projectKey ? { ...el, project_img: file } : el
           )
         );
       }
@@ -89,8 +90,9 @@ const ProjectInputCard = ({ projectKey, index }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setPortfolioStackProjectsContextData((prevData) =>
-          prevData.filter((el) => el.project_id !== projectKey)
+          prevData.filter((el) => el.id !== projectId)
         );
+        await deleteProjectById(projectId);
       }
     });
   };

@@ -6,7 +6,6 @@ export async function getCreateHeroData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user.id " + user.id); // TODO problem je da nakon logouta ostaju stari podaci u kontekstu i onda ih ucitava od prethodno ucitanog usera
   const { data: portfolio, error } = await supabase
     .from("portfolios")
     .select()

@@ -14,6 +14,7 @@ const PortfolioContext = createContext({
 
 const PortfolioProvider = ({ children }) => {
   const [portfolioStackContextData, setPortfolioStackContextData] = useState({
+    id: null,
     hero_image: null,
     hero_image_rounded: false,
     hero_border_style: "dashed",
@@ -46,7 +47,8 @@ const PortfolioProvider = ({ children }) => {
     setPortfolioStackProjectsContextData,
   ] = useState([
     {
-      project_id: 1,
+      id: null,
+      project_order: 1,
       project_title: "",
       project_description: "",
       project_technology_1_icon: "",
@@ -122,7 +124,8 @@ const PortfolioProvider = ({ children }) => {
 
     setPortfolioStackProjectsContextData([
       {
-        project_id: 1,
+        project_id: null,
+        project_order: 1,
         project_title: "",
         project_description: "",
         project_technology_1_icon: "",

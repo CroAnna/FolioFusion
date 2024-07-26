@@ -3,7 +3,12 @@ import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import ProjectInputCard from "@/app/_components/ProjectInputCard";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
+import {
+  getAddProjectsSectionData,
+  getAddProjectsData,
+  upsertAddProjectsData,
+} from "./actions";
 
 const AddWork = () => {
   const {
@@ -24,9 +29,9 @@ const AddWork = () => {
     setPortfolioStackProjectsContextData([
       ...portfolioStackProjectsContextData,
       {
-        project_id:
+        project_order:
           portfolioStackProjectsContextData.length > 0
-            ? portfolioStackProjectsContextData.slice(-1)[0].project_id + 1
+            ? portfolioStackProjectsContextData.slice(-1)[0].project_order + 1
             : 1,
         project_title: "",
         project_descrtiption: "",
@@ -39,9 +44,62 @@ const AddWork = () => {
     ]);
   };
 
+  const saveData = async () => {
+    const response = await upsertAddProjectsData(
+      portfolioStackContextData.id,
+      portfolioStackContextData.project_group_description,
+      portfolioStackContextData.project_group_title,
+      portfolioStackProjectsContextData
+    );
+    console.log(response);
+  };
+
+  const getPortfolio = useCallback(async () => {
+    const { portfolio, error } = await getAddProjectsSectionData();
+
+    if (error) {
+      console.log(error);
+    } else {
+      setPortfolioId(portfolio.id);
+      setPortfolioStackContextData({
+        ...portfolioStackContextData,
+        project_group_description: portfolio.project_group_description,
+        project_group_title: portfolio.project_group_title,
+      });
+    }
+  }, []);
+
+  const getProjects = useCallback(async () => {
+    const { projects, error } = await getAddProjectsData();
+
+    if (error) {
+      console.log(error);
+    } else if (projects.length > 0) {
+      setPortfolioStackProjectsContextData(projects);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      portfolioStackContextData.project_group_title == "" ||
+      portfolioStackContextData.project_group_description == ""
+    ) {
+      getPortfolio();
+    }
+    getProjects();
+  }, []);
+
   return (
     <div className="p-6 flex flex-col gap-8">
-      <h2 className="text-4xl font-bold">2. Add your projects</h2>
+      <div className="flex justify-between">
+        <h2 className="text-4xl font-bold">2. Add your projects</h2>
+        <button
+          className="btn btn-secondary w-24 btn-outline"
+          onClick={saveData}
+        >
+          Save
+        </button>
+      </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">2.1. Add section title</h3>
         <Input
@@ -66,16 +124,19 @@ const AddWork = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">2.3. Add your projects</h3>
-        {portfolioStackProjectsContextData.map(
-          (project, index) =>
-            project.project_id && (
-              <ProjectInputCard
-                key={project.project_id}
-                projectKey={project.project_id}
-                index={index}
-              />
-            )
-        )}
+        {portfolioStackProjectsContextData &&
+          portfolioStackProjectsContextData.length > 0 &&
+          portfolioStackProjectsContextData.map(
+            (project, index) =>
+              project.project_order && (
+                <ProjectInputCard
+                  key={project.project_order}
+                  projectKey={project.project_order}
+                  index={index}
+                  projectId={project.id}
+                />
+              )
+          )}
         <button
           className="btn btn-primary"
           onClick={() => {
@@ -86,6 +147,7 @@ const AddWork = () => {
         </button>
       </div>
       <NextPreviousNavigation
+        handleNextClick={saveData}
         nextUrl={"/builder/add-education"}
         previousUrl={"/builder/create-hero"}
       />
