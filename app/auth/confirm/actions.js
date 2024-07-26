@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 
 export async function addUser() {
+  console.log("adding user");
+
   const supabase = createClient();
   const {
     data: { user },
@@ -9,9 +11,12 @@ export async function addUser() {
 
   const { error } = await supabase.from("users").insert({
     id: user.id,
-    name: "testno ime registracije",
-    domain_url: "testna domena",
+    email: user.email,
+    domain_url: null,
+    access_granted: false,
+    order_id: null,
   });
+  console.log(error);
 
   return { error };
 }

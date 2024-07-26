@@ -15,9 +15,9 @@ export async function login(formData) {
   };
 
   const { error } = await supabase.auth.signInWithPassword(data);
-  // TODO dodaj nakon validacije ili tu da se spremi user i u tablicu s userima
 
   if (error) {
+    console.log(error);
     redirect("/error");
   }
 
