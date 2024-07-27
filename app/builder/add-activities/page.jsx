@@ -80,7 +80,7 @@ const AddActivities = () => {
         </button>
       </div>
       <NextPreviousNavigation
-        nextUrl={"/builder/add-education"}
+        nextUrl={"/builder/deploy-portfolio"}
         previousUrl={"/builder/add-education"}
       />
     </div>

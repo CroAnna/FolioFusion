@@ -3,14 +3,17 @@ import React from "react";
 
 const Steps = ({ currentStep, stepsData }) => {
   const getPageUrl = (index) => {
-    if (index == 0) {
-      return "/builder/create-hero";
-    } else if (index == 1) {
-      return "/builder/add-projects";
-    } else if (index == 2) {
-      return "/builder/add-education";
-    } else if (index == 3) {
-      return "/builder/add-activities";
+    switch (index) {
+      case 0:
+        return "/builder/create-hero";
+      case 1:
+        return "/builder/add-projects";
+      case 2:
+        return "/builder/add-education";
+      case 3:
+        return "/builder/add-activities";
+      case 4:
+        return "/builder/deploy-portfolio";
     }
   };
 

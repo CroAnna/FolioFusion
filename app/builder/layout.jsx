@@ -20,6 +20,8 @@ export default function BuilderLayout({ children }) {
       setCurrentStep(3);
     } else if (pathname == "/builder/add-activities") {
       setCurrentStep(4);
+    } else if (pathname == "/builder/deploy-portfolio") {
+      setCurrentStep(5);
     }
   }, [pathname]);
 
