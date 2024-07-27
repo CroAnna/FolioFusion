@@ -37,13 +37,11 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const allowedPaths = ["/login", "/auth", "/sign-up", "/validate-account"];
+  const unallowedPaths = ["/builder"];
   console.log(request.nextUrl.pathname);
   if (
     !user &&
-    request.nextUrl.pathname !== "/" &&
-    request.nextUrl.pathname !== "/api/webhook" &&
-    !allowedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
+    unallowedPaths.some((path) => request.nextUrl.pathname.startsWith(path))
   ) {
     console.log("nema usera i redirecta middleware");
     // no user, potentially respond by redirecting the user to the login page
