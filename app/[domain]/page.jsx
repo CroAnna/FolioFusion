@@ -1,7 +1,12 @@
 import React from "react";
+import RenderedPortfolio from "../_components/RenderedPortfolio";
 
 const Portfolio = ({ params }) => {
-  return <div>Portfolio {params.domain}</div>;
+  return (
+    <div>
+      <RenderedPortfolio domain={params.domain}/>
+    </div>
+  );
 };
 
 export default Portfolio;
