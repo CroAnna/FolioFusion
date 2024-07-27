@@ -90,10 +90,11 @@ const CreateHero = () => {
         social_other: portfolio.social_other,
         project_group_description: portfolio.project_group_description,
         project_group_title: portfolio.project_group_title,
+        experience_group_title: portfolio.experience_group_title,
+        experience_group_description: portfolio.experience_group_description,
       });
     }
   }, []);
-
 
   useEffect(() => {
     getPortfolio();

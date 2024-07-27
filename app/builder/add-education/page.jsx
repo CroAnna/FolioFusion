@@ -3,14 +3,19 @@ import ExperienceInputCard from "@/app/_components/ExperienceInputCard";
 import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
-import React, { useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
+import {
+  getAddExperiencesSectionData,
+  getAddExperiencesData,
+  upsertAddExperiencesData,
+} from "./actions";
 
 const AddEducation = () => {
   const {
     portfolioStackContextData,
-    portfolioStackTimelineContextData,
+    portfolioStackExperienceContextData,
     setPortfolioStackContextData,
-    setPortfolioStackTimelineContextData,
+    setPortfolioStackExperienceContextData,
   } = useContext(PortfolioContext);
 
   const handleUpdate = (field, value) => {
@@ -21,32 +26,87 @@ const AddEducation = () => {
   };
 
   const addExperience = () => {
-    setPortfolioStackTimelineContextData([
-      ...portfolioStackTimelineContextData,
+    setPortfolioStackExperienceContextData([
+      ...portfolioStackExperienceContextData,
       {
-        timeline_id:
-          portfolioStackTimelineContextData.length > 0
-            ? portfolioStackTimelineContextData.slice(-1)[0].timeline_id + 1
+        experience_order:
+          portfolioStackExperienceContextData.length > 0
+            ? portfolioStackExperienceContextData.slice(-1)[0]
+                .experience_order + 1
             : 1,
-        timeline_title: "",
-        timeline_description: "",
-        timeline_time: "",
-        timeline_keywords: "",
-        timeline_type: null,
+        experience_title: "",
+        experience_description: "",
+        experience_time: "",
+        experience_keywords: "",
+        experience_type: null,
       },
     ]);
   };
 
+  const saveData = async () => {
+    const response = await upsertAddExperiencesData(
+      portfolioStackContextData.id,
+      portfolioStackContextData.experience_group_description,
+      portfolioStackContextData.experience_group_title,
+      portfolioStackExperienceContextData
+    );
+    console.log(response);
+    setPortfolioStackExperienceContextData(response.experiences); // sluzi da se ne dogodi da ako se doda experience i samo spremi page (bez prebacivanja dalje) i doda jos jedan experience, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+  };
+
+  const getPortfolio = useCallback(async () => {
+    const { portfolio, error } = await getAddExperiencesSectionData();
+
+    if (error) {
+      console.log(error);
+    } else {
+      setPortfolioStackContextData({
+        ...portfolioStackContextData,
+        experience_group_description: portfolio.experience_group_description,
+        experience_group_title: portfolio.experience_group_title,
+      });
+    }
+  }, []);
+
+  const getExperiences = useCallback(async () => {
+    const { experiences, error } = await getAddExperiencesData();
+
+    if (error) {
+      console.log(error);
+    } else if (experiences.length > 0) {
+      setPortfolioStackExperienceContextData(experiences);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      portfolioStackContextData.experience_group_title == "" ||
+      portfolioStackContextData.experience_group_description == ""
+    ) {
+      console.log("dohvati");
+      getPortfolio();
+    }
+    getExperiences();
+  }, []);
+
   return (
     <div className="p-6 flex flex-col gap-4">
-      <h2 className="text-4xl font-bold">3. Add your education</h2>
+      <div className="flex justify-between">
+        <h2 className="text-4xl font-bold">3. Add your experience</h2>
+        <button
+          className="btn btn-secondary w-24 btn-outline"
+          onClick={saveData}
+        >
+          Save
+        </button>
+      </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">3.1. Add section title</h3>
         <Input
-          name={"timeline_group_title"}
-          value={portfolioStackContextData.timeline_group_title}
+          name={"experience_group_title"}
+          value={portfolioStackContextData.experience_group_title}
           onChange={(e) => {
-            handleUpdate("timeline_group_title", e.target.value);
+            handleUpdate("experience_group_title", e.target.value);
           }}
           placeholder={"My work and education"}
         />
@@ -54,10 +114,10 @@ const AddEducation = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">3.2. Add section description</h3>
         <Input
-          name={"timeline_group_description"}
-          value={portfolioStackContextData.timeline_group_description}
+          name={"experience_group_description"}
+          value={portfolioStackContextData.experience_group_description}
           onChange={(e) => {
-            handleUpdate("timeline_group_description", e.target.value);
+            handleUpdate("experience_group_description", e.target.value);
           }}
           placeholder={"This is where I have worked."}
         />
@@ -69,16 +129,19 @@ const AddEducation = () => {
           </h3>
           <p>(from newest to oldest)</p>
         </div>
-        {portfolioStackTimelineContextData.map(
-          (timeline, index) =>
-            timeline.timeline_id && (
-              <ExperienceInputCard
-                key={timeline.timeline_id}
-                index={index}
-                experienceKey={timeline.timeline_id}
-              />
-            )
-        )}
+        {portfolioStackExperienceContextData &&
+          portfolioStackExperienceContextData.length > 0 &&
+          portfolioStackExperienceContextData.map(
+            (timeline, index) =>
+              timeline.experience_order && (
+                <ExperienceInputCard
+                  key={timeline.experience_order}
+                  index={index}
+                  experienceKey={timeline.experience_order}
+                  experienceId={timeline.id}
+                />
+              )
+          )}
         <button
           className="btn btn-secondary "
           onClick={() => {
@@ -89,6 +152,7 @@ const AddEducation = () => {
         </button>
       </div>
       <NextPreviousNavigation
+        handleNextClick={saveData}
         nextUrl={"/builder/add-activities"}
         previousUrl={"/builder/add-projects"}
       />

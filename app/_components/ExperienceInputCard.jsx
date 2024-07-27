@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Input from "./Input";
 import Textarea from "./Textarea";
 import { PortfolioContext } from "./PortfolioProvider";
@@ -7,22 +7,24 @@ import Select from "./Select";
 import { experienceLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
+import { deleteExperienceById } from "../builder/add-education/actions";
 
-const ExperienceInputCard = ({ index, experienceKey }) => {
+const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
   const {
-    portfolioStackTimelineContextData,
-    setPortfolioStackTimelineContextData,
+    portfolioStackExperienceContextData,
+    setPortfolioStackExperienceContextData,
   } = useContext(PortfolioContext);
 
   const handleUpdateNested = (field, value) => {
-    setPortfolioStackTimelineContextData((prevData) =>
+    setPortfolioStackExperienceContextData((prevData) =>
       prevData.map((el) =>
-        el.timeline_id === index + 1 ? { ...el, [field]: value } : el
+        el.experience_order === experienceKey ? { ...el, [field]: value } : el
       )
     );
   };
 
   const handleDelete = () => {
+    console.log(experienceId);
     Swal.fire({
       title: "Are you sure?",
       text: "You will delete this experience.",
@@ -35,23 +37,36 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        setPortfolioStackTimelineContextData((prevData) =>
-          prevData.filter((el) => el.timeline_id !== experienceKey)
-        );
+        if (experienceId) {
+          // postoji u bazi
+          setPortfolioStackExperienceContextData((prevData) =>
+            prevData.filter((el) => el.id !== experienceId)
+          );
+          await deleteExperienceById(experienceId);
+        } else {
+          // postoji samo u kontekstu zasad (jos nije savean)
+          setPortfolioStackExperienceContextData((prevData) =>
+            prevData.filter(
+              (el) =>
+                el.experience_order !==
+                portfolioStackExperienceContextData[index].experience_order
+            )
+          );
+        }
       }
     });
   };
 
   return (
-    portfolioStackTimelineContextData[index] && (
+    portfolioStackExperienceContextData[index] && (
       <div className="border-emerald-500 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
         <div className="flex gap-4">
           <Input
             label={"Title:"}
-            name={`timeline_title`}
-            value={portfolioStackTimelineContextData[index].timeline_title}
+            name={`experience_title`}
+            value={portfolioStackExperienceContextData[index].experience_title}
             onChange={(e) => {
-              handleUpdateNested(`timeline_title`, e.target.value);
+              handleUpdateNested(`experience_title`, e.target.value);
             }}
             placeholder={"Recommended 1 or 2 words"}
           />
@@ -64,19 +79,21 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
         </div>
         <Textarea
           label={"Description:"}
-          name={"timeline_description"}
-          value={portfolioStackTimelineContextData[index].timeline_description}
+          name={"experience_description"}
+          value={
+            portfolioStackExperienceContextData[index].experience_description
+          }
           onChange={(e) => {
-            handleUpdateNested("timeline_description", e.target.value);
+            handleUpdateNested("experience_description", e.target.value);
           }}
           placeholder={"Describe your position"}
         />
         <Input
           label={"Period of time:"}
-          name={`timeline_time`}
-          value={portfolioStackTimelineContextData[index].timeline_time}
+          name={`experience_time`}
+          value={portfolioStackExperienceContextData[index].experience_time}
           onChange={(e) => {
-            handleUpdateNested(`timeline_time`, e.target.value);
+            handleUpdateNested(`experience_time`, e.target.value);
           }}
           placeholder={"March 2021 - August 2024"}
         />
@@ -84,20 +101,20 @@ const ExperienceInputCard = ({ index, experienceKey }) => {
           placeholder="-"
           options={experienceLinkIcons}
           label={"Type:"}
-          name={`timeline_type`}
+          name={`experience_type`}
           onChange={(e) => {
             console.log(e.target.value);
             console.log(JSON.parse(JSON.stringify(e.target.value)));
-            handleUpdateNested(`timeline_type`, e.target.value);
+            handleUpdateNested(`experience_type`, e.target.value);
           }}
-          value={portfolioStackTimelineContextData[index].timeline_type}
+          value={portfolioStackExperienceContextData[index].experience_type}
         />
         <Input
           label={"Keywords:"}
-          name={`timeline_keywords`}
-          value={portfolioStackTimelineContextData[index].timeline_keywords}
+          name={`experience_keywords`}
+          value={portfolioStackExperienceContextData[index].experience_keywords}
           onChange={(e) => {
-            handleUpdateNested(`timeline_keywords`, e.target.value);
+            handleUpdateNested(`experience_keywords`, e.target.value);
           }}
           placeholder={"Frontend, React, Storybook"}
         />

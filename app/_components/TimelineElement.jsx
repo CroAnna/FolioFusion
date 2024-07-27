@@ -15,7 +15,7 @@ const TimelineElement = ({ palette, data }) => {
     data && (
       <VerticalTimelineElement
         visible={true}
-        date={data.timeline_time}
+        date={data.experience_time}
         contentArrowStyle={{
           borderRight: `7px solid ${getHexSecondaryBgColor(palette)}`,
         }}
@@ -30,21 +30,21 @@ const TimelineElement = ({ palette, data }) => {
           boxShadow: "none",
         }}
         icon={
-          data.timeline_type
-            ? experienceLinkIcons.find((el) => el.value == data.timeline_type)
+          data.experience_type
+            ? experienceLinkIcons.find((el) => el.value == data.experience_type)
                 ?.icon
             : null
         }
       >
         <h3 className="vertical-timeline-element-title font-bold text-lg">
-          {data.timeline_title}
+          {data.experience_title}
         </h3>
         <h4 className="vertical-timeline-element-subtitle">
-          {data.timeline_description}
+          {data.experience_description}
         </h4>
         <div className="vertical-timeline-element-subtitle flex gap-2 pt-3 flex-wrap">
-          {data.timeline_keywords &&
-            data.timeline_keywords.split(",").map((el, _index) => (
+          {data.experience_keywords &&
+            data.experience_keywords.split(",").map((el, _index) => (
               <div
                 className={`${getPrimaryBgColors(palette)} 
             ${getSecondaryTextColor(palette)} w-fit rounded-md px-2 `}

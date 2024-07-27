@@ -5,8 +5,8 @@ const PortfolioContext = createContext({
   setPortfolioStackContextData: () => {},
   portfolioStackProjectsContextData: [],
   setPortfolioStackProjectsContextData: () => {},
-  portfolioStackTimelineContextData: [],
-  setPortfolioStackTimelineContextData: () => {},
+  portfolioStackExperienceContextData: [],
+  setPortfolioStackExperienceContextData: () => {},
   portfolioStackActivityContextData: [],
   setPortfolioStackActivityContextData: () => {},
   resetContextValues: () => {},
@@ -37,8 +37,8 @@ const PortfolioProvider = ({ children }) => {
     social_other: "",
     project_group_description: "",
     project_group_title: "",
-    timeline_group_description: "",
-    timeline_group_title: "",
+    experience_group_description: "",
+    experience_group_title: "",
     activity_bg_shape: "low-poly-grid",
   });
 
@@ -67,16 +67,17 @@ const PortfolioProvider = ({ children }) => {
   ]);
 
   const [
-    portfolioStackTimelineContextData,
-    setPortfolioStackTimelineContextData,
+    portfolioStackExperienceContextData,
+    setPortfolioStackExperienceContextData,
   ] = useState([
     {
-      timeline_id: 1,
-      timeline_title: "",
-      timeline_description: "",
-      timeline_time: "",
-      timeline_keywords: "",
-      timeline_type: null,
+      id: null,
+      experience_order: 1,
+      experience_title: "",
+      experience_description: "",
+      experience_time: "",
+      experience_keywords: "",
+      experience_type: null,
     },
   ]);
 
@@ -117,8 +118,8 @@ const PortfolioProvider = ({ children }) => {
       social_other: "",
       project_group_description: "",
       project_group_title: "",
-      timeline_group_description: "",
-      timeline_group_title: "",
+      experience_group_description: "",
+      experience_group_title: "",
       activity_bg_shape: "low-poly-grid",
     });
 
@@ -143,14 +144,15 @@ const PortfolioProvider = ({ children }) => {
       },
     ]);
 
-    setPortfolioStackTimelineContextData([
+    setPortfolioStackExperienceContextData([
       {
-        timeline_id: 1,
-        timeline_title: "",
-        timeline_description: "",
-        timeline_time: "",
-        timeline_keywords: "",
-        timeline_type: null,
+        id: null,
+        experience_order: 1,
+        experience_title: "",
+        experience_description: "",
+        experience_time: "",
+        experience_keywords: "",
+        experience_type: null,
       },
     ]);
 
@@ -172,8 +174,8 @@ const PortfolioProvider = ({ children }) => {
         setPortfolioStackContextData,
         portfolioStackProjectsContextData,
         setPortfolioStackProjectsContextData,
-        portfolioStackTimelineContextData,
-        setPortfolioStackTimelineContextData,
+        portfolioStackExperienceContextData,
+        setPortfolioStackExperienceContextData,
         portfolioStackActivityContextData,
         setPortfolioStackActivityContextData,
         resetContextValues,

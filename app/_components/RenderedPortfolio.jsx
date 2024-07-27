@@ -9,7 +9,7 @@ const RenderedPortfolio = () => {
   const {
     portfolioStackContextData,
     portfolioStackProjectsContextData,
-    portfolioStackTimelineContextData,
+    portfolioStackExperienceContextData,
     portfolioStackActivityContextData,
   } = useContext(PortfolioContext);
 
@@ -18,7 +18,7 @@ const RenderedPortfolio = () => {
       <p className="max-w-6xl break-words">
         {JSON.stringify(portfolioStackContextData)}
         {JSON.stringify(portfolioStackProjectsContextData)}
-        {JSON.stringify(portfolioStackTimelineContextData)}
+        {JSON.stringify(portfolioStackExperienceContextData)}
         {JSON.stringify(portfolioStackActivityContextData)}
       </p>
       <PortfolioHero />
