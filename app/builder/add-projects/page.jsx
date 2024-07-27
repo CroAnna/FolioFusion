@@ -3,7 +3,7 @@ import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import ProjectInputCard from "@/app/_components/ProjectInputCard";
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import {
   getAddProjectsSectionData,
   getAddProjectsData,
@@ -52,6 +52,7 @@ const AddWork = () => {
       portfolioStackProjectsContextData
     );
     console.log(response);
+    setPortfolioStackProjectsContextData(response.projects); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
   const getPortfolio = useCallback(async () => {
@@ -60,7 +61,6 @@ const AddWork = () => {
     if (error) {
       console.log(error);
     } else {
-      setPortfolioId(portfolio.id);
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         project_group_description: portfolio.project_group_description,

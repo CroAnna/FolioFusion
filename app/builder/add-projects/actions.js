@@ -8,7 +8,7 @@ export async function getAddProjectsSectionData() {
 
   console.log("user.id " + user.id);
   const { data: portfolio, error } = await supabase
-    .from("portfolio")
+    .from("portfolios")
     .select("id, project_group_title, project_group_description")
     .eq("user_id", user.id)
     .single();
@@ -26,6 +26,7 @@ export async function getAddProjectsData() {
   const { data: projects, error } = await supabase
     .from("projects")
     .select()
+    .order("project_order", { ascending: true })
     .eq("user_id", user.id);
 
   console.log(projects);
@@ -39,7 +40,6 @@ export async function upsertAddProjectsData(
   project_group_title,
   projectsData
 ) {
-  let projects = [];
   const supabase = createClient();
   const {
     data: { user },
@@ -61,39 +61,42 @@ export async function upsertAddProjectsData(
     .select()
     .single();
 
-  projectsData.map(async (project) => {
-    const upsertProjectsData = {
-      project_title: project.project_title,
-      project_description: project.project_description,
-      project_technology_1_icon: project.project_technology_1_icon,
-      project_technology_2_icon: project.project_technology_2_icon,
-      project_technology_3_icon: project.project_technology_3_icon,
-      project_technology_4_icon: project.project_technology_4_icon,
-      project_technology_5_icon: project.project_technology_5_icon,
-      project_link_1_url: project.project_link_1_url,
-      project_link_2_url: project.project_link_2_url,
-      project_link_1_text: project.project_link_1_text,
-      project_link_2_text: project.project_link_2_text,
-      project_link_1_icon: project.project_link_1_icon,
-      project_link_2_icon: project.project_link_2_icon,
-      project_img: project.project_img,
-      project_order: project.project_order,
-      user_id: user.id,
-    };
-    console.log(project.id);
+  const projects = await Promise.all(
+    projectsData.map(async (project) => {
+      const upsertProjectsData = {
+        project_title: project.project_title,
+        project_description: project.project_description,
+        project_technology_1_icon: project.project_technology_1_icon,
+        project_technology_2_icon: project.project_technology_2_icon,
+        project_technology_3_icon: project.project_technology_3_icon,
+        project_technology_4_icon: project.project_technology_4_icon,
+        project_technology_5_icon: project.project_technology_5_icon,
+        project_link_1_url: project.project_link_1_url,
+        project_link_2_url: project.project_link_2_url,
+        project_link_1_text: project.project_link_1_text,
+        project_link_2_text: project.project_link_2_text,
+        project_link_1_icon: project.project_link_1_icon,
+        project_link_2_icon: project.project_link_2_icon,
+        project_img: project.project_img,
+        project_order: project.project_order,
+        user_id: user.id,
+      };
+      console.log(project.id);
 
-    if (project.id) {
-      console.log(`vec postoji ${id}`);
-      upsertProjectsData.id = project.id;
-    }
+      if (project.id) {
+        console.log(`vec postoji ${id}`);
+        upsertProjectsData.id = project.id;
+      }
 
-    const { data, error } = await supabase
-      .from("projects")
-      .upsert(upsertProjectsData)
-      .select();
-    console.log(data + error);
-    projects = [...projects, data];
-  });
+      const { data, error } = await supabase
+        .from("projects")
+        .upsert(upsertProjectsData)
+        .select()
+        .single();
+      console.log(data + error);
+      return data;
+    })
+  );
 
   return { portfolio, projects, error };
 }

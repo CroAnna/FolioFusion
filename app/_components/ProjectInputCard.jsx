@@ -89,10 +89,22 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        setPortfolioStackProjectsContextData((prevData) =>
-          prevData.filter((el) => el.id !== projectId)
-        );
-        await deleteProjectById(projectId);
+        if (projectId) {
+          // postoji u bazi
+          setPortfolioStackProjectsContextData((prevData) =>
+            prevData.filter((el) => el.id !== projectId)
+          );
+          await deleteProjectById(projectId);
+        } else {
+          // postoji samo u kontekstu zasad (jos nije savean)
+          setPortfolioStackProjectsContextData((prevData) =>
+            prevData.filter(
+              (el) =>
+                el.project_order !==
+                portfolioStackProjectsContextData[index].project_order
+            )
+          );
+        }
       }
     });
   };
