@@ -7,7 +7,7 @@ import Select from "./Select";
 import { experienceLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
-import { deleteExperienceById } from "../builder/add-education/actions";
+import { deleteExperienceById } from "../(web-builder)/builder/add-education/actions";
 
 const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
   const {

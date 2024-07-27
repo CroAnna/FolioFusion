@@ -8,7 +8,7 @@ import Select from "./Select";
 import { icons, projectLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
-import { deleteProjectById } from "../builder/add-projects/actions";
+import { deleteProjectById } from "../(web-builder)/builder/add-projects/actions";
 
 const ProjectInputCard = ({ projectKey, index, projectId }) => {
   const {

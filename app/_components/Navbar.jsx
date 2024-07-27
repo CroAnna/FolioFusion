@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "../logout/actions";
+import { logout } from "../(web-builder)/logout/actions";
 import LogoutButton from "./LogoutButton";
 
 const Navbar = async () => {

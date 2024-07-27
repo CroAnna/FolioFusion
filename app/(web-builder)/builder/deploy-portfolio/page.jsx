@@ -50,15 +50,7 @@ const DeployPortfolio = () => {
   return (
     user && (
       <div className="p-6 flex flex-col gap-8">
-        <div className="flex justify-between">
-          <h2 className="text-4xl font-bold">5. Make portfolio live</h2>
-          <button
-            className="btn btn-secondary w-24 btn-outline"
-            onClick={saveData}
-          >
-            Save
-          </button>
-        </div>
+        <h2 className="text-4xl font-bold">5. Make portfolio live</h2>
         <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-bold">5.1. Check for access</h3>
           <div>

@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import RenderedPortfolio from "../_components/RenderedPortfolio";
-import PortfolioMaker from "../_components/PortfolioMaker";
-import { stepsData } from "../_libs/utils";
-import Steps from "../_components/Steps";
+import RenderedPortfolio from "../../_components/RenderedPortfolio";
+import PortfolioMaker from "../../_components/PortfolioMaker";
+import { stepsData } from "../../_libs/utils";
+import Steps from "../../_components/Steps";
 
 export default function BuilderLayout({ children }) {
   const [currentStep, setCurrentStep] = useState(1);
