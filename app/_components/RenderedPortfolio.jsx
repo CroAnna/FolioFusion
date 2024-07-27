@@ -31,7 +31,7 @@ const RenderedPortfolio = ({ domain = null }) => {
     console.log(data);
     setPortfolioStackContextData(data.portfolio);
     setPortfolioStackProjectsContextData(data.projects);
-    // setPortfolioStackActivityContextData(data.activities)
+    setPortfolioStackActivityContextData(data.activities);
     setPortfolioStackExperienceContextData(data.experiences);
   };
 

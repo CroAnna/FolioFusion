@@ -92,6 +92,7 @@ const CreateHero = () => {
         project_group_title: portfolio.project_group_title,
         experience_group_title: portfolio.experience_group_title,
         experience_group_description: portfolio.experience_group_description,
+        activity_bg_shape: portfolio.activity_bg_shape,
       });
     }
   }, []);

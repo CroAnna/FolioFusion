@@ -86,7 +86,8 @@ const PortfolioProvider = ({ children }) => {
     setPortfolioStackActivityContextData,
   ] = useState([
     {
-      activity_id: 1,
+      id: null,
+      activity_order: 1,
       activity_title: "",
       activity_description: "",
       activity_type: null,
@@ -158,7 +159,8 @@ const PortfolioProvider = ({ children }) => {
 
     setPortfolioStackActivityContextData([
       {
-        activity_id: 1,
+        id: null,
+        activity_order: 1,
         activity_title: "",
         activity_description: "",
         activity_type: null,

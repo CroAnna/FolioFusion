@@ -7,14 +7,13 @@ import { Trash } from "@phosphor-icons/react/dist/ssr";
 import { activityIcons } from "../_libs/utils";
 import FileInput from "./FileInput";
 import Swal from "sweetalert2";
+import { deleteActivityById } from "../(web-builder)/builder/add-activities/actions";
 
-const ActivityInputCard = ({ index, activityKey }) => {
+const ActivityInputCard = ({ index, activityKey, activityId }) => {
   const {
-    portfolioStackContextData,
     portfolioStackActivityContextData,
     setPortfolioStackActivityContextData,
   } = useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
 
   const activityInputRef = useRef(null);
   const [file, setFile] = useState(null);
@@ -23,7 +22,7 @@ const ActivityInputCard = ({ index, activityKey }) => {
   const handleUpdateNested = (field, value) => {
     setPortfolioStackActivityContextData((prevData) =>
       prevData.map((el) =>
-        el.activity_id === activityKey ? { ...el, [field]: value } : el
+        el.activity_order === activityKey ? { ...el, [field]: value } : el
       )
     );
   };
@@ -35,7 +34,7 @@ const ActivityInputCard = ({ index, activityKey }) => {
     }
     setPortfolioStackActivityContextData((prevData) =>
       prevData.map((el) =>
-        el.activity_id == activityKey ? { ...el, activity_img: null } : el
+        el.activity_order == activityKey ? { ...el, activity_img: null } : el
       )
     );
   };
@@ -52,21 +51,25 @@ const ActivityInputCard = ({ index, activityKey }) => {
       setFirstLoad(true);
       setPortfolioStackActivityContextData((prevData) =>
         prevData.map((el) =>
-          el.activity_id == activityKey ? { ...el, activity_img: file } : el
+          el.activity_order == activityKey ? { ...el, activity_img: file } : el
         )
       );
     } else if (file && portfolioStackActivityContextData[index].activity_img) {
       if (!firstLoad) {
         setPortfolioStackActivityContextData((prevData) =>
           prevData.map((el) =>
-            el.activity_id == activityKey ? { ...el, activity_img: file } : el
+            el.activity_order == activityKey
+              ? { ...el, activity_img: file }
+              : el
           )
         );
         setFirstLoad(true);
       } else {
         setPortfolioStackActivityContextData((prevData) =>
           prevData.map((el) =>
-            el.activity_id == activityKey ? { ...el, activity_img: file } : el
+            el.activity_order == activityKey
+              ? { ...el, activity_img: file }
+              : el
           )
         );
       }
@@ -74,6 +77,7 @@ const ActivityInputCard = ({ index, activityKey }) => {
   }, [file]);
 
   const handleDelete = () => {
+    console.log(activityId);
     Swal.fire({
       title: "Are you sure?",
       text: "You will delete this activity.",
@@ -86,9 +90,22 @@ const ActivityInputCard = ({ index, activityKey }) => {
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        setPortfolioStackActivityContextData((prevData) =>
-          prevData.filter((el) => el.activity_id !== activityKey)
-        );
+        if (activityId) {
+          // postoji u bazi
+          setPortfolioStackActivityContextData((prevData) =>
+            prevData.filter((el) => el.id !== activityId)
+          );
+          await deleteActivityById(activityId);
+        } else {
+          // postoji samo u kontekstu zasad (jos nije savean)
+          setPortfolioStackActivityContextData((prevData) =>
+            prevData.filter(
+              (el) =>
+                el.activity_order !==
+                portfolioStackActivityContextData[index].activity_order
+            )
+          );
+        }
       }
     });
   };

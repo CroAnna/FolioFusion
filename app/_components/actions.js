@@ -27,22 +27,21 @@ export async function getDataByDomain(domain) {
     .order("experience_order", { ascending: true })
     .eq("user_id", owner.id);
 
-  // TODO
-  //   const { data: activities, activitiesError } = await supabase
-  //     .from("activities")
-  //     .select()
-  //     .order("activity_order", { ascending: true })
-  //     .eq("user_id", owner.id);
+  const { data: activities, activitiesError } = await supabase
+    .from("activities")
+    .select()
+    .order("activity_order", { ascending: true })
+    .eq("user_id", owner.id);
 
   return {
     portfolio,
     projects,
     experiences,
-    // activities,
+    activities,
     ownerError,
     portfolioError,
     projectsError,
     experiencesError,
-    // activitiesError
+    activitiesError,
   };
 }

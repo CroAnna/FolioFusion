@@ -5,22 +5,13 @@ import {
   getUserData,
   upsertDeploymentData,
 } from "./actions";
-import { useContext, useEffect, useState } from "react";
-import { PortfolioContext } from "@/app/_components/PortfolioProvider";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const DeployPortfolio = () => {
-  const { portfolioStackContextData, setPortfolioStackContextData } =
-    useContext(PortfolioContext);
   const [user, setUser] = useState(null);
   const [domain, setDomain] = useState(null);
   const [domainAvailable, setDomainAvailable] = useState(true);
-
-  const saveData = async () => {
-    const response = await upsertDeploymentData();
-    console.log(response);
-    setPortfolioStackContextData(response.projects);
-  };
 
   const deployPortfolio = async () => {
     // check if domain is unique and available
@@ -40,10 +31,12 @@ const DeployPortfolio = () => {
   const fetchUserData = async () => {
     const data = await getUserData();
     setUser(data.userData);
+    setDomain(data.userData.domain_url);
   };
 
   const handleUpdate = (value) => {
     setDomain(value);
+    console.log(value);
     setDomainAvailable(true);
   };
 
