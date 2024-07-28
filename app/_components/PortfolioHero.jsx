@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PortfolioContext } from "./PortfolioProvider";
 import {
   DribbbleLogo,
@@ -27,6 +27,23 @@ const PortfolioHero = () => {
   const palette = portfolioStackContextData.hero_palette;
   const extra_style_elements =
     portfolioStackContextData.hero_extra_style_elements;
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    let url;
+    try {
+      if (portfolioStackContextData.hero_image instanceof File) {
+        url = URL.createObjectURL(portfolioStackContextData.hero_image);
+      } else {
+        url = portfolioStackContextData.hero_image.publicUrl;
+      }
+    } catch (error) {
+      console.error("No image found or null: ", error);
+      url = "";
+    }
+    setImageUrl(url);
+  }, [portfolioStackContextData.hero_image]);
 
   return (
     <div
@@ -126,7 +143,7 @@ const PortfolioHero = () => {
             <Image
               width={320}
               height={320}
-              src={URL.createObjectURL(portfolioStackContextData.hero_image)}
+              src={imageUrl}
               alt=""
               className={`${
                 portfolioStackContextData.hero_image_rounded

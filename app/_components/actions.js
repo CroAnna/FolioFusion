@@ -9,11 +9,22 @@ export async function getDataByDomain(domain) {
     .eq("domain_url", domain)
     .single();
 
-  const { data: portfolio, portfolioError } = await supabase
+  const { data: portfolioWithoutImage, portfolioError } = await supabase
     .from("portfolios")
     .select()
     .eq("user_id", owner.id)
     .single();
+
+  let hero_image = null;
+  if (portfolioWithoutImage.hero_image) {
+    const hero_image_filepath = portfolioWithoutImage.hero_image;
+
+    const { data } = supabase.storage
+      .from("images")
+      .getPublicUrl(`${hero_image_filepath}`);
+    hero_image = data;
+  }
+  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image };
 
   const { data: projects, projectsError } = await supabase
     .from("projects")
@@ -35,6 +46,7 @@ export async function getDataByDomain(domain) {
 
   return {
     portfolio,
+    hero_image,
     projects,
     experiences,
     activities,

@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
+import { v4 as uuidv4 } from "uuid";
 
 export async function getCreateHeroData() {
   const supabase = createClient();
@@ -6,17 +7,27 @@ export async function getCreateHeroData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: portfolio, error } = await supabase
+  const { data: portfolioWithoutImage, error } = await supabase
     .from("portfolios")
     .select()
     .eq("user_id", user.id)
     .single();
 
-  return { portfolio, error };
+  let hero_image = null;
+  if (portfolioWithoutImage.hero_image) {
+    const hero_image_filepath = portfolioWithoutImage.hero_image;
+    const { data } = supabase.storage
+      .from("images")
+      .getPublicUrl(`${hero_image_filepath}`);
+    hero_image = data;
+  }
+  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image };
+  return { portfolio, hero_image, error };
 }
 
 export async function upsertCreateHeroData(
   id,
+  hero_image,
   hero_image_rounded,
   hero_image_border,
   hero_border_style,
@@ -42,7 +53,30 @@ export async function upsertCreateHeroData(
     data: { user },
   } = await supabase.auth.getUser();
 
+  let filepath;
+  if (hero_image && (hero_image.name || hero_image.public_url)) {
+    let filename;
+    if (hero_image.name) {
+      filename = `${uuidv4()}-supabaseName-${hero_image.name}`;
+    } else if (hero_image.public_url) {
+      filename = `${uuidv4()}-supabaseName-${hero_image.public_url}`;
+    }
+
+    const { data, error: imageError } = await supabase.storage
+      .from("images")
+      .upload(filename, hero_image, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (imageError) {
+      console.log(imageError);
+    }
+
+    filepath = data.path;
+  }
   const upsertData = {
+    hero_image: hero_image ? filepath : null,
     hero_image_rounded: hero_image_rounded,
     hero_image_border: hero_image_border,
     hero_border_style: hero_border_style,

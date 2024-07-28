@@ -9,6 +9,12 @@ const nextConfig = {
         port: "",
         pathname: "/api/icons/**",
       },
+      {
+        protocol: "https",
+        hostname: "xaocjvppqlrveojwlgsu.supabase.co",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

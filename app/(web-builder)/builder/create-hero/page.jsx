@@ -61,14 +61,15 @@ const CreateHero = () => {
   };
 
   const getPortfolio = useCallback(async () => {
-    const { portfolio, error } = await getCreateHeroData();
-
+    const { portfolio, hero_image, error } = await getCreateHeroData();
+    console.log(hero_image);
     if (error) {
       console.log(error);
     } else {
       setPortfolioStackContextData({
         ...portfolioStackContextData,
         id: portfolio.id,
+        hero_image: hero_image,
         hero_image_rounded: portfolio.hero_image_rounded,
         hero_image_border: portfolio.hero_image_border,
         hero_border_style: portfolio.hero_border_style,
@@ -120,6 +121,7 @@ const CreateHero = () => {
         });
         setFirstLoad(true);
       } else {
+        // ovo nisam sigurna jel se ikad pozove opce i jel taj load sluzi icemu
         setPortfolioStackContextData({
           ...portfolioStackContextData,
           hero_image: file,
@@ -131,6 +133,7 @@ const CreateHero = () => {
   const saveData = async () => {
     const response = await upsertCreateHeroData(
       portfolioStackContextData.id,
+      portfolioStackContextData.hero_image,
       portfolioStackContextData.hero_image_rounded,
       portfolioStackContextData.hero_image_border,
       portfolioStackContextData.hero_border_style,
@@ -168,43 +171,44 @@ const CreateHero = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">1.1. Add your photo</h3>
         <div className="flex gap-4">
-          <div>
-            <FileInput
-              setFile={setFile}
-              file={file}
-              fileInputRef={fileInputRef}
-            />
-            {file && (
-              <>
-                <Toggle
-                  text={"Rounded image"}
-                  onChange={(e) => {
-                    console.log(portfolioStackContextData.hero_image);
-                    handleUpdate("hero_image_rounded", e.target.checked);
-                  }}
-                  checked={portfolioStackContextData.hero_image_rounded}
-                />
-                <Toggle
-                  checked={portfolioStackContextData.hero_image_border}
-                  text={"Border around image"}
-                  onChange={(e) => {
-                    handleUpdate("hero_image_border", e.target.checked);
-                  }}
-                />
-                {portfolioStackContextData.hero_image_border && (
-                  <Join
-                    value={portfolioStackContextData.hero_border_style}
-                    items={borderStyleItemsData}
+          {!portfolioStackContextData.hero_image ? (
+            <div>
+              <FileInput
+                setFile={setFile}
+                file={file}
+                fileInputRef={fileInputRef}
+              />
+              {file && (
+                <>
+                  <Toggle
+                    text={"Rounded image"}
                     onChange={(e) => {
-                      handleUpdate("hero_border_style", e.target.value);
+                      console.log(portfolioStackContextData.hero_image);
+                      handleUpdate("hero_image_rounded", e.target.checked);
                     }}
-                    name={"hero_border_style"}
+                    checked={portfolioStackContextData.hero_image_rounded}
                   />
-                )}
-              </>
-            )}
-          </div>
-          {file && (
+                  <Toggle
+                    checked={portfolioStackContextData.hero_image_border}
+                    text={"Border around image"}
+                    onChange={(e) => {
+                      handleUpdate("hero_image_border", e.target.checked);
+                    }}
+                  />
+                  {portfolioStackContextData.hero_image_border && (
+                    <Join
+                      value={portfolioStackContextData.hero_border_style}
+                      items={borderStyleItemsData}
+                      onChange={(e) => {
+                        handleUpdate("hero_border_style", e.target.value);
+                      }}
+                      name={"hero_border_style"}
+                    />
+                  )}
+                </>
+              )}
+            </div>
+          ) : (
             <div className="flex flex-col gap-2">
               <button
                 className="btn btn-outline w-fit btn-error btn-ghost"
