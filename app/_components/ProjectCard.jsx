@@ -11,12 +11,14 @@ import {
   getIconBgColor,
 } from "../_libs/utils";
 import { PortfolioContext } from "./PortfolioProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
-const ProjectCard = ({ project }) => {
-  const { portfolioStackContextData } = useContext(PortfolioContext);
+const ProjectCard = ({ project, projectIndex }) => {
+  const { portfolioStackContextData, portfolioStackProjectsContextData } =
+    useContext(PortfolioContext);
   const palette = portfolioStackContextData.hero_palette;
+  const [imageUrl, setImageUrl] = useState("");
 
   const selectedIcon1 = projectLinkIcons.find(
     (el) => el.value === project.project_link_1_icon
@@ -27,6 +29,40 @@ const ProjectCard = ({ project }) => {
 
   const iconBg = getIconBgColor(palette);
 
+  useEffect(() => {
+    let url;
+    try {
+      // TODO provjeri kak ovo dela kad se izbrise neki item
+      console.log(portfolioStackProjectsContextData[projectIndex].project_img);
+      if (
+        portfolioStackProjectsContextData[projectIndex].project_img instanceof
+        File
+      ) {
+        url = URL.createObjectURL(
+          portfolioStackProjectsContextData[projectIndex].project_img
+        );
+        console.log("1");
+        console.log(url);
+      } else {
+        console.log("2");
+        console.log(portfolioStackProjectsContextData[projectIndex]);
+        console.log(
+          portfolioStackProjectsContextData[projectIndex].project_img // OVO MORA BIT OBJEKT
+        );
+        url =
+          portfolioStackProjectsContextData[projectIndex].project_img.publicUrl;
+      }
+    } catch (error) {
+      console.log("3");
+      console.log(url);
+
+      console.log("No image found or null: ", error);
+      url = "";
+    }
+    console.log("postavljanje image urla " + url);
+    setImageUrl(url);
+  }, [portfolioStackProjectsContextData[projectIndex].project_img]);
+
   return (
     <div
       className={`${getSecondaryBgColors(palette)} ${getPrimaryTextColor(
@@ -34,15 +70,23 @@ const ProjectCard = ({ project }) => {
       )} rounded-3xl shadow-custom-lg m-2 p-1 flex flex-col md:flex-row`}
     >
       <div className="m-5 w-full md:w-[591px] h-96 overflow-hidden">
+        {/* {project && project?.project_img && project.project_img.toString()} */}
+        {/* --- */}
+        {/* {JSON.stringify(imageUrl)} */}
         {project.project_img && (
-          <img
-            src={URL.createObjectURL(project.project_img)}
+          <Image
+            width={400}
+            height={400} // TODO napravi da se pomice
+            src={imageUrl}
             alt={project.project_title}
             className="rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom"
           />
         )}
       </div>
       <div className="flex flex-col justify-center items-center gap-4 p-4 md:flex-1">
+        {" "}
+        {/* {imageUrl && imageUrl.toString()} */}
+        {/* {JSON.stringify(imageUrl)} */}
         <h2 className=" text-2xl font-semibold">{project.project_title}</h2>
         <p className=" text-lg text-center leading-6">
           {project.project_description}

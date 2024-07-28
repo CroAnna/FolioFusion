@@ -31,7 +31,7 @@ const PortfolioProjects = () => {
           {portfolioStackContextData.project_group_description}
         </p>
         {portfolioStackProjectsContextData.map((el, index) => (
-          <ProjectCard project={el} key={index} />
+          <ProjectCard project={el} key={index} projectIndex={index} />
         ))}
       </div>
     </div>

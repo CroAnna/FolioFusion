@@ -38,10 +38,10 @@ const RenderedPortfolio = ({ domain = null }) => {
   return (
     <div className="overflow-y-scroll h-screen">
       <p className="max-w-6xl break-words">
-        {JSON.stringify(portfolioStackContextData)}
-        {JSON.stringify(portfolioStackProjectsContextData)}
-        {JSON.stringify(portfolioStackExperienceContextData)}
-        {JSON.stringify(portfolioStackActivityContextData)}
+        {/* {JSON.stringify(portfolioStackContextData)} */}
+        {/* {JSON.stringify(portfolioStackProjectsContextData)} */}
+        {/* {JSON.stringify(portfolioStackExperienceContextData)} */}
+        {/* {JSON.stringify(portfolioStackActivityContextData)} */}
       </p>
       {portfolioStackContextData && <PortfolioHero />}
       {portfolioStackProjectsContextData && <PortfolioProjects />}

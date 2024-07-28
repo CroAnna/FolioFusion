@@ -178,7 +178,7 @@ const CreateHero = () => {
                 file={file}
                 fileInputRef={fileInputRef}
               />
-              {file && (
+              {portfolioStackContextData.hero_image && (
                 <>
                   <Toggle
                     text={"Rounded image"}

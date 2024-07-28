@@ -43,8 +43,6 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
   useEffect(() => {
     console.log(portfolioStackProjectsContextData[index].project_img);
     if (portfolioStackProjectsContextData[index].project_img) {
-      console.log(portfolioStackProjectsContextData[index].project_img);
-      console.log(portfolioStackProjectsContextData[index].project_img);
       setFile(portfolioStackProjectsContextData[index].project_img);
     }
   }, []);
@@ -114,6 +112,7 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
       <>
         <div className="border-emerald-500 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
           <div className="flex gap-4">
+            {/* {JSON.stringify(portfolioStackProjectsContextData[index])} */}
             <Input
               label={"Title:"}
               name={`project_title`}
@@ -140,21 +139,29 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
             placeholder={"Describe your project in a few sentences."}
           />
           <div className="flex items-end w-full gap-3">
-            <FileInput
-              file={file}
-              fileInputRef={fileInputRef}
-              label={"Image:"}
-              setFile={setFile}
-              name={"project_img"}
-              placeholder={"Paste image URL"}
-            />
-            {file && (
-              <button
-                className="btn btn-outline w-fit btn-error btn-ghost"
-                onClick={removeSelectedImage}
-              >
-                Remove image
-              </button>
+            {!portfolioStackProjectsContextData[index].project_img ? (
+              <FileInput
+                file={file}
+                fileInputRef={fileInputRef}
+                label={"Image:"}
+                setFile={setFile}
+                name={"project_img"}
+                placeholder={"Paste image URL"}
+              />
+            ) : (
+              file && (
+                <div className="flex flex-col">
+                  <div className="label pb-0 pt-0">
+                    <span className="label-text text-base w-full">Image:</span>
+                  </div>
+                  <button
+                    className="btn btn-outline w-fit btn-error btn-ghost"
+                    onClick={removeSelectedImage}
+                  >
+                    Remove image
+                  </button>
+                </div>
+              )
             )}
           </div>
           <div className="flex gap-3 w-full">

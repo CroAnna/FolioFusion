@@ -43,7 +43,7 @@ const AddWork = () => {
       },
     ]);
   };
-
+  // TODO iz nekog razloga se dvaput dodal projekt na kraju
   const saveData = async () => {
     const response = await upsertAddProjectsData(
       portfolioStackContextData.id,
@@ -51,8 +51,7 @@ const AddWork = () => {
       portfolioStackContextData.project_group_title,
       portfolioStackProjectsContextData
     );
-    console.log(response);
-    setPortfolioStackProjectsContextData(response.projects); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    setPortfolioStackProjectsContextData(response.projectsWithImages); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
   const getPortfolio = useCallback(async () => {
@@ -71,7 +70,6 @@ const AddWork = () => {
 
   const getProjects = useCallback(async () => {
     const { projects, error } = await getAddProjectsData();
-
     if (error) {
       console.log(error);
     } else if (projects.length > 0) {

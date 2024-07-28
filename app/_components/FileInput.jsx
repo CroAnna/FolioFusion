@@ -8,8 +8,12 @@ const FileInput = ({ setFile, fileInputRef, label, file }) => {
   useEffect(() => {
     if (fileInputRef.current && file) {
       const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      fileInputRef.current.files = dataTransfer.files;
+      if (file instanceof File) {
+        dataTransfer.items.add(file);
+        fileInputRef.current.files = dataTransfer.files;
+      } else {
+        console.error("Provided file is not an instance of File.");
+      }
     }
   }, [file, fileInputRef]);
 

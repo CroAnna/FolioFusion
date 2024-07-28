@@ -57,9 +57,9 @@ export async function upsertCreateHeroData(
   if (hero_image && (hero_image.name || hero_image.public_url)) {
     let filename;
     if (hero_image.name) {
-      filename = `${uuidv4()}-supabaseName-${hero_image.name}`;
+      filename = `${uuidv4()}-${hero_image.name}`;
     } else if (hero_image.public_url) {
-      filename = `${uuidv4()}-supabaseName-${hero_image.public_url}`;
+      filename = `${uuidv4()}-${hero_image.public_url}`;
     }
 
     const { data, error: imageError } = await supabase.storage
