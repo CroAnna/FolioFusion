@@ -178,6 +178,9 @@ const CreateHero = () => {
                 file={file}
                 fileInputRef={fileInputRef}
               />
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
               {portfolioStackContextData.hero_image && (
                 <>
                   <Toggle
@@ -207,9 +210,6 @@ const CreateHero = () => {
                   )}
                 </>
               )}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2">
               <button
                 className="btn btn-outline w-fit btn-error btn-ghost"
                 onClick={removeSelectedImage}
