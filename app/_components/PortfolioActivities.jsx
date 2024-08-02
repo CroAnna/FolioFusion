@@ -21,7 +21,12 @@ const PortfolioActivities = () => {
       />
       <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 grid grid-cols-3 py-16">
         {portfolioStackActivityContextData.map((el, index) => (
-          <ActivityCard palette={palette} key={index} data={el} />
+          <ActivityCard
+            palette={palette}
+            key={index}
+            data={el}
+            activityIndex={index}
+          />
         ))}
       </div>
     </div>

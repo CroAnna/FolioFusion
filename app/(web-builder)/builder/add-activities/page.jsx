@@ -48,8 +48,8 @@ const AddActivities = () => {
       portfolioStackContextData.activity_bg_shape,
       portfolioStackActivityContextData
     );
-    console.log(response);
-    setPortfolioStackActivityContextData(response.activities); // sluzi da se ne dogodi da ako se doda activity i samo spremi page (bez prebacivanja dalje) i doda jos jedan activity, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    console.log(response.activitiesWithImages);
+    setPortfolioStackActivityContextData(response.activitiesWithImages); // sluzi da se ne dogodi da ako se doda activity i samo spremi page (bez prebacivanja dalje) i doda jos jedan activity, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
   const getPortfolio = useCallback(async () => {

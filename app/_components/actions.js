@@ -53,11 +53,26 @@ export async function getDataByDomain(domain) {
     .order("experience_order", { ascending: true })
     .eq("user_id", owner.id);
 
-  const { data: activities, activitiesError } = await supabase
+  const { data: activitiesWithoutImages, activitiesError } = await supabase
     .from("activities")
     .select()
     .order("activity_order", { ascending: true })
     .eq("user_id", owner.id);
+  console.log(activitiesWithoutImages);
+
+  let activities = [];
+  activitiesWithoutImages.map((el) => {
+    let activity_image = null;
+    if (el.activity_img) {
+      const activity_img_filepath = el.activity_img;
+      const { data } = supabase.storage
+        .from("images")
+        .getPublicUrl(`${activity_img_filepath}`);
+      activity_image = data;
+    }
+    const activityWithImage = { ...el, activity_img: activity_image };
+    activities = [...activities, activityWithImage];
+  });
 
   return {
     portfolio,

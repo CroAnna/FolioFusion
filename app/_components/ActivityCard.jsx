@@ -1,19 +1,56 @@
-import { Medal } from "@phosphor-icons/react/dist/ssr";
+import { useContext, useEffect, useState } from "react";
 import {
   activityIcons,
-  getHexSecondaryBgColor,
   getPrimaryBgColors,
   getPrimaryBorderColors,
-  getSecondaryBgColors,
   getSecondaryTextColor,
 } from "../_libs/utils";
+import { PortfolioContext } from "./PortfolioProvider";
+import Image from "next/image";
 
-const ActivityCard = ({ palette, data }) => {
+const ActivityCard = ({ palette, data, activityIndex }) => {
+  const { portfolioStackActivityContextData } = useContext(PortfolioContext);
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    let url;
+    try {
+      // TODO provjeri kak ovo dela kad se izbrise neki item
+      console.log(
+        portfolioStackActivityContextData[activityIndex].activity_img
+      );
+      if (
+        portfolioStackActivityContextData[activityIndex].activity_img instanceof
+        File
+      ) {
+        url = URL.createObjectURL(
+          portfolioStackActivityContextData[activityIndex].activity_img
+        );
+        console.log(url);
+      } else {
+        console.log(portfolioStackActivityContextData[activityIndex]);
+        console.log(
+          portfolioStackActivityContextData[activityIndex].activity_img // OVO MORA BIT OBJEKT
+        );
+        url =
+          portfolioStackActivityContextData[activityIndex].activity_img
+            .publicUrl;
+      }
+    } catch (error) {
+      console.log(url);
+
+      console.log("No image found or null: ", error);
+      url = "";
+    }
+    console.log("postavljanje image urla " + url);
+    setImageUrl(url);
+  }, [portfolioStackActivityContextData[activityIndex].activity_img]);
+
   return (
     <div className="card card-compact glass w-72 relative">
       {data.activity_img && (
         <figure className="h-48">
-          <img src={URL.createObjectURL(data.activity_img)} alt="activity" />
+          <Image width={400} height={48} src={imageUrl} alt="activity" />
         </figure>
       )}
       {data.activity_type ? (

@@ -140,20 +140,28 @@ const ActivityInputCard = ({ index, activityKey, activityId }) => {
           placeholder={"Describe your activity"}
         />
         <div className="flex items-end w-full gap-3">
-          <FileInput
-            file={file}
-            fileInputRef={activityInputRef}
-            label={"Image:"}
-            setFile={setFile}
-            name={"activity_img"}
-          />
-          {file && (
-            <button
-              className="btn btn-outline w-fit btn-error btn-ghost"
-              onClick={removeSelectedImage}
-            >
-              Remove image
-            </button>
+          {!portfolioStackActivityContextData[index].activity_img ? (
+            <FileInput
+              file={file}
+              fileInputRef={activityInputRef}
+              label={"Image:"}
+              setFile={setFile}
+              name={"activity_img"}
+            />
+          ) : (
+            file && (
+              <div className="flex flex-col">
+                <div className="label pb-0 pt-0">
+                  <span className="label-text text-base w-full">Image:</span>
+                </div>
+                <button
+                  className="btn btn-outline w-fit btn-error btn-ghost"
+                  onClick={removeSelectedImage}
+                >
+                  Remove image
+                </button>
+              </div>
+            )
           )}
         </div>
         <Select
