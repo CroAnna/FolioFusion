@@ -6,6 +6,8 @@ import PortfolioProjects from "./PortfolioProjects";
 import PortfolioEducation from "./PortfolioEducation";
 import PortfolioActivities from "./PortfolioActivities";
 import { getDataByDomain } from "./actions";
+import ScrollToTop from "@/app/_components/ScrollToTop";
+import { useRouter } from "next/router";
 
 const RenderedPortfolio = ({ domain = null }) => {
   const {
@@ -20,8 +22,10 @@ const RenderedPortfolio = ({ domain = null }) => {
   } = useContext(PortfolioContext);
 
   useEffect(() => {
+    console.log(domain);
+
     if (domain) {
-      // it's deployed portfolio
+      // it's deployed portfolio, otherwise it's builder
       fetchData();
     }
   }, []);
@@ -36,7 +40,10 @@ const RenderedPortfolio = ({ domain = null }) => {
   };
 
   return (
-    <div className="overflow-y-scroll h-screen">
+    <div className={`${!domain && "overflow-y-scroll"} h-screen flex flex-col`}>
+      {portfolioStackContextData.hero_scroll_to_top && domain && (
+        <ScrollToTop />
+      )}
       <p className="max-w-6xl break-words">
         {/* {JSON.stringify(portfolioStackContextData)} */}
         {/* {JSON.stringify(portfolioStackProjectsContextData)} */}

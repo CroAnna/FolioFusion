@@ -74,6 +74,7 @@ const CreateHero = () => {
         hero_image_border: portfolio.hero_image_border,
         hero_border_style: portfolio.hero_border_style,
         hero_extra: portfolio.hero_extra,
+        hero_scroll_to_top: portfolio.hero_scroll_to_top,
         hero_palette: portfolio.hero_palette,
         hero_extra_style_elements: portfolio.hero_extra_style_elements,
         hero_welcome: portfolio.hero_welcome,
@@ -138,6 +139,7 @@ const CreateHero = () => {
       portfolioStackContextData.hero_image_border,
       portfolioStackContextData.hero_border_style,
       portfolioStackContextData.hero_extra,
+      portfolioStackContextData.hero_scroll_to_top,
       portfolioStackContextData.hero_palette,
       portfolioStackContextData.hero_extra_style_elements,
       portfolioStackContextData.hero_welcome,
@@ -273,7 +275,7 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold">
-          1.6. Select hero background color
+          1.6. Select portfolio color palette
         </h3>
         <Join
           value={portfolioStackContextData.hero_palette}
@@ -393,6 +395,22 @@ const CreateHero = () => {
           placeholder={"Paste other URL"}
         />
       </div>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-2xl font-bold">
+          1.9. Do you want to have scroll to top button ?
+        </h3>
+        <Toggle
+          yesNo
+          checked={portfolioStackContextData.hero_scroll_to_top}
+          text={
+            "Scroll to top (visible on deployed portfolio with custom domain)"
+          }
+          onChange={(e) => {
+            handleUpdate("hero_scroll_to_top", e.target.checked);
+          }}
+        />
+      </div>
+
       <NextPreviousNavigation
         handleNextClick={saveData}
         nextUrl={"/builder/add-projects"}
