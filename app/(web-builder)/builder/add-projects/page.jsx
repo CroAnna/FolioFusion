@@ -89,8 +89,10 @@ const AddWork = () => {
 
   return (
     <div className="p-6 flex flex-col gap-8">
-      <div className="flex justify-between">
-        <h2 className="text-4xl font-bold">2. Add your projects</h2>
+      <div className="flex justify-between gap-2">
+        <h2 className="text-2xl items-center flex md:text-4xl font-bold">
+          2. Add your projects
+        </h2>
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
@@ -99,7 +101,9 @@ const AddWork = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">2.1. Add section title</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          2.1. Add section title
+        </h3>
         <Input
           name={"project_group_title"}
           value={portfolioStackContextData.project_group_title}
@@ -110,7 +114,9 @@ const AddWork = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">2.2. Add section description</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          2.2. Add section description
+        </h3>
         <Input
           name={"project_group_description"}
           value={portfolioStackContextData.project_group_description}
@@ -121,7 +127,9 @@ const AddWork = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">2.3. Add your projects</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          2.3. Add your projects
+        </h3>
         {portfolioStackProjectsContextData &&
           portfolioStackProjectsContextData.length > 0 &&
           portfolioStackProjectsContextData.map(

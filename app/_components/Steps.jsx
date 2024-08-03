@@ -18,13 +18,15 @@ const Steps = ({ currentStep, stepsData }) => {
   };
 
   return (
-    <ul className="steps">
+    <ul className="steps w-full">
       {stepsData.map((el, index) => (
         <li
           key={index}
           className={`step ${currentStep >= index + 1 && "step-primary"}`}
         >
-          <Link href={`${getPageUrl(index)}`}>{el.text}</Link>
+          <Link href={`${getPageUrl(index)}`} className="hidden md:flex">
+            {el.text}
+          </Link>
         </li>
       ))}
     </ul>

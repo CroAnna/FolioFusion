@@ -238,11 +238,11 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
           </div>
           <div>
             <div className="label pb-0 pt-0">
-              <span className="label-text  text-base">
+              <span className="label-text text-base">
                 Select up to 5 technologies:
               </span>
             </div>
-            <div className="flex justify-between items-end gap-3">
+            <div className="flex justify-between items-end gap-3 flex-col md:flex-row">
               <Select
                 placeholder="-"
                 options={icons}

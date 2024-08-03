@@ -19,7 +19,7 @@ const PortfolioActivities = () => {
         fill
         className="w-full h-auto object-cover top-0 left-0 right-0 bottom-0"
       />
-      <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 grid grid-cols-3 py-16">
+      <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 flex flex-col md:grid md:grid-cols-3 py-16">
         {portfolioStackActivityContextData.map((el, index) => (
           <ActivityCard
             palette={palette}

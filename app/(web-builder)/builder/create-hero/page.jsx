@@ -161,8 +161,10 @@ const CreateHero = () => {
 
   return (
     <div className="p-6 flex flex-col gap-8">
-      <div className="flex justify-between">
-        <h2 className="text-4xl font-bold">1. Create hero</h2>
+      <div className="flex justify-between gap-2">
+        <h2 className="text-2xl items-center flex md:text-4xl font-bold">
+          1. Create hero
+        </h2>
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
@@ -171,7 +173,7 @@ const CreateHero = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">1.1. Add your photo</h3>
+        <h3 className="text-xl md:text-2xl font-bold">1.1. Add your photo</h3>
         <div className="flex gap-4">
           {!portfolioStackContextData.hero_image ? (
             <div>
@@ -224,7 +226,9 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">1.2. Add welcome text</h3>
+          <h3 className="text-xl md:text-2xl font-bold">
+            1.2. Add welcome text
+          </h3>
         </div>
         <Input
           name={"hero_welcome"}
@@ -236,7 +240,7 @@ const CreateHero = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">1.3. Add your name</h3>
+        <h3 className="text-xl md:text-2xl font-bold">1.3. Add your name</h3>
         <Input
           name={"hero_name"}
           value={portfolioStackContextData.hero_name}
@@ -248,7 +252,9 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">1.4. Short text about you</h3>
+          <h3 className="text-xl md:text-2xl font-bold">
+            1.4. Short text about you
+          </h3>
         </div>
         <Input
           name={"hero_short"}
@@ -261,7 +267,9 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">1.5. Describe yourself</h3>
+          <h3 className="text-xl md:text-2xl font-bold">
+            1.5. Describe yourself
+          </h3>
           <p>(Or add a funny punchline)</p>
         </div>
         <Input
@@ -274,7 +282,7 @@ const CreateHero = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">
+        <h3 className="text-xl md:text-2xl font-bold">
           1.6. Select portfolio color palette
         </h3>
         <Join
@@ -287,7 +295,9 @@ const CreateHero = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">1.7. Select UI of your hero</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          1.7. Select UI of your hero
+        </h3>
         <Toggle
           checked={portfolioStackContextData.hero_extra}
           text={"Border around image"}
@@ -308,7 +318,7 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">
+          <h3 className="text-xl md:text-2xl font-bold">
             1.8. Add links to social medias
           </h3>
           <p>(Or leave blank)</p>
@@ -396,7 +406,7 @@ const CreateHero = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">
+        <h3 className="text-xl md:text-2xl font-bold">
           1.9. Do you want to have scroll to top button ?
         </h3>
         <Toggle

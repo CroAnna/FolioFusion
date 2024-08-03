@@ -47,10 +47,15 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
   }, [portfolioStackActivityContextData[activityIndex].activity_img]);
 
   return (
-    <div className="card card-compact glass w-72 relative">
+    <div className="card card-compact glass w-72 relative mx-auto">
       {data.activity_img && (
-        <figure className="h-48">
-          <Image width={400} height={48} src={imageUrl} alt="activity" />
+        <figure className="h-48 relative w-full ">
+          <Image
+            layout="fill"
+            objectFit="cover"
+            src={imageUrl}
+            alt="activity"
+          />
         </figure>
       )}
       {data.activity_type ? (

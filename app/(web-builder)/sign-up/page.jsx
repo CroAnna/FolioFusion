@@ -1,13 +1,16 @@
 import Link from "next/link";
-import { login, signup } from "./actions";
+import { signup } from "./actions";
 
 const SignUpPage = async () => {
   return (
-    <div className="flex flex-col gap-8 w-full items-center mt-10">
+    <div
+      className="flex-col gap-8 items-center mx-4 flex justify-center"
+      style={{ height: "calc(100vh - 64px)" }}
+    >
       <h2 className="font-bold text-3xl flex items-center">
         Sign up for&nbsp; <span className="text-emerald-400 ">free</span>.
       </h2>
-      <form className="flex flex-col gap-8 w-96 bg-neutral-900 p-8 rounded-xl">
+      <form className="flex flex-col gap-8 mx-4 md:mx-0 p-8 w-full bg-neutral-900 rounded-xl mb-10 max-w-96">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="email">Email:</label>
@@ -43,9 +46,9 @@ const SignUpPage = async () => {
                 href="/login"
                 className="text-emerald-400 underline text-lg"
               >
-                Login
+                Log in
               </Link>
-              <p>and start building your portfolio now</p>
+              <p>and start building your portfolio</p>
             </div>
           </div>
         </div>

@@ -91,8 +91,10 @@ const AddEducation = () => {
 
   return (
     <div className="p-6 flex flex-col gap-4">
-      <div className="flex justify-between">
-        <h2 className="text-4xl font-bold">3. Add your experience</h2>
+      <div className="flex justify-between gap-2">
+        <h2 className="text-2xl items-center flex md:text-4xl font-bold">
+          3. Add your experience
+        </h2>
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
@@ -101,7 +103,9 @@ const AddEducation = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">3.1. Add section title</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          3.1. Add section title
+        </h3>
         <Input
           name={"experience_group_title"}
           value={portfolioStackContextData.experience_group_title}
@@ -112,7 +116,9 @@ const AddEducation = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">3.2. Add section description</h3>
+        <h3 className="text-xl md:text-2xl font-bold">
+          3.2. Add section description
+        </h3>
         <Input
           name={"experience_group_description"}
           value={portfolioStackContextData.experience_group_description}
@@ -124,7 +130,7 @@ const AddEducation = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">
+          <h3 className="text-xl md:text-2xl font-bold">
             3.3. Add your work experience and education
           </h3>
           <p>(from newest to oldest)</p>

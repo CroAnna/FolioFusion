@@ -86,8 +86,8 @@ const AddActivities = () => {
 
   return (
     <div className="p-6 flex flex-col gap-4">
-      <div className="flex justify-between">
-        <h2 className="text-4xl font-bold">
+      <div className="flex justify-between gap-2">
+        <h2 className="text-2xl items-center flex md:text-4xl font-bold">
           4. Add achievements and activities
         </h2>
         <button
@@ -98,7 +98,7 @@ const AddActivities = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-2xl font-bold">
+        <h3 className="text-xl md:text-2xl font-bold">
           4.1. Select activity background color
         </h3>
         <Join
@@ -112,7 +112,7 @@ const AddActivities = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <h3 className="text-2xl font-bold">
+          <h3 className="text-xl md:text-2xl font-bold">
             4.2. Add your achievements and activities
           </h3>
         </div>

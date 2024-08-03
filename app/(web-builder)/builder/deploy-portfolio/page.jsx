@@ -43,9 +43,13 @@ const DeployPortfolio = () => {
   return (
     user && (
       <div className="p-6 flex flex-col gap-8">
-        <h2 className="text-4xl font-bold">5. Make portfolio live</h2>
+        <h2 className="text-2xl items-center flex md:text-4xl font-bold">
+          5. Make portfolio live
+        </h2>
         <div className="flex flex-col gap-4">
-          <h3 className="text-2xl font-bold">5.1. Check for access</h3>
+          <h3 className="text-xl md:text-2xl font-bold">
+            5.1. Check for access
+          </h3>
           <div>
             <p>
               ❔ To deploy your portfolio you need to have{" "}
@@ -88,7 +92,9 @@ const DeployPortfolio = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <h3 className="text-2xl font-bold">5.2. Choose your unique domain</h3>
+          <h3 className="text-xl md:text-2xl font-bold">
+            5.2. Choose your unique domain
+          </h3>
           <div className="flex flex-row items-center">
             <p>www.portfolio.com/&nbsp;</p>
             <Input
@@ -107,7 +113,7 @@ const DeployPortfolio = () => {
           )}
         </div>
         <div className="flex flex-col gap-4">
-          <h3 className="text-2xl font-bold">5.3. Deploy it</h3>
+          <h3 className="text-xl md:text-2xl font-bold">5.3. Deploy it</h3>
           <button
             disabled={!user.access_granted || !domainAvailable}
             className={`btn btn-block btn-secondary h-24 text-lg font-bold ${

@@ -11,20 +11,22 @@ const Hero = () => {
         alt="hero-bg"
         src={"/hero-page-bg.svg"}
       />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-screen-xl">
-        <div className="flex gap-16 items-center">
-          <Image
-            width={400}
-            height={400}
-            alt="hero-illustration"
-            src={"/hero-illustration.svg"}
-          />
-          <div className="flex flex-col gap-8">
-            <h1 className="text-[96px] font-bold leading-none text-stone-100">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-screen-xl pb-16 md:pb-0">
+        <div className="flex gap-16 items-center flex-col-reverse md:flex-row">
+          <div className="hidden md:flex relative md:w-[640px] md:h-[400px]">
+            <Image
+              layout="fill"
+              objectFit="cover"
+              alt="hero-illustration"
+              src={"/hero-illustration.svg"}
+            />
+          </div>
+          <div className="flex flex-col gap-8 px-8 md:px-0">
+            <h1 className="text-7xl md:text-8xl font-bold leading-none text-stone-100">
               Create your portfolio{" "}
               <span className="text-secondary">fast.</span>
             </h1>
-            <h2 className="text-[32px] font-bold text-stone-400">
+            <h2 className="text-xl md:text-3xl font-bold text-stone-400">
               Endless customization.
             </h2>
           </div>

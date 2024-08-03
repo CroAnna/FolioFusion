@@ -67,28 +67,24 @@ const ProjectCard = ({ project, projectIndex }) => {
     <div
       className={`${getSecondaryBgColors(palette)} ${getPrimaryTextColor(
         palette
-      )} rounded-3xl shadow-custom-lg m-2 p-1 flex flex-col md:flex-row`}
+      )} rounded-3xl shadow-custom-lg p-3 flex flex-col md:flex-row md:p-1`}
     >
-      <div className="m-5 w-full md:w-[591px] h-96 overflow-hidden">
-        {/* {project && project?.project_img && project.project_img.toString()} */}
-        {/* --- */}
-        {/* {JSON.stringify(imageUrl)} */}
+      <div className="w-full overflow-hidden relative h-[400px] md:m-5 md:w-[591px] ">
         {project.project_img && (
           <Image
-            width={400}
-            height={400} // TODO napravi da se pomice
+            layout="fill"
+            objectFit="cover"
             src={imageUrl}
             alt={project.project_title}
             className="rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom"
           />
         )}
       </div>
-      <div className="flex flex-col justify-center items-center gap-4 p-4 md:flex-1">
-        {" "}
-        {/* {imageUrl && imageUrl.toString()} */}
-        {/* {JSON.stringify(imageUrl)} */}
-        <h2 className=" text-2xl font-semibold">{project.project_title}</h2>
-        <p className=" text-lg text-center leading-6">
+      <div className="flex flex-col justify-center items-center gap-4 p-2 py-4 md:p-4 md:flex-1">
+        <h2 className="text-xl md:text-2xl font-semibold">
+          {project.project_title}
+        </h2>
+        <p className=" md:text-lg text-center leading-6">
           {project.project_description}
         </p>
         <div className="flex gap-6 p-2">
@@ -153,7 +149,7 @@ const ProjectCard = ({ project, projectIndex }) => {
               <button
                 className={`py-2 flex w-full items-center justify-center gap-1 ${getBgColor(
                   palette
-                )} text-lg rounded-lg shadow-custom-sm font-medium `}
+                )} md:text-lg rounded-lg shadow-custom-sm font-medium `}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -174,7 +170,7 @@ const ProjectCard = ({ project, projectIndex }) => {
                   palette
                 )} ${getSecondaryTextColor(
                   palette
-                )} text-lg  rounded-lg font-medium`}
+                )} md:text-lg rounded-lg font-medium`}
                 target="_blank"
                 rel="noreferrer"
               >

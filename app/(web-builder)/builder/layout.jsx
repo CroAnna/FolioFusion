@@ -28,7 +28,7 @@ export default function BuilderLayout({ children }) {
   return (
     <>
       <div className="flex-1"></div>
-      <div className="flex w-full">
+      <div className="flex w-full flex-col md:flex-row">
         <div className="flex-2">
           <Steps currentStep={currentStep} stepsData={stepsData} />
           <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>

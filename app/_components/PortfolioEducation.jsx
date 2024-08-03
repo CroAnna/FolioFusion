@@ -17,11 +17,11 @@ const PortfolioEducation = () => {
 
   return (
     <div
-      className={`w-full 
+      className={`w-full pb-8
         ${getBgColor(palette)} ${getPrimaryTextColor(palette)}`}
     >
       <div
-        className={`max-w-screen-lg px-2 mx-auto pt-16 flex flex-col gap-6 `}
+        className={`max-w-screen-lg px-4 md:px-2 mx-auto pt-16 flex flex-col gap-6 `}
       >
         <h3
           className={`uppercase text-xl font-medium tracking-wider ${getPrimaryColors(

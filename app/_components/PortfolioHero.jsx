@@ -51,7 +51,7 @@ const PortfolioHero = () => {
         ${getPrimaryTextColor(palette)} ${getBgColor(palette)}`}
     >
       {portfolioStackContextData.hero_extra && (
-        <>
+        <div className="hidden md:block">
           <Image
             src={
               palette == "Palette 1"
@@ -116,12 +116,12 @@ const PortfolioHero = () => {
             height="320"
             className="absolute right-0 top-0"
           />
-        </>
+        </div>
       )}
-      <div className={`hero-content rounded-full`}>
+      <div className={`hero-content rounded-full flex flex-col md:flex-row`}>
         {portfolioStackContextData.hero_image && (
           <div
-            className={`max-w-xs inline-block 
+            className={`max-w-xs m-6 inline-block
             ${
               portfolioStackContextData.hero_image_rounded
                 ? "rounded-full"
@@ -154,24 +154,24 @@ const PortfolioHero = () => {
           </div>
         )}
         <div className="flex flex-col gap-4">
-          <p className="py-0 text-lg">
+          <p className="py-0 text-lg text-center md:text-left">
             {portfolioStackContextData.hero_welcome}
           </p>
           <div>
             <h1
-              className={`text-8xl font-bold break-words max-w-[680px]
+              className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] text-center mt-2 md:mt-0 md:text-left
                 ${getPrimaryColors(palette)}`}
             >
               {portfolioStackContextData.hero_name}
             </h1>
             <h2
-              className={`text-5xl font-bold 
+              className={`text-4xl md:text-5xl font-bold text-center md:text-left
               ${getSecondaryColors(palette)}`}
             >
               {portfolioStackContextData.hero_short}
             </h2>
           </div>
-          <p className="py-4 text-lg max-w-xl">
+          <p className=" md:text-lg max-w-xl text-center md:text-left md:py-4">
             {portfolioStackContextData.hero_description}
           </p>
         </div>

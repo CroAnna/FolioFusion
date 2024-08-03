@@ -7,7 +7,7 @@ const LogoutButton = () => {
 
   return (
     <button
-      className="btn btn-primary btn-outline"
+      className="btn w-full md:w-fit btn-primary btn-outline"
       type="submit"
       onClick={resetContextValues}
     >
