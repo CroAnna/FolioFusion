@@ -801,7 +801,7 @@ export const icons = [
   { icon: "taro" },
   { icon: "tata" },
   { icon: "tauri" },
-  { icon: "tawilwindcss" },
+  { icon: "tailwindcss" },
   { icon: "teamviewer" },
   { icon: "terraform" },
   { icon: "testcafe" },

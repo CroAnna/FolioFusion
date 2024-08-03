@@ -149,19 +149,17 @@ const ActivityInputCard = ({ index, activityKey, activityId }) => {
               name={"activity_img"}
             />
           ) : (
-            file && (
-              <div className="flex flex-col">
-                <div className="label pb-0 pt-0">
-                  <span className="label-text text-base w-full">Image:</span>
-                </div>
-                <button
-                  className="btn btn-outline w-fit btn-error btn-ghost"
-                  onClick={removeSelectedImage}
-                >
-                  Remove image
-                </button>
+            <div className="flex flex-col">
+              <div className="label pb-0 pt-0">
+                <span className="label-text text-base w-full">Image:</span>
               </div>
-            )
+              <button
+                className="btn btn-outline w-fit btn-error btn-ghost"
+                onClick={removeSelectedImage}
+              >
+                Remove image
+              </button>
+            </div>
           )}
         </div>
         <Select
