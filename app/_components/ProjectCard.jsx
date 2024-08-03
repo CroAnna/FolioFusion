@@ -145,7 +145,11 @@ const ProjectCard = ({ project, projectIndex }) => {
         </div>
         <div className="flex gap-2 justify-between w-full">
           {project.project_link_1_url && project.project_link_1_text && (
-            <Link href={project.project_link_1_url} className="w-full">
+            <a
+              href={project.project_link_1_url}
+              target="_blank"
+              className="w-full"
+            >
               <button
                 className={`py-2 flex w-full items-center justify-center gap-1 ${getBgColor(
                   palette
@@ -157,10 +161,14 @@ const ProjectCard = ({ project, projectIndex }) => {
                 &nbsp;
                 {project.project_link_1_text}
               </button>
-            </Link>
+            </a>
           )}
           {project.project_link_2_url && project.project_link_2_text && (
-            <Link href={project.project_link_2_url} className="w-full">
+            <a
+              href={project.project_link_2_url}
+              target="_blank"
+              className="w-full"
+            >
               <button
                 className={`py-2 hover:none flex w-full items-center justify-center gap-1 ${getPrimaryBgColors(
                   palette
@@ -174,7 +182,7 @@ const ProjectCard = ({ project, projectIndex }) => {
                 &nbsp;
                 {project.project_link_2_text}
               </button>
-            </Link>
+            </a>
           )}
         </div>
       </div>
