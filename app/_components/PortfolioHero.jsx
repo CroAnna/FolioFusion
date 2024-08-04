@@ -31,6 +31,16 @@ const PortfolioHero = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [isMobile, setIsMobile] = useState(false);
 
+  const isAdvancedHeroUI = () => {
+    // advanced = steps, mono, bubble
+    // basic = abstract, dots
+    return (
+      extra_style_elements == "steps" ||
+      extra_style_elements == "mono" ||
+      extra_style_elements == "bubble"
+    );
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -59,77 +69,128 @@ const PortfolioHero = () => {
   return (
     <div
       className={`hero min-h-screen w-full relative flex flex-col gap-4 justify-center 
+        ${isAdvancedHeroUI() && "relative w-full"} 
         ${getPrimaryTextColor(palette)} ${getBgColor(palette)}`}
     >
       {portfolioStackContextData.hero_extra && (
-        <div className="hidden md:block">
-          <Image
-            src={
-              palette == "Palette 1"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-1-blue.png`
-                  : extra_style_elements == "dots" && `/dots-blue.png`
-                : palette == "Palette 2"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-1-blue.png`
-                  : extra_style_elements == "dots" && `/dots-blue.png`
-                : palette == "Palette 3"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-1-green.png`
-                  : extra_style_elements == "dots" && `/dots-green.png`
-                : palette == "Palette 4"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-1-yellow.png`
+        <div className={`hidden md:block  `}>
+          {!isAdvancedHeroUI() ? (
+            <Image
+              src={
+                palette == "Palette 1"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-1-blue.png`
+                    : extra_style_elements == "dots" && `/dots-blue.png`
+                  : palette == "Palette 2"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-1-blue.png`
+                    : extra_style_elements == "dots" && `/dots-blue.png`
+                  : palette == "Palette 3"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-1-green.png`
+                    : extra_style_elements == "dots" && `/dots-green.png`
+                  : palette == "Palette 4"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-1-yellow.png`
+                    : extra_style_elements == "dots" && `/dots-yellow.png`
+                  : palette == "Palette 5"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-1-emerald.png`
+                    : extra_style_elements == "dots" && `/dots-emerald.png`
+                  : palette == "Palette 6" && extra_style_elements == "abstract"
+                  ? `/detail-1-orange.png`
                   : extra_style_elements == "dots" && `/dots-yellow.png`
-                : palette == "Palette 5"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-1-emerald.png`
-                  : extra_style_elements == "dots" && `/dots-emerald.png`
-                : palette == "Palette 6" && extra_style_elements == "abstract"
-                ? `/detail-1-orange.png`
-                : extra_style_elements == "dots" && `/dots-yellow.png`
-            }
-            alt={""}
-            width="360"
-            height="360"
-            className={`absolute left-0 ${
-              extra_style_elements == "abstract" ? "bottom-0" : "bottom-8"
-            }`}
-          />
-          <Image
-            src={
-              palette == "Palette 1"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-2-orange.png`
-                  : extra_style_elements == "dots" && `/dots-long-orange.png`
-                : palette == "Palette 2"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-2-blue.png`
-                  : extra_style_elements == "dots" && `/dots-long-blue.png`
-                : palette == "Palette 3"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-2-brown.png`
-                  : extra_style_elements == "dots" && `/dots-long-brown.png`
-                : palette == "Palette 4"
-                ? extra_style_elements == "abstract"
+              }
+              alt={""}
+              width="360"
+              height="360"
+              className={`absolute left-0 ${
+                extra_style_elements == "abstract" ? "bottom-0" : "bottom-8"
+              }`}
+            />
+          ) : (
+            <Image
+              src={
+                palette == "Palette 1"
+                  ? extra_style_elements == "steps"
+                    ? `/layered-steps-1-hero.svg`
+                    : extra_style_elements == "mono"
+                    ? `/mono-1-hero.svg`
+                    : extra_style_elements == "bubble" && `/bubble-1-hero.svg`
+                  : palette == "Palette 2"
+                  ? extra_style_elements == "steps"
+                    ? `/layered-steps-2-hero.svg`
+                    : extra_style_elements == "mono"
+                    ? `/mono-2-hero.svg`
+                    : extra_style_elements == "bubble" && `/bubble-2-hero.svg`
+                  : palette == "Palette 3"
+                  ? extra_style_elements == "steps"
+                    ? `/layered-steps-3-hero.svg`
+                    : extra_style_elements == "mono"
+                    ? `/mono-3-hero.svg`
+                    : extra_style_elements == "bubble" && `/bubble-3-hero.svg`
+                  : palette == "Palette 4"
+                  ? extra_style_elements == "steps"
+                    ? `/layered-steps-4-hero.svg`
+                    : extra_style_elements == "mono"
+                    ? `/mono-4-hero.svg`
+                    : extra_style_elements == "bubble" && `/bubble-4-hero.svg`
+                  : palette == "Palette 5"
+                  ? extra_style_elements == "steps"
+                    ? `/layered-steps-5-hero.svg`
+                    : extra_style_elements == "mono"
+                    ? `/mono-5-hero.svg`
+                    : extra_style_elements == "bubble" && `/bubble-5-hero.svg`
+                  : palette == "Palette 6" && extra_style_elements == "steps"
+                  ? `/layered-steps-6-hero.svg`
+                  : extra_style_elements == "mono"
+                  ? `/mono-6-hero.svg`
+                  : extra_style_elements == "bubble" && `/bubble-6-hero.svg`
+              }
+              alt={""}
+              layout="fill"
+              objectFit="cover"
+              className="absolute bottom-0 z-0"
+            />
+          )}
+          {!isAdvancedHeroUI() && (
+            <Image
+              src={
+                palette == "Palette 1"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-2-orange.png`
+                    : extra_style_elements == "dots" && `/dots-long-orange.png`
+                  : palette == "Palette 2"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-2-blue.png`
+                    : extra_style_elements == "dots" && `/dots-long-blue.png`
+                  : palette == "Palette 3"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-2-brown.png`
+                    : extra_style_elements == "dots" && `/dots-long-brown.png`
+                  : palette == "Palette 4"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-2-yellow.png`
+                    : extra_style_elements == "dots" && `/dots-long-yellow.png`
+                  : palette == "Palette 5"
+                  ? extra_style_elements == "abstract"
+                    ? `/detail-2-lime.png`
+                    : extra_style_elements == "dots" && `/dots-long-lime.png`
+                  : palette == "Palette 6" && extra_style_elements == "abstract"
                   ? `/detail-2-yellow.png`
                   : extra_style_elements == "dots" && `/dots-long-yellow.png`
-                : palette == "Palette 5"
-                ? extra_style_elements == "abstract"
-                  ? `/detail-2-lime.png`
-                  : extra_style_elements == "dots" && `/dots-long-lime.png`
-                : palette == "Palette 6" && extra_style_elements == "abstract"
-                ? `/detail-2-yellow.png`
-                : extra_style_elements == "dots" && `/dots-long-yellow.png`
-            }
-            alt={""}
-            width="360"
-            height="320"
-            className="absolute right-0 top-0"
-          />
+              }
+              alt={""}
+              width="360"
+              height="320"
+              className="absolute right-0 top-0"
+            />
+          )}
         </div>
       )}
-      <div className={`hero-content rounded-full flex flex-col md:flex-row`}>
+      <div
+        className={`hero-content rounded-full flex flex-col md:flex-row z-10`}
+      >
         {portfolioStackContextData.hero_image && (
           <div
             className={`max-w-xs m-6 inline-block

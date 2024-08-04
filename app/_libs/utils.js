@@ -41,7 +41,13 @@ export const activityBgData = [
 
 export const borderStyleItemsData = ["dashed", "dotted", "solid", "double"];
 
-export const heroExtraElementsData = ["abstract", "dots"];
+export const heroExtraElementsData = [
+  "abstract",
+  "dots",
+  "steps",
+  "mono",
+  "bubble",
+];
 
 export const getBgColor = (palette) => {
   switch (palette) {
