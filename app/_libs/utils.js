@@ -28,6 +28,8 @@ export const heroPaletteItemsData = [
   "Palette 6",
 ];
 
+export const heroAlignmentItemsData = ["left", "center", "right"];
+
 export const activityBgData = [
   "low-poly-grid",
   "layered-steps",

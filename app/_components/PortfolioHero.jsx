@@ -29,6 +29,17 @@ const PortfolioHero = () => {
     portfolioStackContextData.hero_extra_style_elements;
 
   const [imageUrl, setImageUrl] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     let url;
@@ -153,28 +164,54 @@ const PortfolioHero = () => {
             />
           </div>
         )}
-        <div className="flex flex-col gap-4">
-          <p className="py-0 text-lg text-center md:text-left">
-            {portfolioStackContextData.hero_welcome}
-          </p>
-          <div>
-            <h1
-              className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] text-center mt-2 md:mt-0 md:text-left
+        {
+          <div className="flex flex-col gap-4">
+            <p
+              className={`py-0 text-lg`}
+              style={{
+                textAlign: isMobile
+                  ? portfolioStackContextData.hero_mobile_alignment
+                  : portfolioStackContextData.hero_desktop_alignment,
+              }}
+            >
+              {portfolioStackContextData.hero_welcome}
+            </p>
+            <div>
+              <h1
+                className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] mt-2 md:mt-0 
                 ${getPrimaryColors(palette)}`}
+                style={{
+                  textAlign: isMobile
+                    ? portfolioStackContextData.hero_mobile_alignment
+                    : portfolioStackContextData.hero_desktop_alignment,
+                }}
+              >
+                {portfolioStackContextData.hero_name}
+              </h1>
+              <h2
+                className={`text-4xl md:text-5xl font-bold 
+                  ${getSecondaryColors(palette)}`}
+                style={{
+                  textAlign: isMobile
+                    ? portfolioStackContextData.hero_mobile_alignment
+                    : portfolioStackContextData.hero_desktop_alignment,
+                }}
+              >
+                {portfolioStackContextData.hero_short}
+              </h2>
+            </div>
+            <p
+              className={`md:text-lg max-w-xl md:py-4`}
+              style={{
+                textAlign: isMobile
+                  ? portfolioStackContextData.hero_mobile_alignment
+                  : portfolioStackContextData.hero_desktop_alignment,
+              }}
             >
-              {portfolioStackContextData.hero_name}
-            </h1>
-            <h2
-              className={`text-4xl md:text-5xl font-bold text-center md:text-left
-              ${getSecondaryColors(palette)}`}
-            >
-              {portfolioStackContextData.hero_short}
-            </h2>
+              {portfolioStackContextData.hero_description}
+            </p>
           </div>
-          <p className=" md:text-lg max-w-xl text-center md:text-left md:py-4">
-            {portfolioStackContextData.hero_description}
-          </p>
-        </div>
+        }
       </div>
       <div className="flex gap-2">
         {portfolioStackContextData.social_github && (

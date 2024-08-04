@@ -7,6 +7,7 @@ import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import Toggle from "@/app/_components/Toggle";
 import {
   borderStyleItemsData,
+  heroAlignmentItemsData,
   heroExtraElementsData,
   heroPaletteItemsData,
 } from "@/app/_libs/utils";
@@ -62,7 +63,6 @@ const CreateHero = () => {
 
   const getPortfolio = useCallback(async () => {
     const { portfolio, hero_image, error } = await getCreateHeroData();
-    console.log(hero_image);
     if (error) {
       console.log(error);
     } else {
@@ -78,6 +78,8 @@ const CreateHero = () => {
         hero_palette: portfolio.hero_palette,
         hero_extra_style_elements: portfolio.hero_extra_style_elements,
         hero_welcome: portfolio.hero_welcome,
+        hero_mobile_alignment: portfolio.hero_mobile_alignment,
+        hero_desktop_alignment: portfolio.hero_desktop_alignment,
         hero_name: portfolio.hero_name,
         hero_short: portfolio.hero_short,
         hero_description: portfolio.hero_description,
@@ -143,6 +145,8 @@ const CreateHero = () => {
       portfolioStackContextData.hero_palette,
       portfolioStackContextData.hero_extra_style_elements,
       portfolioStackContextData.hero_welcome,
+      portfolioStackContextData.hero_mobile_alignment,
+      portfolioStackContextData.hero_desktop_alignment,
       portfolioStackContextData.hero_name,
       portfolioStackContextData.hero_short,
       portfolioStackContextData.hero_description,
@@ -420,7 +424,29 @@ const CreateHero = () => {
           }}
         />
       </div>
-
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          1.10. Select text alignments
+        </h3>
+        <p>Mobile text alignment</p>
+        <Join
+          value={portfolioStackContextData.hero_mobile_alignment}
+          items={heroAlignmentItemsData}
+          onChange={(e) => {
+            handleUpdate("hero_mobile_alignment", e.target.value);
+          }}
+          name={"hero_mobile_alignment"}
+        />{" "}
+        <p>Desktop text alignment</p>
+        <Join
+          value={portfolioStackContextData.hero_desktop_alignment}
+          items={heroAlignmentItemsData}
+          onChange={(e) => {
+            handleUpdate("hero_desktop_alignment", e.target.value);
+          }}
+          name={"hero_desktop_alignment"}
+        />
+      </div>
       <NextPreviousNavigation
         handleNextClick={saveData}
         nextUrl={"/builder/add-projects"}

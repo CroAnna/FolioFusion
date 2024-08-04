@@ -9,6 +9,10 @@ export async function getDataByDomain(domain) {
     .eq("domain_url", domain)
     .single();
 
+  // TODO napravi da ak tu vrati owner null da baci da portfolio s tom domenom jos ne postoji
+
+  console.log(owner);
+
   const { data: portfolioWithoutImage, portfolioError } = await supabase
     .from("portfolios")
     .select()
