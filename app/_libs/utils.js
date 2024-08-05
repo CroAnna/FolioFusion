@@ -49,6 +49,8 @@ export const heroExtraElementsData = [
   "bubble",
 ];
 
+export const heroVariantData = ["A", "B", "C", "D"];
+
 export const getBgColor = (palette) => {
   switch (palette) {
     case "Palette 1":

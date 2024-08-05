@@ -10,6 +10,7 @@ import {
   heroAlignmentItemsData,
   heroExtraElementsData,
   heroPaletteItemsData,
+  heroVariantData,
 } from "@/app/_libs/utils";
 import {
   DribbbleLogo,
@@ -77,6 +78,7 @@ const CreateHero = () => {
         hero_scroll_to_top: portfolio.hero_scroll_to_top,
         hero_palette: portfolio.hero_palette,
         hero_extra_style_elements: portfolio.hero_extra_style_elements,
+        hero_variant: portfolio.hero_variant,
         hero_welcome: portfolio.hero_welcome,
         hero_mobile_alignment: portfolio.hero_mobile_alignment,
         hero_desktop_alignment: portfolio.hero_desktop_alignment,
@@ -144,6 +146,7 @@ const CreateHero = () => {
       portfolioStackContextData.hero_scroll_to_top,
       portfolioStackContextData.hero_palette,
       portfolioStackContextData.hero_extra_style_elements,
+      portfolioStackContextData.hero_variant,
       portfolioStackContextData.hero_welcome,
       portfolioStackContextData.hero_mobile_alignment,
       portfolioStackContextData.hero_desktop_alignment,
@@ -318,6 +321,16 @@ const CreateHero = () => {
               handleUpdate("hero_extra_style_elements", e.target.value);
             }}
             name={"hero_extra_style_elements"}
+          />
+        )}
+        {portfolioStackContextData.hero_extra && (
+          <Join
+            value={portfolioStackContextData.hero_variant}
+            items={heroVariantData}
+            onChange={(e) => {
+              handleUpdate("hero_variant", e.target.value);
+            }}
+            name={"hero_variant"}
           />
         )}
       </div>

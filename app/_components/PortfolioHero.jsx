@@ -27,6 +27,7 @@ const PortfolioHero = () => {
   const palette = portfolioStackContextData.hero_palette;
   const extra_style_elements =
     portfolioStackContextData.hero_extra_style_elements;
+  const variant = portfolioStackContextData.hero_variant;
 
   const [imageUrl, setImageUrl] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -39,6 +40,253 @@ const PortfolioHero = () => {
       extra_style_elements == "mono" ||
       extra_style_elements == "bubble"
     );
+  };
+  const getHeroExtraStyle = (position) => {
+    if (palette === "Palette 1") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-blue.png"
+            : "/detail-2-orange.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/dots-blue.png"
+            : "/dots-long-orange.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-1-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-1-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-1-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 2") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-blue.png"
+            : "/detail-2-blue.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left" ? "/dots-blue.png" : "/dots-long-blue.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-2-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-2-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-2-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 3") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-green.png"
+            : "/detail-2-brown.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/dots-green.png"
+            : "/dots-long-brown.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-3-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-3-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-3-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 4") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-yellow.png"
+            : "/detail-2-yellow.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/dots-yellow.png"
+            : "/dots-long-yellow.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-4-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-4-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-4-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 5") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-emerald.png"
+            : "/detail-2-lime.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/dots-emerald.png"
+            : "/dots-long-lime.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-5-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-5-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-5-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 6") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/detail-1-orange.png"
+            : "/detail-2-yellow.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left"
+            ? "/dots-orange.png"
+            : "/dots-long-yellow.png";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-6-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+          return "/mono-6-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+          return "/bubble-6-hero.svg";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -76,31 +324,7 @@ const PortfolioHero = () => {
         <div className={`hidden md:block  `}>
           {!isAdvancedHeroUI() ? (
             <Image
-              src={
-                palette == "Palette 1"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-1-blue.png`
-                    : extra_style_elements == "dots" && `/dots-blue.png`
-                  : palette == "Palette 2"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-1-blue.png`
-                    : extra_style_elements == "dots" && `/dots-blue.png`
-                  : palette == "Palette 3"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-1-green.png`
-                    : extra_style_elements == "dots" && `/dots-green.png`
-                  : palette == "Palette 4"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-1-yellow.png`
-                    : extra_style_elements == "dots" && `/dots-yellow.png`
-                  : palette == "Palette 5"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-1-emerald.png`
-                    : extra_style_elements == "dots" && `/dots-emerald.png`
-                  : palette == "Palette 6" && extra_style_elements == "abstract"
-                  ? `/detail-1-orange.png`
-                  : extra_style_elements == "dots" && `/dots-yellow.png`
-              }
+              src={getHeroExtraStyle("left")}
               alt={""}
               width="360"
               height="360"
@@ -110,43 +334,7 @@ const PortfolioHero = () => {
             />
           ) : (
             <Image
-              src={
-                palette == "Palette 1"
-                  ? extra_style_elements == "steps"
-                    ? `/layered-steps-1-hero.svg`
-                    : extra_style_elements == "mono"
-                    ? `/mono-1-hero.svg`
-                    : extra_style_elements == "bubble" && `/bubble-1-hero.svg`
-                  : palette == "Palette 2"
-                  ? extra_style_elements == "steps"
-                    ? `/layered-steps-2-hero.svg`
-                    : extra_style_elements == "mono"
-                    ? `/mono-2-hero.svg`
-                    : extra_style_elements == "bubble" && `/bubble-2-hero.svg`
-                  : palette == "Palette 3"
-                  ? extra_style_elements == "steps"
-                    ? `/layered-steps-3-hero.svg`
-                    : extra_style_elements == "mono"
-                    ? `/mono-3-hero.svg`
-                    : extra_style_elements == "bubble" && `/bubble-3-hero.svg`
-                  : palette == "Palette 4"
-                  ? extra_style_elements == "steps"
-                    ? `/layered-steps-4-hero.svg`
-                    : extra_style_elements == "mono"
-                    ? `/mono-4-hero.svg`
-                    : extra_style_elements == "bubble" && `/bubble-4-hero.svg`
-                  : palette == "Palette 5"
-                  ? extra_style_elements == "steps"
-                    ? `/layered-steps-5-hero.svg`
-                    : extra_style_elements == "mono"
-                    ? `/mono-5-hero.svg`
-                    : extra_style_elements == "bubble" && `/bubble-5-hero.svg`
-                  : palette == "Palette 6" && extra_style_elements == "steps"
-                  ? `/layered-steps-6-hero.svg`
-                  : extra_style_elements == "mono"
-                  ? `/mono-6-hero.svg`
-                  : extra_style_elements == "bubble" && `/bubble-6-hero.svg`
-              }
+              src={getHeroExtraStyle()}
               alt={""}
               layout="fill"
               objectFit="cover"
@@ -155,31 +343,7 @@ const PortfolioHero = () => {
           )}
           {!isAdvancedHeroUI() && (
             <Image
-              src={
-                palette == "Palette 1"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-2-orange.png`
-                    : extra_style_elements == "dots" && `/dots-long-orange.png`
-                  : palette == "Palette 2"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-2-blue.png`
-                    : extra_style_elements == "dots" && `/dots-long-blue.png`
-                  : palette == "Palette 3"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-2-brown.png`
-                    : extra_style_elements == "dots" && `/dots-long-brown.png`
-                  : palette == "Palette 4"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-2-yellow.png`
-                    : extra_style_elements == "dots" && `/dots-long-yellow.png`
-                  : palette == "Palette 5"
-                  ? extra_style_elements == "abstract"
-                    ? `/detail-2-lime.png`
-                    : extra_style_elements == "dots" && `/dots-long-lime.png`
-                  : palette == "Palette 6" && extra_style_elements == "abstract"
-                  ? `/detail-2-yellow.png`
-                  : extra_style_elements == "dots" && `/dots-long-yellow.png`
-              }
+              src={getHeroExtraStyle("right")}
               alt={""}
               width="360"
               height="320"
