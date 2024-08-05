@@ -304,7 +304,7 @@ const CreateHero = () => {
         </h3>
         <Toggle
           checked={portfolioStackContextData.hero_extra}
-          text={"Border around image"}
+          text={"Show custom elements"}
           onChange={(e) => {
             handleUpdate("hero_extra", e.target.checked);
           }}
@@ -397,7 +397,7 @@ const CreateHero = () => {
           onChange={(e) => {
             handleUpdate("social_dribble", e.target.value);
           }}
-          placeholder={"Paste Dribble URL"}
+          placeholder={"Paste Dribbble URL"}
         />
         <Input
           icon={<Link size={32} weight="duotone" />}

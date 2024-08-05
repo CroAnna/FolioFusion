@@ -280,7 +280,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_github}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <GithubLogo size={36} weight="duotone" />
           </Link>
@@ -290,7 +290,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_linkedin}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <LinkedinLogo size={36} weight="duotone" />
           </Link>
@@ -300,7 +300,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_x}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <XLogo size={36} weight="duotone" />
           </Link>
@@ -310,7 +310,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_facebook}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <FacebookLogo size={36} weight="duotone" />
           </Link>
@@ -320,7 +320,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_instagram}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <InstagramLogo size={36} weight="duotone" />
           </Link>
@@ -330,7 +330,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_youtube}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <YoutubeLogo size={36} weight="duotone" />
           </Link>
@@ -340,7 +340,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_tiktok}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <TiktokLogo size={36} weight="duotone" />
           </Link>
@@ -350,7 +350,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_dribble}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <DribbbleLogo size={36} weight="duotone" />
           </Link>
@@ -360,7 +360,7 @@ const PortfolioHero = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={portfolioStackContextData.social_other}
-            className={getPrimaryColors(palette)}
+            className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <LinkLogo size={36} weight="duotone" />
           </Link>
