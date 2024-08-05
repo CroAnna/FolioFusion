@@ -26,6 +26,7 @@ export const heroPaletteItemsData = [
   "Palette 4",
   "Palette 5",
   "Palette 6",
+  "Palette 7",
 ];
 
 export const heroAlignmentItemsData = ["left", "center", "right"];
@@ -47,6 +48,7 @@ export const heroExtraElementsData = [
   "steps",
   "mono",
   "bubble",
+  "spikes",
 ];
 
 export const heroVariantData = ["A", "B", "C", "D"];
@@ -65,6 +67,8 @@ export const getBgColor = (palette) => {
       return "bg-neutral-900";
     case "Palette 6":
       return "bg-stone-900";
+    case "Palette 7":
+      return "bg-neutral-200";
     default:
       return null;
   }
@@ -84,6 +88,8 @@ export const getPrimaryBgColors = (palette) => {
       return "bg-lime-500";
     case "Palette 6":
       return "bg-yellow-400";
+    case "Palette 7":
+      return "bg-red-500";
     default:
       return null;
   }
@@ -103,6 +109,8 @@ export const getSecondaryBgColors = (palette) => {
       return "bg-neutral-800";
     case "Palette 6":
       return "bg-stone-800";
+    case "Palette 7":
+      return "bg-stone-100";
     default:
       return null;
   }
@@ -122,6 +130,8 @@ export const getPrimaryTextColor = (palette) => {
       return "text-gray-100";
     case "Palette 6":
       return "text-gray-100";
+    case "Palette 7":
+      return "text-stone-900";
     default:
       return null;
   }
@@ -141,6 +151,8 @@ export const getSecondaryTextColor = (palette) => {
       return "text-gray-900";
     case "Palette 6":
       return "text-gray-900";
+    case "Palette 7":
+      return "text-stone-100";
     default:
       return null;
   }
@@ -160,6 +172,8 @@ export const getPrimaryBorderColors = (palette) => {
       return "border-emerald-500";
     case "Palette 6":
       return "border-orange-500";
+    case "Palette 7":
+      return "border-red-500";
     default:
       return null;
   }
@@ -179,6 +193,8 @@ export const getPrimaryColors = (palette) => {
       return "text-lime-500";
     case "Palette 6":
       return "text-yellow-400";
+    case "Palette 7":
+      return "text-stone-700";
     default:
       return "";
   }
@@ -198,6 +214,8 @@ export const getSecondaryColors = (palette) => {
       return "text-emerald-500";
     case "Palette 6":
       return "text-orange-500";
+    case "Palette 7":
+      return "text-red-500";
     default:
       return "";
   }
@@ -250,6 +268,7 @@ export const getIconBgColor = (palette) => {
     case "Palette 1":
     case "Palette 2":
     case "Palette 3":
+    case "Palette 7":
       return "light";
     case "Palette 4":
     case "Palette 5":
@@ -274,6 +293,8 @@ export const getHexSecondaryBgColor = (palette) => {
       return "#262626"; // neutral-800
     case "Palette 6":
       return "#2D2D2D"; // stone-800
+    case "Palette 7":
+      return "#f5f5f4"; // stone-100
     default:
       return null;
   }
@@ -292,6 +313,8 @@ export const getHexPrimaryTextColor = (palette) => {
     case "Palette 5":
     case "Palette 6":
       return "#f3f4f6"; // gray-100
+    case "Palette 7":
+      return "#1c1917"; // stone-900
     default:
       return null;
   }
@@ -311,6 +334,8 @@ export const getHexPrimaryColor = (palette) => {
       return "#84cc16"; // lime-500
     case "Palette 6":
       return "#facc15"; // yellow-400
+    case "Palette 7":
+      return "#44403c"; // stone-700
     default:
       return null;
   }
@@ -329,6 +354,10 @@ export const getHexSecondaryColor = (palette) => {
       return "#10b981"; // emerald-500
     case "Palette 6":
       return "#f97316"; // orange-500
+    case "Palette 6":
+      return "#f97316"; // orange-500
+    case "Palette 7":
+      return "#ef4444"; // red-500
     default:
       return null;
   }
@@ -339,6 +368,7 @@ export const getHexLineColor = (palette) => {
     case "Palette 1":
     case "Palette 2":
     case "Palette 3":
+    case "Palette 7":
       return "#d4d4d4";
     case "Palette 4":
     case "Palette 5":

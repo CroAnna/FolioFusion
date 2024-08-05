@@ -33,11 +33,12 @@ const PortfolioHero = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const isAdvancedHeroUI = () => {
-    // advanced = steps, mono, bubble
+    // advanced = steps, mono, bubble, spikes
     // basic = abstract, dots
     return (
       extra_style_elements == "steps" ||
       extra_style_elements == "mono" ||
+      extra_style_elements == "spikes" ||
       extra_style_elements == "bubble"
     );
   };
@@ -65,6 +66,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-1-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-1-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -72,6 +74,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-1-hero.svg";
         } else if (variant === "B") {
+          return "/mono-1-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -79,6 +82,14 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-1-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-1-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-1-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -104,6 +115,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-2-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-2-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -111,6 +123,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-2-hero.svg";
         } else if (variant === "B") {
+          return "/mono-2-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -118,6 +131,14 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-2-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-2-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-2-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -145,6 +166,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-3-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-3-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -152,6 +174,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-3-hero.svg";
         } else if (variant === "B") {
+          return "/mono-3-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -159,6 +182,14 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-3-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-3-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-3-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -186,6 +217,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-4-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-4-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -193,6 +225,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-4-hero.svg";
         } else if (variant === "B") {
+          return "/mono-4-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -200,6 +233,14 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-4-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-4-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-4-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -227,6 +268,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-5-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-5-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -234,6 +276,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-5-hero.svg";
         } else if (variant === "B") {
+          return "/mono-5-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -241,6 +284,14 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-5-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-5-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-5-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -268,6 +319,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/layered-steps-6-hero.svg";
         } else if (variant === "B") {
+          return "/layered-steps-6-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -275,6 +327,7 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/mono-6-hero.svg";
         } else if (variant === "B") {
+          return "/mono-6-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
@@ -282,6 +335,58 @@ const PortfolioHero = () => {
         if (variant === "A") {
           return "/bubble-6-hero.svg";
         } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-6-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-6-2-hero.svg";
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      }
+    } else if (palette === "Palette 7") {
+      if (extra_style_elements === "abstract") {
+        if (variant === "A") {
+          return position == "left" ? "" : "";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "dots") {
+        if (variant === "A") {
+          return position == "left" ? "" : "";
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "steps") {
+        if (variant === "A") {
+          return "/layered-steps-7-1-hero.svg";
+        } else if (variant === "B") {
+          return "/layered-steps-7-2-hero.svg";
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "mono") {
+        if (variant === "A") {
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "bubble") {
+        if (variant === "A") {
+        } else if (variant === "B") {
+        } else if (variant === "C") {
+        } else if (variant === "D") {
+        }
+      } else if (extra_style_elements === "spikes") {
+        if (variant === "A") {
+          return "/spikes-7-1-hero.svg";
+        } else if (variant === "B") {
+          return "/spikes-7-2-hero.svg";
         } else if (variant === "C") {
         } else if (variant === "D") {
         }
