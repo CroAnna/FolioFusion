@@ -27,7 +27,7 @@ const NextPreviousNavigation = ({
     <div className="join grid grid-cols-2">
       {previousUrl && (
         <Link href={previousUrl} className="w-full">
-          <button className="join-item btn btn-outline w-full">
+          <button className="join-item btn btn-outline w-full" disabled={isLoading}>
             Previous page
           </button>
         </Link>
@@ -35,11 +35,11 @@ const NextPreviousNavigation = ({
       {nextUrl && (
         <button
           className="join-item btn btn-secondary w-full"
-          onClick={handleClick}
+          onClick={handleClick}disabled={isLoading}
         >
           {isLoading ? (
             <>
-              <Image src={loadingGif} width={24} height={24} />
+              <Image src={loadingGif} width={24} height={24} alt="spinner"/>
               <p>Saving...</p>
             </>
           ) : (

@@ -7,6 +7,7 @@ import {
 } from "./actions";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 
 const DeployPortfolio = () => {
   const [user, setUser] = useState(null);
@@ -124,6 +125,7 @@ const DeployPortfolio = () => {
             Deploy portfolio
           </button>
         </div>
+        <NextPreviousNavigation previousUrl={"/builder/add-activities"} />
       </div>
     )
   );
