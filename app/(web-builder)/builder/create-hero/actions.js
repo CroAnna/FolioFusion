@@ -104,15 +104,27 @@ export async function upsertCreateHeroData(
     social_other: social_other,
     user_id: user.id,
   };
+
+  console.log(id);
+
   if (id) {
     upsertData.id = id;
   }
 
-  const { data: portfolio, error } = await supabase
+  const { data: portfolioWithoutImage, error } = await supabase
     .from("portfolios")
     .upsert(upsertData)
     .select()
     .single();
 
-  return { portfolio, error };
+  let hero_image_db = null;
+  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
+    const hero_image_filepath = portfolioWithoutImage.hero_image;
+    const { data } = supabase.storage
+      .from("images")
+      .getPublicUrl(`${hero_image_filepath}`);
+    hero_image_db = data;
+  }
+  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image_db };
+  return { portfolio, hero_image, error };
 }

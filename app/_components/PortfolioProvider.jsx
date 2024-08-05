@@ -100,6 +100,7 @@ const PortfolioProvider = ({ children }) => {
 
   const resetContextValues = () => {
     setPortfolioStackContextData({
+      id: null,
       hero_image: null,
       hero_image_rounded: false,
       hero_border_style: "dashed",
@@ -132,7 +133,7 @@ const PortfolioProvider = ({ children }) => {
 
     setPortfolioStackProjectsContextData([
       {
-        project_id: null,
+        id: null,
         project_order: 1,
         project_title: "",
         project_description: "",

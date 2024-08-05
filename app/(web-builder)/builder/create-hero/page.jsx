@@ -161,6 +161,7 @@ const CreateHero = () => {
       portfolioStackContextData.social_other
     );
     console.log(response);
+    setPortfolioStackContextData(response.portfolio);
   };
 
   return (

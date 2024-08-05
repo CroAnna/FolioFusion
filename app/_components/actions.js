@@ -24,7 +24,7 @@ export async function getDataByDomain(domain) {
     .single();
 
   let hero_image = null;
-  if (portfolioWithoutImage.hero_image) {
+  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
     const hero_image_filepath = portfolioWithoutImage.hero_image;
 
     const { data } = supabase.storage
