@@ -9,9 +9,13 @@ export async function getDataByDomain(domain) {
     .eq("domain_url", domain)
     .single();
 
-  // TODO napravi da ak tu vrati owner null da baci da portfolio s tom domenom jos ne postoji
-
   console.log(owner);
+  if (owner == null) {
+    return {
+      code: 404,
+      message: "Portfolio with that domain does not exist yet. 😕",
+    };
+  }
 
   const { data: portfolioWithoutImage, portfolioError } = await supabase
     .from("portfolios")
