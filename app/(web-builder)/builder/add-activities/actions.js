@@ -131,6 +131,7 @@ export async function upsertAddActivitiesData(
       const upsertActivityData = {
         activity_title: activity.activity_title,
         activity_description: activity.activity_description,
+        activity_url: activity.activity_url,
         activity_img: activityImage ? filepath : null,
         activity_type: activity.activity_type,
         activity_order: activity.activity_order,

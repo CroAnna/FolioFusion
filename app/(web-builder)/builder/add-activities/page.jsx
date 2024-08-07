@@ -29,6 +29,7 @@ const AddActivities = () => {
             : 1,
         activity_title: "",
         activity_description: "",
+        activity_url: "",
         activity_type: null,
         activity_img: "",
       },

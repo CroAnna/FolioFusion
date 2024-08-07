@@ -7,6 +7,16 @@ import {
   Link,
   Medal,
   Trophy,
+  GameController,
+  Ranking,
+  ArrowFatLineLeft,
+  HandsClapping,
+  Handshake,
+  Users,
+  UsersFour,
+  UsersThree,
+  GlobeHemisphereWest,
+  AirplaneTilt,
 } from "@phosphor-icons/react/dist/ssr";
 
 export const stepsData = [
@@ -260,6 +270,56 @@ export const activityIcons = [
     value: "binary",
     label: "Binary",
     icon: <Binary weight="duotone" size={32} />,
+  },
+  {
+    value: "gameController",
+    label: "Game Controller",
+    icon: <GameController weight="duotone" size={32} />,
+  },
+  {
+    value: "ranking",
+    label: "Ranking",
+    icon: <Ranking weight="duotone" size={32} />,
+  },
+  {
+    value: "arrowFatLineLeft",
+    label: "Arrow",
+    icon: <ArrowFatLineLeft weight="duotone" size={32} />,
+  },
+  {
+    value: "handsClapping",
+    label: "Hands Clapping",
+    icon: <HandsClapping weight="duotone" size={32} />,
+  },
+  {
+    value: "handshake",
+    label: "Handshake",
+    icon: <Handshake weight="duotone" size={32} />,
+  },
+  {
+    value: "GlobeHemisphereWest",
+    label: "Globe",
+    icon: <GlobeHemisphereWest weight="duotone" size={32} />,
+  },
+  {
+    value: "AirplaneTilt",
+    label: "Airplane",
+    icon: <AirplaneTilt weight="duotone" size={32} />,
+  },
+  {
+    value: "Users",
+    label: "Duo",
+    icon: <Users weight="duotone" size={32} />,
+  },
+  {
+    value: "UsersThree",
+    label: "Trio",
+    icon: <UsersThree weight="duotone" size={32} />,
+  },
+  {
+    value: "UsersFour",
+    label: "Quatro",
+    icon: <UsersFour weight="duotone" size={32} />,
   },
 ];
 

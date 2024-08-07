@@ -174,6 +174,15 @@ const ActivityInputCard = ({ index, activityKey, activityId }) => {
           }}
           value={portfolioStackActivityContextData[index].activity_type}
         />
+        <Input
+          label={"URL:"}
+          name={`activity_url`}
+          value={portfolioStackActivityContextData[index].activity_url}
+          onChange={(e) => {
+            handleUpdateNested(`activity_url`, e.target.value);
+          }}
+          placeholder={"More info, article, video link..."}
+        />
       </div>
     )
   );

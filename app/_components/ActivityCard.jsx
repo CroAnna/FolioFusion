@@ -7,6 +7,7 @@ import {
 } from "../_libs/utils";
 import { PortfolioContext } from "./PortfolioProvider";
 import Image from "next/image";
+import { ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
 
 const ActivityCard = ({ palette, data, activityIndex }) => {
   const { portfolioStackActivityContextData } = useContext(PortfolioContext);
@@ -47,7 +48,11 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
   }, [portfolioStackActivityContextData[activityIndex].activity_img]);
 
   return (
-    <div className="card card-compact glass w-72 relative mx-auto">
+    <a
+      className="card card-compact glass w-72 relative mx-auto"
+      href={data.activity_url && data.activity_url}
+      target="_blank"
+    >
       {data.activity_img && (
         <figure className="h-48 relative w-full ">
           <Image
@@ -55,7 +60,10 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
             objectFit="cover"
             src={imageUrl}
             alt="activity"
-          />
+          />{" "}
+          {data.activity_url && (
+            <ArrowSquareOut size={32} className="absolute top-2 left-2" />
+          )}
         </figure>
       )}
       {data.activity_type ? (
@@ -77,7 +85,7 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
           {data.activity_description}
         </p>
       </div>
-    </div>
+    </a>
   );
 };
 
