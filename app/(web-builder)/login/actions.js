@@ -3,24 +3,42 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { z } from "zod";
 
-export async function login(formData) {
+export async function login(prevState, formData) {
+  // does not work without prevState
   const supabase = createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
+  const schema = z
+    .object({
+      password: z.string().min(6, "Password must have minimum of 6 characters"),
+      email: z.string().email("Invalid email address"),
+    })
+    .required();
+
+  const validation = schema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
-  };
+  });
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  if (validation.success) {
+    const { email, password } = validation.data;
 
-  if (error) {
-    console.log(error);
-    redirect("/error");
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.log(error);
+      return { message: error.message };
+    }
+
+    revalidatePath("/", "layout");
+    redirect("/");
+  } else {
+    return {
+      message: validation.error.issues.map((issue) => issue.message).join(", "),
+    };
   }
-
-  revalidatePath("/", "layout");
-  redirect("/");
 }

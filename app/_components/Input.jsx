@@ -1,4 +1,3 @@
-import { GithubLogo } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 
 const Input = ({
