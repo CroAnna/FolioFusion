@@ -1,9 +1,28 @@
 import { useEffect } from "react";
+import Resizer from "react-image-file-resizer";
 
 const FileInput = ({ setFile, fileInputRef, label, file }) => {
-  const handleChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleChange = async (event) => {
+    const file = event.target.files[0];
+    const resized = await resizeFile(file);
+    setFile(resized);
   };
+
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        1920,
+        8000,
+        "JPEG",
+        75,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "file"
+      );
+    });
 
   useEffect(() => {
     if (fileInputRef.current && file) {

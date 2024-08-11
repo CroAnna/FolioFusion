@@ -482,6 +482,7 @@ const PortfolioHero = () => {
           }`}
           >
             <Image
+              quality={40}
               width={320}
               height={320}
               src={imageUrl}

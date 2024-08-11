@@ -56,6 +56,7 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
       {data.activity_img && (
         <figure className="h-48 relative w-full ">
           <Image
+            quality={40}
             layout="fill"
             objectFit="cover"
             src={imageUrl}

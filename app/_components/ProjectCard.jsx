@@ -72,6 +72,7 @@ const ProjectCard = ({ project, projectIndex }) => {
       <div className="w-full overflow-hidden relative h-[400px] md:m-5 md:w-[591px] ">
         {project.project_img && (
           <Image
+            quality={40}
             layout="fill"
             objectFit="cover"
             src={imageUrl}
@@ -91,6 +92,7 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_technology_1_icon &&
             project.project_technology_1_icon != "-" && (
               <Image
+                quality={40}
                 width={32}
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
@@ -101,6 +103,7 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_technology_2_icon &&
             project.project_technology_2_icon != "-" && (
               <Image
+                quality={40}
                 width={32}
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}&theme=${iconBg}`}
@@ -111,6 +114,7 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_technology_3_icon &&
             project.project_technology_3_icon != "-" && (
               <Image
+                quality={40}
                 width={32}
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
@@ -121,6 +125,7 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_technology_4_icon &&
             project.project_technology_4_icon != "-" && (
               <Image
+                quality={40}
                 width={32}
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
@@ -131,6 +136,7 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_technology_5_icon &&
             project.project_technology_5_icon != "-" && (
               <Image
+                quality={40}
                 width={32}
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}

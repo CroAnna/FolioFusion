@@ -155,14 +155,16 @@ const ActivityInputCard = ({
             <FileInput
               file={file}
               fileInputRef={activityInputRef}
-              label={"Image:"}
+              label={"Image: (max. 5 MB)"}
               setFile={setFile}
               name={"activity_img"}
             />
           ) : (
             <div className="flex flex-col">
               <div className="label pb-0 pt-0">
-                <span className="label-text text-base w-full">Image:</span>
+                <span className="label-text text-base w-full">
+                  Image: (max. 5 MB)
+                </span>
               </div>
               <button
                 className="btn btn-outline w-fit btn-error btn-ghost"
