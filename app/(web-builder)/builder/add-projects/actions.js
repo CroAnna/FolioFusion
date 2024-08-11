@@ -47,7 +47,7 @@ export async function getAddProjectsData() {
           return { ...project, project_img: null };
         }
 
-        return { ...project, project_img: data }; //
+        return { ...project, project_img: data };
       }
 
       return { ...project, project_img: null };

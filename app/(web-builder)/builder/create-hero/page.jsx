@@ -30,18 +30,27 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { getCreateHeroData, upsertCreateHeroData } from "./actions";
+import {
+  deleteUnusedImages,
+  getCreateHeroData,
+  upsertCreateHeroData,
+} from "./actions";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [firstLoad, setFirstLoad] = useState(false);
+  const [imagesToRemove, setImagesToRemove] = useState([]);
 
   const { portfolioStackContextData, setPortfolioStackContextData } =
     useContext(PortfolioContext);
 
   const removeSelectedImage = () => {
-    setFile(null);
+    if (portfolioStackContextData.hero_image.publicUrl) {
+      const imgUrl = portfolioStackContextData.hero_image.publicUrl;
+      setImagesToRemove([...imagesToRemove, imgUrl]);
+      setFile(null);
+    }
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -136,6 +145,9 @@ const CreateHero = () => {
   }, [file]);
 
   const saveData = async () => {
+    const deleteRes = await deleteUnusedImages(imagesToRemove);
+    console.log(deleteRes);
+
     const response = await upsertCreateHeroData(
       portfolioStackContextData.id,
       portfolioStackContextData.hero_image,
@@ -222,6 +234,7 @@ const CreateHero = () => {
                   )}
                 </>
               )}
+
               <button
                 className="btn btn-outline w-fit btn-error btn-ghost"
                 onClick={removeSelectedImage}
