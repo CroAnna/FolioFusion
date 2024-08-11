@@ -103,8 +103,8 @@ export async function upsertAddProjectsData(
       let filepath;
       const projectImage = project.project_img;
 
+      let filename = null;
       if (projectImage && (projectImage.name || projectImage.public_url)) {
-        let filename;
         if (projectImage.name) {
           filename = `${uuidv4()}-${projectImage.name}`;
         } else if (projectImage.public_url) {
@@ -115,7 +115,7 @@ export async function upsertAddProjectsData(
           .from("images")
           .upload(filename, projectImage, {
             cacheControl: "3600",
-            upsert: false,
+            upsert: true,
           });
 
         if (imageError) {
@@ -152,7 +152,12 @@ export async function upsertAddProjectsData(
       if (project.project_img) {
         projectsWithImages = [
           ...projectsWithImages,
-          { ...project, project_img: project.project_img },
+          {
+            ...project,
+            project_img: {
+              publicUrl: `https://xaocjvppqlrveojwlgsu.supabase.co/storage/v1/object/public/images/${filename}`,
+            },
+          },
         ];
       }
 

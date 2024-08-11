@@ -30,11 +30,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  deleteUnusedImages,
-  getCreateHeroData,
-  upsertCreateHeroData,
-} from "./actions";
+import { getCreateHeroData, upsertCreateHeroData } from "./actions";
+import { deleteUnusedImages } from "../actions";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
@@ -49,9 +46,8 @@ const CreateHero = () => {
     if (portfolioStackContextData.hero_image.publicUrl) {
       const imgUrl = portfolioStackContextData.hero_image.publicUrl;
       setImagesToRemove([...imagesToRemove, imgUrl]);
-      setFile(null);
     }
-
+    setFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

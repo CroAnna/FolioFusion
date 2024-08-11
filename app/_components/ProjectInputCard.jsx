@@ -10,7 +10,13 @@ import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
 import { deleteProjectById } from "../(web-builder)/builder/add-projects/actions";
 
-const ProjectInputCard = ({ projectKey, index, projectId }) => {
+const ProjectInputCard = ({
+  projectKey,
+  index,
+  projectId,
+  setImagesToRemove,
+  imagesToRemove,
+}) => {
   const {
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
@@ -29,6 +35,11 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
   };
 
   const removeSelectedImage = () => {
+    if (portfolioStackProjectsContextData[index].project_img.publicUrl) {
+      const imgUrl =
+        portfolioStackProjectsContextData[index].project_img.publicUrl;
+      setImagesToRemove([...imagesToRemove, imgUrl]);
+    }
     setFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -41,14 +52,12 @@ const ProjectInputCard = ({ projectKey, index, projectId }) => {
   };
 
   useEffect(() => {
-    console.log(portfolioStackProjectsContextData[index].project_img);
     if (portfolioStackProjectsContextData[index].project_img) {
       setFile(portfolioStackProjectsContextData[index].project_img);
     }
   }, []);
 
   useEffect(() => {
-    console.log(file);
     if (file && !portfolioStackProjectsContextData[index].project_img) {
       setFirstLoad(true);
       setPortfolioStackProjectsContextData((prevData) =>

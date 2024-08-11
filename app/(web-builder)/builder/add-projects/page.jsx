@@ -3,12 +3,13 @@ import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import ProjectInputCard from "@/app/_components/ProjectInputCard";
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useCallback, useState } from "react";
 import {
   getAddProjectsSectionData,
   getAddProjectsData,
   upsertAddProjectsData,
 } from "./actions";
+import { deleteUnusedImages } from "../actions";
 
 const AddWork = () => {
   const {
@@ -17,6 +18,7 @@ const AddWork = () => {
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
   } = useContext(PortfolioContext);
+  const [imagesToRemove, setImagesToRemove] = useState([]);
 
   const handleUpdate = (field, value) => {
     setPortfolioStackContextData({
@@ -45,12 +47,14 @@ const AddWork = () => {
   };
   // TODO iz nekog razloga se dvaput dodal projekt na kraju
   const saveData = async () => {
+    await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddProjectsData(
       portfolioStackContextData.id,
       portfolioStackContextData.project_group_description,
       portfolioStackContextData.project_group_title,
       portfolioStackProjectsContextData
     );
+
     setPortfolioStackProjectsContextData(response.projectsWithImages); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
@@ -140,6 +144,8 @@ const AddWork = () => {
                   projectKey={project.project_order}
                   index={index}
                   projectId={project.id}
+                  setImagesToRemove={setImagesToRemove}
+                  imagesToRemove={imagesToRemove}
                 />
               )
           )}
