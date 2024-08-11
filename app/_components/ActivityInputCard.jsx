@@ -9,7 +9,13 @@ import FileInput from "./FileInput";
 import Swal from "sweetalert2";
 import { deleteActivityById } from "../(web-builder)/builder/add-activities/actions";
 
-const ActivityInputCard = ({ index, activityKey, activityId }) => {
+const ActivityInputCard = ({
+  index,
+  activityKey,
+  activityId,
+  setImagesToRemove,
+  imagesToRemove,
+}) => {
   const {
     portfolioStackActivityContextData,
     setPortfolioStackActivityContextData,
@@ -28,6 +34,11 @@ const ActivityInputCard = ({ index, activityKey, activityId }) => {
   };
 
   const removeSelectedImage = () => {
+    if (portfolioStackActivityContextData[index].activity_img.publicUrl) {
+      const imgUrl =
+        portfolioStackActivityContextData[index].activity_img.publicUrl;
+      setImagesToRemove([...imagesToRemove, imgUrl]);
+    }
     setFile(null);
     if (activityInputRef.current) {
       activityInputRef.current.value = "";

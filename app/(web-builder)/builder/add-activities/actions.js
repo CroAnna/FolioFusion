@@ -7,14 +7,12 @@ export async function getAddActivitiesSectionData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user.id " + user.id);
   const { data: portfolio, error } = await supabase
     .from("portfolios")
     .select("id, activity_bg_shape")
     .eq("user_id", user.id)
     .single();
 
-  console.log(portfolio);
   return { portfolio, error };
 }
 
@@ -24,14 +22,11 @@ export async function getAddActivitiesData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user.id " + user.id);
   const { data: activities, error } = await supabase
     .from("activities")
     .select()
     .order("activity_order", { ascending: true })
     .eq("user_id", user.id);
-
-  console.log(activities);
 
   if (error) {
     console.log("error fetching activities:", error);
@@ -67,7 +62,6 @@ export async function upsertAddActivitiesData(
   activity_bg_shape,
   activitiesData
 ) {
-  console.log(activitiesData);
   const supabase = createClient();
   const {
     data: { user },
@@ -104,8 +98,8 @@ export async function upsertAddActivitiesData(
       let filepath;
       const activityImage = activity.activity_img;
 
+      let filename = null;
       if (activityImage && (activityImage.name || activityImage.public_url)) {
-        let filename;
         if (activityImage.name) {
           filename = `${uuidv4()}-${activityImage.name}`;
         } else if (activityImage.public_url) {
@@ -115,7 +109,7 @@ export async function upsertAddActivitiesData(
           .from("images")
           .upload(filename, activityImage, {
             cacheControl: "3600",
-            upsert: false,
+            upsert: true,
           });
 
         if (imageError) {
@@ -124,9 +118,6 @@ export async function upsertAddActivitiesData(
 
         filepath = data.path;
       }
-
-      console.log(activityImage);
-      console.log(filepath);
 
       const upsertActivityData = {
         activity_title: activity.activity_title,
@@ -137,25 +128,24 @@ export async function upsertAddActivitiesData(
         activity_order: activity.activity_order,
         user_id: user.id,
       };
-      console.log(activity.id);
 
       if (activity.id) {
         console.log(`vec postoji ${id}`);
         upsertActivityData.id = activity.id;
       }
-      console.log(upsertActivityData.activity_img);
-      console.log(activity.activity_img);
 
-      if (activity.activity_img) {
+      if (activity.activity_img && filename) {
         activitiesWithImages = [
           ...activitiesWithImages,
-          { ...activity, activity_img: activity.activity_img },
+          {
+            ...activity,
+            activity_img: {
+              publicUrl: `https://xaocjvppqlrveojwlgsu.supabase.co/storage/v1/object/public/images/${filename}`,
+            },
+          },
         ];
       } else {
-        activitiesWithImages = [
-          ...activitiesWithImages,
-          { ...activity, activity_img: null },
-        ];
+        activitiesWithImages = [...activitiesWithImages, { ...activity }];
       }
 
       const { data, error } = await supabase
@@ -164,19 +154,16 @@ export async function upsertAddActivitiesData(
         .select()
         .single();
 
-      console.log(data + error);
       return data;
     })
   );
 
-  console.log(activities);
-  console.log(activitiesWithImages);
+  activitiesWithImages.sort((a, b) => a.activity_order - b.activity_order);
 
   return { portfolio, activitiesWithImages };
 }
 
 export async function deleteActivityById(id) {
-  console.log(id);
   const supabase = createClient();
   const { data, error } = await supabase
     .from("activities")

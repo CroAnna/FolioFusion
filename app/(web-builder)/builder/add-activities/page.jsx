@@ -4,12 +4,13 @@ import Join from "@/app/_components/Join";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import { activityBgData } from "@/app/_libs/utils";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
   getAddActivitiesData,
   getAddActivitiesSectionData,
   upsertAddActivitiesData,
 } from "./actions";
+import { deleteUnusedImages } from "../actions";
 
 const AddActivities = () => {
   const {
@@ -18,6 +19,7 @@ const AddActivities = () => {
     portfolioStackContextData,
     setPortfolioStackContextData,
   } = useContext(PortfolioContext);
+  const [imagesToRemove, setImagesToRemove] = useState([]);
 
   const addActivity = () => {
     setPortfolioStackActivityContextData([
@@ -44,12 +46,12 @@ const AddActivities = () => {
   };
 
   const saveData = async () => {
+    await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddActivitiesData(
       portfolioStackContextData.id,
       portfolioStackContextData.activity_bg_shape,
       portfolioStackActivityContextData
     );
-    console.log(response.activitiesWithImages);
     setPortfolioStackActivityContextData(response.activitiesWithImages); // sluzi da se ne dogodi da ako se doda activity i samo spremi page (bez prebacivanja dalje) i doda jos jedan activity, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
@@ -72,14 +74,12 @@ const AddActivities = () => {
     if (error) {
       console.log(error);
     } else if (activities.length > 0) {
-      console.log(activities);
       setPortfolioStackActivityContextData(activities);
     }
   }, []);
 
   useEffect(() => {
     if (portfolioStackContextData.activity_bg_shape == "") {
-      console.log("dohvati");
       getPortfolio();
     }
     getActivities();
@@ -127,6 +127,8 @@ const AddActivities = () => {
                   index={index}
                   activityKey={activity.activity_order}
                   activityId={activity.id}
+                  setImagesToRemove={setImagesToRemove}
+                  imagesToRemove={imagesToRemove}
                 />
               )
           )}

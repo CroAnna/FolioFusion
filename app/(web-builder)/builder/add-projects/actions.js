@@ -149,7 +149,7 @@ export async function upsertAddProjectsData(
         upsertProjectsData.id = project.id;
       }
 
-      if (project.project_img) {
+      if (project.project_img && filename) {
         projectsWithImages = [
           ...projectsWithImages,
           {
@@ -157,6 +157,13 @@ export async function upsertAddProjectsData(
             project_img: {
               publicUrl: `https://xaocjvppqlrveojwlgsu.supabase.co/storage/v1/object/public/images/${filename}`,
             },
+          },
+        ];
+      } else {
+        projectsWithImages = [
+          ...projectsWithImages,
+          {
+            ...project,
           },
         ];
       }
