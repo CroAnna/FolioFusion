@@ -16,7 +16,6 @@ const Hero = () => {
           <div className="hidden md:flex relative md:w-[640px] md:h-[400px]">
             <Image
               layout="fill"
-              objectFit="cover"
               alt="hero-illustration"
               src={"/hero-illustration.svg"}
             />
