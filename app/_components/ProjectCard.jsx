@@ -153,13 +153,13 @@ const ProjectCard = ({ project, projectIndex }) => {
               className="w-full"
             >
               <button
-                className={`py-2 flex w-full items-center justify-center gap-1 ${getBgColor(
+                className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${getBgColor(
                   palette
                 )} md:text-lg rounded-lg shadow-custom-sm font-medium `}
                 target="_blank"
                 rel="noreferrer"
               >
-                {selectedIcon1 && selectedIcon1.icon}
+                <div className="w-8">{selectedIcon1 && selectedIcon1.icon}</div>
                 &nbsp;
                 {project.project_link_1_text}
               </button>
@@ -172,7 +172,7 @@ const ProjectCard = ({ project, projectIndex }) => {
               className="w-full"
             >
               <button
-                className={`py-2 hover:none flex w-full items-center justify-center gap-1 ${getPrimaryBgColors(
+                className={`py-2 hover:none flex w-full items-center justify-center gap-1 px-2 ${getPrimaryBgColors(
                   palette
                 )} ${getSecondaryTextColor(
                   palette
@@ -180,7 +180,7 @@ const ProjectCard = ({ project, projectIndex }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                {selectedIcon2 && selectedIcon2.icon}
+                <div className="w-8">{selectedIcon2 && selectedIcon2.icon}</div>
                 &nbsp;
                 {project.project_link_2_text}
               </button>
