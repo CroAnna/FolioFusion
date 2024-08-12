@@ -1,8 +1,10 @@
 import React, { createContext, useState } from "react";
 
 const PortfolioContext = createContext({
-  portfolioStackContextData: {},
-  setPortfolioStackContextData: () => {},
+  portfolioStackBasicContextData: {},
+  setPortfolioStackBasicContextData: () => {},
+  portfolioStackHeroContextData: {},
+  setPortfolioStackHeroContextData: () => {},
   portfolioStackProjectsContextData: [],
   setPortfolioStackProjectsContextData: () => {},
   portfolioStackExperienceContextData: [],
@@ -17,38 +19,44 @@ const PortfolioContext = createContext({
 const PortfolioProvider = ({ children }) => {
   const [confettiTriggerState, setConfettiTriggerState] = useState(false);
 
-  const [portfolioStackContextData, setPortfolioStackContextData] = useState({
-    id: null,
-    hero_image: null,
-    hero_image_rounded: false,
-    hero_border_style: "dashed",
-    hero_image_border: false,
-    hero_extra: false,
-    hero_scroll_to_top: false,
-    hero_palette: "Palette 1",
-    hero_extra_style_elements: "abstract",
-    hero_variant: "A",
-    hero_welcome: "",
-    hero_mobile_alignment: "left",
-    hero_desktop_alignment: "left",
-    hero_name: "",
-    hero_short: "",
-    hero_description: "",
-    social_github: "",
-    social_linkedin: "",
-    social_x: "",
-    social_facebook: "",
-    social_instagram: "",
-    social_youtube: "",
-    social_tiktok: "",
-    social_dribble: "",
-    social_other: "",
-    project_group_description: "",
-    project_group_title: "",
-    experience_group_description: "",
-    experience_group_title: "",
-    activity_bg_shape: "low-poly-grid",
-  });
+  const [portfolioStackBasicContextData, setPortfolioStackBasicContextData] =
+    useState({
+      id: null,
+      portfolio_palette: "Palette 1",
+    });
+
+  const [portfolioStackHeroContextData, setPortfolioStackHeroContextData] =
+    useState({
+      id: null,
+      hero_image: null,
+      hero_image_rounded: false,
+      hero_border_style: "dashed",
+      hero_image_border: false,
+      hero_extra: false,
+      hero_scroll_to_top: false,
+      hero_extra_style_elements: "abstract",
+      hero_variant: "A",
+      hero_welcome: "",
+      hero_mobile_alignment: "left",
+      hero_desktop_alignment: "left",
+      hero_name: "",
+      hero_short: "",
+      hero_description: "",
+      social_github: "",
+      social_linkedin: "",
+      social_x: "",
+      social_facebook: "",
+      social_instagram: "",
+      social_youtube: "",
+      social_tiktok: "",
+      social_dribble: "",
+      social_other: "",
+      project_group_description: "",
+      project_group_title: "",
+      experience_group_description: "",
+      experience_group_title: "",
+      activity_bg_shape: "low-poly-grid",
+    });
 
   const [
     portfolioStackProjectsContextData,
@@ -105,7 +113,7 @@ const PortfolioProvider = ({ children }) => {
   ]);
 
   const resetContextValues = () => {
-    setPortfolioStackContextData({
+    setPortfolioStackHeroContextData({
       id: null,
       hero_image: null,
       hero_image_rounded: false,
@@ -113,7 +121,6 @@ const PortfolioProvider = ({ children }) => {
       hero_image_border: false,
       hero_extra: false,
       hero_scroll_to_top: false,
-      hero_palette: "Palette 1",
       hero_extra_style_elements: "abstract",
       hero_variant: "A",
       hero_welcome: "",
@@ -182,13 +189,20 @@ const PortfolioProvider = ({ children }) => {
         activity_img: "",
       },
     ]);
+
+    setPortfolioStackBasicContextData({
+      id: null,
+      portfolio_palette: "Palette 1",
+    });
   };
 
   return (
     <PortfolioContext.Provider
       value={{
-        portfolioStackContextData,
-        setPortfolioStackContextData,
+        portfolioStackBasicContextData,
+        setPortfolioStackBasicContextData,
+        portfolioStackHeroContextData,
+        setPortfolioStackHeroContextData,
         portfolioStackProjectsContextData,
         setPortfolioStackProjectsContextData,
         portfolioStackExperienceContextData,

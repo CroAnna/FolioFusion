@@ -11,9 +11,12 @@ import { PortfolioContext } from "./PortfolioProvider";
 import TimelineElement from "./TimelineElement";
 
 const PortfolioEducation = () => {
-  const { portfolioStackContextData, portfolioStackExperienceContextData } =
-    useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
+  const {
+    portfolioStackHeroContextData,
+    portfolioStackExperienceContextData,
+    portfolioStackBasicContextData,
+  } = useContext(PortfolioContext);
+  const palette = portfolioStackBasicContextData.portfolio_palette;
 
   return (
     <div
@@ -28,10 +31,10 @@ const PortfolioEducation = () => {
             palette
           )}`}
         >
-          {portfolioStackContextData.experience_group_title}
+          {portfolioStackHeroContextData.experience_group_title}
         </h3>
         <p className="text-xl font-bold max-w-xs">
-          {portfolioStackContextData.experience_group_description}
+          {portfolioStackHeroContextData.experience_group_description}
         </p>
         {portfolioStackExperienceContextData.length > 0 && (
           <VerticalTimeline lineColor={getHexLineColor(palette)}>

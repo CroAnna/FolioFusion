@@ -12,15 +12,15 @@ import {
 
 const AddEducation = () => {
   const {
-    portfolioStackContextData,
+    portfolioStackHeroContextData,
     portfolioStackExperienceContextData,
-    setPortfolioStackContextData,
+    setPortfolioStackHeroContextData,
     setPortfolioStackExperienceContextData,
   } = useContext(PortfolioContext);
 
   const handleUpdate = (field, value) => {
-    setPortfolioStackContextData({
-      ...portfolioStackContextData,
+    setPortfolioStackHeroContextData({
+      ...portfolioStackHeroContextData,
       [field]: value,
     });
   };
@@ -45,23 +45,23 @@ const AddEducation = () => {
 
   const saveData = async () => {
     const response = await upsertAddExperiencesData(
-      portfolioStackContextData.id,
-      portfolioStackContextData.experience_group_description,
-      portfolioStackContextData.experience_group_title,
+      portfolioStackHeroContextData.id,
+      portfolioStackHeroContextData.experience_group_description,
+      portfolioStackHeroContextData.experience_group_title,
       portfolioStackExperienceContextData
     );
     console.log(response);
     setPortfolioStackExperienceContextData(response.experiences); // sluzi da se ne dogodi da ako se doda experience i samo spremi page (bez prebacivanja dalje) i doda jos jedan experience, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
-  const getPortfolio = useCallback(async () => {
+  const getHero = useCallback(async () => {
     const { portfolio, error } = await getAddExperiencesSectionData();
 
     if (error) {
       console.log(error);
     } else {
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
+      setPortfolioStackHeroContextData({
+        ...portfolioStackHeroContextData,
         experience_group_description: portfolio.experience_group_description,
         experience_group_title: portfolio.experience_group_title,
       });
@@ -80,11 +80,11 @@ const AddEducation = () => {
 
   useEffect(() => {
     if (
-      portfolioStackContextData.experience_group_title == "" ||
-      portfolioStackContextData.experience_group_description == ""
+      portfolioStackHeroContextData.experience_group_title == "" ||
+      portfolioStackHeroContextData.experience_group_description == ""
     ) {
       console.log("dohvati");
-      getPortfolio();
+      getHero();
     }
     getExperiences();
   }, []);
@@ -108,7 +108,7 @@ const AddEducation = () => {
         </h3>
         <Input
           name={"experience_group_title"}
-          value={portfolioStackContextData.experience_group_title}
+          value={portfolioStackHeroContextData.experience_group_title}
           onChange={(e) => {
             handleUpdate("experience_group_title", e.target.value);
           }}
@@ -121,7 +121,7 @@ const AddEducation = () => {
         </h3>
         <Input
           name={"experience_group_description"}
-          value={portfolioStackContextData.experience_group_description}
+          value={portfolioStackHeroContextData.experience_group_description}
           onChange={(e) => {
             handleUpdate("experience_group_description", e.target.value);
           }}

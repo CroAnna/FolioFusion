@@ -9,7 +9,6 @@ import {
   borderStyleItemsData,
   heroAlignmentItemsData,
   heroExtraElementsData,
-  heroPaletteItemsData,
   heroVariantData,
 } from "@/app/_libs/utils";
 import {
@@ -39,20 +38,24 @@ const CreateHero = () => {
   const [firstLoad, setFirstLoad] = useState(false);
   const [imagesToRemove, setImagesToRemove] = useState([]);
 
-  const { portfolioStackContextData, setPortfolioStackContextData } =
-    useContext(PortfolioContext);
+  const {
+    portfolioStackHeroContextData,
+    setPortfolioStackHeroContextData,
+    portfolioStackBasicContextData,
+    setPortfolioStackBasicContextData,
+  } = useContext(PortfolioContext);
 
   const removeSelectedImage = () => {
-    if (portfolioStackContextData.hero_image.publicUrl) {
-      const imgUrl = portfolioStackContextData.hero_image.publicUrl;
+    if (portfolioStackHeroContextData.hero_image.publicUrl) {
+      const imgUrl = portfolioStackHeroContextData.hero_image.publicUrl;
       setImagesToRemove([...imagesToRemove, imgUrl]);
     }
     setFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-    setPortfolioStackContextData({
-      ...portfolioStackContextData,
+    setPortfolioStackHeroContextData({
+      ...portfolioStackHeroContextData,
       hero_image: null,
       hero_image_rounded: false,
       hero_border_style: "dashed",
@@ -61,79 +64,85 @@ const CreateHero = () => {
   };
 
   const handleUpdate = (field, value) => {
-    setPortfolioStackContextData((prev) => ({
+    setPortfolioStackHeroContextData((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
 
-  const getPortfolio = useCallback(async () => {
-    const { portfolio, hero_image, error } = await getCreateHeroData();
+  const getHero = useCallback(async () => {
+    const { hero, hero_image, error, portfolio, error2 } =
+      await getCreateHeroData();
     if (error) {
       console.log(error);
     } else {
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
+      setPortfolioStackBasicContextData({
+        ...portfolioStackBasicContextData,
         id: portfolio.id,
+        portfolio_palette: portfolio.portfolio_palette,
+      });
+
+      setPortfolioStackHeroContextData({
+        ...portfolioStackHeroContextData,
+        id: hero.id,
         hero_image: hero_image,
-        hero_image_rounded: portfolio.hero_image_rounded,
-        hero_image_border: portfolio.hero_image_border,
-        hero_border_style: portfolio.hero_border_style,
-        hero_extra: portfolio.hero_extra,
-        hero_scroll_to_top: portfolio.hero_scroll_to_top,
-        hero_palette: portfolio.hero_palette,
-        hero_extra_style_elements: portfolio.hero_extra_style_elements,
-        hero_variant: portfolio.hero_variant,
-        hero_welcome: portfolio.hero_welcome,
-        hero_mobile_alignment: portfolio.hero_mobile_alignment,
-        hero_desktop_alignment: portfolio.hero_desktop_alignment,
-        hero_name: portfolio.hero_name,
-        hero_short: portfolio.hero_short,
-        hero_description: portfolio.hero_description,
-        social_github: portfolio.social_github,
-        social_linkedin: portfolio.social_linkedin,
-        social_x: portfolio.social_x,
-        social_facebook: portfolio.social_facebook,
-        social_instagram: portfolio.social_instagram,
-        social_youtube: portfolio.social_youtube,
-        social_tiktok: portfolio.social_tiktok,
-        social_dribble: portfolio.social_dribble,
-        social_other: portfolio.social_other,
-        project_group_description: portfolio.project_group_description,
-        project_group_title: portfolio.project_group_title,
-        experience_group_title: portfolio.experience_group_title,
-        experience_group_description: portfolio.experience_group_description,
-        activity_bg_shape: portfolio.activity_bg_shape,
+        hero_image_rounded: hero.hero_image_rounded,
+        hero_image_border: hero.hero_image_border,
+        hero_border_style: hero.hero_border_style,
+        hero_extra: hero.hero_extra,
+        hero_scroll_to_top: hero.hero_scroll_to_top,
+        hero_extra_style_elements: hero.hero_extra_style_elements,
+        hero_variant: hero.hero_variant,
+        hero_welcome: hero.hero_welcome,
+        hero_mobile_alignment: hero.hero_mobile_alignment,
+        hero_desktop_alignment: hero.hero_desktop_alignment,
+        hero_name: hero.hero_name,
+        hero_short: hero.hero_short,
+        hero_description: hero.hero_description,
+        social_github: hero.social_github,
+        social_linkedin: hero.social_linkedin,
+        social_x: hero.social_x,
+        social_facebook: hero.social_facebook,
+        social_instagram: hero.social_instagram,
+        social_youtube: hero.social_youtube,
+        social_tiktok: hero.social_tiktok,
+        social_dribble: hero.social_dribble,
+        social_other: hero.social_other,
+        project_group_description: hero.project_group_description,
+        project_group_title: hero.project_group_title,
+        experience_group_title: hero.experience_group_title,
+        experience_group_description: hero.experience_group_description,
+        activity_bg_shape: hero.activity_bg_shape,
       });
     }
   }, []);
 
   useEffect(() => {
-    getPortfolio();
+    getHero();
 
-    if (portfolioStackContextData.hero_image) {
-      setFile(portfolioStackContextData.hero_image);
+    if (portfolioStackHeroContextData.hero_image) {
+      setFile(portfolioStackHeroContextData.hero_image);
     }
   }, []);
 
   useEffect(() => {
-    if (file && !portfolioStackContextData.hero_image) {
+    if (file && !portfolioStackHeroContextData.hero_image) {
       setFirstLoad(true);
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
+      setPortfolioStackHeroContextData({
+        ...portfolioStackHeroContextData,
         hero_image: file,
       });
-    } else if (file && portfolioStackContextData.hero_image) {
+    } else if (file && portfolioStackHeroContextData.hero_image) {
       if (!firstLoad) {
-        setPortfolioStackContextData({
-          ...portfolioStackContextData,
+        setPortfolioStackHeroContextData({
+          ...portfolioStackHeroContextData,
           hero_image: file,
         });
         setFirstLoad(true);
       } else {
         // ovo nisam sigurna jel se ikad pozove opce i jel taj load sluzi icemu
-        setPortfolioStackContextData({
-          ...portfolioStackContextData,
+        setPortfolioStackHeroContextData({
+          ...portfolioStackHeroContextData,
           hero_image: file,
         });
       }
@@ -145,34 +154,33 @@ const CreateHero = () => {
     console.log(deleteRes);
 
     const response = await upsertCreateHeroData(
-      portfolioStackContextData.id,
-      portfolioStackContextData.hero_image,
-      portfolioStackContextData.hero_image_rounded,
-      portfolioStackContextData.hero_image_border,
-      portfolioStackContextData.hero_border_style,
-      portfolioStackContextData.hero_extra,
-      portfolioStackContextData.hero_scroll_to_top,
-      portfolioStackContextData.hero_palette,
-      portfolioStackContextData.hero_extra_style_elements,
-      portfolioStackContextData.hero_variant,
-      portfolioStackContextData.hero_welcome,
-      portfolioStackContextData.hero_mobile_alignment,
-      portfolioStackContextData.hero_desktop_alignment,
-      portfolioStackContextData.hero_name,
-      portfolioStackContextData.hero_short,
-      portfolioStackContextData.hero_description,
-      portfolioStackContextData.social_github,
-      portfolioStackContextData.social_linkedin,
-      portfolioStackContextData.social_x,
-      portfolioStackContextData.social_facebook,
-      portfolioStackContextData.social_instagram,
-      portfolioStackContextData.social_youtube,
-      portfolioStackContextData.social_tiktok,
-      portfolioStackContextData.social_dribble,
-      portfolioStackContextData.social_other
+      portfolioStackHeroContextData.id,
+      portfolioStackHeroContextData.hero_image,
+      portfolioStackHeroContextData.hero_image_rounded,
+      portfolioStackHeroContextData.hero_image_border,
+      portfolioStackHeroContextData.hero_border_style,
+      portfolioStackHeroContextData.hero_extra,
+      portfolioStackHeroContextData.hero_scroll_to_top,
+      portfolioStackHeroContextData.hero_extra_style_elements,
+      portfolioStackHeroContextData.hero_variant,
+      portfolioStackHeroContextData.hero_welcome,
+      portfolioStackHeroContextData.hero_mobile_alignment,
+      portfolioStackHeroContextData.hero_desktop_alignment,
+      portfolioStackHeroContextData.hero_name,
+      portfolioStackHeroContextData.hero_short,
+      portfolioStackHeroContextData.hero_description,
+      portfolioStackHeroContextData.social_github,
+      portfolioStackHeroContextData.social_linkedin,
+      portfolioStackHeroContextData.social_x,
+      portfolioStackHeroContextData.social_facebook,
+      portfolioStackHeroContextData.social_instagram,
+      portfolioStackHeroContextData.social_youtube,
+      portfolioStackHeroContextData.social_tiktok,
+      portfolioStackHeroContextData.social_dribble,
+      portfolioStackHeroContextData.social_other
     );
     console.log(response);
-    setPortfolioStackContextData(response.portfolio);
+    setPortfolioStackHeroContextData(response.hero);
   };
 
   return (
@@ -191,7 +199,7 @@ const CreateHero = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">1.1. Add your photo</h3>
         <div className="flex gap-4">
-          {!portfolioStackContextData.hero_image ? (
+          {!portfolioStackHeroContextData.hero_image ? (
             <div>
               <FileInput
                 setFile={setFile}
@@ -201,26 +209,26 @@ const CreateHero = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-2">
-              {portfolioStackContextData.hero_image && (
+              {portfolioStackHeroContextData.hero_image && (
                 <>
                   <Toggle
                     text={"Rounded image"}
                     onChange={(e) => {
-                      console.log(portfolioStackContextData.hero_image);
+                      console.log(portfolioStackHeroContextData.hero_image);
                       handleUpdate("hero_image_rounded", e.target.checked);
                     }}
-                    checked={portfolioStackContextData.hero_image_rounded}
+                    checked={portfolioStackHeroContextData.hero_image_rounded}
                   />
                   <Toggle
-                    checked={portfolioStackContextData.hero_image_border}
+                    checked={portfolioStackHeroContextData.hero_image_border}
                     text={"Border around image"}
                     onChange={(e) => {
                       handleUpdate("hero_image_border", e.target.checked);
                     }}
                   />
-                  {portfolioStackContextData.hero_image_border && (
+                  {portfolioStackHeroContextData.hero_image_border && (
                     <Join
-                      value={portfolioStackContextData.hero_border_style}
+                      value={portfolioStackHeroContextData.hero_border_style}
                       items={borderStyleItemsData}
                       onChange={(e) => {
                         handleUpdate("hero_border_style", e.target.value);
@@ -249,7 +257,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_welcome"}
-          value={portfolioStackContextData.hero_welcome}
+          value={portfolioStackHeroContextData.hero_welcome}
           onChange={(e) => {
             handleUpdate("hero_welcome", e.target.value);
           }}
@@ -260,7 +268,7 @@ const CreateHero = () => {
         <h3 className="text-xl md:text-2xl font-bold">1.3. Add your name</h3>
         <Input
           name={"hero_name"}
-          value={portfolioStackContextData.hero_name}
+          value={portfolioStackHeroContextData.hero_name}
           onChange={(e) => {
             handleUpdate("hero_name", e.target.value);
           }}
@@ -275,7 +283,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_short"}
-          value={portfolioStackContextData.hero_short}
+          value={portfolioStackHeroContextData.hero_short}
           onChange={(e) => {
             handleUpdate("hero_short", e.target.value);
           }}
@@ -291,7 +299,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_description"}
-          value={portfolioStackContextData.hero_description}
+          value={portfolioStackHeroContextData.hero_description}
           onChange={(e) => {
             handleUpdate("hero_description", e.target.value);
           }}
@@ -300,31 +308,18 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">
-          1.6. Select portfolio color palette
-        </h3>
-        <Join
-          value={portfolioStackContextData.hero_palette}
-          items={heroPaletteItemsData}
-          onChange={(e) => {
-            handleUpdate("hero_palette", e.target.value);
-          }}
-          name={"hero_palette"}
-        />
-      </div>
-      <div className="flex flex-col gap-4">
-        <h3 className="text-xl md:text-2xl font-bold">
-          1.7. Select UI of your hero
+          1.6. Select UI of your hero
         </h3>
         <Toggle
-          checked={portfolioStackContextData.hero_extra}
+          checked={portfolioStackHeroContextData.hero_extra}
           text={"Show custom elements"}
           onChange={(e) => {
             handleUpdate("hero_extra", e.target.checked);
           }}
         />
-        {portfolioStackContextData.hero_extra && (
+        {portfolioStackHeroContextData.hero_extra && (
           <Join
-            value={portfolioStackContextData.hero_extra_style_elements}
+            value={portfolioStackHeroContextData.hero_extra_style_elements}
             items={heroExtraElementsData}
             onChange={(e) => {
               handleUpdate("hero_extra_style_elements", e.target.value);
@@ -332,9 +327,9 @@ const CreateHero = () => {
             name={"hero_extra_style_elements"}
           />
         )}
-        {portfolioStackContextData.hero_extra && (
+        {portfolioStackHeroContextData.hero_extra && (
           <Join
-            value={portfolioStackContextData.hero_variant}
+            value={portfolioStackHeroContextData.hero_variant}
             items={heroVariantData}
             onChange={(e) => {
               handleUpdate("hero_variant", e.target.value);
@@ -346,14 +341,14 @@ const CreateHero = () => {
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
           <h3 className="text-xl md:text-2xl font-bold">
-            1.8. Add links to social medias
+            1.7. Add links to social medias
           </h3>
           <p>(Or leave blank)</p>
         </div>
         <Input
           icon={<GithubLogo size={32} weight="duotone" />}
           name={"social_github"}
-          value={portfolioStackContextData.social_github}
+          value={portfolioStackHeroContextData.social_github}
           onChange={(e) => {
             handleUpdate("social_github", e.target.value);
           }}
@@ -362,7 +357,7 @@ const CreateHero = () => {
         <Input
           icon={<LinkedinLogo size={32} weight="duotone" />}
           name={"social_linkedin"}
-          value={portfolioStackContextData.social_linkedin}
+          value={portfolioStackHeroContextData.social_linkedin}
           onChange={(e) => {
             handleUpdate("social_linkedin", e.target.value);
           }}
@@ -371,7 +366,7 @@ const CreateHero = () => {
         <Input
           icon={<XLogo size={32} weight="duotone" />}
           name={"social_x"}
-          value={portfolioStackContextData.social_x}
+          value={portfolioStackHeroContextData.social_x}
           onChange={(e) => {
             handleUpdate("social_x", e.target.value);
           }}
@@ -380,7 +375,7 @@ const CreateHero = () => {
         <Input
           icon={<FacebookLogo size={32} weight="duotone" />}
           name={"social_facebook"}
-          value={portfolioStackContextData.social_facebook}
+          value={portfolioStackHeroContextData.social_facebook}
           onChange={(e) => {
             handleUpdate("social_facebook", e.target.value);
           }}
@@ -389,7 +384,7 @@ const CreateHero = () => {
         <Input
           icon={<InstagramLogo size={32} weight="duotone" />}
           name={"social_instagram"}
-          value={portfolioStackContextData.social_instagram}
+          value={portfolioStackHeroContextData.social_instagram}
           onChange={(e) => {
             handleUpdate("social_instagram", e.target.value);
           }}
@@ -398,7 +393,7 @@ const CreateHero = () => {
         <Input
           icon={<YoutubeLogo size={32} weight="duotone" />}
           name={"social_youtube"}
-          value={portfolioStackContextData.social_youtube}
+          value={portfolioStackHeroContextData.social_youtube}
           onChange={(e) => {
             handleUpdate("social_youtube", e.target.value);
           }}
@@ -407,7 +402,7 @@ const CreateHero = () => {
         <Input
           icon={<TiktokLogo size={32} weight="duotone" />}
           name={"social_tiktok"}
-          value={portfolioStackContextData.social_tiktok}
+          value={portfolioStackHeroContextData.social_tiktok}
           onChange={(e) => {
             handleUpdate("social_tiktok", e.target.value);
           }}
@@ -415,7 +410,7 @@ const CreateHero = () => {
         />
         <Input
           icon={<DribbbleLogo size={32} weight="duotone" />}
-          value={portfolioStackContextData.social_dribble}
+          value={portfolioStackHeroContextData.social_dribble}
           name={"social_dribble"}
           onChange={(e) => {
             handleUpdate("social_dribble", e.target.value);
@@ -424,7 +419,7 @@ const CreateHero = () => {
         />
         <Input
           icon={<Link size={32} weight="duotone" />}
-          value={portfolioStackContextData.social_other}
+          value={portfolioStackHeroContextData.social_other}
           name={"social_other"}
           onChange={(e) => {
             handleUpdate("social_other", e.target.value);
@@ -434,11 +429,11 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">
-          1.9. Do you want to have scroll to top button ?
+          1.8. Do you want to have scroll to top button ?
         </h3>
         <Toggle
           yesNo
-          checked={portfolioStackContextData.hero_scroll_to_top}
+          checked={portfolioStackHeroContextData.hero_scroll_to_top}
           text={
             "Scroll to top (visible on deployed portfolio with custom domain)"
           }
@@ -449,20 +444,20 @@ const CreateHero = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">
-          1.10. Select text alignments
+          1.9. Select text alignments
         </h3>
         <p>Mobile text alignment</p>
         <Join
-          value={portfolioStackContextData.hero_mobile_alignment}
+          value={portfolioStackHeroContextData.hero_mobile_alignment}
           items={heroAlignmentItemsData}
           onChange={(e) => {
             handleUpdate("hero_mobile_alignment", e.target.value);
           }}
           name={"hero_mobile_alignment"}
-        />{" "}
+        />
         <p>Desktop text alignment</p>
         <Join
-          value={portfolioStackContextData.hero_desktop_alignment}
+          value={portfolioStackHeroContextData.hero_desktop_alignment}
           items={heroAlignmentItemsData}
           onChange={(e) => {
             handleUpdate("hero_desktop_alignment", e.target.value);

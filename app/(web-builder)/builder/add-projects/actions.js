@@ -8,7 +8,7 @@ export async function getAddProjectsSectionData() {
   } = await supabase.auth.getUser();
 
   const { data: portfolio, error } = await supabase
-    .from("portfolios")
+    .from("heros")
     .select("id, project_group_title, project_group_description")
     .eq("user_id", user.id)
     .single();
@@ -79,23 +79,23 @@ export async function upsertAddProjectsData(
     upsertData.id = id;
   }
 
-  const { data: portfolioWithoutImage, error } = await supabase
-    .from("portfolios")
+  const { data: heroWithoutImage, error } = await supabase
+    .from("heros")
     .select()
     .eq("user_id", user.id)
     .single();
 
   let hero_image = null;
-  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
-    const hero_image_filepath = portfolioWithoutImage.hero_image;
+  if (heroWithoutImage && heroWithoutImage.hero_image) {
+    const hero_image_filepath = heroWithoutImage.hero_image;
     const { data } = supabase.storage
       .from("images")
       .getPublicUrl(`${hero_image_filepath}`);
     hero_image = data;
   }
   const portfolio = {
-    ...portfolioWithoutImage,
-    hero_image: portfolioWithoutImage && hero_image,
+    ...heroWithoutImage,
+    hero_image: heroWithoutImage && hero_image,
   };
 
   const projects = await Promise.all(

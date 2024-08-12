@@ -8,9 +8,12 @@ import {
 import ProjectCard from "./ProjectCard";
 
 const PortfolioProjects = () => {
-  const { portfolioStackContextData, portfolioStackProjectsContextData } =
-    useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
+  const {
+    portfolioStackHeroContextData,
+    portfolioStackProjectsContextData,
+    portfolioStackBasicContextData,
+  } = useContext(PortfolioContext);
+  const palette = portfolioStackBasicContextData.portfolio_palette;
 
   return (
     <div
@@ -25,10 +28,10 @@ const PortfolioProjects = () => {
             palette
           )}`}
         >
-          {portfolioStackContextData.project_group_title}
+          {portfolioStackHeroContextData.project_group_title}
         </h3>
         <p className="text-xl font-bold max-w-xs">
-          {portfolioStackContextData.project_group_description}
+          {portfolioStackHeroContextData.project_group_description}
         </p>
         <div className="flex flex-col gap-10 md:gap-16 ">
           {portfolioStackProjectsContextData.map((el, index) => (

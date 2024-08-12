@@ -26,6 +26,9 @@ export const stepsData = [
   { text: "Add projects" },
   { text: "Add education and work experience" },
   { text: "Add achievements and activities" },
+  {
+    text: "Customize portfolio",
+  },
   { text: "Deploy or download as PDF" },
 ];
 

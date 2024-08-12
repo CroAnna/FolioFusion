@@ -13,6 +13,8 @@ const Steps = ({ currentStep, stepsData }) => {
       case 3:
         return "/builder/add-activities";
       case 4:
+        return "/builder/add-basic-info";
+      case 5:
         return "/builder/deploy-portfolio";
     }
   };

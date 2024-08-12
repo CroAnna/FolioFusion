@@ -16,8 +16,8 @@ const AddActivities = () => {
   const {
     portfolioStackActivityContextData,
     setPortfolioStackActivityContextData,
-    portfolioStackContextData,
-    setPortfolioStackContextData,
+    portfolioStackHeroContextData,
+    setPortfolioStackHeroContextData,
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
 
@@ -39,7 +39,7 @@ const AddActivities = () => {
   };
 
   const handleUpdate = (field, value) => {
-    setPortfolioStackContextData((prev) => ({
+    setPortfolioStackHeroContextData((prev) => ({
       ...prev,
       [field]: value,
     }));
@@ -48,21 +48,21 @@ const AddActivities = () => {
   const saveData = async () => {
     await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddActivitiesData(
-      portfolioStackContextData.id,
-      portfolioStackContextData.activity_bg_shape,
+      portfolioStackHeroContextData.id,
+      portfolioStackHeroContextData.activity_bg_shape,
       portfolioStackActivityContextData
     );
     setPortfolioStackActivityContextData(response.activitiesWithImages); // sluzi da se ne dogodi da ako se doda activity i samo spremi page (bez prebacivanja dalje) i doda jos jedan activity, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
-  const getPortfolio = useCallback(async () => {
+  const getHero = useCallback(async () => {
     const { portfolio, error } = await getAddActivitiesSectionData();
 
     if (error) {
       console.log(error);
     } else {
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
+      setPortfolioStackHeroContextData({
+        ...portfolioStackHeroContextData,
         activity_bg_shape: portfolio.activity_bg_shape,
       });
     }
@@ -79,8 +79,8 @@ const AddActivities = () => {
   }, []);
 
   useEffect(() => {
-    if (portfolioStackContextData.activity_bg_shape == "") {
-      getPortfolio();
+    if (portfolioStackHeroContextData.activity_bg_shape == "") {
+      getHero();
     }
     getActivities();
   }, []);
@@ -103,7 +103,7 @@ const AddActivities = () => {
           4.1. Select activity background color
         </h3>
         <Join
-          value={portfolioStackContextData.activity_bg_shape}
+          value={portfolioStackHeroContextData.activity_bg_shape}
           items={activityBgData}
           onChange={(e) => {
             handleUpdate("activity_bg_shape", e.target.value);
@@ -143,7 +143,7 @@ const AddActivities = () => {
       </div>
       <NextPreviousNavigation
         handleNextClick={saveData}
-        nextUrl={"/builder/deploy-portfolio"}
+        nextUrl={"/builder/add-basic-info"}
         previousUrl={"/builder/add-education"}
       />
     </div>

@@ -22,12 +22,13 @@ import {
 } from "../_libs/utils";
 
 const PortfolioHero = () => {
-  const { portfolioStackContextData } = useContext(PortfolioContext);
-  const border_style = portfolioStackContextData.hero_border_style;
-  const palette = portfolioStackContextData.hero_palette;
+  const { portfolioStackHeroContextData, portfolioStackBasicContextData } =
+    useContext(PortfolioContext);
+  const border_style = portfolioStackHeroContextData.hero_border_style;
+  const palette = portfolioStackBasicContextData.portfolio_palette;
   const extra_style_elements =
-    portfolioStackContextData.hero_extra_style_elements;
-  const variant = portfolioStackContextData.hero_variant;
+    portfolioStackHeroContextData.hero_extra_style_elements;
+  const variant = portfolioStackHeroContextData.hero_variant;
 
   const [imageUrl, setImageUrl] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -407,17 +408,17 @@ const PortfolioHero = () => {
   useEffect(() => {
     let url;
     try {
-      if (portfolioStackContextData.hero_image instanceof File) {
-        url = URL.createObjectURL(portfolioStackContextData.hero_image);
+      if (portfolioStackHeroContextData.hero_image instanceof File) {
+        url = URL.createObjectURL(portfolioStackHeroContextData.hero_image);
       } else {
-        url = portfolioStackContextData.hero_image.publicUrl;
+        url = portfolioStackHeroContextData.hero_image.publicUrl;
       }
     } catch (error) {
       console.error("No image found or null: ", error);
       url = "";
     }
     setImageUrl(url);
-  }, [portfolioStackContextData.hero_image]);
+  }, [portfolioStackHeroContextData.hero_image]);
 
   return (
     <div
@@ -425,7 +426,7 @@ const PortfolioHero = () => {
         ${isAdvancedHeroUI() && "relative w-full"} 
         ${getPrimaryTextColor(palette)} ${getBgColor(palette)}`}
     >
-      {portfolioStackContextData.hero_extra && (
+      {portfolioStackHeroContextData.hero_extra && (
         <div className={`hidden md:block  `}>
           {!isAdvancedHeroUI() ? (
             <Image
@@ -460,16 +461,16 @@ const PortfolioHero = () => {
       <div
         className={`hero-content rounded-full flex flex-col md:flex-row z-10`}
       >
-        {portfolioStackContextData.hero_image && (
+        {portfolioStackHeroContextData.hero_image && (
           <div
             className={`max-w-xs m-6 inline-block
             ${
-              portfolioStackContextData.hero_image_rounded
+              portfolioStackHeroContextData.hero_image_rounded
                 ? "rounded-full"
                 : "rounded-lg"
             } 
           ${
-            portfolioStackContextData.hero_image_border &&
+            portfolioStackHeroContextData.hero_image_border &&
             `border-4 ${
               border_style == "dashed"
                 ? "border-dashed"
@@ -488,7 +489,7 @@ const PortfolioHero = () => {
               src={imageUrl}
               alt=""
               className={`${
-                portfolioStackContextData.hero_image_rounded
+                portfolioStackHeroContextData.hero_image_rounded
                   ? "rounded-full"
                   : "rounded-lg"
               } w-full h-full`}
@@ -501,11 +502,11 @@ const PortfolioHero = () => {
               className={`py-0 text-lg`}
               style={{
                 textAlign: isMobile
-                  ? portfolioStackContextData.hero_mobile_alignment
-                  : portfolioStackContextData.hero_desktop_alignment,
+                  ? portfolioStackHeroContextData.hero_mobile_alignment
+                  : portfolioStackHeroContextData.hero_desktop_alignment,
               }}
             >
-              {portfolioStackContextData.hero_welcome}
+              {portfolioStackHeroContextData.hero_welcome}
             </p>
             <div>
               <h1
@@ -513,123 +514,123 @@ const PortfolioHero = () => {
                 ${getPrimaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
-                    ? portfolioStackContextData.hero_mobile_alignment
-                    : portfolioStackContextData.hero_desktop_alignment,
+                    ? portfolioStackHeroContextData.hero_mobile_alignment
+                    : portfolioStackHeroContextData.hero_desktop_alignment,
                 }}
               >
-                {portfolioStackContextData.hero_name}
+                {portfolioStackHeroContextData.hero_name}
               </h1>
               <h2
                 className={`text-4xl md:text-5xl font-bold 
                   ${getSecondaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
-                    ? portfolioStackContextData.hero_mobile_alignment
-                    : portfolioStackContextData.hero_desktop_alignment,
+                    ? portfolioStackHeroContextData.hero_mobile_alignment
+                    : portfolioStackHeroContextData.hero_desktop_alignment,
                 }}
               >
-                {portfolioStackContextData.hero_short}
+                {portfolioStackHeroContextData.hero_short}
               </h2>
             </div>
             <p
               className={`md:text-lg max-w-xl md:py-4`}
               style={{
                 textAlign: isMobile
-                  ? portfolioStackContextData.hero_mobile_alignment
-                  : portfolioStackContextData.hero_desktop_alignment,
+                  ? portfolioStackHeroContextData.hero_mobile_alignment
+                  : portfolioStackHeroContextData.hero_desktop_alignment,
               }}
             >
-              {portfolioStackContextData.hero_description}
+              {portfolioStackHeroContextData.hero_description}
             </p>
           </div>
         }
       </div>
       <div className="flex gap-2">
-        {portfolioStackContextData.social_github && (
+        {portfolioStackHeroContextData.social_github && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_github}
+            href={portfolioStackHeroContextData.social_github}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <GithubLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_linkedin && (
+        {portfolioStackHeroContextData.social_linkedin && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_linkedin}
+            href={portfolioStackHeroContextData.social_linkedin}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <LinkedinLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_x && (
+        {portfolioStackHeroContextData.social_x && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_x}
+            href={portfolioStackHeroContextData.social_x}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <XLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_facebook && (
+        {portfolioStackHeroContextData.social_facebook && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_facebook}
+            href={portfolioStackHeroContextData.social_facebook}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <FacebookLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_instagram && (
+        {portfolioStackHeroContextData.social_instagram && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_instagram}
+            href={portfolioStackHeroContextData.social_instagram}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <InstagramLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_youtube && (
+        {portfolioStackHeroContextData.social_youtube && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_youtube}
+            href={portfolioStackHeroContextData.social_youtube}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <YoutubeLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_tiktok && (
+        {portfolioStackHeroContextData.social_tiktok && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_tiktok}
+            href={portfolioStackHeroContextData.social_tiktok}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <TiktokLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_dribble && (
+        {portfolioStackHeroContextData.social_dribble && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_dribble}
+            href={portfolioStackHeroContextData.social_dribble}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <DribbbleLogo size={36} weight="duotone" />
           </Link>
         )}
-        {portfolioStackContextData.social_other && (
+        {portfolioStackHeroContextData.social_other && (
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href={portfolioStackContextData.social_other}
+            href={portfolioStackHeroContextData.social_other}
             className={`z-20 ${getPrimaryColors(palette)}`}
           >
             <LinkLogo size={36} weight="duotone" />

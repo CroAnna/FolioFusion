@@ -17,22 +17,28 @@ export async function getDataByDomain(domain) {
     };
   }
 
-  const { data: portfolioWithoutImage, portfolioError } = await supabase
+  const { data: portfolio, portfolioError } = await supabase
     .from("portfolios")
     .select()
     .eq("user_id", owner.id)
     .single();
 
+  const { data: heroWithoutImage, heroError } = await supabase
+    .from("heros")
+    .select()
+    .eq("user_id", owner.id)
+    .single();
+
   let hero_image = null;
-  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
-    const hero_image_filepath = portfolioWithoutImage.hero_image;
+  if (heroWithoutImage && heroWithoutImage.hero_image) {
+    const hero_image_filepath = heroWithoutImage.hero_image;
 
     const { data } = supabase.storage
       .from("images")
       .getPublicUrl(`${hero_image_filepath}`);
     hero_image = data;
   }
-  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image };
+  const hero = { ...heroWithoutImage, hero_image: hero_image };
 
   const { data: projectsWithoutImages, projectsError } = await supabase
     .from("projects")
@@ -83,13 +89,15 @@ export async function getDataByDomain(domain) {
   });
 
   return {
-    portfolio,
+    hero,
     hero_image,
     projects,
     experiences,
     activities,
-    ownerError,
+    portfolio,
     portfolioError,
+    ownerError,
+    heroError,
     projectsError,
     experiencesError,
     activitiesError,

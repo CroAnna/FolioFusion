@@ -8,7 +8,7 @@ export async function getAddActivitiesSectionData() {
   } = await supabase.auth.getUser();
 
   const { data: portfolio, error } = await supabase
-    .from("portfolios")
+    .from("heros")
     .select("id, activity_bg_shape")
     .eq("user_id", user.id)
     .single();
@@ -77,21 +77,21 @@ export async function upsertAddActivitiesData(
     upsertData.id = id;
   }
 
-  const { data: portfolioWithoutImage, error } = await supabase
-    .from("portfolios")
+  const { data: heroWithoutImage, error } = await supabase
+    .from("heros")
     .upsert(upsertData)
     .select()
     .single();
 
   let hero_image = null;
-  if (portfolioWithoutImage.hero_image) {
-    const hero_image_filepath = portfolioWithoutImage.hero_image;
+  if (heroWithoutImage.hero_image) {
+    const hero_image_filepath = heroWithoutImage.hero_image;
     const { data } = supabase.storage
       .from("images")
       .getPublicUrl(`${hero_image_filepath}`);
     hero_image = data;
   }
-  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image };
+  const portfolio = { ...heroWithoutImage, hero_image: hero_image };
 
   const activities = await Promise.all(
     activitiesData.map(async (activity) => {

@@ -15,9 +15,9 @@ import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
 const ProjectCard = ({ project, projectIndex }) => {
-  const { portfolioStackContextData, portfolioStackProjectsContextData } =
+  const { portfolioStackBasicContextData, portfolioStackProjectsContextData } =
     useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
+  const palette = portfolioStackBasicContextData.portfolio_palette;
   const [imageUrl, setImageUrl] = useState("");
 
   const selectedIcon1 = projectLinkIcons.find(

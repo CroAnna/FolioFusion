@@ -4,17 +4,19 @@ import ActivityCard from "./ActivityCard";
 import { PortfolioContext } from "./PortfolioProvider";
 
 const PortfolioActivities = () => {
-  const { portfolioStackContextData, portfolioStackActivityContextData } =
-    useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
+  const {
+    portfolioStackHeroContextData,
+    portfolioStackActivityContextData,
+    portfolioStackBasicContextData,
+  } = useContext(PortfolioContext);
+  const palette = portfolioStackBasicContextData.portfolio_palette;
 
   return (
     <div className="relative z-0">
       <Image
-        src={`/${portfolioStackContextData.activity_bg_shape}-${palette.slice(
-          -1
-        )}.svg`}
-        // dodaj da se mijenjaju i biraju slike, dizajni slika https://app.haikei.app/ i boje prema paleti
+        src={`/${
+          portfolioStackHeroContextData.activity_bg_shape
+        }-${palette.slice(-1)}.svg`}
         alt=""
         fill
         className="w-full h-auto object-cover top-0 left-0 right-0 bottom-0"

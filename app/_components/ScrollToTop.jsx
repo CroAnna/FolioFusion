@@ -6,8 +6,8 @@ import { getHexSecondaryBgColor, getPrimaryBgColors } from "../_libs/utils";
 
 const ScrollToTop = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
-  const { portfolioStackContextData } = useContext(PortfolioContext);
-  const palette = portfolioStackContextData.hero_palette;
+  const { portfolioStackBasicContextData } = useContext(PortfolioContext);
+  const palette = portfolioStackBasicContextData.portfolio_palette;
 
   useEffect(() => {
     const totalHeight = document.documentElement.scrollHeight;

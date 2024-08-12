@@ -14,14 +14,16 @@ import { deepEqual } from "@/utils/common/methods.js";
 const RenderedPortfolio = ({ domain = null }) => {
   const [errorData, setErrorData] = useState(null);
   const {
-    portfolioStackContextData,
+    portfolioStackBasicContextData,
+    portfolioStackHeroContextData,
     portfolioStackProjectsContextData,
     portfolioStackExperienceContextData,
     portfolioStackActivityContextData,
-    setPortfolioStackContextData,
+    setPortfolioStackHeroContextData,
     setPortfolioStackExperienceContextData,
     setPortfolioStackProjectsContextData,
     setPortfolioStackActivityContextData,
+    setPortfolioStackBasicContextData,
   } = useContext(PortfolioContext);
 
   useEffect(() => {
@@ -38,14 +40,15 @@ const RenderedPortfolio = ({ domain = null }) => {
     if (_data.code && _data.code == 404) {
       setErrorData(_data);
     } else {
-      setPortfolioStackContextData(_data.portfolio);
+      setPortfolioStackBasicContextData(_data.portfolio);
+      setPortfolioStackHeroContextData(_data.hero);
       setPortfolioStackProjectsContextData(_data.projects);
       setPortfolioStackActivityContextData(_data.activities);
       setPortfolioStackExperienceContextData(_data.experiences);
     }
   };
 
-  const checkIfPortfolioStackContextDataIsDefault = () => {
+  const checkIfportfolioStackHeroContextDataIsDefault = () => {
     const defaultValue = [
       {
         id: null,
@@ -55,7 +58,6 @@ const RenderedPortfolio = ({ domain = null }) => {
         hero_image_border: false,
         hero_extra: false,
         hero_scroll_to_top: false,
-        hero_palette: "Palette 1",
         hero_extra_style_elements: "abstract",
         hero_variant: "A",
         hero_welcome: "",
@@ -81,8 +83,8 @@ const RenderedPortfolio = ({ domain = null }) => {
       },
     ];
     return (
-      deepEqual(portfolioStackContextData, defaultValue) ||
-      deepEqual(portfolioStackContextData, [])
+      deepEqual(portfolioStackHeroContextData, defaultValue) ||
+      deepEqual(portfolioStackHeroContextData, [])
     );
   };
 
@@ -152,11 +154,12 @@ const RenderedPortfolio = ({ domain = null }) => {
 
   return (
     <div className={`${!domain && "overflow-y-scroll"} h-screen flex flex-col`}>
-      {portfolioStackContextData.hero_scroll_to_top && domain && (
+      {portfolioStackHeroContextData.hero_scroll_to_top && domain && (
         <ScrollToTop />
       )}
       <p className="max-w-6xl break-words">
-        {/* {JSON.stringify(portfolioStackContextData)} */}
+        {/* {JSON.stringify(portfolioStackBasicContextData)} */}
+        {/* {JSON.stringify(portfolioStackHeroContextData)} */}
         {/* {JSON.stringify(portfolioStackProjectsContextData)} */}
         {/* {JSON.stringify(portfolioStackExperienceContextData)} */}
         {/* {JSON.stringify(portfolioStackActivityContextData)} */}
@@ -174,8 +177,10 @@ const RenderedPortfolio = ({ domain = null }) => {
       )}
       {!errorData && (
         <>
-          {portfolioStackContextData &&
-            !checkIfPortfolioStackContextDataIsDefault() && <PortfolioHero />}
+          {portfolioStackHeroContextData &&
+            !checkIfportfolioStackHeroContextDataIsDefault() && (
+              <PortfolioHero />
+            )}
           {portfolioStackProjectsContextData &&
             !checkIfPortfolioStackProjectsContextDataIsDefault() && (
               <PortfolioProjects />

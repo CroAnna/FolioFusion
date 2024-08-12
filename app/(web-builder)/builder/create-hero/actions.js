@@ -7,22 +7,29 @@ export async function getCreateHeroData() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: portfolioWithoutImage, error } = await supabase
-    .from("portfolios")
+  const { data: heroWithoutImage, error } = await supabase
+    .from("heros")
     .select()
     .eq("user_id", user.id)
     .single();
 
   let hero_image = null;
-  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
-    const hero_image_filepath = portfolioWithoutImage.hero_image;
+  if (heroWithoutImage && heroWithoutImage.hero_image) {
+    const hero_image_filepath = heroWithoutImage.hero_image;
     const { data } = supabase.storage
       .from("images")
       .getPublicUrl(`${hero_image_filepath}`);
     hero_image = data;
   }
-  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image };
-  return { portfolio, hero_image, error };
+  const hero = { ...heroWithoutImage, hero_image: hero_image };
+
+  const { data: portfolio, error2 } = await supabase
+    .from("portfolios")
+    .select()
+    .eq("user_id", user.id)
+    .single();
+
+  return { hero, hero_image, error, portfolio, error2 };
 }
 
 export async function upsertCreateHeroData(
@@ -33,7 +40,6 @@ export async function upsertCreateHeroData(
   hero_border_style,
   hero_extra,
   hero_scroll_to_top,
-  hero_palette,
   hero_extra_style_elements,
   hero_variant,
   hero_welcome,
@@ -86,7 +92,6 @@ export async function upsertCreateHeroData(
     hero_border_style: hero_border_style,
     hero_extra: hero_extra,
     hero_scroll_to_top: hero_scroll_to_top,
-    hero_palette: hero_palette,
     hero_extra_style_elements: hero_extra_style_elements,
     hero_variant: hero_variant,
     hero_welcome: hero_welcome,
@@ -113,20 +118,20 @@ export async function upsertCreateHeroData(
     upsertData.id = id;
   }
 
-  const { data: portfolioWithoutImage, error } = await supabase
-    .from("portfolios")
+  const { data: heroWithoutImage, error } = await supabase
+    .from("heros")
     .upsert(upsertData)
     .select()
     .single();
 
   let hero_image_db = null;
-  if (portfolioWithoutImage && portfolioWithoutImage.hero_image) {
-    const hero_image_filepath = portfolioWithoutImage.hero_image;
+  if (heroWithoutImage && heroWithoutImage.hero_image) {
+    const hero_image_filepath = heroWithoutImage.hero_image;
     const { data } = supabase.storage
       .from("images")
       .getPublicUrl(`${hero_image_filepath}`);
     hero_image_db = data;
   }
-  const portfolio = { ...portfolioWithoutImage, hero_image: hero_image_db };
-  return { portfolio, hero_image, error };
+  const hero = { ...heroWithoutImage, hero_image: hero_image_db };
+  return { hero, hero_image, error };
 }

@@ -13,16 +13,16 @@ import { deleteUnusedImages } from "../actions";
 
 const AddWork = () => {
   const {
-    portfolioStackContextData,
-    setPortfolioStackContextData,
+    portfolioStackHeroContextData,
+    setPortfolioStackHeroContextData,
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
 
   const handleUpdate = (field, value) => {
-    setPortfolioStackContextData({
-      ...portfolioStackContextData,
+    setPortfolioStackHeroContextData({
+      ...portfolioStackHeroContextData,
       [field]: value,
     });
   };
@@ -49,23 +49,23 @@ const AddWork = () => {
   const saveData = async () => {
     await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddProjectsData(
-      portfolioStackContextData.id,
-      portfolioStackContextData.project_group_description,
-      portfolioStackContextData.project_group_title,
+      portfolioStackHeroContextData.id,
+      portfolioStackHeroContextData.project_group_description,
+      portfolioStackHeroContextData.project_group_title,
       portfolioStackProjectsContextData
     );
 
     setPortfolioStackProjectsContextData(response.projectsWithImages); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
   };
 
-  const getPortfolio = useCallback(async () => {
+  const getHero = useCallback(async () => {
     const { portfolio, error } = await getAddProjectsSectionData();
 
     if (error) {
       console.log(error);
     } else {
-      setPortfolioStackContextData({
-        ...portfolioStackContextData,
+      setPortfolioStackHeroContextData({
+        ...portfolioStackHeroContextData,
         project_group_description: portfolio.project_group_description,
         project_group_title: portfolio.project_group_title,
       });
@@ -83,10 +83,10 @@ const AddWork = () => {
 
   useEffect(() => {
     if (
-      portfolioStackContextData.project_group_title == "" ||
-      portfolioStackContextData.project_group_description == ""
+      portfolioStackHeroContextData.project_group_title == "" ||
+      portfolioStackHeroContextData.project_group_description == ""
     ) {
-      getPortfolio();
+      getHero();
     }
     getProjects();
   }, []);
@@ -110,7 +110,7 @@ const AddWork = () => {
         </h3>
         <Input
           name={"project_group_title"}
-          value={portfolioStackContextData.project_group_title}
+          value={portfolioStackHeroContextData.project_group_title}
           onChange={(e) => {
             handleUpdate("project_group_title", e.target.value);
           }}
@@ -123,7 +123,7 @@ const AddWork = () => {
         </h3>
         <Input
           name={"project_group_description"}
-          value={portfolioStackContextData.project_group_description}
+          value={portfolioStackHeroContextData.project_group_description}
           onChange={(e) => {
             handleUpdate("project_group_description", e.target.value);
           }}

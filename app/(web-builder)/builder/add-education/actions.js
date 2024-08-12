@@ -8,7 +8,7 @@ export async function getAddExperiencesSectionData() {
 
   console.log("user.id " + user.id);
   const { data: portfolio, error } = await supabase
-    .from("portfolios")
+    .from("heros")
     .select("id, experience_group_title, experience_group_description")
     .eq("user_id", user.id)
     .single();
@@ -58,7 +58,7 @@ export async function upsertAddExperiencesData(
   }
 
   const { data: portfolio, error } = await supabase
-    .from("portfolios")
+    .from("heros")
     .upsert(upsertData)
     .select()
     .single();
