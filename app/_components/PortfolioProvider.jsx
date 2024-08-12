@@ -9,10 +9,14 @@ const PortfolioContext = createContext({
   setPortfolioStackExperienceContextData: () => {},
   portfolioStackActivityContextData: [],
   setPortfolioStackActivityContextData: () => {},
+  confettiTriggerState: false,
+  setConfettiTriggerState: () => {},
   resetContextValues: () => {},
 });
 
 const PortfolioProvider = ({ children }) => {
+  const [confettiTriggerState, setConfettiTriggerState] = useState(false);
+
   const [portfolioStackContextData, setPortfolioStackContextData] = useState({
     id: null,
     hero_image: null,
@@ -191,6 +195,8 @@ const PortfolioProvider = ({ children }) => {
         setPortfolioStackExperienceContextData,
         portfolioStackActivityContextData,
         setPortfolioStackActivityContextData,
+        confettiTriggerState,
+        setConfettiTriggerState,
         resetContextValues,
       }}
     >

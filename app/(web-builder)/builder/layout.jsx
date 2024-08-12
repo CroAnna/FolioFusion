@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import RenderedPortfolio from "../../_components/RenderedPortfolio";
 import PortfolioMaker from "../../_components/PortfolioMaker";
 import { stepsData } from "../../_libs/utils";
 import Steps from "../../_components/Steps";
+import Confetti from "@/app/_components/Confetti";
+import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 
 export default function BuilderLayout({ children }) {
   const [currentStep, setCurrentStep] = useState(1);
   const pathname = usePathname();
+  const { confettiTriggerState } = useContext(PortfolioContext);
 
   useEffect(() => {
     console.log("next page " + pathname);
@@ -27,6 +30,7 @@ export default function BuilderLayout({ children }) {
 
   return (
     <>
+      {confettiTriggerState && <Confetti />}
       <div className="flex-1"></div>
       <div className="flex w-full flex-col md:flex-row">
         <div className="flex-2">

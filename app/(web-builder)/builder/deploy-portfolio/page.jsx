@@ -5,14 +5,16 @@ import {
   getUserData,
   upsertDeploymentData,
 } from "./actions";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
+import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 
 const DeployPortfolio = () => {
   const [user, setUser] = useState(null);
   const [domain, setDomain] = useState(null);
   const [domainAvailable, setDomainAvailable] = useState(true);
+  const { setConfettiTriggerState } = useContext(PortfolioContext);
 
   const deployPortfolio = async () => {
     // check if domain is unique and available
@@ -20,8 +22,10 @@ const DeployPortfolio = () => {
     if (unavailableDomain) {
       console.log("unavailable");
       setDomainAvailable(false);
+      setConfettiTriggerState(false);
     } else {
-      upsertDeploymentData(domain);
+      const { _user, error } = await upsertDeploymentData(domain);
+      setConfettiTriggerState(error ? false : _user ? true : false);
     }
   };
 
