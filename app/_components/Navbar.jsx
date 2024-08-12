@@ -4,10 +4,12 @@ import { createClient } from "@/utils/supabase/server";
 import { logout } from "../(web-builder)/logout/actions";
 import LogoutButton from "./LogoutButton";
 import VariableNavbar from "./VariableNavbar";
+import { getUserData } from "./actionsServer";
 
 const Navbar = async () => {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
+  const { userData } = await getUserData();
 
   return (
     <div className="navbar p-0 bg-base-100 justify-between max-w-screen-xl mx-auto">
@@ -22,6 +24,13 @@ const Navbar = async () => {
               <Link href="/builder/create-hero">
                 <button className="btn btn-primary">My portfolio</button>
               </Link>
+              {userData && userData.domain_url && (
+                <a href={`/${userData.domain_url}`} target="_blank">
+                  <button className="btn btn-secondary">
+                    Check live portfolio
+                  </button>
+                </a>
+              )}
               <form action={logout}>
                 <LogoutButton />
               </form>
