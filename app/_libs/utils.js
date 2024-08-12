@@ -32,7 +32,7 @@ export const stepsData = [
   { text: "Deploy or download as PDF" },
 ];
 
-export const heroPaletteItemsData = [
+export const portfolioPaletteItemsData = [
   "Palette 1",
   "Palette 2",
   "Palette 3",
@@ -40,6 +40,16 @@ export const heroPaletteItemsData = [
   "Palette 5",
   "Palette 6",
   "Palette 7",
+];
+
+export const portfolioFontItemsData = [
+  "gabarito",
+  "montserrat",
+  "inter",
+  "poppins",
+  "robotoMono",
+  "greyQo",
+  "sankofaDisplay",
 ];
 
 export const heroAlignmentItemsData = ["left", "center", "right"];

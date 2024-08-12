@@ -23,6 +23,8 @@ const PortfolioProvider = ({ children }) => {
     useState({
       id: null,
       portfolio_palette: "Palette 1",
+      portfolio_font_primary: "gabarito",
+      portfolio_font_secondary: "gabarito",
     });
 
   const [portfolioStackHeroContextData, setPortfolioStackHeroContextData] =
@@ -193,6 +195,8 @@ const PortfolioProvider = ({ children }) => {
     setPortfolioStackBasicContextData({
       id: null,
       portfolio_palette: "Palette 1",
+      portfolio_font_primary: "gabarito",
+      portfolio_font_secondary: "gabarito",
     });
   };
 

@@ -4,7 +4,10 @@ import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import { getCreateBasicInfo, upsertCreatePortfolioBasicData } from "./actions";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import Join from "@/app/_components/Join";
-import { heroPaletteItemsData } from "@/app/_libs/utils";
+import {
+  portfolioFontItemsData,
+  portfolioPaletteItemsData,
+} from "@/app/_libs/utils";
 
 const BasicInfo = () => {
   const { portfolioStackBasicContextData, setPortfolioStackBasicContextData } =
@@ -26,6 +29,8 @@ const BasicInfo = () => {
         ...portfolioStackBasicContextData,
         id: portfolio.id,
         portfolio_palette: portfolio.portfolio_palette,
+        portfolio_font_primary: portfolio.portfolio_font_primary,
+        portfolio_font_secondary: portfolio.portfolio_font_secondary,
       });
     }
   }, []);
@@ -37,7 +42,9 @@ const BasicInfo = () => {
   const saveData = async () => {
     const response = await upsertCreatePortfolioBasicData(
       portfolioStackBasicContextData.id,
-      portfolioStackBasicContextData.portfolio_palette
+      portfolioStackBasicContextData.portfolio_palette,
+      portfolioStackBasicContextData.portfolio_font_primary,
+      portfolioStackBasicContextData.portfolio_font_secondary
     );
     console.log(response);
     setPortfolioStackBasicContextData(response.portfolio);
@@ -62,11 +69,37 @@ const BasicInfo = () => {
         </h3>
         <Join
           value={portfolioStackBasicContextData.portfolio_palette}
-          items={heroPaletteItemsData}
+          items={portfolioPaletteItemsData}
           onChange={(e) => {
             handleUpdate("portfolio_palette", e.target.value);
           }}
           name={"portfolio_palette"}
+        />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          5.2. Select primary font
+        </h3>
+        <Join
+          value={portfolioStackBasicContextData.portfolio_font_primary}
+          items={portfolioFontItemsData}
+          onChange={(e) => {
+            handleUpdate("portfolio_font_primary", e.target.value);
+          }}
+          name={"portfolio_font_primary"}
+        />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          5.2. Select secondary font
+        </h3>
+        <Join
+          value={portfolioStackBasicContextData.portfolio_font_secondary}
+          items={portfolioFontItemsData}
+          onChange={(e) => {
+            handleUpdate("portfolio_font_secondary", e.target.value);
+          }}
+          name={"portfolio_font_secondary"}
         />
       </div>
       <NextPreviousNavigation

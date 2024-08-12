@@ -17,6 +17,7 @@ const PortfolioEducation = () => {
     portfolioStackBasicContextData,
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
+  const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
 
   return (
     <div
@@ -27,19 +28,19 @@ const PortfolioEducation = () => {
         className={`max-w-screen-lg px-4 md:px-2 mx-auto pt-16 flex flex-col gap-6 `}
       >
         <h3
-          className={`uppercase text-xl font-medium tracking-wider ${getPrimaryColors(
+          className={`uppercase text-xl font-medium tracking-wider font-${fontPrimary} ${getPrimaryColors(
             palette
           )}`}
         >
           {portfolioStackHeroContextData.experience_group_title}
         </h3>
-        <p className="text-xl font-bold max-w-xs">
+        <p className={`text-xl font-bold max-w-xs font-${fontPrimary}`}>
           {portfolioStackHeroContextData.experience_group_description}
         </p>
         {portfolioStackExperienceContextData.length > 0 && (
           <VerticalTimeline lineColor={getHexLineColor(palette)}>
             {portfolioStackExperienceContextData.map((el, index) => (
-              <TimelineElement palette={palette} key={index} data={el} />
+              <TimelineElement palette={palette} fontPrimary={fontPrimary} key={index} data={el} />
             ))}
           </VerticalTimeline>
         )}

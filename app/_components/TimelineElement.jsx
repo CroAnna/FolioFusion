@@ -1,4 +1,3 @@
-import { Briefcase, ToiletPaper } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import {
@@ -10,7 +9,7 @@ import {
   getSecondaryTextColor,
 } from "../_libs/utils";
 
-const TimelineElement = ({ palette, data }) => {
+const TimelineElement = ({ palette, data, fontPrimary }) => {
   return (
     data && (
       <VerticalTimelineElement
@@ -36,10 +35,14 @@ const TimelineElement = ({ palette, data }) => {
             : null
         }
       >
-        <h3 className="vertical-timeline-element-title font-bold text-lg">
+        <h3
+          className={`vertical-timeline-element-title font-bold text-lg font-${fontPrimary}`}
+        >
           {data.experience_title}
         </h3>
-        <h4 className="vertical-timeline-element-subtitle">
+        <h4
+          className={`vertical-timeline-element-subtitle font-${fontPrimary}`}
+        >
           {data.experience_description}
         </h4>
         <div className="vertical-timeline-element-subtitle flex gap-2 pt-3 flex-wrap">

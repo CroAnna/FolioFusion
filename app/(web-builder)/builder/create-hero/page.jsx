@@ -80,6 +80,8 @@ const CreateHero = () => {
         ...portfolioStackBasicContextData,
         id: portfolio.id,
         portfolio_palette: portfolio.portfolio_palette,
+        portfolio_font_primary: portfolio.portfolio_font_primary,
+        portfolio_font_secondary: portfolio.portfolio_font_secondary,
       });
 
       setPortfolioStackHeroContextData({

@@ -10,6 +10,7 @@ const PortfolioActivities = () => {
     portfolioStackBasicContextData,
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
+  const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
 
   return (
     <div className="relative z-0">
@@ -24,6 +25,7 @@ const PortfolioActivities = () => {
       <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 flex flex-col md:grid md:grid-cols-3 py-16">
         {portfolioStackActivityContextData.map((el, index) => (
           <ActivityCard
+          fontPrimary={fontPrimary}
             palette={palette}
             key={index}
             data={el}

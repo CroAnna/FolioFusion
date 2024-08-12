@@ -18,6 +18,7 @@ const ProjectCard = ({ project, projectIndex }) => {
   const { portfolioStackBasicContextData, portfolioStackProjectsContextData } =
     useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
+  const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
   const [imageUrl, setImageUrl] = useState("");
 
   const selectedIcon1 = projectLinkIcons.find(
@@ -82,13 +83,13 @@ const ProjectCard = ({ project, projectIndex }) => {
         )}
       </div>
       <div className="flex flex-col justify-center items-center gap-4 p-2 py-4 md:p-4 md:flex-1">
-        <h2 className="text-xl md:text-2xl font-semibold">
+        <h2 className={`text-xl md:text-2xl font-semibold font-${fontPrimary}`}>
           {project.project_title}
         </h2>
-        <p className=" md:text-lg text-center leading-6">
+        <p className={`md:text-lg text-center leading-6 font-${fontPrimary}`}>
           {project.project_description}
         </p>
-        <div className="flex gap-6 p-2">
+        <div className={`flex gap-6 p-2`}>
           {project.project_technology_1_icon &&
             project.project_technology_1_icon != "-" && (
               <Image
@@ -155,7 +156,7 @@ const ProjectCard = ({ project, projectIndex }) => {
               <button
                 className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${getBgColor(
                   palette
-                )} md:text-lg rounded-lg shadow-custom-sm font-medium `}
+                )} md:text-lg rounded-lg shadow-custom-sm font-medium font-${fontPrimary}`}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -176,7 +177,7 @@ const ProjectCard = ({ project, projectIndex }) => {
                   palette
                 )} ${getSecondaryTextColor(
                   palette
-                )} md:text-lg rounded-lg font-medium`}
+                )} md:text-lg rounded-lg font-medium font-${fontPrimary}`}
                 target="_blank"
                 rel="noreferrer"
               >

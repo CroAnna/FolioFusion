@@ -9,7 +9,7 @@ import { PortfolioContext } from "./PortfolioProvider";
 import Image from "next/image";
 import { ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
 
-const ActivityCard = ({ palette, data, activityIndex }) => {
+const ActivityCard = ({ palette, data, activityIndex, fontPrimary }) => {
   const { portfolioStackActivityContextData } = useContext(PortfolioContext);
   const [imageUrl, setImageUrl] = useState("");
 
@@ -79,10 +79,14 @@ const ActivityCard = ({ palette, data, activityIndex }) => {
         </div>
       ) : null}
       <div className="card-body">
-        <h2 className={`${getSecondaryTextColor(palette)} card-title`}>
+        <h2
+          className={`${getSecondaryTextColor(
+            palette
+          )} card-title font-${fontPrimary}`}
+        >
           {data.activity_title}
         </h2>
-        <p className={`${getSecondaryTextColor(palette)}`}>
+        <p className={`${getSecondaryTextColor(palette)} font-${fontPrimary}`}>
           {data.activity_description}
         </p>
       </div>

@@ -26,6 +26,8 @@ const PortfolioHero = () => {
     useContext(PortfolioContext);
   const border_style = portfolioStackHeroContextData.hero_border_style;
   const palette = portfolioStackBasicContextData.portfolio_palette;
+  const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
+  const fontSecondary = portfolioStackBasicContextData.portfolio_font_secondary;
   const extra_style_elements =
     portfolioStackHeroContextData.hero_extra_style_elements;
   const variant = portfolioStackHeroContextData.hero_variant;
@@ -499,7 +501,7 @@ const PortfolioHero = () => {
         {
           <div className="flex flex-col gap-4">
             <p
-              className={`py-0 text-lg`}
+              className={`py-0 text-lg font-${fontPrimary}`}
               style={{
                 textAlign: isMobile
                   ? portfolioStackHeroContextData.hero_mobile_alignment
@@ -510,7 +512,7 @@ const PortfolioHero = () => {
             </p>
             <div>
               <h1
-                className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] mt-2 md:mt-0 
+                className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] mt-2 md:mt-0 font-${fontSecondary}
                 ${getPrimaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
@@ -521,7 +523,7 @@ const PortfolioHero = () => {
                 {portfolioStackHeroContextData.hero_name}
               </h1>
               <h2
-                className={`text-4xl md:text-5xl font-bold 
+                className={`text-4xl md:text-5xl font-bold font-${fontSecondary}
                   ${getSecondaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
@@ -533,7 +535,7 @@ const PortfolioHero = () => {
               </h2>
             </div>
             <p
-              className={`md:text-lg max-w-xl md:py-4`}
+              className={`md:text-lg max-w-xl md:py-4 font-${fontPrimary}`}
               style={{
                 textAlign: isMobile
                   ? portfolioStackHeroContextData.hero_mobile_alignment

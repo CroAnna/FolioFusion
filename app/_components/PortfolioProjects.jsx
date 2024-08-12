@@ -14,6 +14,7 @@ const PortfolioProjects = () => {
     portfolioStackBasicContextData,
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
+  const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
 
   return (
     <div
@@ -24,13 +25,13 @@ const PortfolioProjects = () => {
         className={`max-w-screen-lg px-4 pb-2 md:px-2 mx-auto pt-16 flex flex-col gap-6`}
       >
         <h3
-          className={`uppercase text-xl font-medium tracking-wider ${getPrimaryColors(
+          className={`uppercase text-xl font-medium tracking-wider font-${fontPrimary} ${getPrimaryColors(
             palette
           )}`}
         >
           {portfolioStackHeroContextData.project_group_title}
         </h3>
-        <p className="text-xl font-bold max-w-xs">
+        <p className={`text-xl font-bold max-w-xs font-${fontPrimary}`}>
           {portfolioStackHeroContextData.project_group_description}
         </p>
         <div className="flex flex-col gap-10 md:gap-16 ">

@@ -6,6 +6,15 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      inter: ['"Inter"', "sans-serif"],
+      poppins: ['"Poppins"', "sans-serif"],
+      robotoMono: ['"Roboto Mono"', "sans-serif"],
+      greyQo: ['"Grey Qo"', "sans-serif"],
+      sankofaDisplay: ['"Sankofa Display"', "sans-serif"],
+      gabarito: ['"Gabarito"', "sans-serif"],
+      montserrat: ['"Montserrat"', "sans-serif"],
+    },
     extend: {
       boxShadow: {
         "custom-sm": "0 0 3px #85888c",
