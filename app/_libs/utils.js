@@ -112,7 +112,7 @@ export const getPrimaryBgColors = (palette) => {
     case "Palette 6":
       return "bg-yellow-400";
     case "Palette 7":
-      return "bg-red-500";
+      return "bg-red-800";
     default:
       return null;
   }
