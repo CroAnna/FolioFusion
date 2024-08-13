@@ -10,6 +10,7 @@ import ScrollToTop from "@/app/_components/ScrollToTop";
 import Image from "next/image";
 import errorImage from "@/public/404-error.png";
 import { deepEqual } from "@/utils/common/methods.js";
+import Link from "next/link";
 
 const RenderedPortfolio = ({ domain = null }) => {
   const [errorData, setErrorData] = useState(null);
@@ -172,7 +173,10 @@ const RenderedPortfolio = ({ domain = null }) => {
             width={256}
             height={256}
           />
-          <p className=" text-3xl">{errorData.message}</p>
+          <p className=" text-3xl px-4 text-center">{errorData.message}</p>
+          <Link href="/" className="underline">
+            Back to homepage
+          </Link>
         </div>
       )}
       {!errorData && (
