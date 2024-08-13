@@ -91,7 +91,7 @@ export const getBgColor = (palette) => {
     case "Palette 6":
       return "bg-stone-900";
     case "Palette 7":
-      return "bg-neutral-200";
+      return "bg-zinc-100";
     default:
       return null;
   }
@@ -133,7 +133,7 @@ export const getSecondaryBgColors = (palette) => {
     case "Palette 6":
       return "bg-stone-800";
     case "Palette 7":
-      return "bg-stone-100";
+      return "bg-zinc-200";
     default:
       return null;
   }

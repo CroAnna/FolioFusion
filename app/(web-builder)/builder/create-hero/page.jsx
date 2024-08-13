@@ -96,6 +96,7 @@ const CreateHero = () => {
         hero_extra_style_elements: hero.hero_extra_style_elements,
         hero_variant: hero.hero_variant,
         hero_welcome: hero.hero_welcome,
+        hero_bg_disabled_mobile: hero.hero_bg_disabled_mobile,
         hero_mobile_alignment: hero.hero_mobile_alignment,
         hero_desktop_alignment: hero.hero_desktop_alignment,
         hero_name: hero.hero_name,
@@ -166,6 +167,7 @@ const CreateHero = () => {
       portfolioStackHeroContextData.hero_extra_style_elements,
       portfolioStackHeroContextData.hero_variant,
       portfolioStackHeroContextData.hero_welcome,
+      portfolioStackHeroContextData.hero_bg_disabled_mobile,
       portfolioStackHeroContextData.hero_mobile_alignment,
       portfolioStackHeroContextData.hero_desktop_alignment,
       portfolioStackHeroContextData.hero_name,
@@ -215,6 +217,7 @@ const CreateHero = () => {
                 <>
                   <Toggle
                     text={"Rounded image"}
+                    yesNo
                     onChange={(e) => {
                       console.log(portfolioStackHeroContextData.hero_image);
                       handleUpdate("hero_image_rounded", e.target.checked);
@@ -224,6 +227,7 @@ const CreateHero = () => {
                   <Toggle
                     checked={portfolioStackHeroContextData.hero_image_border}
                     text={"Border around image"}
+                    yesNo
                     onChange={(e) => {
                       handleUpdate("hero_image_border", e.target.checked);
                     }}
@@ -315,29 +319,39 @@ const CreateHero = () => {
         <Toggle
           checked={portfolioStackHeroContextData.hero_extra}
           text={"Show custom elements"}
+          yesNo
           onChange={(e) => {
             handleUpdate("hero_extra", e.target.checked);
           }}
         />
+
         {portfolioStackHeroContextData.hero_extra && (
-          <Join
-            value={portfolioStackHeroContextData.hero_extra_style_elements}
-            items={heroExtraElementsData}
-            onChange={(e) => {
-              handleUpdate("hero_extra_style_elements", e.target.value);
-            }}
-            name={"hero_extra_style_elements"}
-          />
-        )}
-        {portfolioStackHeroContextData.hero_extra && (
-          <Join
-            value={portfolioStackHeroContextData.hero_variant}
-            items={heroVariantData}
-            onChange={(e) => {
-              handleUpdate("hero_variant", e.target.value);
-            }}
-            name={"hero_variant"}
-          />
+          <>
+            <Toggle
+              checked={portfolioStackHeroContextData.hero_bg_disabled_mobile}
+              text={"Custom elements hidden on small screens?"}
+              yesNo
+              onChange={(e) => {
+                handleUpdate("hero_bg_disabled_mobile", e.target.checked);
+              }}
+            />
+            <Join
+              value={portfolioStackHeroContextData.hero_extra_style_elements}
+              items={heroExtraElementsData}
+              onChange={(e) => {
+                handleUpdate("hero_extra_style_elements", e.target.value);
+              }}
+              name={"hero_extra_style_elements"}
+            />
+            <Join
+              value={portfolioStackHeroContextData.hero_variant}
+              items={heroVariantData}
+              onChange={(e) => {
+                handleUpdate("hero_variant", e.target.value);
+              }}
+              name={"hero_variant"}
+            />
+          </>
         )}
       </div>
       <div className="flex flex-col gap-4">

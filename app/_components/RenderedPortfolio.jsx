@@ -62,6 +62,7 @@ const RenderedPortfolio = ({ domain = null }) => {
         hero_extra_style_elements: "abstract",
         hero_variant: "A",
         hero_welcome: "",
+        hero_bg_disabled_mobile: false,
         hero_mobile_alignment: "left",
         hero_desktop_alignment: "left",
         hero_name: "",

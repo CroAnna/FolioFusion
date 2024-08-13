@@ -77,6 +77,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-1-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-1-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -85,13 +86,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-1-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-1-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-1-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-1-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-1-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -100,6 +104,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-1-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-1-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -132,6 +137,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-2-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-2-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -140,13 +146,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-2-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-2-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-2-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-2-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-2-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -155,6 +164,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-2-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-2-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -189,6 +199,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-3-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-3-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -197,13 +208,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-3-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-3-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-3-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-3-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-3-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -212,6 +226,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-3-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-3-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -248,6 +263,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-4-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-4-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -256,13 +272,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-4-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-4-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-4-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-4-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-4-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -271,6 +290,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-4-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-4-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -307,6 +327,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-5-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-5-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -315,13 +336,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-5-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-5-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-5-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-5-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-5-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -330,6 +354,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-5-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-5-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -366,6 +391,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/layered-steps-6-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-6-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
@@ -374,13 +400,16 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/mono-6-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-6-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
           return "/bubble-6-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-6-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-6-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -389,6 +418,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-6-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-6-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -415,22 +445,29 @@ const PortfolioHero = () => {
         }
       } else if (extra_style_elements === "steps") {
         if (variant === "A") {
-          return "/layered-steps-7-1-hero.svg";
+          return "/layered-steps-7-hero.svg";
         } else if (variant === "B") {
           return "/layered-steps-7-2-hero.svg";
         } else if (variant === "C") {
+          return "/layered-steps-7-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "mono") {
         if (variant === "A") {
+          return "/mono-1-hero.svg";
         } else if (variant === "B") {
+          return "/mono-1-2-hero.svg";
         } else if (variant === "C") {
+          return "/mono-7-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "bubble") {
         if (variant === "A") {
+          return "/bubble-7-hero.svg";
         } else if (variant === "B") {
+          return "/bubble-7-2-hero.svg";
         } else if (variant === "C") {
+          return "/bubble-7-3-hero.svg";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "spikes") {
@@ -439,6 +476,7 @@ const PortfolioHero = () => {
         } else if (variant === "B") {
           return "/spikes-7-2-hero.svg";
         } else if (variant === "C") {
+          return "/spikes-7-3-hero.svg";
         } else if (variant === "D") {
         }
       }
@@ -477,7 +515,13 @@ const PortfolioHero = () => {
         ${getPrimaryTextColor(palette)} ${getBgColor(palette)}`}
     >
       {portfolioStackHeroContextData.hero_extra && (
-        <div className={`hidden md:block  `}>
+        <div
+          className={`${
+            portfolioStackHeroContextData.hero_bg_disabled_mobile
+              ? "hidden"
+              : "block"
+          } md:block  `}
+        >
           {!isAdvancedHeroUI() ? (
             <Image
               src={getHeroExtraStyle("left")}

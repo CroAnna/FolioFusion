@@ -2,7 +2,7 @@ import React from "react";
 
 const Toggle = ({ text, onChange, checked, yesNo = false }) => {
   return (
-    <div className={`form-control w-52 ${yesNo && "w-96"}`}>
+    <div className={`form-control w-60 ${yesNo && "w-[440px]"}`}>
       <label className="label cursor-pointer">
         <span className="label-text">{text}</span>
         <div className={`flex gap-2 ${yesNo && "ml-4"}`}>
