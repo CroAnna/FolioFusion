@@ -74,7 +74,7 @@ export const heroExtraElementsData = [
   "spikes",
 ];
 
-export const heroVariantData = ["A", "B", "C", "D"];
+export const heroVariantData = ["A", "B", "C"];
 
 export const getBgColor = (palette) => {
   switch (palette) {

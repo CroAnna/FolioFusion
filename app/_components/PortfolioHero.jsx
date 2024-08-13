@@ -53,7 +53,11 @@ const PortfolioHero = () => {
             ? "/detail-1-blue.png"
             : "/detail-2-orange.png";
         } else if (variant === "B") {
+          return position == "left" ? "/binray-blue.png" : "/binary-orange.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-2-blue.png"
+            : "/swirl-1-orange.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
@@ -62,7 +66,9 @@ const PortfolioHero = () => {
             ? "/dots-blue.png"
             : "/dots-long-orange.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-1-2.png" : "/circles-1-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-1-2.png" : "/pops-1-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -104,14 +110,20 @@ const PortfolioHero = () => {
             ? "/detail-1-blue.png"
             : "/detail-2-blue.png";
         } else if (variant === "B") {
+          return position == "left" ? "/binray-blue.png" : "/binary-blue.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-2-blue.png"
+            : "/swirl-2-blue2.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
         if (variant === "A") {
           return position == "left" ? "/dots-blue.png" : "/dots-long-blue.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-1-2.png" : "/circles-2-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-1-2.png" : "/pops-2-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -153,7 +165,11 @@ const PortfolioHero = () => {
             ? "/detail-1-green.png"
             : "/detail-2-brown.png";
         } else if (variant === "B") {
+          return position == "left" ? "/binray-green.png" : "/binary-brown.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-3-green.png"
+            : "/swirl-3-brown.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
@@ -162,7 +178,9 @@ const PortfolioHero = () => {
             ? "/dots-green.png"
             : "/dots-long-brown.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-3-2.png" : "/circles-3-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-3-2.png" : "/pops-3-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -204,7 +222,13 @@ const PortfolioHero = () => {
             ? "/detail-1-yellow.png"
             : "/detail-2-yellow.png";
         } else if (variant === "B") {
+          return position == "left"
+            ? "/binray-yellow.png"
+            : "/binary-yellow.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-4-yellow.png"
+            : "/swirl-6-yellow.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
@@ -213,7 +237,9 @@ const PortfolioHero = () => {
             ? "/dots-yellow.png"
             : "/dots-long-yellow.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-4-2.png" : "/circles-6-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-4-2.png" : "/pops-6-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -255,7 +281,13 @@ const PortfolioHero = () => {
             ? "/detail-1-emerald.png"
             : "/detail-2-lime.png";
         } else if (variant === "B") {
+          return position == "left"
+            ? "/binray-emerald.png"
+            : "/binary-lime.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-5-emerald.png"
+            : "/swirl-5-lime.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
@@ -264,7 +296,9 @@ const PortfolioHero = () => {
             ? "/dots-emerald.png"
             : "/dots-long-lime.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-5-2.png" : "/circles-5-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-5-2.png" : "/pops-5-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -306,7 +340,13 @@ const PortfolioHero = () => {
             ? "/detail-1-orange.png"
             : "/detail-2-yellow.png";
         } else if (variant === "B") {
+          return position == "left"
+            ? "/binray-orange.png"
+            : "/binary-yellow.png";
         } else if (variant === "C") {
+          return position == "left"
+            ? "/swirl-6-orange.png"
+            : "/swirl-6-yellow.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
@@ -315,7 +355,9 @@ const PortfolioHero = () => {
             ? "/dots-orange.png"
             : "/dots-long-yellow.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-6-2.png" : "/circles-6-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-6-2.png" : "/pops-6-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
@@ -353,16 +395,22 @@ const PortfolioHero = () => {
     } else if (palette === "Palette 7") {
       if (extra_style_elements === "abstract") {
         if (variant === "A") {
-          return position == "left" ? "" : "";
+          return position == "left"
+            ? "/detail-1-white.png"
+            : "/detail-2-red.png";
         } else if (variant === "B") {
+          return position == "left" ? "/binray-black.png" : "/binary-red.png";
         } else if (variant === "C") {
+          return position == "left" ? "/swirl-7-black.png" : "/swirl-7-red.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "dots") {
         if (variant === "A") {
-          return position == "left" ? "" : "";
+          return position == "left" ? "/dots-white.png" : "/dots-long-red.png";
         } else if (variant === "B") {
+          return position == "left" ? "/circles-7-2.png" : "/circles-7-1.png";
         } else if (variant === "C") {
+          return position == "left" ? "/pops-7-2.png" : "/pops-7-1.png";
         } else if (variant === "D") {
         }
       } else if (extra_style_elements === "steps") {
