@@ -23,7 +23,7 @@ export async function getCreateHeroData() {
   }
   const hero = { ...heroWithoutImage, hero_image: hero_image };
 
-  const { data: portfolio, error2 } = await supabase
+  const { data: portfolio, error: error2 } = await supabase
     .from("portfolios")
     .select()
     .eq("user_id", user.id)

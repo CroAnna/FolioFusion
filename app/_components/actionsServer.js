@@ -1,4 +1,8 @@
+"use server";
+
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function getUserData() {
   const supabase = createClient();
@@ -15,4 +19,27 @@ export async function getUserData() {
     .single();
 
   return { userData, error };
+}
+
+export async function deleteUserAccount() {
+  // delete from 2 tables - users and auth table
+
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // supabase function/sql editor routine, not sure. granted access to auth users to make it work. if user before this logs out it will not work because the SQL query uses auth.uid()
+  await supabase.rpc("delete_user");
+
+  const { data, error } = await supabase
+    .from("users")
+    .delete()
+    .eq("id", user.id);
+  console.log(data, error);
+
+  if (!error) {
+    revalidatePath("/", "layout");
+    redirect("/");
+  }
 }

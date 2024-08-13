@@ -112,7 +112,7 @@ export const getPrimaryBgColors = (palette) => {
     case "Palette 6":
       return "bg-yellow-400";
     case "Palette 7":
-      return "bg-red-800";
+      return "bg-red-500";
     default:
       return null;
   }
@@ -367,7 +367,7 @@ export const getHexSecondaryBgColor = (palette) => {
     case "Palette 6":
       return "#2D2D2D"; // stone-800
     case "Palette 7":
-      return "#f5f5f4"; // stone-100
+      return "#e4e4e7"; // zinc-200
     default:
       return null;
   }

@@ -5,6 +5,7 @@ import { logout } from "../(web-builder)/logout/actions";
 import LogoutButton from "./LogoutButton";
 import VariableNavbar from "./VariableNavbar";
 import { getUserData } from "./actionsServer";
+import { UserCircle } from "@phosphor-icons/react/dist/ssr";
 
 const Navbar = async () => {
   const supabase = createClient();
@@ -17,9 +18,6 @@ const Navbar = async () => {
       <div className="navbar-end">
         {data && data.user && (
           <div className="hidden lg:flex items-center h-12">
-            <p className="mr-2 flex items-center bg-neutral-900 rounded-md py-2 px-4 h-12">
-              {data.user.email}
-            </p>
             <div className="flex gap-2">
               <Link href="/builder/create-hero">
                 <button className="btn btn-primary">My portfolio</button>
@@ -31,6 +29,13 @@ const Navbar = async () => {
                   </button>
                 </a>
               )}
+              <Link
+                href={"/profile"}
+                className="mr-2 flex gap-2 items-center bg-neutral-900 rounded-md py-2 px-4 h-12"
+              >
+                <UserCircle size={32} color="#f4f4f4" weight="duotone" />
+                <p>{data.user.email}</p>
+              </Link>
               <form action={logout}>
                 <LogoutButton />
               </form>
