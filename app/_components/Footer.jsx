@@ -39,7 +39,8 @@ const Footer = () => {
               Support & Help Center
             </Link>
             <Link
-              href="/https://github.com/CroAnna"
+              href="https://github.com/CroAnna"
+              target="_blank"
               className="link link-hover"
             >
               Contact Creator
@@ -56,14 +57,15 @@ const Footer = () => {
             <Link href="/" className="link link-hover">
               Cookie policy
             </Link>
-          </nav>{" "}
+          </nav>
           <nav className="flex flex-col gap-2">
             <h6 className="footer-title">More</h6>
             <Link href="/" className="link link-hover">
               Learn Croatian Signs
             </Link>
             <Link
-              href="/https://putujemstravem.com/"
+              target="_blank"
+              href="https://putujemstravem.com/"
               className="link link-hover"
             >
               Putujem s TravEM
@@ -71,8 +73,8 @@ const Footer = () => {
           </nav>
         </div>
       </footer>
-      <footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
-        <div className="max-w-screen-xl mx-auto flex flex-row justify-between w-full">
+      <footer className="footer bg-base-200 text-base-content border-base-300 border-t p-4 md:px-10 pb-8">
+        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between w-full">
           <aside side="true" className="grid-flow-col items-center">
             <Link href="https://fosleen.com/" target="_blank">
               <Image

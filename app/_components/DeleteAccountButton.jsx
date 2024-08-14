@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 import Swal from "sweetalert2";
 
-const DeleteAccountButton = ({deleteUserAccount}) => {
+const DeleteAccountButton = ({ deleteUserAccount }) => {
   const handleDeleteAccount = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -26,7 +26,10 @@ const DeleteAccountButton = ({deleteUserAccount}) => {
   }, []);
 
   return (
-    <button className="btn btn-outline btn-error" onClick={handleDeleteAccount}>
+    <button
+      className="btn btn-outline btn-error mb-4"
+      onClick={handleDeleteAccount}
+    >
       Delete my account
     </button>
   );
