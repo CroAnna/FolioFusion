@@ -14,7 +14,7 @@ const Navbar = async () => {
 
   return (
     <div className="navbar p-0 bg-base-100 justify-between max-w-screen-xl mx-auto">
-      <VariableNavbar logout={logout} data={data} />
+      <VariableNavbar logout={logout} data={data} userData={userData} />
       <div className="navbar-end">
         {data && data.user && (
           <div className="hidden lg:flex items-center h-12">
