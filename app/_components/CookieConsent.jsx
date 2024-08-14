@@ -1,47 +1,61 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import cookie from "js-cookie";
 import Link from "next/link";
+import ReactGA from "react-ga4";
+import { usePathname } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 const CookieConsent = () => {
-  const [showBanner, setShowBanner] = useState(false);
+  const [cookies, setCookie] = useCookies(["cookie_consent"]);
+  const [showBanner, setShowBanner] = useState(false); // next crashes without this, some weird error div in div between rendering
+  const pathname = usePathname();
 
   useEffect(() => {
-    const consentCookie = cookie.get("cookie_consent");
+    if (cookies.cookie_consent === "accepted") {
+      ReactGA.send({
+        hitType: "pageview",
+        page: pathname,
+        title: `Pathname: ${pathname}`,
+      });
+    }
+  }, [pathname, cookies.cookie_consent]);
+
+  useEffect(() => {
+    const consentCookie = cookies.cookie_consent;
 
     if (!consentCookie) {
       setShowBanner(true);
     }
-  }, []);
+  }, [cookies.cookie_consent]);
 
   const handleAccept = () => {
     setShowBanner(false);
-    cookie.set("cookie_consent", "accepted", { expires: 365 });
+    setCookie("cookie_consent", "accepted");
   };
 
   const handleReject = () => {
     setShowBanner(false);
-    cookie.set("cookie_consent", "rejected", { expires: 365 });
+    setCookie("cookie_consent", "rejected");
   };
 
-  // const initializeGoogleAnalytics = () => {
-  //   ReactGA.initialize("G-BD4KXGKJ9E");
-  // };
+  const initializeGoogleAnalytics = () => {
+    ReactGA.initialize("G-BD4KXGKJ9E");
+  };
 
-  // useEffect(() => {
-  //   if (cookie.get("cookie_consent") === "accepted") {
-  //     initializeGoogleAnalytics();
-  //   } else {
-  //     console.log("nisu prihvaceni");
-  //   }
-  // }, [cookie.cookie_consent]);
+  useEffect(() => {
+    if (cookies.cookie_consent === "accepted") {
+      initializeGoogleAnalytics();
+    } else {
+      // console.log("nisu prihvaceni");
+    }
+  }, [cookies.cookie_consent]);
 
   if (!showBanner) {
     return null;
   }
 
   return (
-    <div className="fixed bottom-0 right-0 w-full p-8 bg-cyan-300 shadow-2xl z-30 rounded-l-lg md:bottom-12 md:max-w-md md:rounded-l-3xl flex flex-col gap-4">
+    <div className="fixed bottom-0 right-0 w-full p-8 bg-cyan-300 shadow-2xl z-30 rounded-t-lg md:rounded-t-none md:rounded-l-3xl md:bottom-12 md:max-w-md  flex flex-col gap-4">
       <h2 className="text-4xl font-extrabold text-gray-800">
         Why do we use 🍪?
       </h2>

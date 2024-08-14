@@ -6,9 +6,9 @@ import CookieConsent from "../_components/CookieConsent";
 export default function WebBuilderLayout({ children }) {
   return (
     <>
-      <CookieConsent />
       <ScrollToTop />
       <div className={`flex flex-col min-h-screen`}>
+        <CookieConsent />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
