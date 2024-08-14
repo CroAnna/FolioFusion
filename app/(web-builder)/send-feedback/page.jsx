@@ -7,7 +7,7 @@ const SendFeedback = async () => {
   const { data: ideas } = await getIdeas();
 
   return (
-    <div className="md:w-full flex flex-col gap-6 max-w-screen-xl mx-4 md:mx-auto md:p-10 lg:px-0 md:pt-20">
+    <div className="md:w-full flex flex-col gap-6 max-w-screen-xl mx-4 md:mx-auto md:p-10 xl:px-0 md:pt-20">
       <h2 className="text-2xl font-bold">Got an idea? Problem? Question?</h2>
 
       <div className="flex flex-col md:flex-row gap-4 md:gap-16">

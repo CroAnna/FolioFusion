@@ -48,14 +48,8 @@ const Footer = () => {
           </nav>
           <nav className="flex flex-col gap-2">
             <h6 className="footer-title">Legal</h6>
-            <Link href="/" className="link link-hover">
-              Terms of use
-            </Link>
-            <Link href="/" className="link link-hover">
+            <Link href="/privacy-policy" className="link link-hover">
               Privacy policy
-            </Link>
-            <Link href="/" className="link link-hover">
-              Cookie policy
             </Link>
           </nav>
           <nav className="flex flex-col gap-2">

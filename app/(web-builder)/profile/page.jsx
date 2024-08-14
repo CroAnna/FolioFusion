@@ -4,7 +4,7 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div className="md:w-full flex flex-col gap-6 max-w-screen-xl mx-4 md:mx-auto md:p-10 lg:px-0 md:pt-20">
+    <div className="md:w-full flex flex-col gap-6 max-w-screen-xl mx-4 md:mx-auto md:p-10 xl:px-0 md:pt-20">
       <h2 className="text-2xl font-bold">My Profile</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         <Link

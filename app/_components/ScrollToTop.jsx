@@ -45,6 +45,7 @@ const ScrollToTop = () => {
       pathname == "/send-feedback" ||
       pathname == "/login" ||
       pathname == "/sign-up" ||
+      pathname == "/privacy-policy" ||
       pathname.includes("profile")
     ) {
       return true;
