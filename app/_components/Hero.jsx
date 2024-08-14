@@ -17,7 +17,7 @@ const Hero = () => {
             <Image
               layout="fill"
               alt="hero-illustration"
-              src={"/hero-illustration.svg"}
+              src={"/hero-illustration2.svg"}
             />
           </div>
           <div className="flex flex-col gap-8 px-8 md:px-0">

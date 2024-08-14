@@ -3,6 +3,7 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { useState } from "react";
+import Image from "next/image";
 
 const VariableNavbar = ({ logout, data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +72,8 @@ const VariableNavbar = ({ logout, data }) => {
       </div>
       <div className="flex gap-8 items-center ">
         <Link href="/" className="btn btn-ghost text-xl">
-          ShowOff
+          <Image width={48} height={48} src={"/app-logo-192.png"} alt="stackshow-logo"/>
+          StackShow
         </Link>
         <div className="gap-4 hidden lg:flex">
           <Link href="/#examples">Examples</Link>

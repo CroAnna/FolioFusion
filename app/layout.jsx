@@ -5,9 +5,9 @@ import Providers from "./providers";
 const font = Gabarito({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Build your portfolio",
+  title: "Create Your Developer Portfolio Fast",
   description:
-    "Generate your portfolio page in minutes to easily get more job opportunities.",
+    "Generate your portfolio page in minutes to easily get more job opportunities. Endless customization. Link your projects, social medias, experience, activities and other info.",
 };
 
 export default function RootLayout({ children }) {
