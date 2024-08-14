@@ -6,9 +6,10 @@ const Textarea = ({
   name,
   placeholder,
   disabled = false,
+  required = false,
   onChange,
   rows,
-  value = null,
+  value,
 }) => {
   return (
     <div className="w-full">
@@ -23,6 +24,7 @@ const Textarea = ({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          required={required}
           rows={rows}
           value={value}
         ></textarea>

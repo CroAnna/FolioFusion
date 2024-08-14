@@ -10,6 +10,7 @@ const Input = ({
   placeholder,
   disabled = false,
   onBlur,
+  required = false,
   onChange,
 }) => {
   return (
@@ -31,6 +32,7 @@ const Input = ({
           onChange={onChange}
           disabled={disabled}
           onBlur={onBlur}
+          required={required}
         />
         {error && <div>{error}</div>}
       </div>

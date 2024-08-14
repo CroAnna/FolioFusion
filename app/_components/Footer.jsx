@@ -5,7 +5,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="footer bg-base-200 text-base-content p-10">
+      <footer className="footer bg-base-200 text-base-content p-4 md:p-10">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 justify-between w-full gap-12">
           <nav className="flex flex-col gap-2">
             <Link href="/" className="text-xl flex items-center gap-2">
@@ -34,6 +34,9 @@ const Footer = () => {
             </Link>
             <Link href="/login" className="link link-hover">
               Login
+            </Link>
+            <Link href="/send-feedback" className="link link-hover">
+              Support & Help Center
             </Link>
             <Link
               href="/https://github.com/CroAnna"

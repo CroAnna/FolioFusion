@@ -6,8 +6,8 @@ const Data = async () => {
   const { userData } = await getUserData();
 
   return (
-    <div className="md:w-full flex flex-col gap-4 max-w-screen-xl mx-4 md:mx-auto pt-20">
-      <h2 className="text-2xl">My account</h2>
+    <div className="md:w-full flex flex-col gap-6 max-w-screen-xl mx-4 md:mx-auto md:p-10 lg:px-0 md:pt-20">
+      <h2 className="text-2xl font-bold">My account</h2>
 
       <div className="overflow-x-auto">
         <table className="table">

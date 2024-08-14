@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
+import { z } from "zod";
 
 export async function getDataByDomain(domain) {
   const supabase = createClient();
@@ -102,4 +103,73 @@ export async function getDataByDomain(domain) {
     experiencesError,
     activitiesError,
   };
+}
+
+export async function sendIdea(prevState, formData) {
+  const supabase = createClient();
+
+  const schema = z
+    .object({
+      message_title: z.string().max(20, "Title can have max 20 characters."),
+      message_text: z.string(),
+      message_type: z.string(),
+    })
+    .required();
+
+  const validation = schema.safeParse({
+    message_title: formData.get("message_title"),
+    message_text: formData.get("message_text"),
+    message_type: formData.get("message_type"),
+  });
+
+  console.log(validation.data);
+
+  if (validation.success) {
+    const { message_text, message_title, message_type } = validation.data;
+    const insertData = {
+      title: message_title,
+      description: message_text,
+      type: message_type,
+    };
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      insertData.user_id = user.id;
+    }
+
+    const { error } = await supabase.from("ideas").insert(insertData);
+
+    if (error) {
+      console.log(error);
+      return { message: error.message };
+    }
+    return { message: "Success" };
+  } else {
+    return {
+      message: validation.error.issues.map((issue) => issue.message).join(", "),
+    };
+  }
+}
+
+export async function vote(id) {
+  const supabase = createClient();
+
+  const { data: currentData, error: fetchError } = await supabase
+    .from("ideas")
+    .select("votes")
+    .eq("id", id)
+    .single();
+
+  if (fetchError) {
+    console.log(fetchError);
+    return { error: fetchError, updateError: null };
+  }
+  const { data, error: updateError } = await supabase
+    .from("ideas")
+    .update({ votes: currentData.votes + 1 })
+    .eq("id", id);
+
+  return { updateError, fetchError };
 }

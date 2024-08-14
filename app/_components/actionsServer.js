@@ -21,6 +21,18 @@ export async function getUserData() {
   return { userData, error };
 }
 
+export async function getIdeas() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("ideas")
+    .select()
+    .order("votes", { ascending: false })
+    .eq("type", "Idea");
+
+  if (error) console.log(error);
+  return { data, error };
+}
+
 export async function deleteUserAccount() {
   // delete from 2 tables - users and auth table
 
