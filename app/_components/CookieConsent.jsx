@@ -55,7 +55,7 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 w-full p-8 bg-cyan-300 shadow-2xl z-30 rounded-t-lg md:rounded-t-none md:rounded-l-3xl md:bottom-12 md:max-w-md  flex flex-col gap-4">
+    <div className="fixed bottom-0 right-0 w-full p-8 bg-cyan-300 shadow-2xl z-30 rounded-tl-[24px] rounded-tr-[24px] md:rounded-tr-[0px] md:rounded-bl-[24px] md:bottom-12 md:max-w-md flex flex-col gap-4">
       <h2 className="text-4xl font-extrabold text-gray-800">
         Why do we use 🍪?
       </h2>
