@@ -5,9 +5,11 @@ import loadingGif from "@/public/loading.gif";
 import Image from "next/image";
 
 const NextPreviousNavigation = ({
+  disabled = false,
   previousUrl = null,
   nextUrl = null,
   handleNextClick = () => {},
+  setIsPending,
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +19,7 @@ const NextPreviousNavigation = ({
   }, []);
 
   const handleClick = async () => {
+    setIsPending(true);
     setIsLoading(true);
     event.preventDefault();
     await handleNextClick();
@@ -29,7 +32,7 @@ const NextPreviousNavigation = ({
         <Link href={previousUrl} className="w-full">
           <button
             className="join-item btn btn-outline w-full"
-            disabled={isLoading}
+            disabled={isLoading || disabled}
           >
             Previous page
           </button>
@@ -39,7 +42,7 @@ const NextPreviousNavigation = ({
         <button
           className="join-item btn btn-secondary w-full"
           onClick={handleClick}
-          disabled={isLoading}
+          disabled={isLoading || disabled}
         >
           {isLoading ? (
             <>

@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import Resizer from "react-image-file-resizer";
 
-const FileInput = ({ setFile, fileInputRef, label, file }) => {
+const FileInput = ({
+  setFile,
+  fileInputRef,
+  label,
+  file,
+  disabled = false,
+}) => {
   const handleChange = async (event) => {
     const file = event.target.files[0];
     const resized = await resizeFile(file);
@@ -46,6 +52,7 @@ const FileInput = ({ setFile, fileInputRef, label, file }) => {
       <input
         ref={fileInputRef}
         accept="image/*"
+        disabled={disabled}
         type="file"
         onChange={handleChange}
         className="file-input file-input-bordered w-full"

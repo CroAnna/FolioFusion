@@ -9,7 +9,13 @@ import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
 import { deleteExperienceById } from "../(web-builder)/builder/add-education/actions";
 
-const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
+const ExperienceInputCard = ({
+  index,
+  experienceKey,
+  experienceId,
+  setIsPending,
+  disabled,
+}) => {
   const {
     portfolioStackExperienceContextData,
     setPortfolioStackExperienceContextData,
@@ -37,6 +43,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setIsPending(true);
         if (experienceId) {
           // postoji u bazi
           setPortfolioStackExperienceContextData((prevData) =>
@@ -53,6 +60,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
             )
           );
         }
+        setIsPending(false);
       }
     });
   };
@@ -62,6 +70,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
       <div className="border-emerald-500 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
         <div className="flex gap-4">
           <Input
+            disabled={disabled}
             label={"Title:"}
             name={`experience_title`}
             value={portfolioStackExperienceContextData[index].experience_title}
@@ -70,14 +79,16 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
             }}
             placeholder={"Recommended 1 or 2 words"}
           />
-          <div
+          <button
+            disabled={disabled}
             onClick={handleDelete}
-            className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2"
+            className="bg-red-100 flex items-center rounded-lg px-2 disabled:bg-neutral-700"
           >
             <Trash size={32} color="#b91c1c" weight="duotone" />
-          </div>
+          </button>
         </div>
         <Textarea
+          disabled={disabled}
           label={"Description:"}
           name={"experience_description"}
           value={
@@ -89,6 +100,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
           placeholder={"Describe your position"}
         />
         <Input
+          disabled={disabled}
           label={"Period of time:"}
           name={`experience_time`}
           value={portfolioStackExperienceContextData[index].experience_time}
@@ -98,6 +110,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
           placeholder={"March 2021 - August 2024"}
         />
         <Select
+          disabled={disabled}
           placeholder="-"
           options={experienceLinkIcons}
           label={"Type:"}
@@ -110,6 +123,7 @@ const ExperienceInputCard = ({ index, experienceKey, experienceId }) => {
           value={portfolioStackExperienceContextData[index].experience_type}
         />
         <Input
+          disabled={disabled}
           label={"Keywords:"}
           name={`experience_keywords`}
           value={portfolioStackExperienceContextData[index].experience_keywords}

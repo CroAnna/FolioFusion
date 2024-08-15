@@ -3,14 +3,18 @@ import ExperienceInputCard from "@/app/_components/ExperienceInputCard";
 import Input from "@/app/_components/Input";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   getAddExperiencesSectionData,
   getAddExperiencesData,
   upsertAddExperiencesData,
 } from "./actions";
+import Image from "next/image";
+import loadingGif from "@/public/loading.gif";
 
 const AddEducation = () => {
+  const [isPending, setIsPending] = useState(false);
+
   const {
     portfolioStackHeroContextData,
     portfolioStackExperienceContextData,
@@ -44,6 +48,7 @@ const AddEducation = () => {
   };
 
   const saveData = async () => {
+    setIsPending(true);
     const response = await upsertAddExperiencesData(
       portfolioStackHeroContextData.id,
       portfolioStackHeroContextData.experience_group_description,
@@ -52,9 +57,11 @@ const AddEducation = () => {
     );
     console.log(response);
     setPortfolioStackExperienceContextData(response.experiences); // sluzi da se ne dogodi da ako se doda experience i samo spremi page (bez prebacivanja dalje) i doda jos jedan experience, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    setIsPending(false);
   };
 
   const getHero = useCallback(async () => {
+    setIsPending(true);
     const { portfolio, error } = await getAddExperiencesSectionData();
 
     if (error) {
@@ -66,9 +73,11 @@ const AddEducation = () => {
         experience_group_title: portfolio.experience_group_title,
       });
     }
+    setIsPending(false);
   }, []);
 
   const getExperiences = useCallback(async () => {
+    setIsPending(true);
     const { experiences, error } = await getAddExperiencesData();
 
     if (error) {
@@ -76,6 +85,7 @@ const AddEducation = () => {
     } else if (experiences.length > 0) {
       setPortfolioStackExperienceContextData(experiences);
     }
+    setIsPending(false);
   }, []);
 
   useEffect(() => {
@@ -83,7 +93,6 @@ const AddEducation = () => {
       portfolioStackHeroContextData.experience_group_title == "" ||
       portfolioStackHeroContextData.experience_group_description == ""
     ) {
-      console.log("dohvati");
       getHero();
     }
     getExperiences();
@@ -98,8 +107,22 @@ const AddEducation = () => {
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
+          disabled={isPending}
         >
-          Save
+          {isPending ? (
+            <div className="flex gap-1 items-center justify-center">
+              <Image
+                quality={40}
+                src={loadingGif}
+                width={24}
+                height={24}
+                alt="spinner"
+              />
+              <p>Saving...</p>
+            </div>
+          ) : (
+            <p> Save</p>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-4">
@@ -107,6 +130,7 @@ const AddEducation = () => {
           3.1. Add section title
         </h3>
         <Input
+          disabled={isPending}
           name={"experience_group_title"}
           value={portfolioStackHeroContextData.experience_group_title}
           onChange={(e) => {
@@ -120,6 +144,7 @@ const AddEducation = () => {
           3.2. Add section description
         </h3>
         <Input
+          disabled={isPending}
           name={"experience_group_description"}
           value={portfolioStackHeroContextData.experience_group_description}
           onChange={(e) => {
@@ -141,6 +166,8 @@ const AddEducation = () => {
             (timeline, index) =>
               timeline.experience_order && (
                 <ExperienceInputCard
+                  setIsPending={setIsPending}
+                  disabled={isPending}
                   key={timeline.experience_order}
                   index={index}
                   experienceKey={timeline.experience_order}
@@ -149,6 +176,7 @@ const AddEducation = () => {
               )
           )}
         <button
+          disabled={isPending}
           className="btn btn-secondary "
           onClick={() => {
             addExperience();
@@ -158,6 +186,8 @@ const AddEducation = () => {
         </button>
       </div>
       <NextPreviousNavigation
+        setIsPending={setIsPending}
+        disabled={isPending}
         handleNextClick={saveData}
         nextUrl={"/builder/add-activities"}
         previousUrl={"/builder/add-projects"}

@@ -10,6 +10,8 @@ import {
   upsertAddProjectsData,
 } from "./actions";
 import { deleteUnusedImages } from "../actions";
+import Image from "next/image";
+import loadingGif from "@/public/loading.gif";
 
 const AddWork = () => {
   const {
@@ -19,6 +21,7 @@ const AddWork = () => {
     setPortfolioStackProjectsContextData,
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   const handleUpdate = (field, value) => {
     setPortfolioStackHeroContextData({
@@ -47,6 +50,7 @@ const AddWork = () => {
   };
   // TODO iz nekog razloga se dvaput dodal projekt na kraju
   const saveData = async () => {
+    setIsPending(true);
     await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddProjectsData(
       portfolioStackHeroContextData.id,
@@ -56,9 +60,11 @@ const AddWork = () => {
     );
 
     setPortfolioStackProjectsContextData(response.projectsWithImages); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    setIsPending(false);
   };
 
   const getHero = useCallback(async () => {
+    setIsPending(true);
     const { portfolio, error } = await getAddProjectsSectionData();
 
     if (error) {
@@ -70,15 +76,18 @@ const AddWork = () => {
         project_group_title: portfolio.project_group_title,
       });
     }
+    setIsPending(false);
   }, []);
 
   const getProjects = useCallback(async () => {
+    setIsPending(true);
     const { projects, error } = await getAddProjectsData();
     if (error) {
       console.log(error);
     } else if (projects.length > 0) {
       setPortfolioStackProjectsContextData(projects);
     }
+    setIsPending(false);
   }, []);
 
   useEffect(() => {
@@ -98,10 +107,24 @@ const AddWork = () => {
           2. Add your projects
         </h2>
         <button
-          className="btn btn-secondary w-24 btn-outline"
+          className="btn btn-secondary w-fit btn-outline"
           onClick={saveData}
+          disabled={isPending}
         >
-          Save
+          {isPending ? (
+            <div className="flex gap-1 items-center justify-center">
+              <Image
+                quality={40}
+                src={loadingGif}
+                width={24}
+                height={24}
+                alt="spinner"
+              />
+              <p>Saving...</p>
+            </div>
+          ) : (
+            <p> Save</p>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-4">
@@ -109,6 +132,7 @@ const AddWork = () => {
           2.1. Add section title
         </h3>
         <Input
+          disabled={isPending}
           name={"project_group_title"}
           value={portfolioStackHeroContextData.project_group_title}
           onChange={(e) => {
@@ -122,6 +146,7 @@ const AddWork = () => {
           2.2. Add section description
         </h3>
         <Input
+          disabled={isPending}
           name={"project_group_description"}
           value={portfolioStackHeroContextData.project_group_description}
           onChange={(e) => {
@@ -140,6 +165,8 @@ const AddWork = () => {
             (project, index) =>
               project.project_order && (
                 <ProjectInputCard
+                  setIsPending={setIsPending}
+                  disabled={isPending}
                   key={project.project_order}
                   projectKey={project.project_order}
                   index={index}
@@ -150,6 +177,7 @@ const AddWork = () => {
               )
           )}
         <button
+          disabled={isPending}
           className="btn btn-primary"
           onClick={() => {
             addProject();
@@ -159,6 +187,8 @@ const AddWork = () => {
         </button>
       </div>
       <NextPreviousNavigation
+        setIsPending={setIsPending}
+        disabled={isPending}
         handleNextClick={saveData}
         nextUrl={"/builder/add-education"}
         previousUrl={"/builder/create-hero"}

@@ -11,6 +11,8 @@ import {
   upsertAddActivitiesData,
 } from "./actions";
 import { deleteUnusedImages } from "../actions";
+import Image from "next/image";
+import loadingGif from "@/public/loading.gif";
 
 const AddActivities = () => {
   const {
@@ -20,6 +22,7 @@ const AddActivities = () => {
     setPortfolioStackHeroContextData,
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   const addActivity = () => {
     setPortfolioStackActivityContextData([
@@ -46,6 +49,8 @@ const AddActivities = () => {
   };
 
   const saveData = async () => {
+    setIsPending(true);
+
     await deleteUnusedImages(imagesToRemove);
     const response = await upsertAddActivitiesData(
       portfolioStackHeroContextData.id,
@@ -53,9 +58,11 @@ const AddActivities = () => {
       portfolioStackActivityContextData
     );
     setPortfolioStackActivityContextData(response.activitiesWithImages); // sluzi da se ne dogodi da ako se doda activity i samo spremi page (bez prebacivanja dalje) i doda jos jedan activity, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    setIsPending(false);
   };
 
   const getHero = useCallback(async () => {
+    setIsPending(true);
     const { portfolio, error } = await getAddActivitiesSectionData();
 
     if (error) {
@@ -66,9 +73,11 @@ const AddActivities = () => {
         activity_bg_shape: portfolio.activity_bg_shape,
       });
     }
+    setIsPending(false);
   }, []);
 
   const getActivities = useCallback(async () => {
+    setIsPending(true);
     const { activities, error } = await getAddActivitiesData();
 
     if (error) {
@@ -76,6 +85,7 @@ const AddActivities = () => {
     } else if (activities.length > 0) {
       setPortfolioStackActivityContextData(activities);
     }
+    setIsPending(false);
   }, []);
 
   useEffect(() => {
@@ -94,8 +104,22 @@ const AddActivities = () => {
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
+          disabled={isPending}
         >
-          Save
+          {isPending ? (
+            <div className="flex gap-1 items-center justify-center">
+              <Image
+                quality={40}
+                src={loadingGif}
+                width={24}
+                height={24}
+                alt="spinner"
+              />
+              <p>Saving...</p>
+            </div>
+          ) : (
+            <p> Save</p>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-4">
@@ -103,6 +127,7 @@ const AddActivities = () => {
           4.1. Select activity background color
         </h3>
         <Join
+          disabled={isPending}
           value={portfolioStackHeroContextData.activity_bg_shape}
           items={activityBgData}
           onChange={(e) => {
@@ -123,6 +148,8 @@ const AddActivities = () => {
             (activity, index) =>
               activity.activity_order && (
                 <ActivityInputCard
+                  setIsPending={setIsPending}
+                  disabled={isPending}
                   key={activity.activity_order}
                   index={index}
                   activityKey={activity.activity_order}
@@ -133,6 +160,7 @@ const AddActivities = () => {
               )
           )}
         <button
+          disabled={isPending}
           className="btn btn-secondary"
           onClick={() => {
             addActivity();
@@ -142,6 +170,8 @@ const AddActivities = () => {
         </button>
       </div>
       <NextPreviousNavigation
+        setIsPending={setIsPending}
+        disabled={isPending}
         handleNextClick={saveData}
         nextUrl={"/builder/add-basic-info"}
         previousUrl={"/builder/add-education"}

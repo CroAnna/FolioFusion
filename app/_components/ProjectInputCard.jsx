@@ -16,6 +16,8 @@ const ProjectInputCard = ({
   projectId,
   setImagesToRemove,
   imagesToRemove,
+  disabled = false,
+  setIsPending,
 }) => {
   const {
     portfolioStackProjectsContextData,
@@ -96,6 +98,8 @@ const ProjectInputCard = ({
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setIsPending(true);
+
         if (projectId) {
           // postoji u bazi
           setPortfolioStackProjectsContextData((prevData) =>
@@ -112,6 +116,7 @@ const ProjectInputCard = ({
             )
           );
         }
+        setIsPending(false);
       }
     });
   };
@@ -121,8 +126,8 @@ const ProjectInputCard = ({
       <>
         <div className="border-emerald-500 border shadow-sm p-4 rounded-lg flex flex-col gap-2">
           <div className="flex gap-4">
-            {/* {JSON.stringify(portfolioStackProjectsContextData[index])} */}
             <Input
+              disabled={disabled}
               label={"Title:"}
               name={`project_title`}
               value={portfolioStackProjectsContextData[index].project_title}
@@ -131,14 +136,16 @@ const ProjectInputCard = ({
               }}
               placeholder={"Recommended 1 or 2 words"}
             />
-            <div
+            <button
+              disabled={disabled}
               onClick={handleDelete}
-              className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2"
+              className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2 disabled:bg-neutral-700"
             >
               <Trash size={32} color="#b91c1c" weight="duotone" />
-            </div>
+            </button>
           </div>
           <Textarea
+            disabled={disabled}
             label={"Description:"}
             name={"project_description"}
             value={portfolioStackProjectsContextData[index].project_description}
@@ -150,6 +157,7 @@ const ProjectInputCard = ({
           <div className="flex items-end w-full gap-3">
             {!portfolioStackProjectsContextData[index].project_img ? (
               <FileInput
+                disabled={disabled}
                 file={file}
                 fileInputRef={fileInputRef}
                 label={"Image: (max. 5 MB)"}
@@ -166,7 +174,8 @@ const ProjectInputCard = ({
                     </span>
                   </div>
                   <button
-                    className="btn btn-outline w-fit btn-error btn-ghost"
+                    disabled={disabled}
+                    className="btn btn-outline w-fit btn-error btn-ghost disabled:bg-neutral-700"
                     onClick={removeSelectedImage}
                   >
                     Remove image
@@ -177,6 +186,7 @@ const ProjectInputCard = ({
           </div>
           <div className="flex gap-3 w-full">
             <Input
+              disabled={disabled}
               value={
                 portfolioStackProjectsContextData[index].project_link_1_text
               }
@@ -188,6 +198,7 @@ const ProjectInputCard = ({
               placeholder={"Code"}
             />
             <Input
+              disabled={disabled}
               label={"Link 2 text:"}
               name={`project_link_2_text`}
               value={
@@ -201,6 +212,7 @@ const ProjectInputCard = ({
           </div>
           <div className="flex gap-3 w-full">
             <Input
+              disabled={disabled}
               label={"Link 1 URL:"}
               value={
                 portfolioStackProjectsContextData[index].project_link_1_url
@@ -212,6 +224,7 @@ const ProjectInputCard = ({
               placeholder={"Paste URL"}
             />
             <Input
+              disabled={disabled}
               label={"Link 2 URL:"}
               name={`project_link_2`}
               value={
@@ -225,6 +238,7 @@ const ProjectInputCard = ({
           </div>
           <div className="flex gap-3 w-full">
             <Select
+              disabled={disabled}
               value={
                 portfolioStackProjectsContextData[index].project_link_1_icon
               }
@@ -236,6 +250,7 @@ const ProjectInputCard = ({
               }}
             />
             <Select
+              disabled={disabled}
               value={
                 portfolioStackProjectsContextData[index].project_link_2_icon
               }
@@ -255,6 +270,7 @@ const ProjectInputCard = ({
             </div>
             <div className="flex justify-between items-end gap-3 flex-col md:flex-row">
               <Select
+                disabled={disabled}
                 placeholder="-"
                 options={icons}
                 labelAttribute="icon"
@@ -272,6 +288,7 @@ const ProjectInputCard = ({
                 }
               />
               <Select
+                disabled={disabled}
                 placeholder="-"
                 options={icons}
                 labelAttribute="icon"
@@ -289,6 +306,7 @@ const ProjectInputCard = ({
                 }
               />
               <Select
+                disabled={disabled}
                 placeholder="-"
                 options={icons}
                 labelAttribute="icon"
@@ -307,6 +325,7 @@ const ProjectInputCard = ({
                 }
               />
               <Select
+                disabled={disabled}
                 placeholder="-"
                 options={icons}
                 labelAttribute="icon"
@@ -325,6 +344,7 @@ const ProjectInputCard = ({
                 }
               />
               <Select
+                disabled={disabled}
                 placeholder="-"
                 options={icons}
                 labelAttribute="icon"

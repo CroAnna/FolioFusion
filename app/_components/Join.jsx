@@ -1,4 +1,4 @@
-const Join = ({ items, onChange, name, value }) => {
+const Join = ({ items, onChange, name, value, disabled = false }) => {
   return (
     <div className="join flex-col md:flex-row">
       {items.map((el, index) => (
@@ -8,6 +8,7 @@ const Join = ({ items, onChange, name, value }) => {
           type="radio"
           name={name}
           value={el}
+          disabled={disabled}
           checked={el === value}
           aria-label={el}
           onChange={onChange}

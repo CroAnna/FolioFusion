@@ -15,6 +15,8 @@ const ActivityInputCard = ({
   activityId,
   setImagesToRemove,
   imagesToRemove,
+  setIsPending,
+  disabled,
 }) => {
   const {
     portfolioStackActivityContextData,
@@ -34,6 +36,7 @@ const ActivityInputCard = ({
   };
 
   const removeSelectedImage = () => {
+    setIsPending(true);
     if (portfolioStackActivityContextData[index].activity_img.publicUrl) {
       const imgUrl =
         portfolioStackActivityContextData[index].activity_img.publicUrl;
@@ -48,6 +51,7 @@ const ActivityInputCard = ({
         el.activity_order == activityKey ? { ...el, activity_img: null } : el
       )
     );
+    setIsPending(false);
   };
 
   useEffect(() => {
@@ -57,6 +61,7 @@ const ActivityInputCard = ({
   }, []);
 
   useEffect(() => {
+    setIsPending(true);
     console.log(file);
     if (file && !portfolioStackActivityContextData[index].activity_img) {
       setFirstLoad(true);
@@ -85,6 +90,7 @@ const ActivityInputCard = ({
         );
       }
     }
+    setIsPending(false);
   }, [file]);
 
   const handleDelete = () => {
@@ -101,6 +107,7 @@ const ActivityInputCard = ({
       confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setIsPending(true);
         if (activityId) {
           // postoji u bazi
           setPortfolioStackActivityContextData((prevData) =>
@@ -117,6 +124,7 @@ const ActivityInputCard = ({
             )
           );
         }
+        setIsPending(false);
       }
     });
   };
@@ -134,14 +142,16 @@ const ActivityInputCard = ({
             }}
             placeholder={"What, where?"}
           />
-          <div
+          <button
+            disabled={disabled}
             onClick={handleDelete}
-            className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2"
+            className="bg-red-100 cursor-pointer flex items-center rounded-lg px-2 disabled:bg-neutral-700"
           >
             <Trash size={32} color="#b91c1c" weight="duotone" />
-          </div>
+          </button>
         </div>
         <Textarea
+          disabled={disabled}
           label={"Description:"}
           name={"activity_description"}
           value={portfolioStackActivityContextData[index].activity_description}
@@ -153,6 +163,7 @@ const ActivityInputCard = ({
         <div className="flex items-end w-full gap-3">
           {!portfolioStackActivityContextData[index].activity_img ? (
             <FileInput
+              disabled={disabled}
               file={file}
               fileInputRef={activityInputRef}
               label={"Image: (max. 5 MB)"}
@@ -167,7 +178,8 @@ const ActivityInputCard = ({
                 </span>
               </div>
               <button
-                className="btn btn-outline w-fit btn-error btn-ghost"
+                disabled={disabled}
+                className="btn btn-outline w-fit btn-error btn-ghost disabled:bg-neutral-700"
                 onClick={removeSelectedImage}
               >
                 Remove image
@@ -176,6 +188,7 @@ const ActivityInputCard = ({
           )}
         </div>
         <Select
+          disabled={disabled}
           placeholder="-"
           options={activityIcons}
           label={"Type:"}
@@ -188,6 +201,7 @@ const ActivityInputCard = ({
           value={portfolioStackActivityContextData[index].activity_type}
         />
         <Input
+          disabled={disabled}
           label={"URL:"}
           name={`activity_url`}
           value={portfolioStackActivityContextData[index].activity_url}

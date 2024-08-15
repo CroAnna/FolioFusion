@@ -2,6 +2,7 @@
 import FileInput from "@/app/_components/FileInput";
 import Input from "@/app/_components/Input";
 import Join from "@/app/_components/Join";
+import loadingGif from "@/public/loading.gif";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import Toggle from "@/app/_components/Toggle";
@@ -31,12 +32,14 @@ import React, {
 } from "react";
 import { getCreateHeroData, upsertCreateHeroData } from "./actions";
 import { deleteUnusedImages } from "../actions";
+import Image from "next/image";
 
 const CreateHero = () => {
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [firstLoad, setFirstLoad] = useState(false);
   const [imagesToRemove, setImagesToRemove] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
   const {
     portfolioStackHeroContextData,
@@ -71,6 +74,7 @@ const CreateHero = () => {
   };
 
   const getHero = useCallback(async () => {
+    setIsPending(true);
     const { hero, hero_image, error, portfolio, error2 } =
       await getCreateHeroData();
     if (error) {
@@ -118,6 +122,7 @@ const CreateHero = () => {
         activity_bg_shape: hero.activity_bg_shape,
       });
     }
+    setIsPending(false);
   }, []);
 
   useEffect(() => {
@@ -153,6 +158,7 @@ const CreateHero = () => {
   }, [file]);
 
   const saveData = async () => {
+    setIsPending(true);
     const deleteRes = await deleteUnusedImages(imagesToRemove);
     console.log(deleteRes);
 
@@ -185,6 +191,7 @@ const CreateHero = () => {
     );
     console.log(response);
     setPortfolioStackHeroContextData(response.hero);
+    setIsPending(false);
   };
 
   return (
@@ -194,10 +201,24 @@ const CreateHero = () => {
           1. Create hero
         </h2>
         <button
-          className="btn btn-secondary w-24 btn-outline"
+          className="btn btn-secondary btn-outline w-fit"
           onClick={saveData}
+          disabled={isPending}
         >
-          Save
+          {isPending ? (
+            <div className="flex gap-1 items-center justify-center">
+              <Image
+                quality={40}
+                src={loadingGif}
+                width={24}
+                height={24}
+                alt="spinner"
+              />
+              <p>Saving...</p>
+            </div>
+          ) : (
+            <p> Save</p>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-4">
@@ -206,6 +227,7 @@ const CreateHero = () => {
           {!portfolioStackHeroContextData.hero_image ? (
             <div>
               <FileInput
+                disabled={isPending}
                 setFile={setFile}
                 file={file}
                 fileInputRef={fileInputRef}
@@ -216,6 +238,7 @@ const CreateHero = () => {
               {portfolioStackHeroContextData.hero_image && (
                 <>
                   <Toggle
+                    disabled={isPending}
                     text={"Rounded image"}
                     yesNo
                     onChange={(e) => {
@@ -225,6 +248,7 @@ const CreateHero = () => {
                     checked={portfolioStackHeroContextData.hero_image_rounded}
                   />
                   <Toggle
+                    disabled={isPending}
                     checked={portfolioStackHeroContextData.hero_image_border}
                     text={"Border around image"}
                     yesNo
@@ -234,6 +258,7 @@ const CreateHero = () => {
                   />
                   {portfolioStackHeroContextData.hero_image_border && (
                     <Join
+                      disabled={isPending}
                       value={portfolioStackHeroContextData.hero_border_style}
                       items={borderStyleItemsData}
                       onChange={(e) => {
@@ -246,7 +271,8 @@ const CreateHero = () => {
               )}
 
               <button
-                className="btn btn-outline w-fit btn-error btn-ghost"
+                disabled={isPending}
+                className="btn btn-outline w-fit btn-error btn-ghost disabled:bg-neutral-700"
                 onClick={removeSelectedImage}
               >
                 Remove image
@@ -263,6 +289,7 @@ const CreateHero = () => {
         </div>
         <Input
           name={"hero_welcome"}
+          disabled={isPending}
           value={portfolioStackHeroContextData.hero_welcome}
           onChange={(e) => {
             handleUpdate("hero_welcome", e.target.value);
@@ -273,6 +300,7 @@ const CreateHero = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">1.3. Add your name</h3>
         <Input
+          disabled={isPending}
           name={"hero_name"}
           value={portfolioStackHeroContextData.hero_name}
           onChange={(e) => {
@@ -288,6 +316,7 @@ const CreateHero = () => {
           </h3>
         </div>
         <Input
+          disabled={isPending}
           name={"hero_short"}
           value={portfolioStackHeroContextData.hero_short}
           onChange={(e) => {
@@ -304,6 +333,7 @@ const CreateHero = () => {
           <p>(Or add a funny punchline)</p>
         </div>
         <Input
+          disabled={isPending}
           name={"hero_description"}
           value={portfolioStackHeroContextData.hero_description}
           onChange={(e) => {
@@ -317,6 +347,7 @@ const CreateHero = () => {
           1.6. Select UI of your hero
         </h3>
         <Toggle
+          disabled={isPending}
           checked={portfolioStackHeroContextData.hero_extra}
           text={"Show custom elements"}
           yesNo
@@ -328,6 +359,7 @@ const CreateHero = () => {
         {portfolioStackHeroContextData.hero_extra && (
           <>
             <Toggle
+              disabled={isPending}
               checked={portfolioStackHeroContextData.hero_bg_disabled_mobile}
               text={"Custom elements hidden on small screens?"}
               yesNo
@@ -336,6 +368,7 @@ const CreateHero = () => {
               }}
             />
             <Join
+              disabled={isPending}
               value={portfolioStackHeroContextData.hero_extra_style_elements}
               items={heroExtraElementsData}
               onChange={(e) => {
@@ -344,6 +377,7 @@ const CreateHero = () => {
               name={"hero_extra_style_elements"}
             />
             <Join
+              disabled={isPending}
               value={portfolioStackHeroContextData.hero_variant}
               items={heroVariantData}
               onChange={(e) => {
@@ -362,6 +396,7 @@ const CreateHero = () => {
           <p>(Or leave blank)</p>
         </div>
         <Input
+          disabled={isPending}
           icon={<GithubLogo size={32} weight="duotone" />}
           name={"social_github"}
           value={portfolioStackHeroContextData.social_github}
@@ -371,6 +406,7 @@ const CreateHero = () => {
           placeholder={"Paste Github URL"}
         />
         <Input
+          disabled={isPending}
           icon={<LinkedinLogo size={32} weight="duotone" />}
           name={"social_linkedin"}
           value={portfolioStackHeroContextData.social_linkedin}
@@ -380,6 +416,7 @@ const CreateHero = () => {
           placeholder={"Paste LinkedIn URL"}
         />
         <Input
+          disabled={isPending}
           icon={<XLogo size={32} weight="duotone" />}
           name={"social_x"}
           value={portfolioStackHeroContextData.social_x}
@@ -389,6 +426,7 @@ const CreateHero = () => {
           placeholder={"Paste X URL"}
         />
         <Input
+          disabled={isPending}
           icon={<FacebookLogo size={32} weight="duotone" />}
           name={"social_facebook"}
           value={portfolioStackHeroContextData.social_facebook}
@@ -398,6 +436,7 @@ const CreateHero = () => {
           placeholder={"Paste Facebook URL"}
         />
         <Input
+          disabled={isPending}
           icon={<InstagramLogo size={32} weight="duotone" />}
           name={"social_instagram"}
           value={portfolioStackHeroContextData.social_instagram}
@@ -407,6 +446,7 @@ const CreateHero = () => {
           placeholder={"Paste Instagram URL"}
         />
         <Input
+          disabled={isPending}
           icon={<YoutubeLogo size={32} weight="duotone" />}
           name={"social_youtube"}
           value={portfolioStackHeroContextData.social_youtube}
@@ -416,6 +456,7 @@ const CreateHero = () => {
           placeholder={"Paste Youtube URL"}
         />
         <Input
+          disabled={isPending}
           icon={<TiktokLogo size={32} weight="duotone" />}
           name={"social_tiktok"}
           value={portfolioStackHeroContextData.social_tiktok}
@@ -425,6 +466,7 @@ const CreateHero = () => {
           placeholder={"Paste TikTok URL"}
         />
         <Input
+          disabled={isPending}
           icon={<DribbbleLogo size={32} weight="duotone" />}
           value={portfolioStackHeroContextData.social_dribble}
           name={"social_dribble"}
@@ -434,6 +476,7 @@ const CreateHero = () => {
           placeholder={"Paste Dribbble URL"}
         />
         <Input
+          disabled={isPending}
           icon={<Link size={32} weight="duotone" />}
           value={portfolioStackHeroContextData.social_other}
           name={"social_other"}
@@ -448,6 +491,7 @@ const CreateHero = () => {
           1.8. Do you want to have scroll to top button ?
         </h3>
         <Toggle
+          disabled={isPending}
           yesNo
           checked={portfolioStackHeroContextData.hero_scroll_to_top}
           text={
@@ -464,6 +508,7 @@ const CreateHero = () => {
         </h3>
         <p>Mobile text alignment</p>
         <Join
+          disabled={isPending}
           value={portfolioStackHeroContextData.hero_mobile_alignment}
           items={heroAlignmentItemsData}
           onChange={(e) => {
@@ -473,6 +518,7 @@ const CreateHero = () => {
         />
         <p>Desktop text alignment</p>
         <Join
+          disabled={isPending}
           value={portfolioStackHeroContextData.hero_desktop_alignment}
           items={heroAlignmentItemsData}
           onChange={(e) => {
@@ -482,8 +528,10 @@ const CreateHero = () => {
         />
       </div>
       <NextPreviousNavigation
+        setIsPending={setIsPending}
         handleNextClick={saveData}
         nextUrl={"/builder/add-projects"}
+        disabled={isPending}
       />
     </div>
   );

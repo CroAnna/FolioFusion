@@ -6,6 +6,7 @@ const Select = ({
   options,
   name,
   onChange,
+  disabled = false,
   placeholder,
   valueAttribute = "value",
   labelAttribute = "label",
@@ -18,6 +19,7 @@ const Select = ({
         </div>
       )}
       <select
+        disabled={disabled}
         className="select select-bordered w-full"
         name={name}
         onChange={onChange}
@@ -27,7 +29,11 @@ const Select = ({
           {placeholder || "Select"}
         </option>
         {options.map((option, index) => (
-          <option key={index} value={option[valueAttribute]}>
+          <option
+            key={index}
+            value={option[valueAttribute]}
+            disabled={disabled}
+          >
             {option[labelAttribute]}
           </option>
         ))}

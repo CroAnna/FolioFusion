@@ -9,14 +9,18 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
+import Image from "next/image";
+import loadingGif from "@/public/loading.gif";
 
 const DeployPortfolio = () => {
   const [user, setUser] = useState(null);
   const [domain, setDomain] = useState(null);
   const [domainAvailable, setDomainAvailable] = useState(true);
   const { setConfettiTriggerState } = useContext(PortfolioContext);
+  const [isPending, setIsPending] = useState(false);
 
   const deployPortfolio = async () => {
+    setIsPending(true);
     // check if domain is unique and available
     const unavailableDomain = await checkIfDomainIsTaken(domain);
     if (unavailableDomain) {
@@ -27,6 +31,7 @@ const DeployPortfolio = () => {
       const { _user, error } = await upsertDeploymentData(domain);
       setConfettiTriggerState(error ? false : _user ? true : false);
     }
+    setIsPending(false);
   };
 
   useEffect(() => {
@@ -34,15 +39,19 @@ const DeployPortfolio = () => {
   }, []);
 
   const fetchUserData = async () => {
+    setIsPending(true);
     const data = await getUserData();
     setUser(data.userData);
     setDomain(data.userData.domain_url);
+    setIsPending(false);
   };
 
   const handleUpdate = (value) => {
+    setIsPending(true);
     setDomain(value);
     console.log(value);
     setDomainAvailable(true);
+    setIsPending(false);
   };
 
   return (
@@ -103,6 +112,7 @@ const DeployPortfolio = () => {
           <div className="flex flex-row items-center">
             <p>www.portfolio.com/&nbsp;</p>
             <Input
+              disabled={isPending}
               name={"domain"}
               value={domain}
               onChange={(e) => {
@@ -120,7 +130,7 @@ const DeployPortfolio = () => {
         <div className="flex flex-col gap-4">
           <h3 className="text-xl md:text-2xl font-bold">6.3. Deploy it</h3>
           <button
-            disabled={!user.access_granted || !domainAvailable}
+            disabled={!user.access_granted || !domainAvailable || isPending}
             className={`btn btn-block btn-secondary h-24 text-lg font-bold ${
               !user.access_granted && "cursor-not-allowed"
             }`}
@@ -129,7 +139,11 @@ const DeployPortfolio = () => {
             Deploy portfolio
           </button>
         </div>
-        <NextPreviousNavigation previousUrl={"/builder/add-basic-info"} />
+        <NextPreviousNavigation
+          setIsPending={setIsPending}
+          disabled={isPending}
+          previousUrl={"/builder/add-basic-info"}
+        />
       </div>
     )
   );

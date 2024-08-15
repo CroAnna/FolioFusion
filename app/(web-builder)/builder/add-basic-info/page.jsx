@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
 import { getCreateBasicInfo, upsertCreatePortfolioBasicData } from "./actions";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
@@ -8,10 +8,13 @@ import {
   portfolioFontItemsData,
   portfolioPaletteItemsData,
 } from "@/app/_libs/utils";
+import Image from "next/image";
+import loadingGif from "@/public/loading.gif";
 
 const BasicInfo = () => {
   const { portfolioStackBasicContextData, setPortfolioStackBasicContextData } =
     useContext(PortfolioContext);
+  const [isPending, setIsPending] = useState(false);
 
   const handleUpdate = (field, value) => {
     setPortfolioStackBasicContextData((prev) => ({
@@ -21,6 +24,7 @@ const BasicInfo = () => {
   };
 
   const getBasicInfo = useCallback(async () => {
+    setIsPending(true);
     const { portfolio, error } = await getCreateBasicInfo();
     if (error) {
       console.log(error);
@@ -33,6 +37,7 @@ const BasicInfo = () => {
         portfolio_font_secondary: portfolio.portfolio_font_secondary,
       });
     }
+    setIsPending(false);
   }, []);
 
   useEffect(() => {
@@ -40,6 +45,7 @@ const BasicInfo = () => {
   }, []);
 
   const saveData = async () => {
+    setIsPending(true);
     const response = await upsertCreatePortfolioBasicData(
       portfolioStackBasicContextData.id,
       portfolioStackBasicContextData.portfolio_palette,
@@ -48,6 +54,7 @@ const BasicInfo = () => {
     );
     console.log(response);
     setPortfolioStackBasicContextData(response.portfolio);
+    setIsPending(false);
   };
 
   return (
@@ -59,8 +66,22 @@ const BasicInfo = () => {
         <button
           className="btn btn-secondary w-24 btn-outline"
           onClick={saveData}
+          disabled={isPending}
         >
-          Save
+          {isPending ? (
+            <div className="flex gap-1 items-center justify-center">
+              <Image
+                quality={40}
+                src={loadingGif}
+                width={24}
+                height={24}
+                alt="spinner"
+              />
+              <p>Saving...</p>
+            </div>
+          ) : (
+            <p> Save</p>
+          )}
         </button>
       </div>
       <div className="flex flex-col gap-4">
@@ -68,6 +89,7 @@ const BasicInfo = () => {
           5.1. Select portfolio color palette
         </h3>
         <Join
+          disabled={isPending}
           value={portfolioStackBasicContextData.portfolio_palette}
           items={portfolioPaletteItemsData}
           onChange={(e) => {
@@ -81,6 +103,7 @@ const BasicInfo = () => {
           5.2. Select primary font
         </h3>
         <Join
+          disabled={isPending}
           value={portfolioStackBasicContextData.portfolio_font_primary}
           items={portfolioFontItemsData}
           onChange={(e) => {
@@ -94,6 +117,7 @@ const BasicInfo = () => {
           5.2. Select secondary font
         </h3>
         <Join
+          disabled={isPending}
           value={portfolioStackBasicContextData.portfolio_font_secondary}
           items={portfolioFontItemsData}
           onChange={(e) => {
@@ -103,6 +127,8 @@ const BasicInfo = () => {
         />
       </div>
       <NextPreviousNavigation
+        setIsPending={setIsPending}
+        disabled={isPending}
         handleNextClick={saveData}
         previousUrl={"/builder/add-activities"}
         nextUrl={"/builder/deploy-portfolio"}

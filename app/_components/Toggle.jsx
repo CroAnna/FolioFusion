@@ -1,6 +1,12 @@
 import React from "react";
 
-const Toggle = ({ text, onChange, checked, yesNo = false }) => {
+const Toggle = ({
+  text,
+  onChange,
+  checked,
+  yesNo = false,
+  disabled = false,
+}) => {
   return (
     <div className={`form-control w-full ${yesNo && "md:w-[440px]"}`}>
       <label className="label cursor-pointer">
@@ -8,6 +14,7 @@ const Toggle = ({ text, onChange, checked, yesNo = false }) => {
         <div className={`flex gap-2 ${yesNo && "ml-4"}`}>
           {yesNo && <p>NO</p>}
           <input
+            disabled={disabled}
             type="checkbox"
             className="toggle toggle-primary"
             onChange={onChange}
