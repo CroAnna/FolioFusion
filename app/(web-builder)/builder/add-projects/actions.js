@@ -79,24 +79,14 @@ export async function upsertAddProjectsData(
     upsertData.id = id;
   }
 
-  const { data: heroWithoutImage, error } = await supabase
+  const { data: portfolio, error } = await supabase
     .from("heros")
+    .upsert(upsertData)
     .select()
     .eq("user_id", user.id)
     .single();
 
-  let hero_image = null;
-  if (heroWithoutImage && heroWithoutImage.hero_image) {
-    const hero_image_filepath = heroWithoutImage.hero_image;
-    const { data } = supabase.storage
-      .from("images")
-      .getPublicUrl(`${hero_image_filepath}`);
-    hero_image = data;
-  }
-  const portfolio = {
-    ...heroWithoutImage,
-    hero_image: heroWithoutImage && hero_image,
-  };
+  console.log(portfolio);
 
   const projects = await Promise.all(
     projectsData.map(async (project) => {

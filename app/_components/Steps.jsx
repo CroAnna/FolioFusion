@@ -26,9 +26,9 @@ const Steps = ({ currentStep, stepsData }) => {
           key={index}
           className={`step ${currentStep >= index + 1 && "step-primary"}`}
         >
-          <Link href={`${getPageUrl(index)}`} className="hidden md:flex">
-            {el.text}
-          </Link>
+          {/* <Link href={`${getPageUrl(index)}`} className="hidden md:flex"> */}
+          {el.text}
+          {/* </Link> */}
         </li>
       ))}
     </ul>
