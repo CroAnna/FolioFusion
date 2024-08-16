@@ -2,13 +2,13 @@ const VideoShowcase = () => {
   return (
     <div className="md:w-full max-w-screen-xl mx-4 md:mx-auto py-20 md:py-48 gap-20 md:gap-48 flex flex-col">
       <div className="text-center flex flex-col gap-8 md:gap-4">
-        <h3 className="text-xl font-medium text-center w-full">
+        <h3 className="hidden md:block text-xl font-medium text-center w-full">
           No UI design talent, but want to get a job?
         </h3>
-        <h2 className="text-5xl md:text-7xl font-bold text-center w-full">
+        <h2 className="text-2xl md:text-7xl font-bold text-center w-full">
           How StackShow works?
         </h2>
-        <h3 className="text-xl font-medium text-center w-full">
+        <h3 className="hidden md:block text-xl font-medium text-center w-full">
           Have a problem with bad looking portfolio?
         </h3>
       </div>
@@ -19,7 +19,7 @@ const VideoShowcase = () => {
             <span className="underline text-emerald-400 font-extrabold text-6xl">
               eye catching
             </span>{" "}
-            hero{" "}
+            hero
           </h3>
           <p className="text-xl">
             Choose between{" "}
@@ -57,7 +57,7 @@ const VideoShowcase = () => {
           Your browser does not support the video tag.
         </video>{" "}
         <div className="flex flex-col gap-8">
-          <h3 className="font-semibold text-5xl">Highligth your projects</h3>
+          <h3 className="font-semibold text-5xl">Highligth your projects ✨</h3>
           <p className="text-xl">
             Showcase your top projects by uploading images, detailing the{" "}
             <span className="font-bold underline">tech stack</span>, and adding{" "}
@@ -70,14 +70,14 @@ const VideoShowcase = () => {
             what you&apos;ve created.
           </p>
         </div>
-      </div>{" "}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">
             Career & education overview 🎓
           </h3>
           <p className="text-xl">
-            Present your career history and educational accomplishments with a
+            Present your career history and educational accomplishments with a{" "}
             <span className="font-bold underline">timeline</span> that captures
             your growth and achievements over the years.
           </p>
@@ -110,7 +110,7 @@ const VideoShowcase = () => {
           Your browser does not support the video tag.
         </video>{" "}
         <div className="flex flex-col gap-8">
-          <h3 className="font-semibold text-5xl">Prove you&apos;re active</h3>
+          <h3 className="font-semibold text-5xl">Customization 🤩</h3>
           <p className="text-xl">
             Feature your attendance and participation in{" "}
             <span className="font-bold underline">hackathons</span>,{" "}
@@ -118,6 +118,7 @@ const VideoShowcase = () => {
             <span className="font-bold underline">workshops</span> and more to
             show your enthusiasm for the industry.
           </p>
+          <p className="text-xl">Customize it how you want!</p>
         </div>
       </div>{" "}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
