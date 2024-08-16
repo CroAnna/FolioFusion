@@ -1,3 +1,10 @@
+import dynamic from "next/dynamic";
+
+const DynamicVideo = dynamic(() => import("./Video"), {
+  // import the component when it appears the first time
+  loading: () => <p>Loading...</p>,
+});
+
 const VideoShowcase = () => {
   return (
     <div className="md:w-full max-w-screen-xl mx-4 md:mx-auto py-20 md:py-48 gap-20 md:gap-48 flex flex-col">
@@ -29,33 +36,16 @@ const VideoShowcase = () => {
             social and connect all your platforms in one place.
           </p>
         </div>
-        <video
-          controls
-          preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-        >
-          <source src="/stackshow-video-1.mp4" type="video/mp4" />
-          <source src="/stackshow-video-1.ogg" type="video/ogg" />
-          {/* ogg because mp4 doesn't work on firefox */}
-          Your browser does not support the video tag.
-        </video>
+        <DynamicVideo
+          pathMp4={"/stackshow-video-1.mp4"}
+          pathOgg={"/stackshow-video-1.ogg"}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <video
-          controls
-          preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-        >
-          <source src="/stackshow-video-2.mp4" type="video/mp4" />
-          <source src="/stackshow-video-2.ogg" type="video/ogg" />
-          Your browser does not support the video tag.
-        </video>{" "}
+        <DynamicVideo
+          pathMp4={"/stackshow-video-2.mp4"}
+          pathOgg={"/stackshow-video-2.ogg"}
+        />
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">Highligth your projects ✨</h3>
           <p className="text-xl">
@@ -82,33 +72,16 @@ const VideoShowcase = () => {
             your growth and achievements over the years.
           </p>
         </div>
-        <video
-          controls
-          preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-        >
-          <source src="/stackshow-video-3.mp4" type="video/mp4" />
-          <source src="/stackshow-video-3.ogg" type="video/ogg" />
-          {/* ogg because mp4 doesn't work on firefox */}
-          Your browser does not support the video tag.
-        </video>
+        <DynamicVideo
+          pathMp4={"/stackshow-video-3.mp4"}
+          pathOgg={"/stackshow-video-3.ogg"}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <video
-          controls
-          preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-        >
-          <source src="/stackshow-video-4.mp4" type="video/mp4" />
-          <source src="/stackshow-video-4.ogg" type="video/ogg" />
-          Your browser does not support the video tag.
-        </video>{" "}
+        <DynamicVideo
+          pathMp4={"/stackshow-video-4.mp4"}
+          pathOgg={"/stackshow-video-4.ogg"}
+        />
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">Customization 🤩</h3>
           <p className="text-xl">
@@ -120,7 +93,7 @@ const VideoShowcase = () => {
           </p>
           <p className="text-xl">Customize it how you want!</p>
         </div>
-      </div>{" "}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">
@@ -134,19 +107,10 @@ const VideoShowcase = () => {
             to ensure it is live and accessible to everyone, everytime, 24/7.
           </p>
         </div>
-        <video
-          controls
-          preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
-          autoPlay={true}
-          muted={true}
-          loop={true}
-        >
-          <source src="/stackshow-video-5.mp4" type="video/mp4" />
-          <source src="/stackshow-video-5.ogg" type="video/ogg" />
-          {/* ogg because mp4 doesn't work on firefox */}
-          Your browser does not support the video tag.
-        </video>
+        <DynamicVideo
+          pathMp4={"/stackshow-video-5.mp4"}
+          pathOgg={"/stackshow-video-5.ogg"}
+        />
       </div>
     </div>
   );
