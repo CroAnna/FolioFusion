@@ -461,6 +461,7 @@ export const getHexLineColor = (palette) => {
 };
 
 export const icons = [
+  { icon: "-" },
   { icon: "abap" },
   { icon: "aftereffects" },
   { icon: "amazonwebservices" },
