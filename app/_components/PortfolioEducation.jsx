@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import {
@@ -9,8 +9,10 @@ import {
 } from "../_libs/utils";
 import { PortfolioContext } from "./PortfolioProvider";
 import TimelineElement from "./TimelineElement";
+import { useRouter } from "next/navigation";
 
 const PortfolioEducation = () => {
+  const router = useRouter();
   const {
     portfolioStackHeroContextData,
     portfolioStackExperienceContextData,
@@ -19,6 +21,11 @@ const PortfolioEducation = () => {
   const palette = portfolioStackBasicContextData.portfolio_palette;
   const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
 
+  useEffect(() => {
+    if (!portfolioStackHeroContextData.id) {
+      router.push("/builder/create-hero", undefined, { shallow: true });
+    }
+  }, [portfolioStackHeroContextData]);
   return (
     <div
       className={`w-full pb-8
@@ -40,7 +47,12 @@ const PortfolioEducation = () => {
         {portfolioStackExperienceContextData.length > 0 && (
           <VerticalTimeline lineColor={getHexLineColor(palette)}>
             {portfolioStackExperienceContextData.map((el, index) => (
-              <TimelineElement palette={palette} fontPrimary={fontPrimary} key={index} data={el} />
+              <TimelineElement
+                palette={palette}
+                fontPrimary={fontPrimary}
+                key={index}
+                data={el}
+              />
             ))}
           </VerticalTimeline>
         )}

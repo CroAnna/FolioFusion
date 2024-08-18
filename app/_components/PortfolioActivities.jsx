@@ -1,9 +1,11 @@
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ActivityCard from "./ActivityCard";
 import { PortfolioContext } from "./PortfolioProvider";
+import { useRouter } from "next/navigation";
 
 const PortfolioActivities = () => {
+  const router = useRouter();
   const {
     portfolioStackHeroContextData,
     portfolioStackActivityContextData,
@@ -11,6 +13,12 @@ const PortfolioActivities = () => {
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
   const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
+
+  useEffect(() => {
+    if (!portfolioStackHeroContextData.id) {
+      router.push("/builder/create-hero", undefined, { shallow: true });
+    }
+  }, [portfolioStackHeroContextData]);
 
   return (
     <div className="relative z-0">
@@ -25,7 +33,7 @@ const PortfolioActivities = () => {
       <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 flex flex-col md:grid md:grid-cols-3 py-16">
         {portfolioStackActivityContextData.map((el, index) => (
           <ActivityCard
-          fontPrimary={fontPrimary}
+            fontPrimary={fontPrimary}
             palette={palette}
             key={index}
             data={el}

@@ -71,7 +71,7 @@ const ProjectCard = ({ project, projectIndex }) => {
       )} rounded-3xl shadow-custom-lg p-3 flex flex-col md:flex-row md:p-1`}
     >
       <div className="w-full overflow-hidden relative h-[400px] md:m-5 md:w-[591px] ">
-        {project.project_img && (
+        {project.project_img && imageUrl && (
           <Image
             quality={40}
             layout="fill"
@@ -90,17 +90,16 @@ const ProjectCard = ({ project, projectIndex }) => {
           {project.project_description}
         </p>
         <div className={`flex gap-6 p-2`}>
-          {project.project_technology_1_icon &&
-            project.project_technology_1_icon != "-" && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
-                alt={""}
-                className="w-full h-full object-cover"
-              />
-            )}
+          {project.project_technology_1_icon && (
+            <Image
+              quality={40}
+              width={32}
+              height={32}
+              src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
+              alt={""}
+              className="w-full h-full object-cover"
+            />
+          )}
           {project.project_technology_2_icon &&
             project.project_technology_2_icon != "-" && (
               <Image
@@ -160,7 +159,11 @@ const ProjectCard = ({ project, projectIndex }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="w-8">{selectedIcon1 && selectedIcon1.icon}</div>
+                <div className="max-w-8">
+                  {selectedIcon1 &&
+                    selectedIcon1.value != "-" &&
+                    selectedIcon1.icon}
+                </div>
                 &nbsp;
                 {project.project_link_1_text}
               </button>
@@ -181,7 +184,11 @@ const ProjectCard = ({ project, projectIndex }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="w-8">{selectedIcon2 && selectedIcon2.icon}</div>
+                <div className="max-w-8">
+                  {selectedIcon2 &&
+                    selectedIcon2.value != "-" &&
+                    selectedIcon2.icon}
+                </div>
                 &nbsp;
                 {project.project_link_2_text}
               </button>

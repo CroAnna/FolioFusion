@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PortfolioContext } from "./PortfolioProvider";
 import {
   getBgColor,
@@ -6,8 +6,10 @@ import {
   getPrimaryTextColor,
 } from "../_libs/utils";
 import ProjectCard from "./ProjectCard";
+import { useRouter } from "next/navigation";
 
 const PortfolioProjects = () => {
+  const router = useRouter();
   const {
     portfolioStackHeroContextData,
     portfolioStackProjectsContextData,
@@ -15,6 +17,12 @@ const PortfolioProjects = () => {
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
   const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
+
+  useEffect(() => {
+    if (!portfolioStackHeroContextData.id) {
+      router.push("/builder/create-hero", undefined, { shallow: true });
+    }
+  }, [portfolioStackHeroContextData]);
 
   return (
     <div
