@@ -16,7 +16,7 @@ const MadeUsingTag = () => {
 
   return (
     <Link
-      href="https://showoff-builder.vercel.app/"
+      href="https://foliofusion.art/"
       target="_blank"
       className={`absolute flex m-auto w-fit left-0 right-0 bottom-2 md:bottom-12 mx-auto py-1 md:py-2 px-2 md:px-4 rounded-lg 
         ${getSecondaryBgColors(

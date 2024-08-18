@@ -9,15 +9,16 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import { PortfolioContext } from "@/app/_components/PortfolioProvider";
-import Image from "next/image";
-import loadingGif from "@/public/loading.gif";
+import { useRouter } from "next/navigation";
 
 const DeployPortfolio = () => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [domain, setDomain] = useState(null);
   const [domainAvailable, setDomainAvailable] = useState(true);
   const { setConfettiTriggerState } = useContext(PortfolioContext);
   const [isPending, setIsPending] = useState(false);
+  const { portfolioStackHeroContextData } = useContext(PortfolioContext);
 
   const deployPortfolio = async () => {
     setIsPending(true);
@@ -37,6 +38,12 @@ const DeployPortfolio = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (!portfolioStackHeroContextData.id) {
+      router.push("/builder/create-hero", undefined, { shallow: true });
+    }
+  }, [portfolioStackHeroContextData]);
 
   const fetchUserData = async () => {
     setIsPending(true);
@@ -110,7 +117,7 @@ const DeployPortfolio = () => {
             6.2. Choose your unique domain
           </h3>
           <div className="flex flex-row items-center">
-            <p>www.portfolio.com/&nbsp;</p>
+            <p>www.foliofusion.art/&nbsp;</p>
             <Input
               disabled={isPending}
               name={"domain"}
@@ -138,6 +145,11 @@ const DeployPortfolio = () => {
           >
             Deploy portfolio
           </button>
+          <a href={`/${domain}`} target="_blank">
+            <button className="btn btn-primary mt-8 w-full">
+              Check live portfolio
+            </button>
+          </a>
         </div>
         <NextPreviousNavigation
           setIsPending={setIsPending}

@@ -8,6 +8,7 @@ import { activityIcons } from "../_libs/utils";
 import FileInput from "./FileInput";
 import Swal from "sweetalert2";
 import { deleteActivityById } from "../(web-builder)/builder/add-activities/actions";
+import { deleteUnusedImages } from "../(web-builder)/builder/actions";
 
 const ActivityInputCard = ({
   index,
@@ -123,6 +124,14 @@ const ActivityInputCard = ({
                 portfolioStackActivityContextData[index].activity_order
             )
           );
+        }
+        if (
+          portfolioStackActivityContextData[index].activity_img &&
+          portfolioStackActivityContextData[index].activity_img.publicUrl
+        ) {
+          await deleteUnusedImages([
+            portfolioStackActivityContextData[index].activity_img.publicUrl,
+          ]);
         }
         setIsPending(false);
       }
