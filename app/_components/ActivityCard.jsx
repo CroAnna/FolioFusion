@@ -50,7 +50,7 @@ const ActivityCard = ({ palette, data, activityIndex, fontPrimary }) => {
   return (
     <a
       className="card card-compact glass w-72 relative mx-auto"
-      href={data.activity_url && data.activity_url}
+      href={(data.activity_url && data.activity_url) || null}
       target="_blank"
     >
       {data.activity_img && (
