@@ -15,7 +15,7 @@ import { constants } from "../../utils/stripe/constants";
 const Pricing = () => {
   return (
     <div
-      className="md:w-full max-w-screen-xl mx-4 md:mx-auto pt-12 md:pt-20 pb-12 md:pb-64"
+      className="md:w-full max-w-screen-xl mx-4 md:mx-auto pt-12 md:pt-56 pb-12 md:pb-56"
       id="pricing"
     >
       <div className="w-full bg-grey-dark rounded-3xl px-4 py-8 md:p-12 border-cyan-400 border-[1px] shadow-[0_0px_30px_-15px_rgba(34,211,238,1)] flex flex-col md:flex-row justify-between gap-8">
