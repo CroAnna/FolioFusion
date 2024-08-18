@@ -13,9 +13,9 @@ const Footer = () => {
                 width={32}
                 height={32}
                 src={"/app-logo-192.png"}
-                alt="stackshow-logo"
+                alt="FolioFusion-logo"
               />
-              StackShow
+              FolioFusion
             </Link>
             <p>
               Build your portfolio fast. Show your projects, experience and

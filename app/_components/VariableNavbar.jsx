@@ -96,9 +96,9 @@ const VariableNavbar = ({ logout, data, userData }) => {
             width={48}
             height={48}
             src={"/app-logo-192.png"}
-            alt="stackshow-logo"
+            alt="FolioFusion-logo"
           />
-          StackShow
+          FolioFusion
         </Link>
         <div className="gap-4 hidden lg:flex">
           <Link href="/#examples">Examples</Link>

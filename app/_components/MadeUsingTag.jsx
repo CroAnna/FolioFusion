@@ -24,7 +24,7 @@ const MadeUsingTag = () => {
         )} hover:rotate-2 hover:scale-110 duration-500 md:text-base text-sm
        ${getPrimaryTextColor(palette)}`}
     >
-      Made using&nbsp;<span className="underline">StackShow</span>
+      Made using&nbsp;<span className="underline">FolioFusion</span>
       <Image
         quality={40}
         src={logo}

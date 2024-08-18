@@ -75,7 +75,7 @@ const IdeasForm = ({ userData }) => {
               <p className="bg-emerald-100 px-8 py-3 mt-2 w-full text-neutral-800 rounded-lg">
                 Question and problem messages are{" "}
                 <span className="font-bold">anonymous</span> and only the
-                StackShow admin and creator could see it.
+                FolioFusion admin and creator could see it.
               </p>
             )
           )}

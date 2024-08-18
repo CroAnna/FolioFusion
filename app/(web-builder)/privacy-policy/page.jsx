@@ -18,9 +18,9 @@ const PrivacyPolicy = () => {
           What it is? What&apos;s its purpose? How do we collect data?
         </p>
         <p className="text-sm mt-4">
-          This Privacy Policy outlines how StackShow (&quot;we,&quot;
+          This Privacy Policy outlines how FolioFusion (&quot;we,&quot;
           &quot;our,&quot; &quot;us&quot;) collects, uses and protects your
-          information. It also describes the Terms of use of the StackShow
+          information. It also describes the Terms of use of the FolioFusion
           application.
         </p>
         <p className="bg-neutral-900 px-2 py-1 rounded-lg w-fit text-sm">
@@ -33,7 +33,7 @@ const PrivacyPolicy = () => {
           What data do we collect?
         </h2>
         <div className="flex flex-col gap-2">
-          <p>StackShow collects the following data:</p>
+          <p>FolioFusion collects the following data:</p>
           <p className="flex flex-row items-center gap-1">
             <Dot
               size={32}
@@ -75,7 +75,7 @@ const PrivacyPolicy = () => {
         </h2>
         <div className="flex flex-col gap-2">
           <p>
-            StackShow collects and uses your data for the following purposes:
+            FolioFusion collects and uses your data for the following purposes:
           </p>
           <p className="flex flex-row items-center gap-1">
             <Dot
@@ -220,8 +220,8 @@ const PrivacyPolicy = () => {
             positions, achievements, tournaments, travels, projects,
             technologies used and project descriptions will be made public as
             soon as you upload it. By using our application, you agree to share
-            this data with others and StackShow to use that information in
-            analytics of usage of the StackShow application.
+            this data with others and FolioFusion to use that information in
+            analytics of usage of the FolioFusion application.
           </p>
         </div>
       </div>
@@ -317,7 +317,7 @@ const PrivacyPolicy = () => {
           <p className="flex flex-row items-center gap-1">
             If you make a request, we have one month to respond. To exercise any
             of these rights, please contact us at our email:
-            stackshow.contact@gmail.com
+            FolioFusion.contact@gmail.com
           </p>
         </div>
       </div>
@@ -342,9 +342,9 @@ const PrivacyPolicy = () => {
         <div className="flex flex-col gap-2">
           <p className="flex flex-row items-center gap-1">
             If you have any questions or concerns about this Privacy Policy,
-            please contact us at stackshow.contact@gmail.com.
+            please contact us at FolioFusion.contact@gmail.com.
           </p>
-          <p>Thank you for trusting StackShow with your information!</p>
+          <p>Thank you for trusting FolioFusion with your information!</p>
         </div>
       </div>
     </div>

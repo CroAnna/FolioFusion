@@ -13,7 +13,7 @@ const VideoShowcase = () => {
           No UI design talent, but want to get a job?
         </h3>
         <h2 className="text-2xl md:text-7xl font-bold text-center w-full">
-          How StackShow works?
+          How FolioFusion works?
         </h2>
         <h3 className="hidden md:block text-xl font-medium text-center w-full">
           Have a problem with bad looking portfolio?
@@ -37,14 +37,14 @@ const VideoShowcase = () => {
           </p>
         </div>
         <DynamicVideo
-          pathMp4={"/stackshow-video-1.mp4"}
-          pathOgg={"/stackshow-video-1.ogg"}
+          pathMp4={"/FolioFusion-video-1.mp4"}
+          pathOgg={"/FolioFusion-video-1.ogg"}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <DynamicVideo
-          pathMp4={"/stackshow-video-2.mp4"}
-          pathOgg={"/stackshow-video-2.ogg"}
+          pathMp4={"/FolioFusion-video-2.mp4"}
+          pathOgg={"/FolioFusion-video-2.ogg"}
         />
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">Highligth your projects ✨</h3>
@@ -73,14 +73,14 @@ const VideoShowcase = () => {
           </p>
         </div>
         <DynamicVideo
-          pathMp4={"/stackshow-video-3.mp4"}
-          pathOgg={"/stackshow-video-3.ogg"}
+          pathMp4={"/FolioFusion-video-3.mp4"}
+          pathOgg={"/FolioFusion-video-3.ogg"}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <DynamicVideo
-          pathMp4={"/stackshow-video-4.mp4"}
-          pathOgg={"/stackshow-video-4.ogg"}
+          pathMp4={"/FolioFusion-video-4.mp4"}
+          pathOgg={"/FolioFusion-video-4.ogg"}
         />
         <div className="flex flex-col gap-8">
           <h3 className="font-semibold text-5xl">Customization 🤩</h3>
@@ -108,8 +108,8 @@ const VideoShowcase = () => {
           </p>
         </div>
         <DynamicVideo
-          pathMp4={"/stackshow-video-5.mp4"}
-          pathOgg={"/stackshow-video-5.ogg"}
+          pathMp4={"/FolioFusion-video-5.mp4"}
+          pathOgg={"/FolioFusion-video-5.ogg"}
         />
       </div>
     </div>
