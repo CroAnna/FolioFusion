@@ -26,8 +26,8 @@ const VoteButton = ({ votes, id }) => {
 
   return (
     <div
-      className={`flex items-center flex-col bg-neutral-950 rounded-md justify-center h-fit p-2 cursor-pointer ${
-        isVoted && "bg-cyan-900"
+      className={`flex items-center flex-col rounded-md justify-center h-fit p-2 cursor-pointer ${
+        isVoted ? "bg-cyan-900" : "bg-neutral-950"
       }`}
       onClick={handleClick}
     >
