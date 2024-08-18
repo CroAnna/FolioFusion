@@ -5,6 +5,7 @@ import PortfolioHero from "./PortfolioHero";
 import PortfolioProjects from "./PortfolioProjects";
 import PortfolioEducation from "./PortfolioEducation";
 import PortfolioActivities from "./PortfolioActivities";
+import MadeUsingTag from "./MadeUsingTag";
 import { getDataByDomain } from "./actions";
 import ScrollToTop from "@/app/_components/ScrollToTop";
 import Image from "next/image";
@@ -184,7 +185,9 @@ const RenderedPortfolio = ({ domain = null }) => {
         <>
           {portfolioStackHeroContextData &&
             !checkIfportfolioStackHeroContextDataIsDefault() && (
-              <PortfolioHero />
+              <div className="relative">
+                <PortfolioHero /> {domain && <MadeUsingTag />}
+              </div>
             )}
           {portfolioStackProjectsContextData &&
             !checkIfPortfolioStackProjectsContextDataIsDefault() && (
