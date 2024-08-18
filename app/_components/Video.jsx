@@ -37,7 +37,7 @@ const Video = ({ pathMp4, pathOgg }) => {
         <video
           controls
           preload="none"
-          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl"
+          className="aspect-video border-4 rounded-3xl border-neutral-600 shadow-2xl w-[36rem]"
           autoPlay={true}
           muted={true}
           loop={true}
