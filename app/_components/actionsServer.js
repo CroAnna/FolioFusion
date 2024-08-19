@@ -55,3 +55,19 @@ export async function deleteUserAccount() {
     redirect("/");
   }
 }
+
+export async function getOrdersByUser() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data: orders, error } = await supabase
+    .from("orders")
+    .select()
+    .order("created_at", { ascending: false })
+    .eq("email", user.email);
+
+  if (error) console.log(error);
+  return { orders, error };
+}
