@@ -145,11 +145,13 @@ const DeployPortfolio = () => {
           >
             Deploy portfolio
           </button>
-          <a href={`/${domain}`} target="_blank">
-            <button className="btn btn-primary mt-8 w-full">
-              Check live portfolio
-            </button>
-          </a>
+          {domain && (
+            <a href={`/${domain}`} target="_blank">
+              <button className="btn btn-primary mt-8 w-full">
+                Check live portfolio
+              </button>
+            </a>
+          )}
         </div>
         <NextPreviousNavigation
           setIsPending={setIsPending}
