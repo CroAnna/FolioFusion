@@ -36,3 +36,13 @@ export const getOneYearInFuture = (createdAtString) => {
 
   return formattedDate;
 };
+
+export const isPaymentActive = (createdAtString) => {
+  const createdAt = new Date(createdAtString);
+  const oneYearLater = new Date(createdAt);
+  oneYearLater.setFullYear(createdAt.getFullYear() + 1);
+
+  const now = new Date();
+
+  return now >= createdAt && now < oneYearLater;
+};

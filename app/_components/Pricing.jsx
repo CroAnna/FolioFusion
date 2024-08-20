@@ -11,8 +11,11 @@ import {
   UserFocus,
 } from "@phosphor-icons/react/dist/ssr";
 import { constants } from "../../utils/stripe/constants";
+import { getUserData } from "./actionsServer";
 
-const Pricing = () => {
+const Pricing = async () => {
+  const { userData } = await getUserData();
+
   return (
     <div
       className="md:w-full max-w-screen-xl mx-4 md:mx-auto pt-12 md:pt-56 pb-12 md:pb-56"
@@ -73,7 +76,13 @@ const Pricing = () => {
           <a
             className="bg-neutral-900 p-8 rounded-3xl flex items-center justify-center flex-col gap-4 cursor-pointer border-neutral-900 hover:border-emerald-500 border-2 hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105"
             target="_blank"
-            href={constants.paymentLinks.oneYearPass}
+            href={
+              userData && userData.email
+                ? constants.paymentLinks.oneYearPass +
+                  "?prefilled_email=" +
+                  userData.email
+                : constants.paymentLinks.oneYearPass
+            }
           >
             <h3 className="font-semibold text-4xl text-green-400">
               1-Year Pass
@@ -90,7 +99,13 @@ const Pricing = () => {
           <a
             className="bg-neutral-900 flex items-center justify-center flex-col md:my-[-80px] md:mr-[-50px] md:w-[400px] rounded-3xl p-8 border-emerald-500 border-2 shadow-[0_0px_30px_-15px_rgba(34,211,238,1)] gap-4 cursor-pointer hover:shadow-[0_0px_30px_-10px_rgba(34,211,238,1)] hover:transition hover:duration-300 hover:bg-neutral-950 hover:scale-105"
             target="_blank"
-            href={constants.paymentLinks.lifetimePass}
+            href={
+              userData && userData.email
+                ? constants.paymentLinks.lifetimePass +
+                  "?prefilled_email=" +
+                  userData.email
+                : constants.paymentLinks.lifetimePass
+            }
           >
             <h3 className="font-semibold text-4xl text-green-400">
               Lifetime Deal

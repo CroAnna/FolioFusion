@@ -8,10 +8,8 @@ import PortfolioActivities from "./PortfolioActivities";
 import MadeUsingTag from "./MadeUsingTag";
 import { getDataByDomain } from "./actions";
 import ScrollToTop from "@/app/_components/ScrollToTop";
-import Image from "next/image";
-import errorImage from "@/public/404-error.png";
 import { deepEqual } from "@/utils/common/methods.js";
-import Link from "next/link";
+import ErrorPage from "./ErrorPage";
 
 const RenderedPortfolio = ({ domain = null }) => {
   const [errorData, setErrorData] = useState(null);
@@ -168,18 +166,7 @@ const RenderedPortfolio = ({ domain = null }) => {
         {/* {JSON.stringify(portfolioStackActivityContextData)} */}
       </p>
       {errorData && errorData.code == 404 && (
-        <div className="flex flex-col gap-8 justify-center items-center h-full">
-          <Image
-            src={errorImage}
-            alt="404-not-found"
-            width={256}
-            height={256}
-          />
-          <p className=" text-3xl px-4 text-center">{errorData.message}</p>
-          <Link href="/" className="underline">
-            Back to homepage
-          </Link>
-        </div>
+        <ErrorPage errorData={errorData} />
       )}
       {!errorData && (
         <>

@@ -1,5 +1,6 @@
 "use server";
 
+import { isPaymentActive } from "@/utils/common/methods";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -19,6 +20,60 @@ export async function getUserData() {
     .single();
 
   return { userData, error };
+}
+
+export async function checkIfUserHasActivePlan(identifier, type) {
+  const supabase = createClient();
+
+  let query = supabase.from("users").select().single();
+
+  if (type === "email") {
+    query = query.eq("email", identifier);
+  } else if (type === "domain") {
+    query = query.eq("domain_url", identifier);
+  }
+
+  const { data: userData, error: userError } = await query;
+
+  if (userError || !userData) {
+    console.error("Error fetching user data:", userError);
+    return false;
+  }
+
+  const { data: ordersData, error: ordersError } = await supabase
+    .from("orders")
+    .select()
+    .eq("email", userData.email);
+
+  if (ordersError || !ordersData || ordersData.length === 0) {
+    console.log("is not active");
+
+    console.error("Error fetching orders data:", ordersError);
+    return false;
+  }
+
+  for (const order of ordersData) {
+    if (order.description === "FolioFusion - Lifetime Deal") {
+      return true;
+    } else {
+      const isActive = isPaymentActive(order.created_at);
+      if (isActive) {
+        console.log("is active");
+
+        return true;
+      }
+    }
+  }
+
+  // no active order
+  await supabase
+    .from("users")
+    .update({ access_granted: false, domain_url: null })
+    .eq("id", userData.id);
+
+  console.log("is not active");
+
+  return false;
 }
 
 export async function getIdeas() {

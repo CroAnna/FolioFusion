@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { z } from "zod";
+import { checkIfUserHasActivePlan } from "@/app/_components/actionsServer";
 
 export async function login(prevState, formData) {
   // does not work without prevState
@@ -33,6 +34,8 @@ export async function login(prevState, formData) {
       console.log(error);
       return { message: error.message };
     }
+
+    await checkIfUserHasActivePlan(email, "email");
 
     revalidatePath("/", "layout");
     redirect("/");
