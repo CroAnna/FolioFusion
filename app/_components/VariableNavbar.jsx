@@ -62,7 +62,9 @@ const VariableNavbar = ({ logout, data, userData }) => {
                 href="/builder/create-hero"
                 onClick={() => setIsOpen(false)}
               >
-                <button className="btn btn-primary w-full">My portfolio</button>
+                <button className="btn btn-primary w-full">
+                  Portfolio builder
+                </button>
               </Link>
               {userData && userData.domain_url && (
                 <a

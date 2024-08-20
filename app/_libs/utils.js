@@ -36,6 +36,14 @@ export const stepsData = [
   { text: "Deploy or download as PDF" },
 ];
 
+export const projectDesignsItemsData = [
+  "Design 1",
+  "Design 2",
+  "Design 3",
+  "Design 4",
+];
+export const projectsAlignmentItemsData = ["left", "alternately", "right"];
+
 export const portfolioPaletteItemsData = [
   "Palette 1",
   "Palette 2",

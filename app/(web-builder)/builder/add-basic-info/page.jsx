@@ -7,6 +7,8 @@ import Join from "@/app/_components/Join";
 import {
   portfolioFontItemsData,
   portfolioPaletteItemsData,
+  projectDesignsItemsData,
+  projectsAlignmentItemsData,
 } from "@/app/_libs/utils";
 import Image from "next/image";
 import loadingGif from "@/public/loading.gif";
@@ -35,6 +37,8 @@ const BasicInfo = () => {
         portfolio_palette: portfolio.portfolio_palette,
         portfolio_font_primary: portfolio.portfolio_font_primary,
         portfolio_font_secondary: portfolio.portfolio_font_secondary,
+        projects_design: portfolio.projects_design,
+        projects_alignment: portfolio.projects_alignment,
       });
     }
     setIsPending(false);
@@ -50,7 +54,9 @@ const BasicInfo = () => {
       portfolioStackBasicContextData.id,
       portfolioStackBasicContextData.portfolio_palette,
       portfolioStackBasicContextData.portfolio_font_primary,
-      portfolioStackBasicContextData.portfolio_font_secondary
+      portfolioStackBasicContextData.portfolio_font_secondary,
+      portfolioStackBasicContextData.projects_design,
+      portfolioStackBasicContextData.projects_alignment
     );
     console.log(response);
     setPortfolioStackBasicContextData(response.portfolio);
@@ -114,7 +120,7 @@ const BasicInfo = () => {
       </div>
       <div className="flex flex-col gap-4">
         <h3 className="text-xl md:text-2xl font-bold">
-          5.2. Select secondary font
+          5.3. Select secondary font
         </h3>
         <Join
           disabled={isPending}
@@ -125,6 +131,32 @@ const BasicInfo = () => {
           }}
           name={"portfolio_font_secondary"}
         />
+      </div>{" "}
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          5.4. Select projects design
+        </h3>
+        <Join
+          disabled={isPending}
+          value={portfolioStackBasicContextData.projects_design}
+          items={projectDesignsItemsData}
+          onChange={(e) => {
+            handleUpdate("projects_design", e.target.value);
+          }}
+          name={"projects_design"}
+        />
+        {(portfolioStackBasicContextData.projects_design == "Design 1" ||
+          portfolioStackBasicContextData.projects_design == "Design 4") && (
+          <Join
+            disabled={isPending}
+            value={portfolioStackBasicContextData.projects_alignment}
+            items={projectsAlignmentItemsData}
+            onChange={(e) => {
+              handleUpdate("projects_alignment", e.target.value);
+            }}
+            name={"projects_alignment"}
+          />
+        )}
       </div>
       <NextPreviousNavigation
         setIsPending={setIsPending}

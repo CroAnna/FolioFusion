@@ -20,7 +20,7 @@ const Navbar = async () => {
           <div className="hidden lg:flex items-center h-12">
             <div className="flex gap-2">
               <Link href="/builder/create-hero">
-                <button className="btn btn-primary">My portfolio</button>
+                <button className="btn btn-primary ">Portfolio builder</button>
               </Link>
               {userData && userData.domain_url && (
                 <a href={`/${userData.domain_url}`} target="_blank">

@@ -17,6 +17,8 @@ const PortfolioProjects = () => {
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
   const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
+  const projectsDesign = portfolioStackBasicContextData.projects_design;
+  const projectsAlignment = portfolioStackBasicContextData.projects_alignment;
 
   useEffect(() => {
     if (!portfolioStackHeroContextData.id) {
@@ -30,7 +32,7 @@ const PortfolioProjects = () => {
         ${getBgColor(palette)} ${getPrimaryTextColor(palette)}`}
     >
       <div
-        className={`max-w-screen-lg px-4 pb-2 md:px-2 mx-auto pt-16 flex flex-col gap-6`}
+        className={`max-w-screen-lg px-4 pb-2 md:px-2 mx-auto pt-16 flex flex-col gap-8`}
       >
         <h3
           className={`uppercase text-xl font-medium tracking-wider font-${fontPrimary} ${getPrimaryColors(
@@ -42,9 +44,23 @@ const PortfolioProjects = () => {
         <p className={`text-xl font-bold max-w-xs font-${fontPrimary}`}>
           {portfolioStackHeroContextData.project_group_description}
         </p>
-        <div className="flex flex-col gap-10 md:gap-16 ">
+        <div
+          className={`flex flex-col w-full gap-10 md:gap-16 ${
+            projectsDesign == "Design 2" ||
+            projectsDesign == "Design 3" ||
+            projectsDesign == "Design 4"
+              ? "grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-8"
+              : ""
+          }`}
+        >
           {portfolioStackProjectsContextData.map((el, index) => (
-            <ProjectCard project={el} key={index} projectIndex={index} />
+            <ProjectCard
+              project={el}
+              key={index}
+              projectIndex={index}
+              projectsDesign={projectsDesign}
+              projectsAlignment={projectsAlignment}
+            />
           ))}
         </div>
       </div>

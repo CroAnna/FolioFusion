@@ -20,7 +20,9 @@ export async function upsertCreatePortfolioBasicData(
   id,
   portfolio_palette,
   portfolio_font_primary,
-  portfolio_font_secondary
+  portfolio_font_secondary,
+  projects_design,
+  projects_alignment
 ) {
   const supabase = createClient();
   const {
@@ -31,7 +33,8 @@ export async function upsertCreatePortfolioBasicData(
     portfolio_palette: portfolio_palette,
     portfolio_font_primary: portfolio_font_primary,
     portfolio_font_secondary: portfolio_font_secondary,
-
+    projects_design: projects_design,
+    projects_alignment: projects_alignment,
     user_id: user.id,
   };
 

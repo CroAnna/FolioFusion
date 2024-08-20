@@ -25,6 +25,8 @@ const PortfolioProvider = ({ children }) => {
       portfolio_palette: "Palette 1",
       portfolio_font_primary: "gabarito",
       portfolio_font_secondary: "gabarito",
+      projects_design: "Design 1",
+      projects_alignment: "left",
     });
 
   const [portfolioStackHeroContextData, setPortfolioStackHeroContextData] =
@@ -199,6 +201,8 @@ const PortfolioProvider = ({ children }) => {
       portfolio_palette: "Palette 1",
       portfolio_font_primary: "gabarito",
       portfolio_font_secondary: "gabarito",
+      projects_design: "Design 1",
+      projects_alignment: "left",
     });
   };
 

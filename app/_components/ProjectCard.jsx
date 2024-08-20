@@ -14,7 +14,12 @@ import { PortfolioContext } from "./PortfolioProvider";
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
-const ProjectCard = ({ project, projectIndex }) => {
+const ProjectCard = ({
+  project,
+  projectIndex,
+  projectsDesign,
+  projectsAlignment,
+}) => {
   const { portfolioStackBasicContextData, portfolioStackProjectsContextData } =
     useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
@@ -68,9 +73,58 @@ const ProjectCard = ({ project, projectIndex }) => {
     <div
       className={`${getSecondaryBgColors(palette)} ${getPrimaryTextColor(
         palette
-      )} rounded-3xl shadow-custom-lg p-3 flex flex-col md:flex-row md:p-1`}
+      )} rounded-3xl shadow-custom-lg p-3 md:p-1 
+      ${
+        projectsDesign == "Design 1"
+          ? "flex flex-col md:flex-row "
+          : projectsDesign == "Design 2"
+          ? "rounded-xl lg:rounded-none flex flex-col md:flex-col "
+          : projectsDesign == "Design 3"
+          ? ""
+          : projectsDesign == "Design 4" && "flex flex-col "
+      }
+      ${
+        projectsAlignment == "left"
+          ? "flex-col-reverse lg:flex-row gap-4"
+          : projectsAlignment == "right"
+          ? "flex-col-reverse lg:flex-row-reverse gap-4"
+          : projectIndex % 2 == 0
+          ? "flex-col-reverse lg:flex-row gap-4"
+          : "flex-col-reverse lg:flex-row-reverse gap-4"
+      }`}
+      style={
+        (projectsDesign === "Design 3" || projectsDesign === "Design 4") &&
+        imageUrl
+          ? {
+              backgroundImage: `linear-gradient(${
+                getIconBgColor(palette) === "dark"
+                  ? "rgba(0, 0, 0, 1)"
+                  : "rgba(255, 255, 255, 1)"
+              }, ${
+                getIconBgColor(palette) === "dark"
+                  ? "rgba(0, 0, 0, 0.7)"
+                  : "rgba(255, 255, 255, 0.7)"
+              }), url(${imageUrl})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }
+          : {}
+      }
     >
-      <div className="w-full overflow-hidden relative h-[400px] md:m-5 md:w-[591px] ">
+      <div
+        className={`w-full overflow-hidden relative 
+          ${
+            projectsDesign == "Design 1"
+              ? "h-[400px] md:m-5 md:w-[591px]"
+              : projectsDesign == "Design 2"
+              ? "h-[400px] md:w-full"
+              : projectsDesign == "Design 3"
+              ? ""
+              : projectsDesign == "Design 4" &&
+                "min-w-40 h-[256px] lg:h-auto md:m-2"
+          }
+       `}
+      >
         {project.project_img && imageUrl && (
           <Image
             quality={40}
@@ -78,122 +132,155 @@ const ProjectCard = ({ project, projectIndex }) => {
             objectFit="cover"
             src={imageUrl}
             alt={project.project_title}
-            className="rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom"
+            className={`rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom ${
+              projectsDesign == "Design 2"
+                ? "lg:p-5"
+                : projectsDesign == "Design 3"
+                ? ""
+                : projectsDesign == "Design 4" && ""
+            }`}
           />
         )}
       </div>
-      <div className="flex flex-col justify-center items-center gap-4 p-2 py-4 md:p-4 md:flex-1">
-        <h2 className={`text-xl md:text-2xl font-semibold font-${fontPrimary}`}>
-          {project.project_title}
-        </h2>
-        <p className={`md:text-lg text-center leading-6 font-${fontPrimary}`}>
-          {project.project_description}
-        </p>
-        <div className={`flex gap-6 p-2`}>
-          {project.project_technology_1_icon && (
-            <Image
-              quality={40}
-              width={32}
-              height={32}
-              src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
-              alt={""}
-              className="w-full h-full object-cover"
-            />
-          )}
-          {project.project_technology_2_icon &&
-            project.project_technology_2_icon != "-" && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}&theme=${iconBg}`}
-                alt={""}
-                className="w-full h-full object-cover"
-              />
-            )}
-          {project.project_technology_3_icon &&
-            project.project_technology_3_icon != "-" && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
-                alt={""}
-                className="w-full h-full object-cover"
-              />
-            )}
-          {project.project_technology_4_icon &&
-            project.project_technology_4_icon != "-" && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
-                alt={""}
-                className="w-full h-full object-cover"
-              />
-            )}
-          {project.project_technology_5_icon &&
-            project.project_technology_5_icon != "-" && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
-                alt={""}
-                className="w-full h-full object-cover"
-              />
-            )}
+      <div
+        className={`flex flex-col justify-center items-center gap-4 md:flex-1 lg:m-4 ${
+          projectsDesign == "Design 1"
+            ? "px-2 py-3 lg:p-0"
+            : projectsDesign == "Design 2"
+            ? ""
+            : projectsDesign == "Design 3"
+            ? "flex h-full justify-between lg:pb-12 lg:pt-8"
+            : projectsDesign == "Design 4" && ""
+        }`}
+      >
+        <div
+          className={`flex flex-col justify-center items-center gap-4 p-2 md:p-4 ${
+            projectsDesign == "Design 1"
+              ? ""
+              : projectsDesign == "Design 2"
+              ? "flex flex-1 flex-col h-full flex-grow justify-between"
+              : projectsDesign == "Design 3" && ""
+          }`}
+        >
+          <h2
+            className={`text-xl md:text-2xl font-semibold font-${fontPrimary}`}
+          >
+            {project.project_title}
+          </h2>
+          <p
+            className={`md:text-lg text-center leading-6 font-${fontPrimary} flex flex-1 flex-col h-full flex-grow`}
+          >
+            {project.project_description}
+          </p>
         </div>
-        <div className="flex gap-2 justify-between w-full">
-          {project.project_link_1_url && project.project_link_1_text && (
-            <a
-              href={project.project_link_1_url}
-              target="_blank"
-              className="w-full"
-            >
-              <button
-                className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${getBgColor(
-                  palette
-                )} md:text-lg rounded-lg shadow-custom-sm font-medium font-${fontPrimary}`}
+        <div className="flex flex-col w-full justify-center lg:items-center gap-4 ">
+          {" "}
+          <div className={`flex gap-2 md:gap-6 p-2 mx-auto  md:p-4`}>
+            {project.project_technology_1_icon && (
+              <Image
+                quality={40}
+                width={32}
+                height={32}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
+                alt={""}
+                className=" h-full object-cover w-11 lg:w-full"
+              />
+            )}
+            {project.project_technology_2_icon &&
+              project.project_technology_2_icon != "-" && (
+                <Image
+                  quality={40}
+                  width={32}
+                  height={32}
+                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}&theme=${iconBg}`}
+                  alt={""}
+                  className=" h-full object-cover w-11 lg:w-full"
+                />
+              )}
+            {project.project_technology_3_icon &&
+              project.project_technology_3_icon != "-" && (
+                <Image
+                  quality={40}
+                  width={32}
+                  height={32}
+                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
+                  alt={""}
+                  className=" h-full object-cover w-11 lg:w-full"
+                />
+              )}
+            {project.project_technology_4_icon &&
+              project.project_technology_4_icon != "-" && (
+                <Image
+                  quality={40}
+                  width={32}
+                  height={32}
+                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
+                  alt={""}
+                  className=" h-full object-cover w-11 lg:w-full"
+                />
+              )}
+            {project.project_technology_5_icon &&
+              project.project_technology_5_icon != "-" && (
+                <Image
+                  quality={40}
+                  width={32}
+                  height={32}
+                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
+                  alt={""}
+                  className=" h-full object-cover w-11 lg:w-full"
+                />
+              )}
+          </div>
+          <div className="flex gap-2 justify-between w-full">
+            {project.project_link_1_url && project.project_link_1_text && (
+              <a
+                href={project.project_link_1_url}
                 target="_blank"
-                rel="noreferrer"
+                className="w-full"
               >
-                <div className="max-w-8">
-                  {selectedIcon1 &&
-                    selectedIcon1.value != "-" &&
-                    selectedIcon1.icon}
-                </div>
-                &nbsp;
-                {project.project_link_1_text}
-              </button>
-            </a>
-          )}
-          {project.project_link_2_url && project.project_link_2_text && (
-            <a
-              href={project.project_link_2_url}
-              target="_blank"
-              className="w-full"
-            >
-              <button
-                className={`py-2 hover:none flex w-full items-center justify-center gap-1 px-2 ${getPrimaryBgColors(
-                  palette
-                )} ${getSecondaryTextColor(
-                  palette
-                )} md:text-lg rounded-lg font-medium font-${fontPrimary}`}
+                <button
+                  className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${getBgColor(
+                    palette
+                  )} md:text-lg rounded-lg shadow-custom-sm font-medium font-${fontPrimary}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className="max-w-8">
+                    {selectedIcon1 &&
+                      selectedIcon1.value != "-" &&
+                      selectedIcon1.icon}
+                  </div>
+                  &nbsp;
+                  {project.project_link_1_text}
+                </button>
+              </a>
+            )}
+            {project.project_link_2_url && project.project_link_2_text && (
+              <a
+                href={project.project_link_2_url}
                 target="_blank"
-                rel="noreferrer"
+                className="w-full"
               >
-                <div className="max-w-8">
-                  {selectedIcon2 &&
-                    selectedIcon2.value != "-" &&
-                    selectedIcon2.icon}
-                </div>
-                &nbsp;
-                {project.project_link_2_text}
-              </button>
-            </a>
-          )}
+                <button
+                  className={`py-2 hover:none flex w-full items-center justify-center gap-1 px-2 ${getPrimaryBgColors(
+                    palette
+                  )} ${getSecondaryTextColor(
+                    palette
+                  )} md:text-lg rounded-lg font-medium font-${fontPrimary}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className="max-w-8">
+                    {selectedIcon2 &&
+                      selectedIcon2.value != "-" &&
+                      selectedIcon2.icon}
+                  </div>
+                  &nbsp;
+                  {project.project_link_2_text}
+                </button>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>
