@@ -26,6 +26,7 @@ const PortfolioProvider = ({ children }) => {
       portfolio_font_primary: "gabarito",
       portfolio_font_secondary: "gabarito",
       projects_design: "Design 1",
+      activities_design: "Design 1",
       projects_alignment: "left",
       experience_alignment: "2-columns",
     });
@@ -203,6 +204,7 @@ const PortfolioProvider = ({ children }) => {
       portfolio_font_primary: "gabarito",
       portfolio_font_secondary: "gabarito",
       projects_design: "Design 1",
+      activities_design: "Design 1",
       projects_alignment: "left",
       experience_alignment: "2-columns",
     });

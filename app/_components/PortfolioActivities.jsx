@@ -13,6 +13,7 @@ const PortfolioActivities = () => {
   } = useContext(PortfolioContext);
   const palette = portfolioStackBasicContextData.portfolio_palette;
   const fontPrimary = portfolioStackBasicContextData.portfolio_font_primary;
+  const activitiesDesign = portfolioStackBasicContextData.activities_design;
 
   useEffect(() => {
     if (!portfolioStackHeroContextData.id) {
@@ -30,7 +31,18 @@ const PortfolioActivities = () => {
         fill
         className="w-full h-auto object-cover top-0 left-0 right-0 bottom-0"
       />
-      <div className="z-10 max-w-screen-lg px-2 mx-auto gap-6 flex flex-col md:grid md:grid-cols-3 py-16">
+      <div
+        className={`z-10 max-w-screen-lg px-2 mx-auto flex flex-col py-16 
+          ${
+            activitiesDesign == "Design 1"
+              ? "md:grid md:grid-cols-3 gap-12 lg:gap-8"
+              : activitiesDesign == "Design 2"
+              ? "md:grid md:grid-cols-2 gap-12"
+              : activitiesDesign == "Design 3"
+              ? "md:grid md:grid-cols-2 gap-12"
+              : activitiesDesign == "Design 4" && "gap-12 lg:gap-8 p-8"
+          }`}
+      >
         {portfolioStackActivityContextData.map((el, index) => (
           <ActivityCard
             fontPrimary={fontPrimary}
@@ -38,6 +50,7 @@ const PortfolioActivities = () => {
             key={index}
             data={el}
             activityIndex={index}
+            activitiesDesign={activitiesDesign}
           />
         ))}
       </div>

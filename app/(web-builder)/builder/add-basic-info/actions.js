@@ -22,6 +22,7 @@ export async function upsertCreatePortfolioBasicData(
   portfolio_font_primary,
   portfolio_font_secondary,
   projects_design,
+  activities_design,
   projects_alignment,
   experience_alignment
 ) {
@@ -35,6 +36,7 @@ export async function upsertCreatePortfolioBasicData(
     portfolio_font_primary: portfolio_font_primary,
     portfolio_font_secondary: portfolio_font_secondary,
     projects_design: projects_design,
+    activities_design: activities_design,
     projects_alignment: projects_alignment,
     experience_alignment: experience_alignment,
     user_id: user.id,

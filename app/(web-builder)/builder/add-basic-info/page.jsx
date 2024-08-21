@@ -8,7 +8,7 @@ import {
   experienceAlignmentItemsData,
   portfolioFontItemsData,
   portfolioPaletteItemsData,
-  projectDesignsItemsData,
+  designsItemsData,
   projectsAlignmentItemsData,
 } from "@/app/_libs/utils";
 import Image from "next/image";
@@ -39,6 +39,7 @@ const BasicInfo = () => {
         portfolio_font_primary: portfolio.portfolio_font_primary,
         portfolio_font_secondary: portfolio.portfolio_font_secondary,
         projects_design: portfolio.projects_design,
+        activities_design: portfolio.activities_design,
         projects_alignment: portfolio.projects_alignment,
         experience_alignment: portfolio.experience_alignment,
       });
@@ -58,6 +59,7 @@ const BasicInfo = () => {
       portfolioStackBasicContextData.portfolio_font_primary,
       portfolioStackBasicContextData.portfolio_font_secondary,
       portfolioStackBasicContextData.projects_design,
+      portfolioStackBasicContextData.activities_design,
       portfolioStackBasicContextData.projects_alignment,
       portfolioStackBasicContextData.experience_alignment
     );
@@ -142,7 +144,7 @@ const BasicInfo = () => {
         <Join
           disabled={isPending}
           value={portfolioStackBasicContextData.projects_design}
-          items={projectDesignsItemsData}
+          items={designsItemsData}
           onChange={(e) => {
             handleUpdate("projects_design", e.target.value);
           }}
@@ -173,6 +175,20 @@ const BasicInfo = () => {
             handleUpdate("experience_alignment", e.target.value);
           }}
           name={"experience_alignment"}
+        />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          5.6. Select activities design
+        </h3>
+        <Join
+          disabled={isPending}
+          value={portfolioStackBasicContextData.activities_design}
+          items={designsItemsData}
+          onChange={(e) => {
+            handleUpdate("activities_design", e.target.value);
+          }}
+          name={"activities_design"}
         />
       </div>
       <NextPreviousNavigation

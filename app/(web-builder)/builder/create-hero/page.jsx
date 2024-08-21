@@ -88,6 +88,7 @@ const CreateHero = () => {
           portfolio_font_primary: portfolio.portfolio_font_primary,
           portfolio_font_secondary: portfolio.portfolio_font_secondary,
           projects_design: portfolio.projects_design,
+          activities_design: portfolio.activities_design,
           projects_alignment: portfolio.projects_alignment,
           experience_alignment: portfolio.experience_alignment,
         });

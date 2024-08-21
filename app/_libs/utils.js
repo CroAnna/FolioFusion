@@ -36,12 +36,13 @@ export const stepsData = [
   { text: "Deploy or download as PDF" },
 ];
 
-export const projectDesignsItemsData = [
+export const designsItemsData = [
   "Design 1",
   "Design 2",
   "Design 3",
   "Design 4",
 ];
+
 export const projectsAlignmentItemsData = ["left", "alternately", "right"];
 
 export const experienceAlignmentItemsData = [
