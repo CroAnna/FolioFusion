@@ -5,6 +5,7 @@ import { getCreateBasicInfo, upsertCreatePortfolioBasicData } from "./actions";
 import NextPreviousNavigation from "@/app/_components/NextPreviousNavigation";
 import Join from "@/app/_components/Join";
 import {
+  experienceAlignmentItemsData,
   portfolioFontItemsData,
   portfolioPaletteItemsData,
   projectDesignsItemsData,
@@ -39,6 +40,7 @@ const BasicInfo = () => {
         portfolio_font_secondary: portfolio.portfolio_font_secondary,
         projects_design: portfolio.projects_design,
         projects_alignment: portfolio.projects_alignment,
+        experience_alignment: portfolio.experience_alignment,
       });
     }
     setIsPending(false);
@@ -56,7 +58,8 @@ const BasicInfo = () => {
       portfolioStackBasicContextData.portfolio_font_primary,
       portfolioStackBasicContextData.portfolio_font_secondary,
       portfolioStackBasicContextData.projects_design,
-      portfolioStackBasicContextData.projects_alignment
+      portfolioStackBasicContextData.projects_alignment,
+      portfolioStackBasicContextData.experience_alignment
     );
     console.log(response);
     setPortfolioStackBasicContextData(response.portfolio);
@@ -157,6 +160,20 @@ const BasicInfo = () => {
             name={"projects_alignment"}
           />
         )}
+      </div>{" "}
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl md:text-2xl font-bold">
+          5.5. Select timeline layout
+        </h3>
+        <Join
+          disabled={isPending}
+          value={portfolioStackBasicContextData.experience_alignment}
+          items={experienceAlignmentItemsData}
+          onChange={(e) => {
+            handleUpdate("experience_alignment", e.target.value);
+          }}
+          name={"experience_alignment"}
+        />
       </div>
       <NextPreviousNavigation
         setIsPending={setIsPending}

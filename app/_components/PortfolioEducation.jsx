@@ -45,7 +45,10 @@ const PortfolioEducation = () => {
           {portfolioStackHeroContextData.experience_group_description}
         </p>
         {portfolioStackExperienceContextData.length > 0 && (
-          <VerticalTimeline lineColor={getHexLineColor(palette)}>
+          <VerticalTimeline
+            lineColor={getHexLineColor(palette)}
+            layout={portfolioStackBasicContextData.experience_alignment}
+          >
             {portfolioStackExperienceContextData.map((el, index) => (
               <TimelineElement
                 palette={palette}

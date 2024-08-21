@@ -44,6 +44,12 @@ export const projectDesignsItemsData = [
 ];
 export const projectsAlignmentItemsData = ["left", "alternately", "right"];
 
+export const experienceAlignmentItemsData = [
+  "2-columns",
+  "1-column-left",
+  "1-column-right",
+];
+
 export const portfolioPaletteItemsData = [
   "Palette 1",
   "Palette 2",
