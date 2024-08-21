@@ -36,7 +36,7 @@ const Pricing = async () => {
             </div>
             <div className="flex flex-col justify-center items-center h-20 p-1 md:p-2 bg-neutral-800 shadow-lg rounded-md gap-1">
               <Palette size={28} color="#4dde80" weight="duotone" />
-              <p>6 color palettes</p>
+              <p>7 color palettes</p>
             </div>
             <div className="flex flex-col justify-center items-center h-20 p-1 md:p-2 bg-neutral-800 shadow-lg rounded-md gap-1">
               <UserFocus size={28} color="#4dde80" weight="duotone" />
@@ -68,7 +68,7 @@ const Pricing = async () => {
             </div>
             <div className="flex flex-col justify-center items-center h-20 p-1 md:p-2 md:hidden bg-neutral-800 shadow-lg rounded-md gap-1">
               <Tag size={28} color="#4dde80" weight="duotone" />
-              <p>SEO tags</p>
+              <p>Tags</p>
             </div>
           </div>
         </div>

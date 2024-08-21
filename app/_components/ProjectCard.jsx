@@ -175,7 +175,11 @@ const ProjectCard = ({
         </div>
         <div className="flex flex-col w-full justify-center lg:items-center gap-4 ">
           {" "}
-          <div className={`flex gap-2 lg:gap-1 p-2 mx-auto  md:p-4`}>
+          <div
+            className={`flex gap-2 p-2 mx-auto md:p-4 ${
+              projectsDesign == "Design 1" ? "md:gap-2 " : "lg:gap-1 "
+            }`}
+          >
             {project.project_technology_1_icon && (
               <Image
                 quality={40}
