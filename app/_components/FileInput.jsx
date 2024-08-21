@@ -21,7 +21,7 @@ const FileInput = ({
         1920,
         8000,
         "JPEG",
-        75,
+        20,
         0,
         (uri) => {
           resolve(uri);

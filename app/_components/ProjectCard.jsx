@@ -78,19 +78,19 @@ const ProjectCard = ({
         projectsDesign == "Design 1"
           ? "flex flex-col md:flex-row "
           : projectsDesign == "Design 2"
-          ? "rounded-xl lg:rounded-none flex flex-col md:flex-col "
+          ? "rounded-xl lg:rounded-none flex flex-col md:flex-col gap-4 lg:gap-0"
           : projectsDesign == "Design 3"
           ? ""
-          : projectsDesign == "Design 4" && "flex flex-col "
+          : projectsDesign == "Design 4" && "flex flex-col gap-4 lg:gap-0"
       }
       ${
         projectsAlignment == "left"
-          ? "flex-col-reverse lg:flex-row gap-4"
+          ? "flex-col-reverse lg:flex-row"
           : projectsAlignment == "right"
-          ? "flex-col-reverse lg:flex-row-reverse gap-4"
+          ? "flex-col-reverse lg:flex-row-reverse"
           : projectIndex % 2 == 0
-          ? "flex-col-reverse lg:flex-row gap-4"
-          : "flex-col-reverse lg:flex-row-reverse gap-4"
+          ? "flex-col-reverse lg:flex-row"
+          : "flex-col-reverse lg:flex-row-reverse"
       }`}
       style={
         (projectsDesign === "Design 3" || projectsDesign === "Design 4") &&
@@ -117,11 +117,11 @@ const ProjectCard = ({
             projectsDesign == "Design 1"
               ? "h-[400px] md:m-5 md:w-[591px]"
               : projectsDesign == "Design 2"
-              ? "h-[400px] md:w-full"
+              ? "min-w-40 h-[400px] lg:w-44 md:w-full"
               : projectsDesign == "Design 3"
               ? ""
               : projectsDesign == "Design 4" &&
-                "min-w-40 h-[256px] lg:h-auto md:m-2"
+                "min-w-40 h-[320px] lg:w-40 lg:h-[400px] md:m-2"
           }
        `}
       >
@@ -134,7 +134,7 @@ const ProjectCard = ({
             alt={project.project_title}
             className={`rounded-xl w-full h-full object-cover transition-all duration-[5000ms] ease-in-out object-top hover:object-bottom ${
               projectsDesign == "Design 2"
-                ? "lg:p-5"
+                ? "lg:p-4"
                 : projectsDesign == "Design 3"
                 ? ""
                 : projectsDesign == "Design 4" && ""
@@ -143,14 +143,14 @@ const ProjectCard = ({
         )}
       </div>
       <div
-        className={`flex flex-col justify-center items-center gap-4 md:flex-1 lg:m-4 ${
+        className={`flex flex-col justify-center items-center  md:flex-1 lg:m-4 ${
           projectsDesign == "Design 1"
-            ? "px-2 py-3 lg:p-0"
+            ? "px-2 py-3 lg:p-0 gap-4"
             : projectsDesign == "Design 2"
             ? ""
             : projectsDesign == "Design 3"
-            ? "flex h-full justify-between lg:pb-12 lg:pt-8"
-            : projectsDesign == "Design 4" && ""
+            ? "flex h-full justify-between lg:pb-12 lg:pt-8 gap-4"
+            : projectsDesign == "Design 4" && "gap-4"
         }`}
       >
         <div
@@ -175,7 +175,7 @@ const ProjectCard = ({
         </div>
         <div className="flex flex-col w-full justify-center lg:items-center gap-4 ">
           {" "}
-          <div className={`flex gap-2 md:gap-6 p-2 mx-auto  md:p-4`}>
+          <div className={`flex gap-2 lg:gap-1 p-2 mx-auto  md:p-4`}>
             {project.project_technology_1_icon && (
               <Image
                 quality={40}
