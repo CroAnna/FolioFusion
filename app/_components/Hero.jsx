@@ -1,3 +1,5 @@
+import StartForFree from "./StartForFree";
+
 const { default: Image } = require("next/image");
 
 const Hero = () => {
@@ -11,6 +13,7 @@ const Hero = () => {
         alt="hero-bg"
         src={"/hero-page-bg.svg"}
       />
+
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-screen-xl pb-16 md:pb-0">
         <div className="flex gap-16 items-center flex-col-reverse md:flex-row">
           <div className="hidden md:flex relative md:w-[640px] md:h-[400px]">
@@ -28,6 +31,7 @@ const Hero = () => {
             <h2 className="text-xl md:text-3xl font-bold text-stone-400">
               Endless customization.
             </h2>
+            <StartForFree additionalStyle={"bottom-[-180px]"} small />
           </div>
         </div>
       </div>
