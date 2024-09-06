@@ -49,14 +49,17 @@ const PortfolioEducation = () => {
             lineColor={getHexLineColor(palette)}
             layout={portfolioStackBasicContextData.experience_alignment}
           >
-            {portfolioStackExperienceContextData.map((el, index) => (
-              <TimelineElement
-                palette={palette}
-                fontPrimary={fontPrimary}
-                key={index}
-                data={el}
-              />
-            ))}
+            {portfolioStackExperienceContextData
+              .slice()
+              .reverse()
+              .map((el, index) => (
+                <TimelineElement
+                  palette={palette}
+                  fontPrimary={fontPrimary}
+                  key={index}
+                  data={el}
+                />
+              ))}
           </VerticalTimeline>
         )}
       </div>

@@ -43,16 +43,23 @@ const PortfolioActivities = () => {
               : activitiesDesign == "Design 4" && "gap-12 lg:gap-8 p-8"
           }`}
       >
-        {portfolioStackActivityContextData.map((el, index) => (
-          <ActivityCard
-            fontPrimary={fontPrimary}
-            palette={palette}
-            key={index}
-            data={el}
-            activityIndex={index}
-            activitiesDesign={activitiesDesign}
-          />
-        ))}
+        {portfolioStackActivityContextData &&
+          portfolioStackActivityContextData
+            .slice()
+            .reverse()
+            .map((el, index) => (
+              <ActivityCard
+                fontPrimary={fontPrimary}
+                palette={palette}
+                key={index}
+                data={el}
+                activityIndex={
+                  // to show newest items first, on top, and latest on the bottom
+                  portfolioStackActivityContextData.length - index - 1
+                }
+                activitiesDesign={activitiesDesign}
+              />
+            ))}
       </div>
     </div>
   );

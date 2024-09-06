@@ -137,10 +137,11 @@ const AddActivities = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-start flex-col justify-center">
           <h3 className="text-xl md:text-2xl font-bold">
             4.2. Add your achievements and activities
           </h3>
+          <p>PRO TIP: Add them from the oldest to the newest ones</p>
         </div>
         {portfolioStackActivityContextData &&
           portfolioStackActivityContextData.length > 0 &&

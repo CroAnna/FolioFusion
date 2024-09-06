@@ -154,11 +154,11 @@ const AddEducation = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-start flex-col justify-center">
           <h3 className="text-xl md:text-2xl font-bold">
             3.3. Add your work experience and education
           </h3>
-          <p>(from newest to oldest)</p>
+          <p>PRO TIP: Add them from the oldest to the current one</p>
         </div>
         {portfolioStackExperienceContextData &&
           portfolioStackExperienceContextData.length > 0 &&
