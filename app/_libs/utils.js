@@ -21,6 +21,8 @@ import {
   FacebookLogo,
   Video,
   Image as ImageIcon,
+  Student,
+  Smiley,
 } from "@phosphor-icons/react/dist/ssr";
 
 export const stepsData = [
@@ -283,6 +285,16 @@ export const experienceLinkIcons = [
     value: "education",
     label: "Education",
     icon: <GraduationCap weight="duotone" size={32} />,
+  },
+  {
+    value: "internship",
+    label: "Internship",
+    icon: <Student weight="duotone" size={32} />,
+  },
+  {
+    value: "volunteering",
+    label: "Volunteering",
+    icon: <Smiley size={32} />,
   },
 ];
 
@@ -788,6 +800,7 @@ export const icons = [
   { icon: "nim" },
   { icon: "nixos" },
   { icon: "nodejs" },
+  { icon: "notepadpp" },
   { icon: "notion" },
   { icon: "nova" },
   { icon: "npm" },
@@ -824,6 +837,7 @@ export const icons = [
   { icon: "phpstorm" },
   { icon: "picocss" },
   { icon: "pinecone" },
+  { icon: "pinescript" },
   { icon: "pinia" },
   { icon: "pint" },
   { icon: "pkl" },
@@ -915,6 +929,7 @@ export const icons = [
   { icon: "snowflake" },
   { icon: "snyk" },
   { icon: "socialite" },
+  { icon: "solana" },
   { icon: "solidity" },
   { icon: "solidjs" },
   { icon: "sonarqube" },
@@ -964,6 +979,7 @@ export const icons = [
   { icon: "typescript" },
   { icon: "ubuntu" },
   { icon: "unity" },
+  { icon: "unitycatalog" },
   { icon: "unrealengine" },
   { icon: "v" },
   { icon: "vagrant" },

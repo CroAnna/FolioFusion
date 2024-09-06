@@ -173,6 +173,10 @@ const ProjectInputCard = ({
                       Image: (max. 5 MB)
                     </span>
                   </div>
+                  <p className="text-sm text-neutral-400 pb-1">
+                    * Vertical project images scroll on hover (sometimes, based
+                    on selected UI design)
+                  </p>
                   <button
                     disabled={disabled}
                     className="btn btn-outline w-fit btn-error btn-ghost disabled:bg-neutral-700"
