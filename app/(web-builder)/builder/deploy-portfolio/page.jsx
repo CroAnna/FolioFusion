@@ -119,7 +119,7 @@ const DeployPortfolio = () => {
           <div className="flex flex-row items-center">
             <p>www.foliofusion.art/&nbsp;</p>
             <Input
-              disabled={isPending}
+              disabled={!user.access_granted || isPending}
               name={"domain"}
               value={domain}
               onChange={(e) => {
