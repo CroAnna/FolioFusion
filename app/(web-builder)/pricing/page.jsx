@@ -6,7 +6,7 @@ const PricingPage = () => {
       <h2 className="text-2xl items-center flex md:text-4xl font-bold justify-center">
         Select a plan
       </h2>
-      <h3 className="text-xl items-center flex md:text-2xl font-semibold justify-center">
+      <h3 className="text-xl items-center flex md:text-2xl font-semibold justify-center pb-4 lg:pb-12">
         And make you portfolio available to everyone
       </h3>
       <Pricing />

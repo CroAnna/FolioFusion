@@ -10,7 +10,7 @@ const Examples = () => {
         quality={100}
         src={examples}
         objectFit="cover"
-        className="hidden md:block"
+        className="hidden w-full md:block"
         alt="portfolio-examples"
       />
       <Image

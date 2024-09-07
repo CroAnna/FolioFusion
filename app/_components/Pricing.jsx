@@ -22,7 +22,7 @@ const Pricing = async () => {
       className="lg:w-full max-w-screen-xl mx-4 lg:mx-auto pb-12 lg:pb-56 relative"
       id="pricing"
     >
-      <StartForFree additionalStyle="top-4" />
+      <StartForFree additionalStyle="top-4 hidden" />
       <div className="w-full bg-grey-dark rounded-3xl px-4 py-8 lg:p-12 border-cyan-400 border-[1px] shadow-[0_0px_30px_-15px_rgba(34,211,238,1)] flex flex-col lg:flex-row justify-between gap-8">
         <div className="flex flex-col gap-8 lg:my-8 items-center">
           <div className="flex flex-col gap-2 text-center">
