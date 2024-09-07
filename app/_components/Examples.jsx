@@ -5,7 +5,7 @@ import example3 from "@/public/ui-example.jpg";
 
 const Examples = () => {
   return (
-    <div className="w-full relative" id="examples">
+    <div className="w-full relative pb-12 lg:pb-56" id="examples">
       <Image
         quality={100}
         src={examples}

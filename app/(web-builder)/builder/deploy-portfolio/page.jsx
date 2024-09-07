@@ -74,12 +74,12 @@ const DeployPortfolio = () => {
           <div>
             <p>
               ❔ To deploy your portfolio you need to have{" "}
-              <Link href="/#pricing" className="btn btn-link text-base px-0">
+              <Link href="/pricing" className="btn btn-link text-base px-0">
                 1-Year Pass
               </Link>{" "}
               or{" "}
               <Link
-                href="/#pricing"
+                href="/pricing"
                 className="btn btn-link btn-accent text-base px-0"
               >
                 Lifetime Deal
