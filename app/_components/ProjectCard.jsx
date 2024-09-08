@@ -9,6 +9,7 @@ import {
   getPrimaryTextColor,
   getBgColor,
   getIconBgColor,
+  getHoverBgColor,
 } from "../_libs/utils";
 import { PortfolioContext } from "./PortfolioProvider";
 import { useContext, useEffect, useState } from "react";
@@ -34,6 +35,36 @@ const ProjectCard = ({
   );
 
   const iconBg = getIconBgColor(palette);
+
+  const bgColorVariantsPrimary = {
+    "Palette 1": "bg-zinc-100 hover:bg-zinc-200",
+    "Palette 2": "bg-sky-50 hover:bg-sky-200",
+    "Palette 3": "bg-orange-50 hover:bg-orange-200",
+    "Palette 4": "bg-slate-800 hover:bg-slate-950",
+    "Palette 5": "bg-neutral-900 hover:bg-neutral-700",
+    "Palette 6": "bg-stone-900 hover:bg-stone-700",
+    "Palette 7": "bg-zinc-100 hover:bg-zinc-300",
+  };
+
+  const bgColorVariantsSecondary = {
+    "Palette 1": "bg-amber-600 hover:bg-amber-700",
+    "Palette 2": "bg-blue-800 hover:bg-blue-950",
+    "Palette 3": "bg-orange-800 hover:bg-orange-950",
+    "Palette 4": "bg-yellow-400 hover:bg-yellow-600",
+    "Palette 5": "bg-lime-500 hover:bg-lime-400",
+    "Palette 6": "bg-yellow-400 hover:bg-yellow-200",
+    "Palette 7": "bg-red-500 hover:bg-red-700",
+  };
+
+  const fontVariants = {
+    inter: "font-inter",
+    poppins: "font-poppins",
+    robotoMono: "font-robotoMono",
+    greyQo: "font-greyQo",
+    sankofaDisplay: "font-sankofaDisplay",
+    gabarito: "font-gabarito",
+    montserrat: "font-montserrat",
+  };
 
   useEffect(() => {
     let url;
@@ -163,18 +194,17 @@ const ProjectCard = ({
           }`}
         >
           <h2
-            className={`text-xl md:text-2xl font-semibold font-${fontPrimary}`}
+            className={`text-xl md:text-2xl font-semibold ${fontVariants[fontPrimary]}`}
           >
             {project.project_title}
           </h2>
           <p
-            className={`md:text-lg text-center leading-6 font-${fontPrimary} flex flex-1 flex-col h-full flex-grow`}
+            className={`md:text-lg text-center leading-6 ${fontVariants[fontPrimary]} flex flex-1 flex-col h-full flex-grow`}
           >
             {project.project_description}
           </p>
         </div>
         <div className="flex flex-col w-full justify-center lg:items-center gap-4 ">
-          {" "}
           <div
             className={`flex gap-2 p-2 mx-auto md:p-4 ${
               projectsDesign == "Design 1" ? "md:gap-2 " : "lg:gap-1 "
@@ -243,9 +273,13 @@ const ProjectCard = ({
                 className="w-full"
               >
                 <button
-                  className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${getBgColor(
+                  className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${
+                    bgColorVariantsPrimary[palette]
+                  } ${getPrimaryTextColor(
                     palette
-                  )} md:text-lg rounded-lg shadow-custom-sm font-medium font-${fontPrimary}`}
+                  )} transition-all md:text-lg rounded-lg shadow-custom-sm font-medium ${
+                    fontVariants[fontPrimary]
+                  }`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -266,11 +300,13 @@ const ProjectCard = ({
                 className="w-full"
               >
                 <button
-                  className={`py-2 hover:none flex w-full items-center justify-center gap-1 px-2 ${getPrimaryBgColors(
+                  className={`py-2 hover:none flex w-full items-center justify-center gap-1 px-2 ${
+                    bgColorVariantsSecondary[palette]
+                  } ${getSecondaryTextColor(
                     palette
-                  )} ${getSecondaryTextColor(
-                    palette
-                  )} md:text-lg rounded-lg font-medium font-${fontPrimary}`}
+                  )} transition-all md:text-lg rounded-lg font-medium ${
+                    fontVariants[fontPrimary]
+                  }`}
                   target="_blank"
                   rel="noreferrer"
                 >
