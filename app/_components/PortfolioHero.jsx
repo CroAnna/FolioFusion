@@ -483,16 +483,6 @@ const PortfolioHero = () => {
     }
   };
 
-  const fontVariants = {
-    inter: "font-inter",
-    poppins: "font-poppins",
-    robotoMono: "font-robotoMono",
-    greyQo: "font-greyQo",
-    sankofaDisplay: "font-sankofaDisplay",
-    gabarito: "font-gabarito",
-    montserrat: "font-montserrat",
-  };
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -603,7 +593,7 @@ const PortfolioHero = () => {
         {
           <div className="flex flex-col gap-4">
             <p
-              className={`py-0 text-lg ${fontVariants[fontPrimary]}`}
+              className={`py-0 text-lg font-${fontPrimary}`}
               style={{
                 textAlign: isMobile
                   ? portfolioStackHeroContextData.hero_mobile_alignment
@@ -614,9 +604,7 @@ const PortfolioHero = () => {
             </p>
             <div>
               <h1
-                className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] mt-2 md:mt-0 ${
-                  fontVariants[fontSecondary]
-                }
+                className={`text-5xl md:text-8xl font-bold break-words max-w-[680px] mt-2 md:mt-0 font-${fontSecondary}
                 ${getPrimaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
@@ -627,9 +615,7 @@ const PortfolioHero = () => {
                 {portfolioStackHeroContextData.hero_name}
               </h1>
               <h2
-                className={`text-4xl md:text-5xl font-bold ${
-                  fontVariants[fontSecondary]
-                }
+                className={`text-4xl md:text-5xl font-bold font-${fontSecondary}
                   ${getSecondaryColors(palette)}`}
                 style={{
                   textAlign: isMobile
@@ -641,7 +627,7 @@ const PortfolioHero = () => {
               </h2>
             </div>
             <p
-              className={`md:text-lg max-w-xl md:py-4 ${fontVariants[fontPrimary]}`}
+              className={`md:text-lg max-w-xl md:py-4 font-${fontPrimary}`}
               style={{
                 textAlign: isMobile
                   ? portfolioStackHeroContextData.hero_mobile_alignment
