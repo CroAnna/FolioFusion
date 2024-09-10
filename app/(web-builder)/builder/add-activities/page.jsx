@@ -162,7 +162,7 @@ const AddActivities = () => {
           )}
         <button
           disabled={isPending}
-          className="btn btn-secondary"
+          className="btn btn-primary"
           onClick={() => {
             addActivity();
           }}
