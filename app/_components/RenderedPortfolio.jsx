@@ -89,6 +89,52 @@ const RenderedPortfolio = ({ domain = null }) => {
     );
   };
 
+  const checkIfPortfolioStackProjectsContextDataIsDefault = () => {
+    const defaultValue = [
+      {
+        id: null,
+        project_order: 1,
+        project_title: "",
+        project_description: "",
+        project_technology_1_icon: "",
+        project_technology_2_icon: "",
+        project_technology_3_icon: "",
+        project_technology_4_icon: "",
+        project_technology_5_icon: "",
+        project_link_1_url: "",
+        project_link_2_url: "",
+        project_link_1_text: "",
+        project_link_2_text: "",
+        project_link_1_icon: "",
+        project_link_2_icon: "",
+        project_img: "",
+      },
+    ];
+
+    return (
+      deepEqual(portfolioStackProjectsContextData, defaultValue) ||
+      deepEqual(portfolioStackProjectsContextData, [])
+    );
+  };
+
+  const checkIfPortfolioStackExperienceContextDataIsDefault = () => {
+    const defaultValue = [
+      {
+        id: null,
+        experience_order: 1,
+        experience_title: "",
+        experience_description: "",
+        experience_time: "",
+        experience_keywords: "",
+        experience_type: null,
+      },
+    ];
+    return (
+      deepEqual(portfolioStackExperienceContextData, defaultValue) ||
+      deepEqual(portfolioStackExperienceContextData, [])
+    );
+  };
+
   const checkIfPortfolioStackActivityContextDataIsDefault = () => {
     const defaultValue = [
       {
@@ -130,8 +176,14 @@ const RenderedPortfolio = ({ domain = null }) => {
                 <PortfolioHero /> {domain && <MadeUsingTag />}
               </div>
             )}
-          {portfolioStackProjectsContextData && <PortfolioProjects />}
-          {portfolioStackExperienceContextData && <PortfolioEducation />}
+          {portfolioStackProjectsContextData &&
+            !checkIfPortfolioStackProjectsContextDataIsDefault() && (
+              <PortfolioProjects />
+            )}
+          {portfolioStackExperienceContextData &&
+            !checkIfPortfolioStackExperienceContextDataIsDefault() && (
+              <PortfolioEducation />
+            )}
           {portfolioStackActivityContextData &&
             !checkIfPortfolioStackActivityContextDataIsDefault() && (
               <PortfolioActivities />
