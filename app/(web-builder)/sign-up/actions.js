@@ -37,7 +37,11 @@ export async function signup(prevState, formData) {
 
     if (error) {
       console.log(error);
-      return { message: error.message };
+      console.log(JSON.stringify(error));
+      return {
+        message:
+          error.status == 504 ? `Please try again later.` : error.message,
+      };
     }
 
     revalidatePath("/", "layout");

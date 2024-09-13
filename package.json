@@ -11,7 +11,7 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.5-alpha.3",
     "@supabase/ssr": "^0.4.0",
-    "@supabase/supabase-js": "^2.44.3",
+    "@supabase/supabase-js": "^2.45.4",
     "js-cookie": "^3.0.5",
     "next": "14.2.4",
     "react": "^18",
