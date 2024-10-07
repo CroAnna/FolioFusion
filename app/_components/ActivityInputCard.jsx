@@ -150,6 +150,7 @@ const ActivityInputCard = ({
               handleUpdateNested(`activity_title`, e.target.value);
             }}
             placeholder={"What, where?"}
+            disabled={disabled}
           />
           <button
             disabled={disabled}
