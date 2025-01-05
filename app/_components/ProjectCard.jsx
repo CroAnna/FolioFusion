@@ -217,7 +217,7 @@ const ProjectCard = ({
                 height={32}
                 src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
                 alt={""}
-                className=" h-full object-cover w-11 lg:w-full"
+                className=" h-full object-cover w-11 "
               />
             )}
             {project.project_technology_2_icon &&
@@ -228,7 +228,7 @@ const ProjectCard = ({
                   height={32}
                   src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}&theme=${iconBg}`}
                   alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
+                  className=" h-full object-cover w-11 "
                 />
               )}
             {project.project_technology_3_icon &&
@@ -239,7 +239,7 @@ const ProjectCard = ({
                   height={32}
                   src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
                   alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
+                  className=" h-full object-cover w-11 "
                 />
               )}
             {project.project_technology_4_icon &&
@@ -250,7 +250,7 @@ const ProjectCard = ({
                   height={32}
                   src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
                   alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
+                  className=" h-full object-cover w-11 "
                 />
               )}
             {project.project_technology_5_icon &&
@@ -261,7 +261,7 @@ const ProjectCard = ({
                   height={32}
                   src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
                   alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
+                  className=" h-full object-cover w-11 "
                 />
               )}
           </div>
