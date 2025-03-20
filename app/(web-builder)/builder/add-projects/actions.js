@@ -24,16 +24,36 @@ export async function getAddProjectsData() {
 
   const { data: projects, error } = await supabase
     .from("projects")
-    .select()
+    .select(
+      `*,
+      project_icons (
+        icon_id,
+        icons (
+          name
+        )
+      )`
+    )
     .order("project_order", { ascending: true })
     .eq("user_id", user.id);
+
+  console.log(projects);
+  const updatedProjects = projects.map((el) => {
+    return {
+      ...el,
+      project_icons: el.project_icons.map((icon) => ({
+        id: icon.icon_id,
+        name: icon.icons.name,
+      })),
+    };
+  });
+  console.log(updatedProjects);
 
   if (error) {
     console.log("error fetching projects:", error);
   }
 
   const projectsWithImages = await Promise.all(
-    projects.map(async (project) => {
+    updatedProjects.map(async (project) => {
       if (project.project_img) {
         const { data, error } = await supabase.storage
           .from("images")
@@ -53,6 +73,9 @@ export async function getAddProjectsData() {
       return { ...project, project_img: null };
     })
   );
+
+  console.log("finalni projekti");
+  console.log(projectsWithImages);
 
   return { projects: projectsWithImages, error: null };
 }
@@ -118,11 +141,6 @@ export async function upsertAddProjectsData(
       const upsertProjectsData = {
         project_title: project.project_title,
         project_description: project.project_description,
-        project_technology_1_icon: project.project_technology_1_icon,
-        project_technology_2_icon: project.project_technology_2_icon,
-        project_technology_3_icon: project.project_technology_3_icon,
-        project_technology_4_icon: project.project_technology_4_icon,
-        project_technology_5_icon: project.project_technology_5_icon,
         project_link_1_url: project.project_link_1_url,
         project_link_2_url: project.project_link_2_url,
         project_link_1_text: project.project_link_1_text,
@@ -138,6 +156,7 @@ export async function upsertAddProjectsData(
         console.log(`vec postoji ${id}`);
         upsertProjectsData.id = project.id;
       }
+      console.log(filename);
 
       if (project.project_img && filename) {
         projectsWithImages = [
@@ -145,7 +164,9 @@ export async function upsertAddProjectsData(
           {
             ...project,
             project_img: {
-              publicUrl: `https://xaocjvppqlrveojwlgsu.supabase.co/storage/v1/object/public/images/${filename}`,
+              publicUrl: filename.startsWith("https://xaocjvppqlrveojwlgsu")
+                ? filename
+                : `https://xaocjvppqlrveojwlgsu.supabase.co/storage/v1/object/public/images/${filename}`,
             },
           },
         ];
@@ -163,6 +184,47 @@ export async function upsertAddProjectsData(
         .upsert(upsertProjectsData)
         .select()
         .single();
+
+      // update technology icons
+      const projectId = data.id;
+      if (projectId) {
+        const { error: deleteError } = await supabase
+          .from("project_icons")
+          .delete()
+          .eq("project_id", projectId);
+
+        if (deleteError) console.error("Icon delete error:", deleteError);
+      }
+
+      if (project.project_icons?.length) {
+        const iconInserts = [];
+
+        for (const icon of project.project_icons) {
+          if (!icon?.name || icon.name === "-") continue;
+
+          const { data: iconData } = await supabase
+            .from("icons")
+            .select("id")
+            .eq("name", icon.name)
+            .single();
+
+          if (iconData?.id) {
+            iconInserts.push({
+              project_id: projectId,
+              icon_id: iconData.id,
+            });
+          }
+        }
+
+        if (iconInserts.length > 0) {
+          const { error: insertError } = await supabase
+            .from("project_icons")
+            .insert(iconInserts);
+
+          if (insertError) console.error("Icon insert error:", insertError);
+        }
+      }
+
       console.log(data + error);
       return data;
     })

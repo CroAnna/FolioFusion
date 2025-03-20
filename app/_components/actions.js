@@ -2,6 +2,8 @@ import { createClient } from "@/utils/supabase/client";
 import { z } from "zod";
 
 export async function getDataByDomain(domain) {
+  // TODO refaktoriraj ovo zajedno s getAddProjectsData funkcijom jer imaju puno zajednickog koda
+
   const supabase = createClient();
 
   const { data: owner, error: ownerError } = await supabase
@@ -43,13 +45,32 @@ export async function getDataByDomain(domain) {
 
   const { data: projectsWithoutImages, projectsError } = await supabase
     .from("projects")
-    .select()
+    .select(
+      `*,
+      project_icons (
+        icon_id,
+        icons (
+          name
+        )
+      )`
+    )
     .order("project_order", { ascending: true })
     .eq("user_id", owner.id);
+
   console.log(projectsWithoutImages);
+  const updatedProjects = projectsWithoutImages.map((el) => {
+    return {
+      ...el,
+      project_icons: el.project_icons.map((icon) => ({
+        id: icon.icon_id,
+        name: icon.icons.name,
+      })),
+    };
+  });
+  console.log(updatedProjects);
 
   let projects = [];
-  projectsWithoutImages.map((el) => {
+  updatedProjects.map((el) => {
     let project_image = null;
     if (el.project_img) {
       const project_img_filepath = el.project_img;
@@ -172,4 +193,14 @@ export async function vote(id) {
     .eq("id", id);
 
   return { updateError, fetchError };
+}
+
+export async function getIcons() {
+  const supabase = createClient();
+  const { data: icons, error } = await supabase
+    .from("icons")
+    .select()
+    .order("name", { ascending: true });
+  if (error) console.log(error);
+  return { icons, error };
 }

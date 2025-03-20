@@ -10,6 +10,7 @@ import { getDataByDomain } from "./actions";
 import ScrollToTop from "@/app/_components/ScrollToTop";
 import { deepEqual } from "@/utils/common/methods.js";
 import ErrorPage from "./ErrorPage";
+import { emptyProject } from "../_libs/utils";
 
 const RenderedPortfolio = ({ domain = null }) => {
   const [errorData, setErrorData] = useState(null);
@@ -27,7 +28,7 @@ const RenderedPortfolio = ({ domain = null }) => {
   } = useContext(PortfolioContext);
 
   useEffect(() => {
-    console.log(domain);
+    console.log(`domain:${domain}`);
 
     if (domain) {
       // it's deployed portfolio, otherwise it's builder
@@ -90,26 +91,7 @@ const RenderedPortfolio = ({ domain = null }) => {
   };
 
   const checkIfPortfolioStackProjectsContextDataIsDefault = () => {
-    const defaultValue = [
-      {
-        id: null,
-        project_order: 1,
-        project_title: "",
-        project_description: "",
-        project_technology_1_icon: "",
-        project_technology_2_icon: "",
-        project_technology_3_icon: "",
-        project_technology_4_icon: "",
-        project_technology_5_icon: "",
-        project_link_1_url: "",
-        project_link_2_url: "",
-        project_link_1_text: "",
-        project_link_2_text: "",
-        project_link_1_icon: "",
-        project_link_2_icon: "",
-        project_img: "",
-      },
-    ];
+    const defaultValue = emptyProject;
 
     return (
       deepEqual(portfolioStackProjectsContextData, defaultValue) ||

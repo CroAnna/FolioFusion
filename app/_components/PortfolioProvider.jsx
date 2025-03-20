@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { emptyProject } from "../_libs/utils";
 
 const PortfolioContext = createContext({
   portfolioStackBasicContextData: {},
@@ -74,11 +75,13 @@ const PortfolioProvider = ({ children }) => {
       project_order: 1,
       project_title: "",
       project_description: "",
-      project_technology_1_icon: "",
-      project_technology_2_icon: "",
-      project_technology_3_icon: "",
-      project_technology_4_icon: "",
-      project_technology_5_icon: "",
+      project_icons: [
+        { id: null, name: "-" },
+        { id: null, name: "-" },
+        { id: null, name: "-" },
+        { id: null, name: "-" },
+        { id: null, name: "-" },
+      ],
       project_link_1_url: "",
       project_link_2_url: "",
       project_link_1_text: "",
@@ -153,26 +156,7 @@ const PortfolioProvider = ({ children }) => {
       activity_bg_shape: "low-poly-grid",
     });
 
-    setPortfolioStackProjectsContextData([
-      {
-        id: null,
-        project_order: 1,
-        project_title: "",
-        project_description: "",
-        project_technology_1_icon: "",
-        project_technology_2_icon: "",
-        project_technology_3_icon: "",
-        project_technology_4_icon: "",
-        project_technology_5_icon: "",
-        project_link_1_url: "",
-        project_link_2_url: "",
-        project_link_1_text: "",
-        project_link_2_text: "",
-        project_link_1_icon: "",
-        project_link_2_icon: "",
-        project_img: "",
-      },
-    ]);
+    setPortfolioStackProjectsContextData(emptyProject);
 
     setPortfolioStackExperienceContextData([
       {

@@ -22,7 +22,7 @@ const Footer = () => {
               activities on one place. Choose favorite color palette and custom
               UI elements to make your portfolio truly stand out.
             </p>
-            <p>Copyright &copy; 2024 - All rights reserved</p>
+            <p>Copyright &copy; 2025 - All rights reserved</p>
           </nav>
           <nav className="flex flex-col gap-2">
             <h6 className="footer-title">Links</h6>

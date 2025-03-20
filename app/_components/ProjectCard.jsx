@@ -205,66 +205,34 @@ const ProjectCard = ({
           </p>
         </div>
         <div className="flex flex-col w-full justify-center lg:items-center gap-4 ">
-          <div
-            className={`flex gap-2 p-2 mx-auto md:p-4 ${
-              projectsDesign == "Design 1" ? "md:gap-2 " : "lg:gap-1 "
-            }`}
-          >
-            {project.project_technology_1_icon && (
-              <Image
-                quality={40}
-                width={32}
-                height={32}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_1_icon}&theme=${iconBg}`}
-                alt={""}
-                className=" h-full object-cover w-11 lg:w-full"
-              />
+          {project &&
+            project.project_icons &&
+            project.project_icons.length > 0 && (
+              <div
+                className={`flex gap-2 p-2 mx-auto md:p-4 ${
+                  projectsDesign == "Design 1" ? "md:gap-2 " : "lg:gap-1 "
+                }`}
+              >
+                {[0, 1, 2, 3, 4].map((iconIndex) => {
+                  const icon = project.project_icons[iconIndex];
+                  if (!icon || icon.name === "-") {
+                    return null;
+                  }
+
+                  return (
+                    <Image
+                      key={iconIndex}
+                      quality={40}
+                      width={32}
+                      height={32}
+                      src={`https://go-skill-icons.vercel.app/api/icons?i=${icon.name}&theme=${iconBg}`}
+                      alt={icon.name || ""}
+                      className="h-full object-cover w-11 lg:w-full"
+                    />
+                  );
+                })}
+              </div>
             )}
-            {project.project_technology_2_icon &&
-              project.project_technology_2_icon != "-" && (
-                <Image
-                  quality={40}
-                  width={32}
-                  height={32}
-                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_2_icon}&theme=${iconBg}`}
-                  alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
-                />
-              )}
-            {project.project_technology_3_icon &&
-              project.project_technology_3_icon != "-" && (
-                <Image
-                  quality={40}
-                  width={32}
-                  height={32}
-                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_3_icon}&theme=${iconBg}`}
-                  alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
-                />
-              )}
-            {project.project_technology_4_icon &&
-              project.project_technology_4_icon != "-" && (
-                <Image
-                  quality={40}
-                  width={32}
-                  height={32}
-                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_4_icon}&theme=${iconBg}`}
-                  alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
-                />
-              )}
-            {project.project_technology_5_icon &&
-              project.project_technology_5_icon != "-" && (
-                <Image
-                  quality={40}
-                  width={32}
-                  height={32}
-                  src={`https://go-skill-icons.vercel.app/api/icons?i=${project.project_technology_5_icon}&theme=${iconBg}`}
-                  alt={""}
-                  className=" h-full object-cover w-11 lg:w-full"
-                />
-              )}
-          </div>
           <div className="flex gap-2 justify-between w-full">
             {project.project_link_1_url && project.project_link_1_text && (
               <a

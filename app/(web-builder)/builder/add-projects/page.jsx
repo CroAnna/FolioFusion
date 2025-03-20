@@ -12,6 +12,7 @@ import {
 import { deleteUnusedImages } from "../actions";
 import Image from "next/image";
 import loadingGif from "@/public/loading.gif";
+import { getIcons } from "@/app/_components/actions";
 
 const AddWork = () => {
   const {
@@ -22,12 +23,20 @@ const AddWork = () => {
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
   const [isPending, setIsPending] = useState(false);
+  const [icons, setIcons] = useState([]);
 
   const handleUpdate = (field, value) => {
     setPortfolioStackHeroContextData({
       ...portfolioStackHeroContextData,
       [field]: value,
     });
+  };
+
+  const fetchIcons = async () => {
+    const res = await getIcons();
+    console.log(res.icons);
+
+    setIcons(res.icons);
   };
 
   const addProject = () => {
@@ -45,10 +54,17 @@ const AddWork = () => {
         project_urlGithub: "",
         project_img: "",
         project_demoType: "",
+        project_icons: [
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+        ],
       },
     ]);
   };
-  // TODO iz nekog razloga se dvaput dodal projekt na kraju
+
   const saveData = async () => {
     setIsPending(true);
     await deleteUnusedImages(imagesToRemove);
@@ -56,10 +72,27 @@ const AddWork = () => {
       portfolioStackHeroContextData.id,
       portfolioStackHeroContextData.project_group_description,
       portfolioStackHeroContextData.project_group_title,
-      portfolioStackProjectsContextData
+      portfolioStackProjectsContextData.map((project) => ({
+        ...project,
+        project_icons: project.project_icons.map((icon) => ({
+          name: icon.name || "-",
+          id: icon.id || null,
+        })),
+      }))
     );
 
-    setPortfolioStackProjectsContextData(response.projectsWithImages); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    setPortfolioStackProjectsContextData((prev) =>
+      response.projectsWithImages.map((newProject) => ({
+        ...newProject,
+        project_icons: Array(5)
+          .fill()
+          .map(
+            (_, i) => newProject.project_icons?.[i] || { id: null, name: "-" }
+          ),
+      }))
+    );
+
+    // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
     setIsPending(false);
   };
 
@@ -86,6 +119,7 @@ const AddWork = () => {
       console.log(error);
     } else if (projects.length > 0) {
       setPortfolioStackProjectsContextData(projects);
+      console.log("dohvaceni projekti", projects);
     }
     setIsPending(false);
   }, []);
@@ -97,6 +131,7 @@ const AddWork = () => {
     ) {
       getHero();
     }
+    fetchIcons();
     getProjects();
   }, []);
 
@@ -173,6 +208,7 @@ const AddWork = () => {
                   projectId={project.id}
                   setImagesToRemove={setImagesToRemove}
                   imagesToRemove={imagesToRemove}
+                  icons={icons}
                 />
               )
           )}

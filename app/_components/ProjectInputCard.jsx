@@ -5,7 +5,7 @@ import Textarea from "./Textarea";
 import { PortfolioContext } from "./PortfolioProvider";
 import FileInput from "./FileInput";
 import Select from "./Select";
-import { icons, projectLinkIcons } from "../_libs/utils";
+import { projectLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
 import { deleteProjectById } from "../(web-builder)/builder/add-projects/actions";
@@ -18,6 +18,7 @@ const ProjectInputCard = ({
   imagesToRemove,
   disabled = false,
   setIsPending,
+  icons,
 }) => {
   const {
     portfolioStackProjectsContextData,
@@ -272,101 +273,36 @@ const ProjectInputCard = ({
                 Select up to 5 technologies:
               </span>
             </div>
-            <div className="flex justify-between items-end gap-3 flex-col md:flex-row">
-              <Select
-                disabled={disabled}
-                placeholder="-"
-                options={icons}
-                labelAttribute="icon"
-                valueAttribute="icon"
-                name={`project_technology_1_icon`}
-                onChange={(e) => {
-                  handleUpdateNested(
-                    `project_technology_1_icon`,
-                    e.target.value
-                  );
-                }}
-                value={
-                  portfolioStackProjectsContextData[index]
-                    .project_technology_1_icon
-                }
-              />
-              <Select
-                disabled={disabled}
-                placeholder="-"
-                options={icons}
-                labelAttribute="icon"
-                valueAttribute="icon"
-                name={`project_technology_2_icon`}
-                onChange={(e) => {
-                  handleUpdateNested(
-                    `project_technology_2_icon`,
-                    e.target.value
-                  );
-                }}
-                value={
-                  portfolioStackProjectsContextData[index]
-                    .project_technology_2_icon
-                }
-              />
-              <Select
-                disabled={disabled}
-                placeholder="-"
-                options={icons}
-                labelAttribute="icon"
-                valueAttribute="icon"
-                label={""}
-                name={`project_technology_3_icon`}
-                onChange={(e) => {
-                  handleUpdateNested(
-                    `project_technology_3_icon`,
-                    e.target.value
-                  );
-                }}
-                value={
-                  portfolioStackProjectsContextData[index]
-                    .project_technology_3_icon
-                }
-              />
-              <Select
-                disabled={disabled}
-                placeholder="-"
-                options={icons}
-                labelAttribute="icon"
-                valueAttribute="icon"
-                label={""}
-                name={`project_technology_4_icon`}
-                onChange={(e) => {
-                  handleUpdateNested(
-                    `project_technology_4_icon`,
-                    e.target.value
-                  );
-                }}
-                value={
-                  portfolioStackProjectsContextData[index]
-                    .project_technology_4_icon
-                }
-              />
-              <Select
-                disabled={disabled}
-                placeholder="-"
-                options={icons}
-                labelAttribute="icon"
-                valueAttribute="icon"
-                label={""}
-                name={`project_technology_5_icon`}
-                onChange={(e) => {
-                  handleUpdateNested(
-                    `project_technology_5_icon`,
-                    e.target.value
-                  );
-                }}
-                value={
-                  portfolioStackProjectsContextData[index]
-                    .project_technology_5_icon
-                }
-              />
-            </div>
+            {icons &&
+              icons.length > 0 &&
+              portfolioStackProjectsContextData[index] &&
+              portfolioStackProjectsContextData[index].project_icons && (
+                <div className="flex justify-between items-end gap-3 flex-col md:flex-row">
+                  {[0, 1, 2, 3, 4].map((iconIndex) => (
+                    <Select
+                      key={iconIndex}
+                      disabled={disabled}
+                      placeholder="-"
+                      options={icons}
+                      labelAttribute="name"
+                      valueAttribute="name"
+                      name={`project_icons[${iconIndex}]`}
+                      onChange={(e) => {
+                        const newIcons = [
+                          ...(portfolioStackProjectsContextData[index]
+                            .project_icons || []),
+                        ];
+                        newIcons[iconIndex] = { name: e.target.value };
+                        handleUpdateNested("project_icons", newIcons);
+                      }}
+                      value={
+                        portfolioStackProjectsContextData[index]
+                          .project_icons?.[iconIndex]?.name || ""
+                      }
+                    />
+                  ))}
+                </div>
+              )}
           </div>
         </div>
       </>
