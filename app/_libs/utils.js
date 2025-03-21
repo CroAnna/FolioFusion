@@ -685,3 +685,15 @@ export const emptyProject = [
     project_img: "",
   },
 ];
+
+export const emptyExperience = [
+  {
+    id: null,
+    experience_order: 1,
+    experience_title: "",
+    experience_description: "",
+    experience_time: "",
+    experience_keywords: "",
+    experience_type: null,
+  },
+];

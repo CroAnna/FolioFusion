@@ -10,7 +10,7 @@ import { getDataByDomain } from "./actions";
 import ScrollToTop from "@/app/_components/ScrollToTop";
 import { deepEqual } from "@/utils/common/methods.js";
 import ErrorPage from "./ErrorPage";
-import { emptyProject } from "../_libs/utils";
+import { emptyExperience, emptyProject } from "../_libs/utils";
 
 const RenderedPortfolio = ({ domain = null }) => {
   const [errorData, setErrorData] = useState(null);
@@ -100,17 +100,8 @@ const RenderedPortfolio = ({ domain = null }) => {
   };
 
   const checkIfPortfolioStackExperienceContextDataIsDefault = () => {
-    const defaultValue = [
-      {
-        id: null,
-        experience_order: 1,
-        experience_title: "",
-        experience_description: "",
-        experience_time: "",
-        experience_keywords: "",
-        experience_type: null,
-      },
-    ];
+    const defaultValue = emptyExperience;
+
     return (
       deepEqual(portfolioStackExperienceContextData, defaultValue) ||
       deepEqual(portfolioStackExperienceContextData, [])

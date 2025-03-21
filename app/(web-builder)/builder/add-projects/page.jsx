@@ -12,7 +12,7 @@ import {
 import { deleteUnusedImages } from "../actions";
 import Image from "next/image";
 import loadingGif from "@/public/loading.gif";
-import { getIcons } from "@/app/_components/actions";
+import { useIcons } from "@/app/hooks/useIcons";
 
 const AddWork = () => {
   const {
@@ -23,20 +23,13 @@ const AddWork = () => {
   } = useContext(PortfolioContext);
   const [imagesToRemove, setImagesToRemove] = useState([]);
   const [isPending, setIsPending] = useState(false);
-  const [icons, setIcons] = useState([]);
+  const { icons } = useIcons();
 
   const handleUpdate = (field, value) => {
     setPortfolioStackHeroContextData({
       ...portfolioStackHeroContextData,
       [field]: value,
     });
-  };
-
-  const fetchIcons = async () => {
-    const res = await getIcons();
-    console.log(res.icons);
-
-    setIcons(res.icons);
   };
 
   const addProject = () => {
@@ -131,7 +124,6 @@ const AddWork = () => {
     ) {
       getHero();
     }
-    fetchIcons();
     getProjects();
   }, []);
 

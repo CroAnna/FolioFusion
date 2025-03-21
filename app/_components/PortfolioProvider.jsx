@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { emptyProject } from "../_libs/utils";
+import { emptyExperience, emptyProject } from "../_libs/utils";
 
 const PortfolioContext = createContext({
   portfolioStackBasicContextData: {},
@@ -69,43 +69,12 @@ const PortfolioProvider = ({ children }) => {
   const [
     portfolioStackProjectsContextData,
     setPortfolioStackProjectsContextData,
-  ] = useState([
-    {
-      id: null,
-      project_order: 1,
-      project_title: "",
-      project_description: "",
-      project_icons: [
-        { id: null, name: "-" },
-        { id: null, name: "-" },
-        { id: null, name: "-" },
-        { id: null, name: "-" },
-        { id: null, name: "-" },
-      ],
-      project_link_1_url: "",
-      project_link_2_url: "",
-      project_link_1_text: "",
-      project_link_2_text: "",
-      project_link_1_icon: "",
-      project_link_2_icon: "",
-      project_img: "",
-    },
-  ]);
+  ] = useState(emptyProject);
 
   const [
     portfolioStackExperienceContextData,
     setPortfolioStackExperienceContextData,
-  ] = useState([
-    {
-      id: null,
-      experience_order: 1,
-      experience_title: "",
-      experience_description: "",
-      experience_time: "",
-      experience_keywords: "",
-      experience_type: null,
-    },
-  ]);
+  ] = useState(emptyExperience);
 
   const [
     portfolioStackActivityContextData,
@@ -158,17 +127,7 @@ const PortfolioProvider = ({ children }) => {
 
     setPortfolioStackProjectsContextData(emptyProject);
 
-    setPortfolioStackExperienceContextData([
-      {
-        id: null,
-        experience_order: 1,
-        experience_title: "",
-        experience_description: "",
-        experience_time: "",
-        experience_keywords: "",
-        experience_type: null,
-      },
-    ]);
+    setPortfolioStackExperienceContextData(emptyExperience);
 
     setPortfolioStackActivityContextData([
       {
