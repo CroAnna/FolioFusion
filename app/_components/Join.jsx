@@ -1,6 +1,6 @@
 const Join = ({ items, onChange, name, value, disabled = false }) => {
   return (
-    <div className="join flex-col md:flex-row">
+    <div className="join flex-col md:flex-row flex-wrap">
       {items.map((el, index) => (
         <input
           key={index}
