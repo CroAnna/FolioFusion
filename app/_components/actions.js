@@ -57,17 +57,10 @@ export async function getDataByDomain(domain) {
     .order("project_order", { ascending: true })
     .eq("user_id", owner.id);
 
-  console.log(projectsWithoutImages);
-  const updatedProjects = projectsWithoutImages.map((el) => {
-    return {
-      ...el,
-      project_icons: el.project_icons.map((icon) => ({
-        id: icon.icon_id,
-        name: icon.icons.name,
-      })),
-    };
-  });
-  console.log(updatedProjects);
+  const updatedProjects = reorganizeIconsFieldToProperFormat(
+    projectsWithoutImages,
+    "project_icons"
+  );
 
   let projects = [];
   updatedProjects.map((el) => {
@@ -85,9 +78,24 @@ export async function getDataByDomain(domain) {
 
   const { data: experiences, experiencesError } = await supabase
     .from("experiences")
-    .select()
+    .select(
+      `*,
+      experience_icons (
+        icon_id,
+        icons (
+          name
+        )
+      )`
+    )
     .order("experience_order", { ascending: true })
     .eq("user_id", owner.id);
+
+  console.log(experiences);
+
+  const updatedExperiences = reorganizeIconsFieldToProperFormat(
+    experiences,
+    "experience_icons"
+  );
 
   const { data: activitiesWithoutImages, activitiesError } = await supabase
     .from("activities")
@@ -114,7 +122,7 @@ export async function getDataByDomain(domain) {
     hero,
     hero_image,
     projects,
-    experiences,
+    experiences: updatedExperiences,
     activities,
     portfolio,
     portfolioError,
@@ -125,6 +133,18 @@ export async function getDataByDomain(domain) {
     activitiesError,
   };
 }
+
+const reorganizeIconsFieldToProperFormat = (list, icons_field) => {
+  return list.map((el) => {
+    return {
+      ...el,
+      [icons_field]: el[icons_field].map((icon) => ({
+        id: icon.icon_id,
+        name: icon.icons.name,
+      })),
+    };
+  });
+};
 
 export async function sendIdea(prevState, formData) {
   const supabase = createClient();

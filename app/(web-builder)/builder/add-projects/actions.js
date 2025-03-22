@@ -229,6 +229,7 @@ export async function upsertAddProjectsData(
       return data;
     })
   );
+  console.log("----projectsWithImages", projectsWithImages);
 
   projectsWithImages.sort((a, b) => a.project_order - b.project_order);
   return { portfolio, projectsWithImages, error };

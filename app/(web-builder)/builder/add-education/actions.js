@@ -26,13 +26,30 @@ export async function getAddExperiencesData() {
   console.log("user.id " + user.id);
   const { data: experiences, error } = await supabase
     .from("experiences")
-    .select()
+    .select(
+      `*,
+      experience_icons (
+        icon_id,
+        icons (
+          name
+        )
+      )`
+    )
     .order("experience_order", { ascending: true })
     .eq("user_id", user.id);
 
   console.log(experiences);
+  const updatedExperiences = experiences.map((el) => {
+    return {
+      ...el,
+      experience_icons: el.experience_icons.map((icon) => ({
+        id: icon.icon_id,
+        name: icon.icons.name,
+      })),
+    };
+  });
 
-  return { experiences, error };
+  return { experiences: updatedExperiences, error };
 }
 
 export async function upsertAddExperiencesData(
@@ -66,7 +83,7 @@ export async function upsertAddExperiencesData(
   console.log(portfolio + JSON.stringify(upsertData));
 
   const experiences = await Promise.all(
-    experiencesData.map(async (experience) => {
+    experiencesData.map(async (experience, index) => {
       const upsertExperienceData = {
         experience_title: experience.experience_title,
         experience_description: experience.experience_description,
@@ -89,13 +106,60 @@ export async function upsertAddExperiencesData(
         .select()
         .single();
 
+      const experienceId = data.id;
+      if (experienceId) {
+        const { error: deleteError } = await supabase
+          .from("experience_icons")
+          .delete()
+          .eq("experience_id", experienceId);
+
+        if (deleteError) console.error("Icon delete error:", deleteError);
+      }
+      console.log("experience.experience_icons", experience.experience_icons);
+
+      if (experience.experience_icons?.length) {
+        const iconInserts = [];
+
+        for (const icon of experience.experience_icons) {
+          if (!icon?.name || icon.name === "-") continue;
+
+          const { data: iconData } = await supabase
+            .from("icons")
+            .select("id")
+            .eq("name", icon.name)
+            .single();
+
+          if (iconData?.id) {
+            iconInserts.push({
+              experience_id: experienceId,
+              icon_id: iconData.id,
+            });
+          }
+        }
+
+        if (iconInserts.length > 0) {
+          const { error: insertError } = await supabase
+            .from("experience_icons")
+            .insert(iconInserts);
+
+          if (insertError) console.error("Icon insert error:", insertError);
+        }
+      }
       console.log(data + error);
       return data;
     })
   );
+  
+  // include icons in new experiences array
+  const experiencesWithIcons = experiencesData.map((el, index) => {
+    return {
+      ...experiences[index],
+      experience_icons: el.experience_icons || [],
+    };
+  });
 
-  console.log(experiences);
-  return { portfolio, experiences, error };
+  console.log("----experiences", experiencesWithIcons);
+  return { portfolio, experiences: experiencesWithIcons, error };
 }
 
 export async function deleteExperienceById(id) {

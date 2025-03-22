@@ -83,9 +83,8 @@ const AddWork = () => {
             (_, i) => newProject.project_icons?.[i] || { id: null, name: "-" }
           ),
       }))
-    );
+    ); // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
 
-    // sluzi da se ne dogodi da ako se doda projekt i samo spremi page (bez prebacivanja dalje) i doda jos jedan projekt, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
     setIsPending(false);
   };
 

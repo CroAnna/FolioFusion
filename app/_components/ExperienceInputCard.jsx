@@ -15,6 +15,7 @@ const ExperienceInputCard = ({
   experienceId,
   setIsPending,
   disabled,
+  icons,
 }) => {
   const {
     portfolioStackExperienceContextData,
@@ -132,6 +133,43 @@ const ExperienceInputCard = ({
           }}
           placeholder={"Frontend, React, Storybook"}
         />
+        <div>
+          <div className="label pb-0 pt-0">
+            <span className="label-text text-base">
+              Select up to 5 technologies:
+            </span>
+          </div>
+          {icons &&
+            icons.length > 0 &&
+            portfolioStackExperienceContextData[index] &&
+            portfolioStackExperienceContextData[index].experience_icons && (
+              <div className="flex justify-between items-end gap-3 flex-col md:grid md:grid-cols-5">
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((iconIndex) => (
+                  <Select
+                    key={iconIndex}
+                    disabled={disabled}
+                    placeholder="-"
+                    options={icons}
+                    labelAttribute="name"
+                    valueAttribute="name"
+                    name={`experience_icons[${iconIndex}]`}
+                    onChange={(e) => {
+                      const newIcons = [
+                        ...(portfolioStackExperienceContextData[index]
+                          .experience_icons || []),
+                      ];
+                      newIcons[iconIndex] = { name: e.target.value };
+                      handleUpdateNested("experience_icons", newIcons);
+                    }}
+                    value={
+                      portfolioStackExperienceContextData[index]
+                        .experience_icons?.[iconIndex]?.name || ""
+                    }
+                  />
+                ))}
+              </div>
+            )}
+        </div>
       </div>
     )
   );

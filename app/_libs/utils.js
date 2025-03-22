@@ -695,5 +695,17 @@ export const emptyExperience = [
     experience_time: "",
     experience_keywords: "",
     experience_type: null,
+    experience_icons: [
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+      { id: null, name: "-" },
+    ],
   },
 ];

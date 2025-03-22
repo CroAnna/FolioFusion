@@ -11,9 +11,11 @@ import {
 } from "./actions";
 import Image from "next/image";
 import loadingGif from "@/public/loading.gif";
+import { useIcons } from "@/app/hooks/useIcons";
 
 const AddEducation = () => {
   const [isPending, setIsPending] = useState(false);
+  const { icons } = useIcons();
 
   const {
     portfolioStackHeroContextData,
@@ -43,6 +45,13 @@ const AddEducation = () => {
         experience_time: "",
         experience_keywords: "",
         experience_type: null,
+        experience_icons: [
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+          { id: null, name: "-" },
+        ],
       },
     ]);
   };
@@ -53,10 +62,29 @@ const AddEducation = () => {
       portfolioStackHeroContextData.id,
       portfolioStackHeroContextData.experience_group_description,
       portfolioStackHeroContextData.experience_group_title,
-      portfolioStackExperienceContextData
+      // portfolioStackExperienceContextData,
+      portfolioStackExperienceContextData.map((experience) => ({
+        ...experience,
+        experience_icons: experience.experience_icons.map((icon) => ({
+          name: icon?.name || "-",
+          id: icon?.id || null,
+        })),
+      }))
     );
-    console.log(response);
-    setPortfolioStackExperienceContextData(response.experiences); // sluzi da se ne dogodi da ako se doda experience i samo spremi page (bez prebacivanja dalje) i doda jos jedan experience, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+    console.log("experience response", response);
+
+    setPortfolioStackExperienceContextData((prev) =>
+      response.experiences.map((experience) => ({
+        ...experience,
+        experience_icons: Array(10)
+          .fill()
+          .map(
+            (_, i) =>
+              experience.experience_icons?.[i] || { id: null, name: "-" }
+          ),
+      }))
+    ); // sluzi da se ne dogodi da ako se doda experience i samo spremi page (bez prebacivanja dalje) i doda jos jedan experience, prethodno dodani ce se opet dodat (jer mu se id nije azuriral s onim iz baze)
+
     setIsPending(false);
   };
 
@@ -172,6 +200,7 @@ const AddEducation = () => {
                   index={index}
                   experienceKey={timeline.experience_order}
                   experienceId={timeline.id}
+                  icons={icons}
                 />
               )
           )}

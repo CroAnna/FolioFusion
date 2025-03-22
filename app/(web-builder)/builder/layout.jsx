@@ -33,13 +33,12 @@ export default function BuilderLayout({ children }) {
   return (
     <>
       {confettiTriggerState && <Confetti />}
-      <div className="flex-1"></div>
       <div className="flex w-full flex-col md:flex-row">
-        <div className="flex-2">
+        <div className="max-w-[512px]">
           <Steps currentStep={currentStep} stepsData={stepsData} />
           <PortfolioMaker currentStep={currentStep}>{children}</PortfolioMaker>
         </div>
-        <div className="flex-3 w-full">
+        <div className="w-full">
           <RenderedPortfolio />
         </div>
       </div>

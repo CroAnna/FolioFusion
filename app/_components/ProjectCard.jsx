@@ -227,7 +227,7 @@ const ProjectCard = ({
                       height={32}
                       src={`https://go-skill-icons.vercel.app/api/icons?i=${icon.name}&theme=${iconBg}`}
                       alt={icon.name || ""}
-                      className="h-full object-cover w-11 lg:w-full"
+                      className="h-full object-cover w-11"
                     />
                   );
                 })}
