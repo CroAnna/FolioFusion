@@ -1,6 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PortfolioContext } from "./PortfolioProvider";
 import {
+  bgColorVariantsPrimary,
+  fontVariants,
   getBgColor,
   getPrimaryColors,
   getPrimaryTextColor,
@@ -9,7 +11,9 @@ import ProjectCard from "./ProjectCard";
 import { useRouter } from "next/navigation";
 
 const PortfolioProjects = () => {
+  const NUMBER_OF_SHOWN_PROJECTS_BY_DEFAULT = 6;
   const router = useRouter();
+  const [areAllProjectsShown, setAreAllProjectsShown] = useState(false);
   const {
     portfolioStackHeroContextData,
     portfolioStackProjectsContextData,
@@ -53,15 +57,39 @@ const PortfolioProjects = () => {
               : ""
           }`}
         >
-          {portfolioStackProjectsContextData.map((el, index) => (
-            <ProjectCard
-              project={el}
-              key={index}
-              projectIndex={index}
-              projectsDesign={projectsDesign}
-              projectsAlignment={projectsAlignment}
-            />
-          ))}
+          {portfolioStackProjectsContextData &&
+            portfolioStackProjectsContextData
+              .slice(
+                0,
+                areAllProjectsShown
+                  ? portfolioStackProjectsContextData.length
+                  : NUMBER_OF_SHOWN_PROJECTS_BY_DEFAULT
+              )
+              .map((el, index) => (
+                <ProjectCard
+                  project={el}
+                  key={index}
+                  projectIndex={index}
+                  projectsDesign={projectsDesign}
+                  projectsAlignment={projectsAlignment}
+                />
+              ))}
+          {!areAllProjectsShown &&
+            portfolioStackProjectsContextData.length >
+              NUMBER_OF_SHOWN_PROJECTS_BY_DEFAULT && (
+              <button
+                className={`py-2 flex w-full items-center justify-center gap-1 px-2 ${
+                  bgColorVariantsPrimary[palette]
+                } ${getPrimaryTextColor(
+                  palette
+                )} transition-all md:text-lg rounded-lg shadow-custom-sm font-medium ${
+                  fontVariants[fontPrimary]
+                }`}
+                onClick={() => setAreAllProjectsShown(true)}
+              >
+                Show all projects
+              </button>
+            )}
         </div>
       </div>
     </div>

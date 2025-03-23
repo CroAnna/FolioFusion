@@ -709,3 +709,33 @@ export const emptyExperience = [
     ],
   },
 ];
+
+export const bgColorVariantsPrimary = {
+  "Palette 1": "bg-zinc-100 hover:bg-zinc-200",
+  "Palette 2": "bg-sky-50 hover:bg-sky-200",
+  "Palette 3": "bg-orange-50 hover:bg-orange-200",
+  "Palette 4": "bg-slate-800 hover:bg-slate-950",
+  "Palette 5": "bg-neutral-900 hover:bg-neutral-700",
+  "Palette 6": "bg-stone-900 hover:bg-stone-700",
+  "Palette 7": "bg-zinc-100 hover:bg-zinc-300",
+};
+
+export const bgColorVariantsSecondary = {
+  "Palette 1": "bg-amber-600 hover:bg-amber-700",
+  "Palette 2": "bg-blue-800 hover:bg-blue-950",
+  "Palette 3": "bg-orange-800 hover:bg-orange-950",
+  "Palette 4": "bg-yellow-400 hover:bg-yellow-600",
+  "Palette 5": "bg-lime-500 hover:bg-lime-400",
+  "Palette 6": "bg-yellow-400 hover:bg-yellow-200",
+  "Palette 7": "bg-red-500 hover:bg-red-700",
+};
+
+export const fontVariants = {
+  inter: "font-inter",
+  poppins: "font-poppins",
+  robotoMono: "font-robotoMono",
+  greyQo: "font-greyQo",
+  sankofaDisplay: "font-sankofaDisplay",
+  gabarito: "font-gabarito",
+  montserrat: "font-montserrat",
+};
