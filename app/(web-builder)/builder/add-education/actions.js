@@ -149,7 +149,7 @@ export async function upsertAddExperiencesData(
       return data;
     })
   );
-  
+
   // include icons in new experiences array
   const experiencesWithIcons = experiencesData.map((el, index) => {
     return {
@@ -170,4 +170,22 @@ export async function deleteExperienceById(id) {
     .delete()
     .eq("id", id);
   return { data, error };
+}
+
+export async function getEnhancedText(text) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_AI_SERVER_URL}/enhance-text`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text }),
+    }
+  );
+
+  if (!response.ok) {
+    return { data: null, error: await response.json() };
+  }
+
+  const data = await response.json();
+  return { data, error: null };
 }

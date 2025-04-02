@@ -1,6 +1,8 @@
-import React from "react";
+import AIContentSuggestion from "./AIContentSuggestion";
 
 const Textarea = ({
+  allowAIRecommendation = false,
+  onGenerateContentWithAI = () => {},
   label = "",
   error,
   name,
@@ -15,7 +17,16 @@ const Textarea = ({
     <div className="w-full">
       <label className="form-control">
         <div className="label pb-0 pt-0">
-          <span className="label-text text-base">{label}</span>
+          <span className="label-text text-base flex gap-2">
+            {label}
+            {allowAIRecommendation &&
+              value.split("").length >= 20 &&
+              value.split("").length < 100 && (
+                <AIContentSuggestion
+                  onGenerateContentWithAI={onGenerateContentWithAI}
+                />
+              )}
+          </span>
         </div>
         <textarea
           className="textarea textarea-bordered h-24 text-base"

@@ -7,7 +7,10 @@ import Select from "./Select";
 import { experienceLinkIcons } from "../_libs/utils";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
 import Swal from "sweetalert2";
-import { deleteExperienceById } from "../(web-builder)/builder/add-education/actions";
+import {
+  deleteExperienceById,
+  getEnhancedText,
+} from "../(web-builder)/builder/add-education/actions";
 
 const ExperienceInputCard = ({
   index,
@@ -21,6 +24,13 @@ const ExperienceInputCard = ({
     portfolioStackExperienceContextData,
     setPortfolioStackExperienceContextData,
   } = useContext(PortfolioContext);
+
+  const handleGenerateContentWithAI = async (text) => {
+    const res = await getEnhancedText(text);
+    if (res?.data?.enhanced) {
+      handleUpdateNested("experience_description", res.data.enhanced);
+    }
+  };
 
   const handleUpdateNested = (field, value) => {
     setPortfolioStackExperienceContextData((prevData) =>
@@ -89,6 +99,12 @@ const ExperienceInputCard = ({
           </button>
         </div>
         <Textarea
+          allowAIRecommendation
+          onGenerateContentWithAI={() => {
+            handleGenerateContentWithAI(
+              portfolioStackExperienceContextData[index].experience_description
+            );
+          }}
           disabled={disabled}
           label={"Description:"}
           name={"experience_description"}
