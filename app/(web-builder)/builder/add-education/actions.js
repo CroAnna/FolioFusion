@@ -173,11 +173,19 @@ export async function deleteExperienceById(id) {
 }
 
 export async function getEnhancedText(text) {
+  const supabase = createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const jwt = session?.access_token;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_AI_SERVER_URL}/enhance-text`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ text: text }),
     }
   );
