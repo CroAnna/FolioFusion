@@ -91,7 +91,7 @@ npm run dev
 
 ## Architecture
 
-![foliofusion](https://github.com/user-attachments/assets/576d23a1-3c4e-49b3-a024-1b731fa586f2)
+![foliofusion-architecture](https://github.com/user-attachments/assets/ebf941e4-eca2-4174-a21b-15f0cc5a3dcf)
 
 
 
