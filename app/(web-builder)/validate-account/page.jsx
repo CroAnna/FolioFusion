@@ -60,7 +60,9 @@ const ValidateAccount = () => {
         <Link
           className="underline"
           target="_blank"
-          href={"https://fosleen.com/"}
+          href={
+            "https://fosleen.com/?utm_source=foliofusion&utm_medium=account-validation&utm_campaign=internal-link"
+          }
         >
           Fosleen
         </Link>

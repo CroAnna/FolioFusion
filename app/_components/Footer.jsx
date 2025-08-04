@@ -70,7 +70,10 @@ const Footer = () => {
       <footer className="footer bg-base-200 text-base-content border-base-300 border-t p-4 md:px-10 pb-8">
         <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between w-full">
           <aside side="true" className="grid-flow-col items-center">
-            <Link href="https://fosleen.com/" target="_blank">
+            <Link
+              href="https://fosleen.com/?utm_source=foliofusion&utm_medium=footer&utm_campaign=internal-link"
+              target="_blank"
+            >
               <Image
                 src={"/logo-light.png"}
                 alt="fosleen-logo"
